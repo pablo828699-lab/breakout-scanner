@@ -93,5 +93,5 @@ def configure_logging() -> None:
     )
     # Suppress noisy third-party loggers
     logging.getLogger("urllib3").setLevel(logging.WARNING)
-    logging.getLogger("yfinance").setLevel(logging.WARNING)
+    logging.getLogger("yfinance").setLevel(logging.CRITICAL + 1)
     logging.getLogger("binance").setLevel(logging.WARNING)
