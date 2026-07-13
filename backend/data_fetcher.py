@@ -149,6 +149,11 @@ class DataFetcher:
         if self._crypto_tickers_cache is not None:
             return self._crypto_tickers_cache
 
+        stablecoins = {
+            "USDC", "USDT", "BUSD", "TUSD", "PAX", "DAI", "EUR", "FDUSD", 
+            "AEUR", "USDS", "GBP", "TRY", "RUB", "UAH", "BIDR", "PEPE", "SHIB"
+        }
+
         try:
             url = "https://api.binance.com/api/v3/ticker/24hr"
             resp = requests.get(url, timeout=15)
@@ -156,10 +161,6 @@ class DataFetcher:
             tickers_raw = resp.json()
 
             # Filter to USDT pairs only, exclude leveraged/down tokens and stablecoins/fiat pegs
-            stablecoins = {
-                "USDC", "USDT", "BUSD", "TUSD", "PAX", "DAI", "EUR", "FDUSD", 
-                "AEUR", "USDS", "GBP", "TRY", "RUB", "UAH", "BIDR", "PEPE", "SHIB"
-            }
             usdt_pairs = [
                 t for t in tickers_raw
                 if t["symbol"].endswith("USDT")
