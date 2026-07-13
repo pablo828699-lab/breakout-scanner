@@ -38,7 +38,11 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
         logger.info("%s - - %s" % (self.address_string(), format % args))
 
     def do_GET(self) -> None:
-        if self.path == "/scan":
+        # Strip trailing slashes and query parameters for robust routing
+        clean_path = self.path.split("?")[0].rstrip("/")
+        logger.info("HTTP GET request: path=%s, clean_path=%s", self.path, clean_path)
+
+        if clean_path == "/scan":
             try:
                 logger.info("External HTTP trigger received. Starting scan cycle...")
                 signals = self.scanner.run_scan()
@@ -54,7 +58,7 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
-        elif self.path == "/":
+        elif clean_path == "" or clean_path == "/":
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
