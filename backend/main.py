@@ -44,12 +44,16 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
 
         if clean_path == "/scan":
             try:
-                logger.info("External HTTP trigger received. Starting scan cycle...")
-                signals = self.scanner.run_scan()
+                import threading
+                logger.info("External HTTP trigger received. Spawning background scan thread...")
+                
+                thread = threading.Thread(target=self.scanner.run_scan, name="ScanThread")
+                thread.start()
+
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
                 self.end_headers()
-                res = f'{{"status": "success", "signals_found": {len(signals)}}}'
+                res = '{"status": "processing", "message": "Scan cycle started in background"}'
                 self.wfile.write(res.encode("utf-8"))
             except Exception as exc:
                 logger.error("HTTP scan handler error: %s", exc)
