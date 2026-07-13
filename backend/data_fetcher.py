@@ -123,20 +123,49 @@ class DataFetcher:
         df.index.name = "Date"
         return df[["Open", "High", "Low", "Close", "Volume"]]
 
+    def _fetch_yfinance_crypto(self, yf_symbol: str, period: str, interval: str) -> pd.DataFrame:
+        """Fetch historical crypto data from Yahoo Finance as a backup."""
+        if not _YF_AVAILABLE:
+            return pd.DataFrame()
+        try:
+            df = yf.download(
+                yf_symbol,
+                period=period,
+                interval=interval,
+                progress=False,
+                auto_adjust=True,
+            )
+            if isinstance(df.columns, pd.MultiIndex):
+                df.columns = df.columns.droplevel(1)
+            return df[["Open", "High", "Low", "Close", "Volume"]]
+        except Exception as exc:
+            logger.error("Yahoo Finance crypto fallback error for %s: %s", yf_symbol, exc)
+            return pd.DataFrame()
+
     def fetch_crypto_daily(self, symbol: str) -> pd.DataFrame:
-        """Fetch ~180 daily candles for a crypto pair from Binance."""
+        """Fetch ~180 daily candles for a crypto pair (tries Binance, falls back to yfinance, then mock)."""
         df = self._binance_klines(symbol, "1d", cfg.DAILY_LOOKBACK_DAYS)
         if df.empty:
-            logger.warning("Binance daily empty for %s — generating mock data.", symbol)
+            logger.warning("Binance daily empty for %s — trying Yahoo Finance fallback.", symbol)
+            yf_symbol = symbol.replace("USDT", "-USD")
+            df = self._fetch_yfinance_crypto(yf_symbol, f"{cfg.DAILY_LOOKBACK_DAYS}d", "1d")
+
+        if df.empty:
+            logger.warning("Yahoo Finance fallback empty for %s — generating mock data.", symbol)
             return self._generate_mock_ohlcv(180, base_price=50000.0 if "BTC" in symbol else 2000.0)
         return df
 
     def fetch_crypto_hourly(self, symbol: str) -> pd.DataFrame:
-        """Fetch ~120 hourly candles (5 days) for a crypto pair from Binance."""
+        """Fetch ~120 hourly candles (tries Binance, falls back to yfinance, then mock)."""
         limit = cfg.HOURLY_LOOKBACK_DAYS * 24
         df = self._binance_klines(symbol, "1h", limit)
         if df.empty:
-            logger.warning("Binance hourly empty for %s — generating mock data.", symbol)
+            logger.warning("Binance hourly empty for %s — trying Yahoo Finance fallback.", symbol)
+            yf_symbol = symbol.replace("USDT", "-USD")
+            df = self._fetch_yfinance_crypto(yf_symbol, f"{cfg.HOURLY_LOOKBACK_DAYS}d", "1h")
+
+        if df.empty:
+            logger.warning("Yahoo Finance fallback empty for %s — generating mock data.", symbol)
             return self._generate_mock_ohlcv(limit, base_price=50000.0 if "BTC" in symbol else 2000.0)
         return df
 
