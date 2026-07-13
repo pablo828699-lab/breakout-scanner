@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Custom micro-animations and animations */
+@keyframes pulse-emerald {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(16, 185, 129, 0.2);
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(16, 185, 129, 0.6);
+    opacity: 0.85;
+  }
+}
+
+@keyframes pulse-rose {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(239, 68, 68, 0.2);
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(239, 68, 68, 0.6);
+    opacity: 0.85;
+  }
+}
+
+/* Custom utility classes */
+.animate-pulse-emerald {
+  animation: pulse-emerald 2s infinite ease-in-out;
+}
+
+.animate-pulse-rose {
+  animation: pulse-rose 2s infinite ease-in-out;
+}
+
+/* Custom Scrollbar Styles for premium dark terminal look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Custom font import fallback */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0a0e17;
+  color: #f1f5f9;
+}

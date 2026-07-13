@@ -1,0 +1,14 @@
+# Python local files
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node/React local files
+node_modules/
+dist/
+.ignored/
+
+# OS temporary files
+.DS_Store
+Thumbs.db
