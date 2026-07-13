@@ -42,49 +42,46 @@ class DataFetcher:
     #  S&P 500  (yfinance)
     # ------------------------------------------------------------------
 
-    def fetch_sp500_daily(self, ticker: str) -> pd.DataFrame:
-        """Fetch ~6 months of daily OHLCV for a US equity ticker."""
+    def _safe_yf_download(self, ticker: str, period: str, interval: str) -> pd.DataFrame:
+        """Safely fetch historical data from Yahoo Finance, redirecting stderr to silence failures."""
         if not _YF_AVAILABLE:
-            logger.error("yfinance unavailable — cannot fetch %s daily.", ticker)
             return pd.DataFrame()
+        import os
+        from contextlib import redirect_stderr
         try:
-            df = yf.download(
-                ticker,
-                period=f"{cfg.DAILY_LOOKBACK_DAYS}d",
-                interval="1d",
-                progress=False,
-                auto_adjust=True,
-            )
-            if isinstance(df.columns, pd.MultiIndex):
-                df.columns = df.columns.droplevel(1)
-            if df.empty:
-                logger.warning("No daily data returned for %s.", ticker)
+            with open(os.devnull, "w") as devnull:
+                with redirect_stderr(devnull):
+                    df = yf.download(
+                        ticker,
+                        period=period,
+                        interval=interval,
+                        progress=False,
+                        auto_adjust=True,
+                    )
             return df
         except Exception as exc:
-            logger.error("yfinance daily fetch error for %s: %s", ticker, exc)
+            logger.error("yfinance download error for %s: %s", ticker, exc)
             return pd.DataFrame()
+
+    def fetch_sp500_daily(self, ticker: str) -> pd.DataFrame:
+        """Fetch ~6 months of daily OHLCV for a US equity ticker."""
+        df = self._safe_yf_download(ticker, f"{cfg.DAILY_LOOKBACK_DAYS}d", "1d")
+        if df.empty:
+            logger.warning("No daily data returned for %s.", ticker)
+            return pd.DataFrame()
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.droplevel(1)
+        return df
 
     def fetch_sp500_hourly(self, ticker: str) -> pd.DataFrame:
         """Fetch ~5 days of 1-hour OHLCV for a US equity ticker."""
-        if not _YF_AVAILABLE:
-            logger.error("yfinance unavailable — cannot fetch %s hourly.", ticker)
+        df = self._safe_yf_download(ticker, f"{cfg.HOURLY_LOOKBACK_DAYS}d", "1h")
+        if df.empty:
+            logger.warning("No hourly data returned for %s.", ticker)
             return pd.DataFrame()
-        try:
-            df = yf.download(
-                ticker,
-                period=f"{cfg.HOURLY_LOOKBACK_DAYS}d",
-                interval="1h",
-                progress=False,
-                auto_adjust=True,
-            )
-            if isinstance(df.columns, pd.MultiIndex):
-                df.columns = df.columns.droplevel(1)
-            if df.empty:
-                logger.warning("No hourly data returned for %s.", ticker)
-            return df
-        except Exception as exc:
-            logger.error("yfinance hourly fetch error for %s: %s", ticker, exc)
-            return pd.DataFrame()
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.droplevel(1)
+        return df
 
     # ------------------------------------------------------------------
     #  Crypto  (Binance public REST API)
@@ -125,22 +122,15 @@ class DataFetcher:
 
     def _fetch_yfinance_crypto(self, yf_symbol: str, period: str, interval: str) -> pd.DataFrame:
         """Fetch historical crypto data from Yahoo Finance as a backup."""
-        if not _YF_AVAILABLE:
+        df = self._safe_yf_download(yf_symbol, period, interval)
+        if df.empty:
             return pd.DataFrame()
-        try:
-            df = yf.download(
-                yf_symbol,
-                period=period,
-                interval=interval,
-                progress=False,
-                auto_adjust=True,
-            )
-            if isinstance(df.columns, pd.MultiIndex):
-                df.columns = df.columns.droplevel(1)
-            return df[["Open", "High", "Low", "Close", "Volume"]]
-        except Exception as exc:
-            logger.error("Yahoo Finance crypto fallback error for %s: %s", yf_symbol, exc)
-            return pd.DataFrame()
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.droplevel(1)
+        required = ["Open", "High", "Low", "Close", "Volume"]
+        if all(c in df.columns for c in required):
+            return df[required]
+        return pd.DataFrame()
 
     def fetch_crypto_daily(self, symbol: str) -> pd.DataFrame:
         """Fetch ~180 daily candles for a crypto pair (tries Binance, falls back to yfinance, then mock)."""
