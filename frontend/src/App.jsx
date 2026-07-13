@@ -5,21 +5,50 @@ import AnalyticsChart from './components/AnalyticsChart';
 import OpenPositions from './components/OpenPositions';
 import TradeHistory from './components/TradeHistory';
 
-// Import raw mock data
+// Import fallback mock data in case localStorage is empty initially
 import {
-  candidates as initialCandidates,
-  kpis as initialKpis,
-  openPositions as initialOpenPositions,
-  tradeHistory as initialTradeHistory,
+  candidates as fallbackCandidates,
+  kpis as fallbackKpis,
+  openPositions as fallbackOpenPositions,
+  tradeHistory as fallbackTradeHistory,
   dailyAnalytics
 } from './data/mockData';
 
+const BACKEND_URL = 'https://breakout-scanner-xg9f.onrender.com';
+
 export default function App() {
-  const [candidates, setCandidates] = useState(initialCandidates);
-  const [openPositions, setOpenPositions] = useState(initialOpenPositions);
-  const [tradeHistory, setTradeHistory] = useState(initialTradeHistory);
-  const [kpis, setKpis] = useState(initialKpis);
+  const [candidates, setCandidates] = useState(() => {
+    const saved = localStorage.getItem('candidates');
+    return saved ? JSON.parse(saved) : [];
+  });
+  
+  const [openPositions, setOpenPositions] = useState(() => {
+    const saved = localStorage.getItem('openPositions');
+    return saved ? JSON.parse(saved) : [];
+  });
+  
+  const [tradeHistory, setTradeHistory] = useState(() => {
+    const saved = localStorage.getItem('tradeHistory');
+    return saved ? JSON.parse(saved) : [];
+  });
+  
+  const [kpis, setKpis] = useState(() => {
+    const saved = localStorage.getItem('kpis');
+    return saved ? JSON.parse(saved) : {
+      todayPnL: 0,
+      todayPnLPct: 0,
+      winRate: 0,
+      totalTrades: 0,
+      winningTrades: 0,
+      losingTrades: 0,
+      avgWin: 0,
+      avgLoss: 0,
+      sharpeRatio: 0
+    };
+  });
+  
   const [time, setTime] = useState(new Date());
+  const [isScanning, setIsScanning] = useState(false);
 
   // Real-time clock update
   useEffect(() => {
@@ -27,9 +56,87 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  // Sync state changes with localStorage
+  useEffect(() => {
+    localStorage.setItem('candidates', JSON.stringify(candidates));
+  }, [candidates]);
+
+  useEffect(() => {
+    localStorage.setItem('openPositions', JSON.stringify(openPositions));
+  }, [openPositions]);
+
+  useEffect(() => {
+    localStorage.setItem('tradeHistory', JSON.stringify(tradeHistory));
+  }, [tradeHistory]);
+
+  useEffect(() => {
+    localStorage.setItem('kpis', JSON.stringify(kpis));
+  }, [kpis]);
+
+  // Fetch actual candidates from Render backend
+  useEffect(() => {
+    const fetchCandidates = async () => {
+      try {
+        const resp = await fetch(`${BACKEND_URL}/api/candidates`);
+        if (!resp.ok) throw new Error('Backend response was not ok');
+        const data = await resp.json();
+        
+        setCandidates((prevCandidates) => {
+          const existingIds = new Set(prevCandidates.map(c => `${c.ticker}_${c.timestamp}`));
+          const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
+          const openIds = new Set(savedOpen.map(p => p.ticker));
+          
+          const newCandidates = data
+            .map((c, index) => ({
+              id: c.id || `fetched_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
+              ticker: c.ticker,
+              market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
+              direction: c.direction,
+              brokenLevel: c.broken_level,
+              entry: c.entry_price,
+              stopLoss: c.stop_loss,
+              takeProfit: c.take_profit,
+              volumeRatio: c.volume_ratio,
+              atr: c.atr_value,
+              timestamp: c.timestamp,
+              status: 'pending'
+            }))
+            .filter(c => !existingIds.has(`${c.ticker}_${c.timestamp}`) && !openIds.has(c.ticker));
+            
+          return [...prevCandidates, ...newCandidates];
+        });
+      } catch (err) {
+        console.error('Failed to fetch candidates from backend:', err);
+      }
+    };
+
+    fetchCandidates();
+    // Poll every 2 minutes
+    const interval = setInterval(fetchCandidates, 2 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Force manual scan trigger
+  const handleForceScan = async () => {
+    if (isScanning) return;
+    setIsScanning(true);
+    try {
+      const resp = await fetch(`${BACKEND_URL}/scan`);
+      if (resp.ok) {
+        alert('Escaneo iniciado en segundo plano. Espera 1 minuto y recarga la página para verificar nuevas señales.');
+      } else {
+        alert('El servidor respondió con error al iniciar el escaneo.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error de conexión al iniciar el escaneo en el backend.');
+    } finally {
+      setIsScanning(false);
+    }
+  };
+
   // Handler to approve a breakout signal (move candidate to open positions)
   const handleApprove = (candidate) => {
-    // 1. Create a new open position
     const newPosition = {
       id: Date.now(),
       ticker: candidate.ticker,
@@ -46,11 +153,7 @@ export default function App() {
     };
 
     setOpenPositions([newPosition, ...openPositions]);
-
-    // 2. Remove from candidates panel
     setCandidates(candidates.filter((c) => c.id !== candidate.id));
-
-    // 3. Update KPIs (increase active trade count, etc.)
     setKpis((prev) => ({
       ...prev,
       totalTrades: prev.totalTrades + 1
@@ -74,7 +177,6 @@ export default function App() {
     const pnl = isWin ? (risk * 2) * 50 : -risk * 50; // scaled simulated dollar pnl
     const pnlPct = ((exitPrice - position.entry) / position.entry) * (position.direction === 'LONG' ? 100 : -100);
 
-    // 1. Create closed trade object
     const closedTrade = {
       id: Date.now(),
       ticker: position.ticker,
@@ -91,11 +193,7 @@ export default function App() {
     };
 
     setTradeHistory([closedTrade, ...tradeHistory]);
-
-    // 2. Remove from open positions
     setOpenPositions(openPositions.filter((p) => p.id !== id));
-
-    // 3. Recalculate KPIs based on the trade outcome
     setKpis((prev) => {
       const newWinningTrades = isWin ? prev.winningTrades + 1 : prev.winningTrades;
       const newLosingTrades = !isWin ? prev.losingTrades + 1 : prev.losingTrades;
@@ -136,6 +234,21 @@ export default function App() {
           </div>
           
           <div className="flex items-center gap-4 mt-4 md:mt-0 bg-slate-900/50 px-4 py-2 rounded-xl border border-slate-800/80 backdrop-blur-md">
+            {/* Force Scan Button */}
+            <button
+              onClick={handleForceScan}
+              disabled={isScanning}
+              className={`text-xs font-bold px-3 py-1.5 rounded-lg border transition-all duration-300 ${
+                isScanning
+                  ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
+                  : 'bg-blue-600/10 border-blue-500/30 text-blue-400 hover:bg-blue-600/20 hover:border-blue-500/60'
+              }`}
+            >
+              {isScanning ? 'Escaneando...' : 'Escanear Ahora'}
+            </button>
+            
+            <div className="h-4 w-[1px] bg-slate-800" />
+            
             {/* Live Indicator */}
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
