@@ -19,20 +19,22 @@ from backend.models import PriceLevel
 logger = logging.getLogger(__name__)
 
 
-def _find_swing_highs(highs: np.ndarray) -> np.ndarray:
-    """Return indices of swing highs (local maxima in the High series)."""
+def _find_swing_highs(highs: np.ndarray, k: int = 3) -> np.ndarray:
+    """Return indices of swing highs (local maxima in a window of 2k+1 candles)."""
     indices: list[int] = []
-    for i in range(1, len(highs) - 1):
-        if highs[i] > highs[i - 1] and highs[i] > highs[i + 1]:
+    for i in range(k, len(highs) - k):
+        val = highs[i]
+        if all(val >= highs[j] for j in range(i - k, i + k + 1) if j != i):
             indices.append(i)
     return np.array(indices, dtype=int)
 
 
-def _find_swing_lows(lows: np.ndarray) -> np.ndarray:
-    """Return indices of swing lows (local minima in the Low series)."""
+def _find_swing_lows(lows: np.ndarray, k: int = 3) -> np.ndarray:
+    """Return indices of swing lows (local minima in a window of 2k+1 candles)."""
     indices: list[int] = []
-    for i in range(1, len(lows) - 1):
-        if lows[i] < lows[i - 1] and lows[i] < lows[i + 1]:
+    for i in range(k, len(lows) - k):
+        val = lows[i]
+        if all(val <= lows[j] for j in range(i - k, i + k + 1) if j != i):
             indices.append(i)
     return np.array(indices, dtype=int)
 

@@ -155,27 +155,32 @@ class DataFetcher:
             resp.raise_for_status()
             tickers_raw = resp.json()
 
-            # Filter to USDT pairs only, exclude leveraged/down tokens
+            # Filter to USDT pairs only, exclude leveraged/down tokens and stablecoins/fiat pegs
+            stablecoins = {
+                "USDC", "USDT", "BUSD", "TUSD", "PAX", "DAI", "EUR", "FDUSD", 
+                "AEUR", "USDS", "GBP", "TRY", "RUB", "UAH", "BIDR", "PEPE", "SHIB"
+            }
             usdt_pairs = [
                 t for t in tickers_raw
                 if t["symbol"].endswith("USDT")
-                and "UP" not in t["symbol"]
-                and "DOWN" not in t["symbol"]
-                and "BEAR" not in t["symbol"]
-                and "BULL" not in t["symbol"]
+                and not any(x in t["symbol"] for x in ["UP", "DOWN", "BEAR", "BULL"])
+                and not any(t["symbol"].startswith(s) for s in stablecoins)
             ]
 
             # Sort by 24h quote volume descending
             usdt_pairs.sort(key=lambda t: float(t["quoteVolume"]), reverse=True)
 
             top_n = [t["symbol"] for t in usdt_pairs[: cfg.CRYPTO_TOP_N]]
-            logger.info("Fetched top %d crypto tickers by 24h volume: %s", len(top_n), top_n[:5])
+            logger.info("Fetched top %d crypto tickers by 24h volume (excl. stablecoins): %s", len(top_n), top_n[:5])
             self._crypto_tickers_cache = top_n
             return top_n
 
         except Exception as exc:
             logger.error("Failed to fetch Binance 24hr tickers: %s — using fallback list.", exc)
-            self._crypto_tickers_cache = cfg.CRYPTO_FALLBACK_TICKERS[: cfg.CRYPTO_TOP_N]
+            self._crypto_tickers_cache = [
+                t for t in cfg.CRYPTO_FALLBACK_TICKERS 
+                if not any(t.startswith(s) for s in stablecoins)
+            ][: cfg.CRYPTO_TOP_N]
             return self._crypto_tickers_cache
 
     def get_sp500_tickers(self) -> List[str]:
