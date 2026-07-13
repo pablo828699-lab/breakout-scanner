@@ -37,6 +37,13 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
         # Redirect http.server logs to our logger
         logger.info("%s - - %s" % (self.address_string(), format % args))
 
+    def do_OPTIONS(self) -> None:
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
     def do_GET(self) -> None:
         # Strip trailing slashes and query parameters for robust routing
         clean_path = self.path.split("?")[0].rstrip("/")
@@ -52,6 +59,7 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 res = '{"status": "processing", "message": "Scan cycle started in background"}'
                 self.wfile.write(res.encode("utf-8"))
@@ -59,6 +67,30 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 logger.error("HTTP scan handler error: %s", exc)
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/api/candidates":
+            try:
+                import json
+                import os
+                filepath = os.path.join(os.path.dirname(__file__), "recent_signals.json")
+                data = []
+                if os.path.exists(filepath):
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(json.dumps(data).encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP candidates handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
@@ -89,6 +121,7 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
             self.wfile.write(html.encode("utf-8"))
         else:
             self.send_response(404)
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
 
 

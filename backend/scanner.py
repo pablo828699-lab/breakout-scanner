@@ -36,6 +36,7 @@ class BreakoutScanner:
         )
         self._alerted_tickers: Set[str] = set()
         self._open_positions: List[OpenPosition] = []
+        self._last_scan_time: Optional[datetime] = None
 
     # ------------------------------------------------------------------
     #  Per-ticker analysis
@@ -90,6 +91,25 @@ class BreakoutScanner:
             return None
 
         broken_level, direction = result
+        entry_price = current_price
+
+        # --- Pullback Guard: Reject if current price has pulled back across the broken level ---
+        if direction == "LONG" and entry_price < broken_level.price:
+            logger.info(
+                "%s breakout rejected — price pulled back below broken resistance %.4f (current=%.4f).",
+                ticker,
+                broken_level.price,
+                entry_price,
+            )
+            return None
+        elif direction == "SHORT" and entry_price > broken_level.price:
+            logger.info(
+                "%s breakdown rejected — price pulled back above broken support %.4f (current=%.4f).",
+                ticker,
+                broken_level.price,
+                entry_price,
+            )
+            return None
 
         # --- 3. Volume filter ---
         passes, volume_ratio = passes_volume_filter(
@@ -107,7 +127,6 @@ class BreakoutScanner:
             return None
 
         # --- 4. Risk management ---
-        entry_price = current_price
         stop_loss, take_profit, atr_value = calculate_risk_levels(
             entry_price=entry_price,
             broken_level=broken_level.price,
@@ -138,8 +157,19 @@ class BreakoutScanner:
 
     def run_scan(self) -> List[BreakoutSignal]:
         """Scan all configured tickers across open markets."""
+        now = datetime.now(tz=timezone.utc)
+        if self._last_scan_time is not None:
+            time_since = (now - self._last_scan_time).total_seconds()
+            if time_since < 900:  # 15 minutes
+                logger.info(
+                    "Scan request ignored — scan already completed %.1fs ago (min interval: 900s).",
+                    time_since,
+                )
+                return []
+
+        self._last_scan_time = now
         signals: List[BreakoutSignal] = []
-        scan_start = datetime.now(tz=timezone.utc)
+        scan_start = now
         logger.info("═══ Scan cycle started at %s ═══", scan_start.strftime("%H:%M:%S UTC"))
 
         markets = {
@@ -178,7 +208,44 @@ class BreakoutScanner:
             len(signals),
             elapsed,
         )
+        if signals:
+            self._save_recent_signals(signals)
         return signals
+
+    def _save_recent_signals(self, new_signals: List[BreakoutSignal]) -> None:
+        import json
+        import os
+        filepath = os.path.join(os.path.dirname(__file__), "recent_signals.json")
+        
+        signals_dict = []
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    signals_dict = json.load(f)
+            except Exception:
+                signals_dict = []
+                
+        for s in new_signals:
+            signals_dict.append({
+                "ticker": s.ticker,
+                "market": s.market,
+                "direction": s.direction,
+                "broken_level": s.broken_level,
+                "entry_price": s.entry_price,
+                "stop_loss": s.stop_loss,
+                "take_profit": s.take_profit,
+                "volume_ratio": s.volume_ratio,
+                "atr_value": s.atr_value,
+                "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC")
+            })
+            
+        signals_dict = signals_dict[-50:]
+        
+        try:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(signals_dict, f, indent=2)
+        except Exception as exc:
+            logger.error("Failed to save recent signals to disk: %s", exc)
 
     # ------------------------------------------------------------------
     #  Session management

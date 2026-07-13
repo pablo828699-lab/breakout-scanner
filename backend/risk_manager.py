@@ -70,23 +70,22 @@ def calculate_risk_levels(
     margin = atr_value * atr_sl_multiplier
 
     if direction == "LONG":
-        stop_loss = broken_level - margin
-        risk = abs(entry_price - stop_loss)
+        stop_loss = entry_price - margin
+        risk = entry_price - stop_loss
         take_profit = entry_price + (risk * rr_ratio)
     elif direction == "SHORT":
-        stop_loss = broken_level + margin
-        risk = abs(stop_loss - entry_price)
+        stop_loss = entry_price + margin
+        risk = stop_loss - entry_price
         take_profit = entry_price - (risk * rr_ratio)
     else:
         raise ValueError(f"Invalid direction: {direction!r}")
 
     logger.info(
-        "Risk levels [%s]: SL=%.4f, TP=%.4f, ATR=%.4f, risk=%.4f, margin=%.4f",
+        "Risk levels [%s]: SL=%.4f, TP=%.4f, ATR=%.4f, risk=%.4f",
         direction,
         stop_loss,
         take_profit,
         atr_value,
         risk,
-        margin,
     )
     return round(stop_loss, 6), round(take_profit, 6), round(atr_value, 6)
