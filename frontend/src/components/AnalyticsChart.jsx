@@ -11,6 +11,16 @@ export default function AnalyticsChart({ data }) {
   // Max value to scale heights
   const maxVal = Math.max(...data.map(d => Math.max(d.wins, d.losses))) || 5;
 
+  // Calculate dynamic Y-axis ticks with integer spacing
+  const step = maxVal <= 5 ? 1 : maxVal <= 10 ? 2 : Math.ceil(maxVal / 5);
+  const yTicks = [];
+  for (let i = 0; i <= maxVal; i += step) {
+    yTicks.push(i);
+  }
+  if (yTicks[yTicks.length - 1] !== maxVal) {
+    yTicks.push(maxVal);
+  }
+
   // Chart configuration
   const chartHeight = height - padding * 2;
   const chartWidth = width - padding * 2;
@@ -28,13 +38,13 @@ export default function AnalyticsChart({ data }) {
       <div className="relative flex justify-center items-center mt-6">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full max-w-[360px] overflow-visible">
           {/* Y Axis Grid Lines */}
-          {[0, 0.25, 0.5, 0.75, 1].map((ratio, i) => {
+          {yTicks.map((val, i) => {
+            const ratio = val / maxVal;
             const y = padding + chartHeight * (1 - ratio);
-            const gridValue = Math.round(maxVal * ratio);
             return (
               <g key={i} className="opacity-20">
                 <line x1={padding} y1={y} x2={width - padding} y2={y} stroke="#475569" strokeWidth="1" strokeDasharray="4" />
-                <text x={padding - 8} y={y + 3} fill="#94a3b8" fontSize="10" textAnchor="end">{gridValue}</text>
+                <text x={padding - 8} y={y + 3} fill="#94a3b8" fontSize="10" textAnchor="end">{val}</text>
               </g>
             );
           })}
