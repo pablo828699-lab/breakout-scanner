@@ -53,28 +53,28 @@ def confirm_breakout(
     for level in levels:
         price = level.price
 
-        # ---- Resistance breakout → LONG ----
-        if level.level_type == "resistance":
-            if candle_open < price and candle_close > price:
-                logger.info(
-                    "LONG breakout confirmed — body closed above resistance "
-                    "%.4f (open=%.4f, close=%.4f).",
-                    price,
-                    candle_open,
-                    candle_close,
-                )
-                return level, "LONG"
+        # ---- Crossing from below to above → LONG breakout ----
+        if candle_open < price and candle_close > price:
+            level.level_type = "resistance"  # Update type contextually
+            logger.info(
+                "LONG breakout confirmed — body closed above level "
+                "%.4f (open=%.4f, close=%.4f).",
+                price,
+                candle_open,
+                candle_close,
+            )
+            return level, "LONG"
 
-        # ---- Support breakdown → SHORT ----
-        elif level.level_type == "support":
-            if candle_open > price and candle_close < price:
-                logger.info(
-                    "SHORT breakout confirmed — body closed below support "
-                    "%.4f (open=%.4f, close=%.4f).",
-                    price,
-                    candle_open,
-                    candle_close,
-                )
-                return level, "SHORT"
+        # ---- Crossing from above to below → SHORT breakdown ----
+        elif candle_open > price and candle_close < price:
+            level.level_type = "support"  # Update type contextually
+            logger.info(
+                "SHORT breakout confirmed — body closed below level "
+                "%.4f (open=%.4f, close=%.4f).",
+                price,
+                candle_open,
+                candle_close,
+            )
+            return level, "SHORT"
 
     return None
