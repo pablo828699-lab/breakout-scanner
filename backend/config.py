@@ -21,11 +21,35 @@ VOLUME_MULTIPLIER: float = float(os.getenv("VOLUME_MULTIPLIER", "1.5"))
 VOLUME_SMA_PERIOD: int = int(os.getenv("VOLUME_SMA_PERIOD", "20"))
 
 # ---------------------------------------------------------------------------
+# Breakout Confirmation
+# ---------------------------------------------------------------------------
+# Minimum penetration beyond the level, as a fraction of ATR, for the 1H body
+# close to count as a valid break (filters marginal pokes / stop-runs).
+PENETRATION_ATR_MULT: float = float(os.getenv("PENETRATION_ATR_MULT", "0.15"))
+
+# ---------------------------------------------------------------------------
 # ATR / Risk Management
 # ---------------------------------------------------------------------------
 ATR_PERIOD: int = int(os.getenv("ATR_PERIOD", "14"))
-ATR_SL_MULTIPLIER: float = float(os.getenv("ATR_SL_MULTIPLIER", "0.5"))
 RISK_REWARD_RATIO: float = float(os.getenv("RISK_REWARD_RATIO", "2.0"))
+
+# Structural stop: placed beyond the breakout candle's extreme, with a small
+# ATR buffer. A minimum distance floor prevents sub-noise stops; a maximum
+# distance ceiling rejects chasing an over-extended entry.
+SL_BUFFER_ATR_MULT: float = float(os.getenv("SL_BUFFER_ATR_MULT", "0.10"))
+MIN_STOP_ATR_MULT: float = float(os.getenv("MIN_STOP_ATR_MULT", "0.5"))
+MAX_STOP_ATR_MULT: float = float(os.getenv("MAX_STOP_ATR_MULT", "3.0"))
+
+# Deprecated — kept for backward compat with existing .env files (unused).
+ATR_SL_MULTIPLIER: float = float(os.getenv("ATR_SL_MULTIPLIER", "0.5"))
+
+# ---------------------------------------------------------------------------
+# Regime / Trend Filter
+# ---------------------------------------------------------------------------
+# Only take LONGs when the last daily close is above its SMA, and SHORTs when
+# below — keeps breakouts aligned with the higher-timeframe trend.
+TREND_FILTER_ENABLED: bool = os.getenv("TREND_FILTER_ENABLED", "true").lower() in ("true", "1", "yes")
+TREND_MA_PERIOD: int = int(os.getenv("TREND_MA_PERIOD", "50"))
 
 # ---------------------------------------------------------------------------
 # Lookback Windows

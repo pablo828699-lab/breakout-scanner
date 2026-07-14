@@ -17,7 +17,7 @@ from backend.data_fetcher import DataFetcher
 from backend.levels import detect_key_levels
 from backend.market_hours import is_market_open
 from backend.models import BreakoutSignal, OpenPosition
-from backend.risk_manager import calculate_risk_levels
+from backend.risk_manager import calculate_atr, calculate_risk_levels
 from backend.telegram_notifier import TelegramNotifier
 from backend.volume_filter import passes_volume_filter
 
@@ -86,12 +86,38 @@ class BreakoutScanner:
             return None
 
         current_price = float(hourly_df["Close"].iloc[-1])
-        result = confirm_breakout(hourly_df, levels, current_price)
+        atr_value = calculate_atr(hourly_df, cfg.ATR_PERIOD)
+        result = confirm_breakout(
+            hourly_df,
+            levels,
+            current_price,
+            atr_value=atr_value,
+            penetration_atr_mult=cfg.PENETRATION_ATR_MULT,
+        )
         if result is None:
             return None
 
         broken_level, direction = result
         entry_price = current_price
+
+        # --- Trend filter: only trade breakouts aligned with the HTF trend ---
+        if cfg.TREND_FILTER_ENABLED and len(daily_df) >= cfg.TREND_MA_PERIOD:
+            trend_ma = float(
+                daily_df["Close"].rolling(cfg.TREND_MA_PERIOD).mean().iloc[-1]
+            )
+            daily_close = float(daily_df["Close"].iloc[-1])
+            if direction == "LONG" and daily_close < trend_ma:
+                logger.info(
+                    "%s LONG rejected — price below daily SMA%d (%.4f < %.4f).",
+                    ticker, cfg.TREND_MA_PERIOD, daily_close, trend_ma,
+                )
+                return None
+            if direction == "SHORT" and daily_close > trend_ma:
+                logger.info(
+                    "%s SHORT rejected — price above daily SMA%d (%.4f > %.4f).",
+                    ticker, cfg.TREND_MA_PERIOD, daily_close, trend_ma,
+                )
+                return None
 
         # --- Pullback Guard: Reject if current price has pulled back across the broken level ---
         if direction == "LONG" and entry_price < broken_level.price:
@@ -126,16 +152,28 @@ class BreakoutScanner:
             )
             return None
 
-        # --- 4. Risk management ---
-        stop_loss, take_profit, atr_value = calculate_risk_levels(
+        # --- 4. Risk management (structural stop anchored to the breakout candle) ---
+        breakout_candle = hourly_df.iloc[-2]
+        stop_loss, take_profit, risk = calculate_risk_levels(
             entry_price=entry_price,
-            broken_level=broken_level.price,
+            breakout_candle_low=float(breakout_candle["Low"]),
+            breakout_candle_high=float(breakout_candle["High"]),
             direction=direction,
-            hourly_df=hourly_df,
-            atr_period=cfg.ATR_PERIOD,
-            atr_sl_multiplier=cfg.ATR_SL_MULTIPLIER,
+            atr_value=atr_value,
+            buffer_atr_mult=cfg.SL_BUFFER_ATR_MULT,
+            min_stop_atr_mult=cfg.MIN_STOP_ATR_MULT,
             rr_ratio=cfg.RISK_REWARD_RATIO,
         )
+
+        # --- Extension guard: reject if the live entry has run too far from the
+        #     structural stop (chasing an over-extended breakout = poor R:R). ---
+        max_risk = atr_value * cfg.MAX_STOP_ATR_MULT
+        if risk > max_risk:
+            logger.info(
+                "%s breakout rejected — entry over-extended (risk %.4f > %.2f×ATR=%.4f).",
+                ticker, risk, cfg.MAX_STOP_ATR_MULT, max_risk,
+            )
+            return None
 
         signal = BreakoutSignal(
             ticker=ticker,

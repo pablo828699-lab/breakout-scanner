@@ -1,5 +1,6 @@
 """
-Risk management — ATR-based Stop-Loss and fixed R:R Take-Profit.
+Risk management — structural Stop-Loss anchored to the breakout candle,
+with an ATR buffer and distance guards, plus fixed R:R Take-Profit.
 """
 
 from __future__ import annotations
@@ -13,7 +14,7 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 
-def _calculate_atr(hourly_df: pd.DataFrame, period: int = 14) -> float:
+def calculate_atr(hourly_df: pd.DataFrame, period: int = 14) -> float:
     """Compute the Average True Range over the last *period* candles."""
     if len(hourly_df) < period + 1:
         logger.warning("Not enough data for ATR(%d); using fallback.", period)
@@ -36,56 +37,70 @@ def _calculate_atr(hourly_df: pd.DataFrame, period: int = 14) -> float:
 
 def calculate_risk_levels(
     entry_price: float,
-    broken_level: float,
+    breakout_candle_low: float,
+    breakout_candle_high: float,
     direction: str,
-    hourly_df: pd.DataFrame,
-    atr_period: int = 14,
-    atr_sl_multiplier: float = 0.5,
+    atr_value: float,
+    buffer_atr_mult: float = 0.10,
+    min_stop_atr_mult: float = 0.5,
     rr_ratio: float = 2.0,
 ) -> Tuple[float, float, float]:
-    """Calculate Stop-Loss, Take-Profit, and ATR for a trade.
+    """Calculate a structural Stop-Loss, Take-Profit, and risk for a trade.
+
+    The stop is placed just beyond the *breakout candle's* extreme (its low for
+    a LONG, its high for a SHORT) plus a small ATR buffer — i.e. at the level
+    where the breakout would be invalidated, not at an arbitrary distance from
+    entry. A minimum-distance floor (``min_stop_atr_mult`` × ATR) prevents a
+    sub-noise stop when the breakout candle is tiny.
 
     Parameters
     ----------
     entry_price : float
-        The intended entry price (typically the breakout candle's close).
-    broken_level : float
-        The daily key level that was broken.
+        The intended entry price (current/live price at signal time).
+    breakout_candle_low, breakout_candle_high : float
+        Low/High of the confirmed 1H breakout candle (the invalidation anchor).
     direction : str
         ``'LONG'`` or ``'SHORT'``.
-    hourly_df : pd.DataFrame
-        1-hour OHLCV data used to compute ATR.
-    atr_period : int
-        ATR lookback period (default 14).
-    atr_sl_multiplier : float
-        Fraction of ATR added as margin beyond the broken level for the SL.
+    atr_value : float
+        Pre-computed ATR on the 1H timeframe.
+    buffer_atr_mult : float
+        Extra margin beyond the candle extreme, as a fraction of ATR.
+    min_stop_atr_mult : float
+        Minimum stop distance from entry, as a fraction of ATR.
     rr_ratio : float
         Reward-to-risk ratio for the take-profit target.
 
     Returns
     -------
-    (stop_loss, take_profit, atr_value)
+    (stop_loss, take_profit, risk)
+        ``risk`` is the per-unit distance between entry and stop.
     """
-    atr_value = _calculate_atr(hourly_df, atr_period)
-    margin = atr_value * atr_sl_multiplier
+    buffer = atr_value * buffer_atr_mult
+    min_distance = atr_value * min_stop_atr_mult
 
     if direction == "LONG":
-        stop_loss = entry_price - margin
+        structural_stop = breakout_candle_low - buffer
+        # Floor the distance: take whichever stop sits further below entry.
+        stop_loss = min(structural_stop, entry_price - min_distance)
         risk = entry_price - stop_loss
         take_profit = entry_price + (risk * rr_ratio)
     elif direction == "SHORT":
-        stop_loss = entry_price + margin
+        structural_stop = breakout_candle_high + buffer
+        # Floor the distance: take whichever stop sits further above entry.
+        stop_loss = max(structural_stop, entry_price + min_distance)
         risk = stop_loss - entry_price
         take_profit = entry_price - (risk * rr_ratio)
     else:
         raise ValueError(f"Invalid direction: {direction!r}")
 
     logger.info(
-        "Risk levels [%s]: SL=%.4f, TP=%.4f, ATR=%.4f, risk=%.4f",
+        "Risk levels [%s]: entry=%.4f, SL=%.4f, TP=%.4f, ATR=%.4f, risk=%.4f (%.2f×ATR)",
         direction,
+        entry_price,
         stop_loss,
         take_profit,
         atr_value,
         risk,
+        risk / atr_value if atr_value else 0.0,
     )
-    return round(stop_loss, 6), round(take_profit, 6), round(atr_value, 6)
+    return round(stop_loss, 6), round(take_profit, 6), round(risk, 6)

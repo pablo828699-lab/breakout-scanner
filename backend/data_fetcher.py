@@ -32,6 +32,43 @@ except ImportError:
     logger.warning("yfinance not installed — US Equities data unavailable.")
 
 
+# ---------------------------------------------------------------------------
+# Binance public market-data hosts, tried in order.
+# api.binance.com is geo-blocked (HTTP 451) from many US datacenter IPs
+# (GitHub Actions / Render / Railway), so data-api.binance.vision — the public
+# data-only mirror with the same /api/v3 schema — is used as a fallback.
+# ---------------------------------------------------------------------------
+_BINANCE_HOSTS = (
+    "https://api.binance.com",
+    "https://data-api.binance.vision",
+)
+
+
+def _binance_request(path: str, params: dict | None = None, timeout: int = 15):
+    """GET a Binance public endpoint, falling back across hosts on failure.
+
+    Returns the parsed JSON on the first host that responds successfully, or
+    ``None`` if every host fails (network error, timeout, or geo-block).
+    """
+    last_error: str | None = None
+    for host in _BINANCE_HOSTS:
+        url = f"{host}{path}"
+        try:
+            resp = requests.get(url, params=params, timeout=timeout)
+            if resp.status_code == 451:
+                last_error = f"{host} → 451 (geo-blocked)"
+                logger.warning("Binance host %s geo-blocked (451) — trying next host.", host)
+                continue
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as exc:
+            last_error = f"{host} → {type(exc).__name__}: {exc}"
+            logger.warning("Binance host %s failed (%s) — trying next host.", host, exc)
+            continue
+    logger.error("All Binance hosts failed for %s. Last error: %s", path, last_error)
+    return None
+
+
 class DataFetcher:
     """Unified data access for both US equities and crypto markets."""
 
@@ -90,16 +127,10 @@ class DataFetcher:
     @staticmethod
     def _binance_klines(symbol: str, interval: str, limit: int) -> pd.DataFrame:
         """Fetch klines from Binance public API (no authentication needed)."""
-        url = "https://api.binance.com/api/v3/klines"
-        params = {"symbol": symbol, "interval": interval, "limit": limit}
-        try:
-            resp = requests.get(url, params=params, timeout=15)
-            resp.raise_for_status()
-            raw = resp.json()
-        except Exception as exc:
-            logger.error("Binance klines error for %s (%s): %s", symbol, interval, exc)
-            return pd.DataFrame()
-
+        raw = _binance_request(
+            "/api/v3/klines",
+            params={"symbol": symbol, "interval": interval, "limit": limit},
+        )
         if not raw:
             return pd.DataFrame()
 
@@ -174,10 +205,9 @@ class DataFetcher:
         }
 
         try:
-            url = "https://api.binance.com/api/v3/ticker/24hr"
-            resp = requests.get(url, timeout=15)
-            resp.raise_for_status()
-            tickers_raw = resp.json()
+            tickers_raw = _binance_request("/api/v3/ticker/24hr")
+            if not tickers_raw:
+                raise RuntimeError("all Binance hosts unavailable")
 
             # Filter to USDT pairs only, exclude leveraged/down tokens and stablecoins/fiat pegs
             usdt_pairs = [
