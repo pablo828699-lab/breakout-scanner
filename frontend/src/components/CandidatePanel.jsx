@@ -1,6 +1,17 @@
 import React from 'react';
 
 export default function CandidatePanel({ candidates, onApprove, onReject }) {
+  const formatPrice = (val) => {
+    if (val === undefined || val === null || isNaN(val)) return '0.00';
+    if (val < 1) {
+      return val.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 6 });
+    } else if (val < 100) {
+      return val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+    } else {
+      return val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+  };
+
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-900/20 p-6 backdrop-blur-xl">
       <div className="flex justify-between items-center mb-6">
@@ -24,7 +35,6 @@ export default function CandidatePanel({ candidates, onApprove, onReject }) {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {candidates.map((candidate) => {
             const isLong = candidate.direction === 'LONG';
-            const fmt = candidate.market === 'Crypto' ? '0,0.00' : '0,0.00';
             
             return (
               <div
@@ -58,19 +68,19 @@ export default function CandidatePanel({ candidates, onApprove, onReject }) {
                   <div className="bg-slate-950/40 rounded-lg p-2 border border-slate-800/30">
                     <p className="text-[9px] uppercase font-bold text-slate-500 tracking-wider">Entrada</p>
                     <p className="text-sm font-semibold text-slate-200 mt-0.5">
-                      ${candidate.entry.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      ${formatPrice(candidate.entry)}
                     </p>
                   </div>
                   <div className="bg-slate-950/40 rounded-lg p-2 border border-slate-800/30">
                     <p className="text-[9px] uppercase font-bold text-slate-500 tracking-wider">Stop Loss</p>
                     <p className="text-sm font-semibold text-rose-400/90 mt-0.5">
-                      ${candidate.stopLoss.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      ${formatPrice(candidate.stopLoss)}
                     </p>
                   </div>
                   <div className="bg-slate-950/40 rounded-lg p-2 border border-slate-800/30">
                     <p className="text-[9px] uppercase font-bold text-slate-500 tracking-wider">Take Profit</p>
                     <p className="text-sm font-semibold text-emerald-400/90 mt-0.5">
-                      ${candidate.takeProfit.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      ${formatPrice(candidate.takeProfit)}
                     </p>
                   </div>
                 </div>

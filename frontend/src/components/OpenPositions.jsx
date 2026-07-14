@@ -1,6 +1,17 @@
 import React from 'react';
 
 export default function OpenPositions({ positions, onClosePosition }) {
+  const formatPrice = (val) => {
+    if (val === undefined || val === null || isNaN(val)) return '0.00';
+    if (val < 1) {
+      return val.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 6 });
+    } else if (val < 100) {
+      return val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+    } else {
+      return val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+  };
+
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-900/20 p-6 backdrop-blur-xl">
       <div className="flex justify-between items-center mb-6">
@@ -57,16 +68,16 @@ export default function OpenPositions({ positions, onClosePosition }) {
                       </span>
                     </td>
                     <td className="py-3.5 px-4 text-right font-medium text-slate-300">
-                      ${pos.entry.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      ${formatPrice(pos.entry)}
                     </td>
                     <td className="py-3.5 px-4 text-right font-medium text-slate-300">
-                      ${pos.current.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      ${formatPrice(pos.current)}
                     </td>
                     <td className="py-3.5 px-4 text-right font-medium text-rose-500/80">
-                      ${pos.stopLoss.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      ${formatPrice(pos.stopLoss)}
                     </td>
                     <td className="py-3.5 px-4 text-right font-medium text-emerald-500/80">
-                      ${pos.takeProfit.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      ${formatPrice(pos.takeProfit)}
                     </td>
                     <td className={`py-3.5 px-4 text-right font-bold transition-all duration-300 animate-pulse ${
                       isProfit ? 'text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.2)]' : 'text-rose-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.2)]'
