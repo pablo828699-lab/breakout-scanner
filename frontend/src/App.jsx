@@ -46,6 +46,21 @@ export default function App() {
       sharpeRatio: 0
     };
   });
+
+  const [capitalPerTrade, setCapitalPerTrade] = useState(() => {
+    const saved = localStorage.getItem('capitalPerTrade');
+    return saved ? Number(saved) : 1000;
+  });
+
+  const [accountBalance, setAccountBalance] = useState(() => {
+    const saved = localStorage.getItem('accountBalance');
+    return saved ? Number(saved) : 100000;
+  });
+
+  const [ignoredCandidates, setIgnoredCandidates] = useState(() => {
+    const saved = localStorage.getItem('ignoredCandidates');
+    return saved ? JSON.parse(saved) : [];
+  });
   
   const [time, setTime] = useState(new Date());
   const [isScanning, setIsScanning] = useState(false);
@@ -73,6 +88,18 @@ export default function App() {
     localStorage.setItem('kpis', JSON.stringify(kpis));
   }, [kpis]);
 
+  useEffect(() => {
+    localStorage.setItem('capitalPerTrade', capitalPerTrade.toString());
+  }, [capitalPerTrade]);
+
+  useEffect(() => {
+    localStorage.setItem('accountBalance', accountBalance.toString());
+  }, [accountBalance]);
+
+  useEffect(() => {
+    localStorage.setItem('ignoredCandidates', JSON.stringify(ignoredCandidates));
+  }, [ignoredCandidates]);
+
   // Fetch actual candidates from Render backend
   useEffect(() => {
     const fetchCandidates = async () => {
@@ -85,6 +112,8 @@ export default function App() {
           const existingIds = new Set(prevCandidates.map(c => `${c.ticker}_${c.timestamp}`));
           const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
           const openIds = new Set(savedOpen.map(p => p.ticker));
+          const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
+          const ignoredSet = new Set(savedIgnored);
           
           const newCandidates = data
             .map((c, index) => ({
@@ -101,7 +130,9 @@ export default function App() {
               timestamp: c.timestamp,
               status: 'pending'
             }))
-            .filter(c => !existingIds.has(`${c.ticker}_${c.timestamp}`) && !openIds.has(c.ticker));
+            .filter(c => !existingIds.has(`${c.ticker}_${c.timestamp}`) && 
+                         !openIds.has(c.ticker) &&
+                         !ignoredSet.has(`${c.ticker}_${c.timestamp}`));
             
           return [...prevCandidates, ...newCandidates];
         });
@@ -148,6 +179,7 @@ export default function App() {
       takeProfit: candidate.takeProfit,
       brokenLevel: candidate.brokenLevel,
       entryTime: new Date().toISOString().replace('T', ' ').substring(0, 16),
+      size: capitalPerTrade, // Save the trade size at approval time
       pnl: 0.00,
       pnlPct: 0.00
     };
@@ -160,8 +192,16 @@ export default function App() {
     }));
   };
 
-  // Handler to reject/ignore a candidate signal
+  // Handler to reject/ignore a candidate signal persistently
   const handleReject = (id) => {
+    const candidate = candidates.find((c) => c.id === id);
+    if (candidate) {
+      const key = `${candidate.ticker}_${candidate.timestamp}`;
+      setIgnoredCandidates((prev) => {
+        if (prev.includes(key)) return prev;
+        return [...prev, key];
+      });
+    }
     setCandidates(candidates.filter((c) => c.id !== id));
   };
 
@@ -170,12 +210,12 @@ export default function App() {
     const position = openPositions.find((p) => p.id === id);
     if (!position) return;
 
-    // Simulate exit price near current or take profit/stop loss randomly
-    const isWin = Math.random() > 0.35; // 65% win rate simulation
-    const exitPrice = isWin ? position.takeProfit : position.stopLoss;
-    const risk = Math.abs(position.entry - position.stopLoss);
-    const pnl = isWin ? (risk * 2) * 50 : -risk * 50; // scaled simulated dollar pnl
+    // Use current live price as the exit price
+    const exitPrice = position.current;
+    const size = position.size || capitalPerTrade;
     const pnlPct = ((exitPrice - position.entry) / position.entry) * (position.direction === 'LONG' ? 100 : -100);
+    const pnl = (pnlPct / 100) * size;
+    const isWin = pnl >= 0;
 
     const closedTrade = {
       id: Date.now(),
@@ -189,7 +229,8 @@ export default function App() {
       exitTime: new Date().toISOString().replace('T', ' ').substring(0, 16),
       pnl: pnl,
       pnlPct: pnlPct,
-      result: isWin ? 'WIN' : 'LOSS'
+      result: isWin ? 'WIN' : 'LOSS',
+      size: size
     };
 
     setTradeHistory([closedTrade, ...tradeHistory]);
@@ -198,14 +239,40 @@ export default function App() {
       const newWinningTrades = isWin ? prev.winningTrades + 1 : prev.winningTrades;
       const newLosingTrades = !isWin ? prev.losingTrades + 1 : prev.losingTrades;
       const newTotal = prev.totalTrades;
-      const newWinRate = (newWinningTrades / newTotal) * 100;
+      const newWinRate = newTotal > 0 ? (newWinningTrades / newTotal) * 100 : 0;
       const newPnL = prev.todayPnL + pnl;
 
       return {
         ...prev,
         todayPnL: newPnL,
-        todayPnLPct: (newPnL / 200000) * 100, // assume $200k base capital
+        todayPnLPct: (newPnL / accountBalance) * 100, // Dynamic percentage based on user's balance
         winRate: newWinRate,
+        winningTrades: newWinningTrades,
+        losingTrades: newLosingTrades
+      };
+    });
+  };
+
+  // Handler to delete a trade from history and adjust KPIs
+  const handleDeleteTrade = (id) => {
+    const trade = tradeHistory.find((t) => t.id === id);
+    if (!trade) return;
+
+    setTradeHistory(tradeHistory.filter((t) => t.id !== id));
+    setKpis((prev) => {
+      const isWin = trade.result === 'WIN';
+      const newWinningTrades = isWin ? Math.max(0, prev.winningTrades - 1) : prev.winningTrades;
+      const newLosingTrades = !isWin ? Math.max(0, prev.losingTrades - 1) : prev.losingTrades;
+      const newTotal = Math.max(0, prev.totalTrades - 1);
+      const newWinRate = newTotal > 0 ? (newWinningTrades / newTotal) * 100 : 0;
+      const newPnL = prev.todayPnL - trade.pnl;
+
+      return {
+        ...prev,
+        todayPnL: newPnL,
+        todayPnLPct: (newPnL / accountBalance) * 100,
+        winRate: newWinRate,
+        totalTrades: newTotal,
         winningTrades: newWinningTrades,
         losingTrades: newLosingTrades
       };
@@ -223,7 +290,7 @@ export default function App() {
       <div className="max-w-7xl mx-auto px-4 py-8 relative z-10 space-y-6">
         
         {/* Header Section */}
-        <header className="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-slate-900">
+        <header className="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-slate-900 gap-4">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
               Breakout Scanner
@@ -233,34 +300,63 @@ export default function App() {
             </p>
           </div>
           
-          <div className="flex items-center gap-4 mt-4 md:mt-0 bg-slate-900/50 px-4 py-2 rounded-xl border border-slate-800/80 backdrop-blur-md">
-            {/* Force Scan Button */}
-            <button
-              onClick={handleForceScan}
-              disabled={isScanning}
-              className={`text-xs font-bold px-3 py-1.5 rounded-lg border transition-all duration-300 ${
-                isScanning
-                  ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
-                  : 'bg-blue-600/10 border-blue-500/30 text-blue-400 hover:bg-blue-600/20 hover:border-blue-500/60'
-              }`}
-            >
-              {isScanning ? 'Escaneando...' : 'Escanear Ahora'}
-            </button>
-            
-            <div className="h-4 w-[1px] bg-slate-800" />
-            
-            {/* Live Indicator */}
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
-              <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Live Scanner</span>
+          <div className="flex flex-wrap items-center gap-4 mt-4 md:mt-0">
+            {/* Sizing Configurations */}
+            <div className="flex items-center gap-3 bg-slate-900/40 px-3.5 py-1.5 rounded-xl border border-slate-800/80 backdrop-blur-md text-xs font-semibold">
+              <div className="flex items-center gap-1.5">
+                <span className="text-slate-400">Capital/Trade:</span>
+                <span className="text-slate-500 font-mono">$</span>
+                <input
+                  type="number"
+                  value={capitalPerTrade}
+                  onChange={(e) => setCapitalPerTrade(Math.max(1, Number(e.target.value)))}
+                  className="w-16 bg-slate-950/80 border border-slate-800 rounded px-1.5 py-0.5 text-slate-200 focus:outline-none focus:border-cyan-500 text-right font-mono"
+                  title="Capital utilizado para calcular PnL neto en cada trade"
+                />
+              </div>
+              <div className="h-4 w-[1px] bg-slate-800" />
+              <div className="flex items-center gap-1.5">
+                <span className="text-slate-400">Balance Cuenta:</span>
+                <span className="text-slate-500 font-mono">$</span>
+                <input
+                  type="number"
+                  value={accountBalance}
+                  onChange={(e) => setAccountBalance(Math.max(1, Number(e.target.value)))}
+                  className="w-24 bg-slate-950/80 border border-slate-800 rounded px-1.5 py-0.5 text-slate-200 focus:outline-none focus:border-cyan-500 text-right font-mono"
+                  title="Balance de cuenta para calcular PnL % de la jornada"
+                />
+              </div>
             </div>
-            
-            <div className="h-4 w-[1px] bg-slate-800" />
-            
-            {/* Live clock */}
-            <span className="text-sm font-semibold text-slate-200 tracking-wide font-mono">
-              {time.toLocaleTimeString('en-US', { hour12: false })}
-            </span>
+
+            <div className="flex items-center gap-4 bg-slate-900/50 px-4 py-2 rounded-xl border border-slate-800/80 backdrop-blur-md">
+              {/* Force Scan Button */}
+              <button
+                onClick={handleForceScan}
+                disabled={isScanning}
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg border transition-all duration-300 ${
+                  isScanning
+                    ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
+                    : 'bg-blue-600/10 border-blue-500/30 text-blue-400 hover:bg-blue-600/20 hover:border-blue-500/60'
+                }`}
+              >
+                {isScanning ? 'Escaneando...' : 'Escanear Ahora'}
+              </button>
+              
+              <div className="h-4 w-[1px] bg-slate-800" />
+              
+              {/* Live Indicator */}
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
+                <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Live Scanner</span>
+              </div>
+              
+              <div className="h-4 w-[1px] bg-slate-800" />
+              
+              {/* Live clock */}
+              <span className="text-sm font-semibold text-slate-200 tracking-wide font-mono">
+                {time.toLocaleTimeString('en-US', { hour12: false })}
+              </span>
+            </div>
           </div>
         </header>
 
@@ -294,7 +390,7 @@ export default function App() {
 
         {/* Trade history log */}
         <section className="w-full">
-          <TradeHistory history={tradeHistory} />
+          <TradeHistory history={tradeHistory} onDeleteTrade={handleDeleteTrade} />
         </section>
         
       </div>
