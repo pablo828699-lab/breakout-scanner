@@ -71,6 +71,12 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/ping":
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(b'{"status": "ok"}')
         elif clean_path == "/api/candidates":
             try:
                 import json
