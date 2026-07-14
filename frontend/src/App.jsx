@@ -102,6 +102,27 @@ export default function App() {
     localStorage.setItem('ignoredCandidates', JSON.stringify(ignoredCandidates));
   }, [ignoredCandidates]);
 
+  // Simulate minor price fluctuations for active open positions to bring the dashboard to life
+  useEffect(() => {
+    if (openPositions.length === 0) return;
+
+    const timer = setInterval(() => {
+      setOpenPositions((prevPositions) =>
+        prevPositions.map((pos) => {
+          // Volatility fluctuation: between -0.12% and +0.12%
+          const changePct = (Math.random() - 0.5) * 0.0024;
+          const nextPrice = pos.current * (1 + changePct);
+          return {
+            ...pos,
+            current: Math.max(0.000001, nextPrice)
+          };
+        })
+      );
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [openPositions.length]);
+
   // Fetch actual candidates from Render backend
   useEffect(() => {
     const fetchCandidates = async () => {

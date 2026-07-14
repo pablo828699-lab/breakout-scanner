@@ -50,7 +50,12 @@ export default function OpenPositions({ positions, onClosePosition }) {
             <tbody className="divide-y divide-slate-800/40 text-sm">
               {positions.map((pos) => {
                 const isLong = pos.direction === 'LONG';
-                const isProfit = pos.pnl >= 0;
+                
+                // Calculate PnL in real-time based on the position's size and current price
+                const pnlPct = ((pos.current - pos.entry) / pos.entry) * (isLong ? 100 : -100);
+                const size = pos.size || 1000;
+                const pnl = (pnlPct / 100) * size;
+                const isProfit = pnl >= 0;
 
                 return (
                   <tr key={pos.id} className="hover:bg-slate-900/30 transition duration-150">
@@ -82,12 +87,12 @@ export default function OpenPositions({ positions, onClosePosition }) {
                     <td className={`py-3.5 px-4 text-right font-bold transition-all duration-300 animate-pulse ${
                       isProfit ? 'text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.2)]' : 'text-rose-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.2)]'
                     }`}>
-                      {isProfit ? '+' : ''}${pos.pnl.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      {isProfit ? '+' : ''}${pnl.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </td>
                     <td className={`py-3.5 px-4 text-right font-bold ${
                       isProfit ? 'text-emerald-400' : 'text-rose-400'
                     }`}>
-                      {isProfit ? '+' : ''}{pos.pnlPct.toFixed(2)}%
+                      {isProfit ? '+' : ''}{pnlPct.toFixed(2)}%
                     </td>
                     <td className="py-3.5 px-4 text-center">
                       <button
