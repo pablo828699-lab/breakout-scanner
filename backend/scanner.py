@@ -9,16 +9,17 @@ from __future__ import annotations
 
 import logging
 from datetime import datetime, timezone
-from typing import List, Optional, Set
+from typing import Dict, List, Optional
 
 import backend.config as cfg
 from backend.breakout import confirm_breakout
 from backend.data_fetcher import DataFetcher
 from backend.levels import detect_key_levels
 from backend.market_hours import is_market_open
-from backend.models import BreakoutSignal, OpenPosition
+from backend.models import BreakoutSignal, OpenPosition, RadarSignal
 from backend.risk_manager import calculate_atr, calculate_risk_levels
 from backend.telegram_notifier import TelegramNotifier
+from backend.trend_radar import evaluate_trend_radar
 from backend.volume_filter import passes_volume_filter
 
 logger = logging.getLogger(__name__)
@@ -34,9 +35,17 @@ class BreakoutScanner:
             chat_id=cfg.TELEGRAM_CHAT_ID,
             dry_run=dry_run,
         )
-        self._alerted_tickers: Set[str] = set()
+        # Cooldown map: "TICKER:DIRECTION" -> last alert time (UTC).
+        self._last_alert: Dict[str, datetime] = {}
         self._open_positions: List[OpenPosition] = []
         self._last_scan_time: Optional[datetime] = None
+
+    def _in_cooldown(self, ticker: str, direction: str, now: datetime) -> bool:
+        """True if this asset+direction was alerted within the cooldown window."""
+        last = self._last_alert.get(f"{ticker}:{direction}")
+        if last is None:
+            return False
+        return (now - last).total_seconds() < cfg.ALERT_COOLDOWN_HOURS * 3600
 
     # ------------------------------------------------------------------
     #  Per-ticker analysis
@@ -44,21 +53,19 @@ class BreakoutScanner:
 
     def scan_ticker(
         self, ticker: str, market: str
-    ) -> Optional[BreakoutSignal]:
+    ) -> "Optional[BreakoutSignal | RadarSignal]":
         """Run the full pipeline for a single ticker.
 
-        Returns a ``BreakoutSignal`` if the ticker qualifies, else ``None``.
+        In ``radar`` mode returns a ``RadarSignal`` (trend detection); in
+        ``breakout`` mode returns a ``BreakoutSignal``. ``None`` if no hit.
         """
-        # Duplicate / open-position guard
-        if ticker in self._alerted_tickers:
-            logger.debug("%s already alerted this session — skipping.", ticker)
-            return None
-
+        # Open-position guard (dedup by asset+direction is applied in run_scan
+        # once the signal — and thus its direction — is known).
         if any(p.ticker == ticker for p in self._open_positions):
             logger.debug("%s has an open position — skipping.", ticker)
             return None
 
-        # --- 1. Fetch daily data & detect key levels ---
+        # --- 1. Fetch daily data ---
         if market == "US_EQUITIES":
             daily_df = self._fetcher.fetch_sp500_daily(ticker)
         else:
@@ -67,6 +74,36 @@ class BreakoutScanner:
         if daily_df.empty:
             return None
 
+        # --- RADAR MODE: trend + trigger detection on daily data (no SL/TP) ---
+        if cfg.DETECTION_MODE == "radar":
+            hit = evaluate_trend_radar(
+                daily_df,
+                adx_period=cfg.RADAR_ADX_PERIOD,
+                adx_min=cfg.RADAR_ADX_MIN,
+                ema_fast=cfg.RADAR_EMA_FAST,
+                ema_slow=cfg.RADAR_EMA_SLOW,
+                donchian_n=cfg.RADAR_DONCHIAN_N,
+                impulse_atr_mult=cfg.RADAR_IMPULSE_ATR_MULT,
+                impulse_volume_mult=cfg.RADAR_IMPULSE_VOLUME_MULT,
+                roc_period=cfg.RADAR_ROC_PERIOD,
+            )
+            if hit is None:
+                return None
+            return RadarSignal(
+                ticker=ticker,
+                market=market,
+                direction=hit["direction"],
+                price=hit["price"],
+                triggers=hit["triggers"],
+                adx=hit["adx"],
+                ema_stack=hit["ema_stack"],
+                volume_ratio=hit["volume_ratio"],
+                roc_pct=hit["roc_pct"],
+                donchian_n=hit["donchian_n"],
+                timestamp=datetime.now(tz=timezone.utc),
+            )
+
+        # --- BREAKOUT MODE (legacy): detect key levels ---
         levels = detect_key_levels(
             daily_df,
             proximity_pct=cfg.PROXIMITY_THRESHOLD_PCT,
@@ -225,18 +262,29 @@ class BreakoutScanner:
                 try:
                     signal = self.scan_ticker(ticker, market)
                     if signal is not None:
-                        self._alerted_tickers.add(ticker)
+                        alert_time = datetime.now(tz=timezone.utc)
+                        if self._in_cooldown(signal.ticker, signal.direction, alert_time):
+                            logger.debug(
+                                "%s %s in cooldown (< %.0fh) — skipping alert.",
+                                signal.ticker, signal.direction, cfg.ALERT_COOLDOWN_HOURS,
+                            )
+                            continue
+                        self._last_alert[f"{signal.ticker}:{signal.direction}"] = alert_time
                         self._notifier.send_alert(signal)
                         signals.append(signal)
-                        logger.info(
-                            "✅ SIGNAL: %s %s @ %.4f [SL=%.4f, TP=%.4f, Vol=%.1fx]",
-                            signal.direction,
-                            signal.ticker,
-                            signal.entry_price,
-                            signal.stop_loss,
-                            signal.take_profit,
-                            signal.volume_ratio,
-                        )
+                        if isinstance(signal, RadarSignal):
+                            logger.info(
+                                "✅ RADAR: %s %s @ %.4f [ADX=%.1f, %s, Vol=%.1fx, ROC=%.1f%%]",
+                                signal.direction, signal.ticker, signal.price,
+                                signal.adx, "+".join(signal.triggers),
+                                signal.volume_ratio, signal.roc_pct,
+                            )
+                        else:
+                            logger.info(
+                                "✅ SIGNAL: %s %s @ %.4f [SL=%.4f, TP=%.4f, Vol=%.1fx]",
+                                signal.direction, signal.ticker, signal.entry_price,
+                                signal.stop_loss, signal.take_profit, signal.volume_ratio,
+                            )
                 except Exception as exc:
                     logger.error("Error scanning %s: %s", ticker, exc, exc_info=True)
 
@@ -264,18 +312,33 @@ class BreakoutScanner:
                 signals_dict = []
                 
         for s in new_signals:
-            signals_dict.append({
-                "ticker": s.ticker,
-                "market": s.market,
-                "direction": s.direction,
-                "broken_level": s.broken_level,
-                "entry_price": s.entry_price,
-                "stop_loss": s.stop_loss,
-                "take_profit": s.take_profit,
-                "volume_ratio": s.volume_ratio,
-                "atr_value": s.atr_value,
-                "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC")
-            })
+            if isinstance(s, RadarSignal):
+                signals_dict.append({
+                    "type": "radar",
+                    "ticker": s.ticker,
+                    "market": s.market,
+                    "direction": s.direction,
+                    "price": s.price,
+                    "triggers": s.triggers,
+                    "adx": s.adx,
+                    "volume_ratio": s.volume_ratio,
+                    "roc_pct": s.roc_pct,
+                    "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC"),
+                })
+            else:
+                signals_dict.append({
+                    "type": "breakout",
+                    "ticker": s.ticker,
+                    "market": s.market,
+                    "direction": s.direction,
+                    "broken_level": s.broken_level,
+                    "entry_price": s.entry_price,
+                    "stop_loss": s.stop_loss,
+                    "take_profit": s.take_profit,
+                    "volume_ratio": s.volume_ratio,
+                    "atr_value": s.atr_value,
+                    "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC"),
+                })
             
         signals_dict = signals_dict[-50:]
         
@@ -290,7 +353,11 @@ class BreakoutScanner:
     # ------------------------------------------------------------------
 
     def reset_session(self) -> None:
-        """Clear per-session state (call at the start of a new trading day)."""
-        count = len(self._alerted_tickers)
-        self._alerted_tickers.clear()
-        logger.info("Session reset — cleared %d alerted tickers.", count)
+        """Clear the alert-cooldown map (optional — cooldown is time-based now).
+
+        No longer required for correctness: de-duplication expires on its own
+        after ``ALERT_COOLDOWN_HOURS``. Kept as a manual "forget everything" hook.
+        """
+        count = len(self._last_alert)
+        self._last_alert.clear()
+        logger.info("Session reset — cleared %d cooldown entries.", count)

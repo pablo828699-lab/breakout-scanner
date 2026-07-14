@@ -43,28 +43,47 @@ _BINANCE_HOSTS = (
     "https://data-api.binance.vision",
 )
 
+# Remembers the last host that worked so we don't re-try a geo-blocked host on
+# every symbol (halves scan time and stops log spam once the block is learned).
+_working_host: str | None = None
+
 
 def _binance_request(path: str, params: dict | None = None, timeout: int = 15):
     """GET a Binance public endpoint, falling back across hosts on failure.
 
-    Returns the parsed JSON on the first host that responds successfully, or
-    ``None`` if every host fails (network error, timeout, or geo-block).
+    Tries the last known-good host first, then the rest. Returns the parsed JSON
+    on the first host that responds, or ``None`` if every host fails (network
+    error, timeout, or geo-block).
     """
+    global _working_host
+
+    # Order: known-good host first, then the remaining hosts.
+    hosts = list(_BINANCE_HOSTS)
+    if _working_host in hosts:
+        hosts.remove(_working_host)
+        hosts.insert(0, _working_host)
+
     last_error: str | None = None
-    for host in _BINANCE_HOSTS:
+    for host in hosts:
         url = f"{host}{path}"
         try:
             resp = requests.get(url, params=params, timeout=timeout)
             if resp.status_code == 451:
                 last_error = f"{host} → 451 (geo-blocked)"
-                logger.warning("Binance host %s geo-blocked (451) — trying next host.", host)
+                if _working_host != host:  # only log the first time we learn it
+                    logger.warning("Binance host %s geo-blocked (451) — trying next host.", host)
                 continue
             resp.raise_for_status()
+            if _working_host != host:
+                logger.info("Binance host %s is working — caching as primary.", host)
+                _working_host = host
             return resp.json()
         except Exception as exc:
             last_error = f"{host} → {type(exc).__name__}: {exc}"
             logger.warning("Binance host %s failed (%s) — trying next host.", host, exc)
             continue
+
+    _working_host = None  # reset so the next call re-probes from the top
     logger.error("All Binance hosts failed for %s. Last error: %s", path, last_error)
     return None
 
@@ -195,13 +214,25 @@ class DataFetcher:
     # ------------------------------------------------------------------
 
     def get_crypto_tickers(self) -> List[str]:
-        """Return top N USDT spot pairs by 24h quote volume from Binance."""
+        """Return the crypto universe to scan.
+
+        Defaults to the curated watchlist (quality/liquid assets). Set
+        ``CRYPTO_USE_WATCHLIST=false`` to use the dynamic top-N by 24h volume.
+        """
         if self._crypto_tickers_cache is not None:
             return self._crypto_tickers_cache
 
+        if cfg.CRYPTO_USE_WATCHLIST:
+            self._crypto_tickers_cache = list(cfg.CRYPTO_WATCHLIST)
+            logger.info("Using curated crypto watchlist (%d assets).", len(self._crypto_tickers_cache))
+            return self._crypto_tickers_cache
+
         stablecoins = {
-            "USDC", "USDT", "BUSD", "TUSD", "PAX", "DAI", "EUR", "FDUSD", 
-            "AEUR", "USDS", "GBP", "TRY", "RUB", "UAH", "BIDR", "PEPE", "SHIB"
+            "USDC", "USDT", "BUSD", "TUSD", "PAX", "DAI", "EUR", "FDUSD",
+            "AEUR", "USDS", "GBP", "TRY", "RUB", "UAH", "BIDR", "PEPE", "SHIB",
+            # Additional stable/fiat-pegged tokens that leak into the top-N by volume
+            "USD1", "USDE", "USDD", "USDP", "PYUSD", "FRAX", "GUSD", "LUSD",
+            "EURI", "XUSD", "USDG", "FDUSD", "RLUSD", "XAUT", "PAXG",
         }
 
         try:
@@ -209,10 +240,12 @@ class DataFetcher:
             if not tickers_raw:
                 raise RuntimeError("all Binance hosts unavailable")
 
-            # Filter to USDT pairs only, exclude leveraged/down tokens and stablecoins/fiat pegs
+            # Filter to USDT pairs only, exclude leveraged/down tokens, stablecoins/
+            # fiat-pegs, and junk/promo pairs (non-ASCII symbols).
             usdt_pairs = [
                 t for t in tickers_raw
                 if t["symbol"].endswith("USDT")
+                and t["symbol"].isascii()
                 and not any(x in t["symbol"] for x in ["UP", "DOWN", "BEAR", "BULL"])
                 and not any(t["symbol"].startswith(s) for s in stablecoins)
             ]

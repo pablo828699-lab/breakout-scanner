@@ -37,6 +37,27 @@ class BreakoutSignal:
 
 
 @dataclass
+class RadarSignal:
+    """A trend-radar hit — an asset that just completed a directional move.
+
+    This is a *detection* signal (a candidate to analyze), not a full trade:
+    no stop-loss / take-profit. The manual analysis happens downstream.
+    """
+
+    ticker: str
+    market: str  # 'US_EQUITIES' or 'CRYPTO'
+    direction: str  # 'UP' or 'DOWN'
+    price: float
+    triggers: list  # e.g. ['DONCHIAN_20', 'IMPULSE']
+    adx: float
+    ema_stack: bool  # True when EMAs are aligned with the direction
+    volume_ratio: float
+    roc_pct: float  # momentum: % change over the lookback window
+    donchian_n: int
+    timestamp: datetime
+
+
+@dataclass
 class OpenPosition:
     """A position that has been entered but not yet closed."""
 

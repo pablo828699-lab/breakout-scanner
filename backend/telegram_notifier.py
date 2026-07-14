@@ -12,7 +12,7 @@ from datetime import timezone
 
 import requests
 
-from backend.models import BreakoutSignal
+from backend.models import BreakoutSignal, RadarSignal
 
 logger = logging.getLogger(__name__)
 
@@ -22,6 +22,17 @@ _MARKET_LABELS = {
 }
 
 _DIRECTION_EMOJI = {"LONG": "📈", "SHORT": "📉"}
+
+# Radar helpers
+_RADAR_DIR = {"UP": ("🟢", "ALCISTA"), "DOWN": ("🔴", "BAJISTA")}
+_TRIGGER_LABELS = {"IMPULSE": "Impulso"}
+_ANALYZE_MARKET = {"US_EQUITIES": "stock", "CRYPTO": "crypto"}
+
+
+def _trigger_label(trigger: str) -> str:
+    if trigger.startswith("DONCHIAN_"):
+        return f"Donchian({trigger.split('_')[1]})"
+    return _TRIGGER_LABELS.get(trigger, trigger.title())
 
 
 class TelegramNotifier:
@@ -70,14 +81,41 @@ class TelegramNotifier:
             f"━━━━━━━━━━━━━━━━━━"
         )
 
+    def _format_radar(self, signal: RadarSignal) -> str:
+        """Build a trend-radar alert: a candidate to analyze, not a trade."""
+        market_label = _MARKET_LABELS.get(signal.market, signal.market)
+        emoji, dir_label = _RADAR_DIR.get(signal.direction, ("➡️", signal.direction))
+        ts = signal.timestamp.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        fmt = ".2f" if signal.market == "US_EQUITIES" else ".4f"
+        triggers = " + ".join(_trigger_label(t) for t in signal.triggers)
+        stack = "EMAs apiladas ✓" if signal.ema_stack else "EMAs mixtas"
+        analyze_mkt = _ANALYZE_MARKET.get(signal.market, "crypto")
+
+        return (
+            f"📡 RADAR DE TENDENCIA\n"
+            f"━━━━━━━━━━━━━━━━━━\n"
+            f"🏷️ {signal.ticker} — {market_label}\n"
+            f"{emoji} Tendencia: {dir_label}\n"
+            f"⚡ Disparador: {triggers}\n"
+            f"💪 ADX: {signal.adx:.1f}  |  {stack}\n"
+            f"📊 Volumen: {signal.volume_ratio:.1f}x  |  ROC: {signal.roc_pct:+.1f}%\n"
+            f"💵 Precio: ${signal.price:{fmt}}\n"
+            f"⏰ {ts}\n"
+            f"→ Analizar: analyze.py {signal.ticker} --market {analyze_mkt}\n"
+            f"━━━━━━━━━━━━━━━━━━"
+        )
+
     # ------------------------------------------------------------------
 
-    def send_alert(self, signal: BreakoutSignal) -> bool:
-        """Send (or log) a breakout alert.
+    def send_alert(self, signal) -> bool:
+        """Send (or log) an alert (breakout or radar).
 
         Returns ``True`` on success, ``False`` on failure.
         """
-        text = self._format_message(signal)
+        if isinstance(signal, RadarSignal):
+            text = self._format_radar(signal)
+        else:
+            text = self._format_message(signal)
 
         if self._dry_run:
             logger.info("[DRY-RUN] Telegram alert:\n%s", text)

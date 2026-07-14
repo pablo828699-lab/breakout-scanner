@@ -52,9 +52,34 @@ TREND_FILTER_ENABLED: bool = os.getenv("TREND_FILTER_ENABLED", "true").lower() i
 TREND_MA_PERIOD: int = int(os.getenv("TREND_MA_PERIOD", "50"))
 
 # ---------------------------------------------------------------------------
+# Trend Radar — detection mode
+# ---------------------------------------------------------------------------
+# "radar"    → surface assets that just completed a trending move (Donchian /
+#              momentum impulse) filtered by ADX + EMA alignment. No SL/TP.
+# "breakout" → legacy per-trade breakout signals with structural SL/TP.
+DETECTION_MODE: str = os.getenv("DETECTION_MODE", "radar").lower()
+
+# Trend filter (daily timeframe)
+RADAR_ADX_PERIOD: int = int(os.getenv("RADAR_ADX_PERIOD", "14"))
+RADAR_ADX_MIN: float = float(os.getenv("RADAR_ADX_MIN", "23"))
+RADAR_EMA_FAST: int = int(os.getenv("RADAR_EMA_FAST", "50"))
+RADAR_EMA_SLOW: int = int(os.getenv("RADAR_EMA_SLOW", "200"))
+
+# Triggers
+RADAR_DONCHIAN_N: int = int(os.getenv("RADAR_DONCHIAN_N", "20"))       # new N-day high/low
+RADAR_IMPULSE_ATR_MULT: float = float(os.getenv("RADAR_IMPULSE_ATR_MULT", "1.5"))  # range > x*ATR
+RADAR_IMPULSE_VOLUME_MULT: float = float(os.getenv("RADAR_IMPULSE_VOLUME_MULT", "1.5"))
+RADAR_ROC_PERIOD: int = int(os.getenv("RADAR_ROC_PERIOD", "10"))       # momentum lookback (days)
+
+# De-duplication: don't re-alert the same asset+direction within this window.
+# Lets the radar re-fire on a genuinely new move without spamming the same day.
+ALERT_COOLDOWN_HOURS: float = float(os.getenv("ALERT_COOLDOWN_HOURS", "24"))
+
+# ---------------------------------------------------------------------------
 # Lookback Windows
 # ---------------------------------------------------------------------------
-DAILY_LOOKBACK_DAYS: int = int(os.getenv("DAILY_LOOKBACK_DAYS", "180"))
+# Needs to comfortably exceed RADAR_EMA_SLOW (200) so the daily EMA200 is well-formed.
+DAILY_LOOKBACK_DAYS: int = int(os.getenv("DAILY_LOOKBACK_DAYS", "300"))
 HOURLY_LOOKBACK_DAYS: int = int(os.getenv("HOURLY_LOOKBACK_DAYS", "5"))
 
 # ---------------------------------------------------------------------------
@@ -73,7 +98,28 @@ SP500_TICKERS: List[str] = [
 # Crypto Tickers — fetched dynamically as top N by 24h volume from Binance
 # Fallback list used if the public API is unreachable.
 # ---------------------------------------------------------------------------
-CRYPTO_TOP_N: int = int(os.getenv("CRYPTO_TOP_N", "20"))
+CRYPTO_TOP_N: int = int(os.getenv("CRYPTO_TOP_N", "40"))
+
+# When True (default) the radar runs on the curated watchlist below — liquid,
+# quality assets only. When False it falls back to the dynamic top-N by 24h
+# volume (noisier: pulls in wash-traded / tokenized-stock / new listings).
+CRYPTO_USE_WATCHLIST: bool = os.getenv("CRYPTO_USE_WATCHLIST", "true").lower() in ("true", "1", "yes")
+
+# Curated 40 — validated as TRADING on Binance spot. Grouped by category.
+CRYPTO_WATCHLIST: List[str] = [
+    # Majors
+    "BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT", "ADAUSDT",
+    "AVAXUSDT", "DOGEUSDT", "TRXUSDT", "DOTUSDT", "LTCUSDT", "BCHUSDT", "XLMUSDT",
+    # Established L1 / L2
+    "NEARUSDT", "APTUSDT", "SUIUSDT", "POLUSDT", "ARBUSDT", "OPUSDT",
+    "ATOMUSDT", "INJUSDT", "SEIUSDT", "TIAUSDT", "HBARUSDT",
+    # DeFi / infrastructure
+    "LINKUSDT", "UNIUSDT", "AAVEUSDT", "LDOUSDT", "RUNEUSDT", "FILUSDT",
+    "RENDERUSDT", "GRTUSDT", "ONDOUSDT", "ICPUSDT",
+    # Liquid trending
+    "WLDUSDT", "ENAUSDT", "TAOUSDT", "PEPEUSDT", "JUPUSDT", "PYTHUSDT",
+]
+
 CRYPTO_FALLBACK_TICKERS: List[str] = [
     "BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT",
     "DOGEUSDT", "ADAUSDT", "AVAXUSDT", "DOTUSDT", "POLUSDT",
