@@ -82,13 +82,31 @@ class TelegramNotifier:
         )
 
     def _format_radar(self, signal: RadarSignal) -> str:
-        """Build a trend-radar alert: a candidate to analyze, not a trade."""
+        """Build a trend-radar alert with clear, self-explanatory indicators."""
         market_label = _MARKET_LABELS.get(signal.market, signal.market)
         emoji, dir_label = _RADAR_DIR.get(signal.direction, ("➡️", signal.direction))
         ts = signal.timestamp.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
         fmt = ".2f" if signal.market == "US_EQUITIES" else ".4f"
-        triggers = " + ".join(_trigger_label(t) for t in signal.triggers)
-        stack = "EMAs apiladas ✓" if signal.ema_stack else "EMAs mixtas"
+        
+        # Format trigger explanations
+        triggers_list = []
+        for t in signal.triggers:
+            label = _trigger_label(t)
+            if t.startswith("DONCHIAN_"):
+                triggers_list.append(f"{label} (Ruptura Max/Min {t.split('_')[1]}d)")
+            elif t == "IMPULSE":
+                triggers_list.append(f"{label} (Vela rango amplio)")
+            else:
+                triggers_list.append(label)
+        triggers = " + ".join(triggers_list)
+
+        # ADX trend strength explanation
+        adx_strength = "Rango/Lateral" if signal.adx < 20 else ("Tendencia Fuerte" if signal.adx > 25 else "Tendencia Naciendo")
+        stack_desc = "Fase Madura ✓" if signal.ema_stack else "Fase Temprana"
+        
+        # Volume relative explanation
+        vol_desc = "Normal" if signal.volume_ratio < 1.2 else ("Alto" if signal.volume_ratio < 2.0 else "Institucional/Pánico")
+        
         analyze_mkt = _ANALYZE_MARKET.get(signal.market, "crypto")
 
         return (
@@ -97,8 +115,8 @@ class TelegramNotifier:
             f"🏷️ {signal.ticker} — {market_label}\n"
             f"{emoji} Tendencia: {dir_label}\n"
             f"⚡ Disparador: {triggers}\n"
-            f"💪 ADX: {signal.adx:.1f}  |  {stack}\n"
-            f"📊 Volumen: {signal.volume_ratio:.1f}x  |  ROC: {signal.roc_pct:+.1f}%\n"
+            f"💪 ADX: {signal.adx:.1f} ({adx_strength})  |  {stack_desc}\n"
+            f"📊 Volumen: {signal.volume_ratio:.1f}x ({vol_desc})  |  ROC: {signal.roc_pct:+.1f}%\n"
             f"💵 Precio: ${signal.price:{fmt}}\n"
             f"⏰ {ts}\n"
             f"→ Analizar: analyze.py {signal.ticker} --market {analyze_mkt}\n"
