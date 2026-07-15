@@ -154,13 +154,37 @@ LOG_DATE_FORMAT: str = "%Y-%m-%d %H:%M:%S"
 
 
 def configure_logging() -> None:
-    """Set up root logging with the configured level and format."""
+    """Set up root logging with the configured level and format, outputting to console and app.log."""
+    import sys
+    from pathlib import Path
+    
     numeric_level = getattr(logging, LOG_LEVEL.upper(), logging.INFO)
-    logging.basicConfig(
-        level=numeric_level,
-        format=LOG_FORMAT,
-        datefmt=LOG_DATE_FORMAT,
-    )
+    root_logger = logging.getLogger()
+    root_logger.setLevel(numeric_level)
+    
+    if not root_logger.handlers:
+        formatter = logging.Formatter(LOG_FORMAT, datefmt=LOG_DATE_FORMAT)
+        
+        # Console handler with UTF-8 enforcement to prevent Windows console encoding errors
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+            sys.stderr.reconfigure(encoding='utf-8')
+        except Exception:
+            pass
+            
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setFormatter(formatter)
+        root_logger.addHandler(console_handler)
+        
+        # File handler for remote diagnostics
+        try:
+            log_filepath = Path(__file__).resolve().parent / "app.log"
+            file_handler = logging.FileHandler(log_filepath, encoding="utf-8")
+            file_handler.setFormatter(formatter)
+            root_logger.addHandler(file_handler)
+        except Exception:
+            pass # Fallback if file system is read-only
+            
     # Suppress noisy third-party loggers
     logging.getLogger("urllib3").setLevel(logging.WARNING)
     logging.getLogger("yfinance").setLevel(logging.CRITICAL + 1)

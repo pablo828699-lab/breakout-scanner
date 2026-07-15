@@ -77,6 +77,28 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(b'{"status": "ok"}')
+        elif clean_path == "/logs":
+            try:
+                log_filepath = os.path.join(os.path.dirname(__file__), "app.log")
+                logs_text = "No log file found."
+                if os.path.exists(log_filepath):
+                    with open(log_filepath, "r", encoding="utf-8") as f:
+                        lines = f.readlines()
+                        logs_text = "".join(lines[-250:])
+                
+                self.send_response(200)
+                self.send_header("Content-Type", "text/plain; charset=utf-8")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(logs_text.encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP logs handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/api/candidates":
             try:
                 import json
