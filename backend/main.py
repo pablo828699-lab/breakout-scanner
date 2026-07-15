@@ -11,10 +11,12 @@ Usage
 
 import argparse
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import json
 import logging
 import os
 from pathlib import Path
 import sys
+import threading
 
 from dotenv import load_dotenv
 
@@ -51,7 +53,6 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
 
         if clean_path == "/scan":
             try:
-                import threading
                 logger.info("External HTTP trigger received. Spawning background scan thread...")
                 
                 thread = threading.Thread(target=self.scanner.run_scan, name="ScanThread")
@@ -101,8 +102,6 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/api/candidates":
             try:
-                import json
-                import os
                 filepath = os.path.join(os.path.dirname(__file__), "recent_signals.json")
                 data = []
                 if os.path.exists(filepath):
