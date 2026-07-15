@@ -139,20 +139,45 @@ export default function App() {
           const ignoredSet = new Set(savedIgnored);
           
           const newCandidates = data
-            .map((c, index) => ({
-              id: c.id || `fetched_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
-              ticker: c.ticker,
-              market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
-              direction: c.direction,
-              brokenLevel: c.broken_level,
-              entry: c.entry_price,
-              stopLoss: c.stop_loss,
-              takeProfit: c.take_profit,
-              volumeRatio: c.volume_ratio,
-              atr: c.atr_value,
-              timestamp: c.timestamp,
-              status: 'pending'
-            }))
+            .map((c, index) => {
+              const isRadar = c.type === 'radar' || c.entry_price === undefined;
+              const entryVal = isRadar ? c.price : c.entry_price;
+              const directionVal = c.direction === 'UP' ? 'LONG' : (c.direction === 'DOWN' ? 'SHORT' : c.direction);
+              
+              // Calculate default SL and TP for radar signals (1:2 Risk/Reward)
+              let slVal = c.stop_loss;
+              let tpVal = c.take_profit;
+              
+              if (isRadar || !slVal || !tpVal) {
+                const isCrypto = c.market === 'CRYPTO';
+                // 2% for stocks, 5% for crypto
+                const slPct = isCrypto ? 0.05 : 0.02;
+                const tpPct = slPct * 2.0; // 1:2 R:R
+                
+                if (directionVal === 'LONG') {
+                  slVal = entryVal * (1 - slPct);
+                  tpVal = entryVal * (1 + tpPct);
+                } else {
+                  slVal = entryVal * (1 + slPct);
+                  tpVal = entryVal * (1 - tpPct);
+                }
+              }
+
+              return {
+                id: c.id || `fetched_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
+                ticker: c.ticker,
+                market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
+                direction: directionVal,
+                brokenLevel: isRadar ? entryVal : c.broken_level,
+                entry: entryVal,
+                stopLoss: slVal,
+                takeProfit: tpVal,
+                volumeRatio: c.volume_ratio,
+                atr: c.atr_value || (entryVal * (c.market === 'CRYPTO' ? 0.05 : 0.02)),
+                timestamp: c.timestamp,
+                status: 'pending'
+              };
+            })
             .filter(c => !existingIds.has(`${c.ticker}_${c.timestamp}`) && 
                          !openIds.has(c.ticker) &&
                          !ignoredSet.has(`${c.ticker}_${c.timestamp}`));
