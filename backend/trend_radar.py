@@ -108,14 +108,17 @@ def evaluate_trend_radar(
     if not np.isfinite(adx_val) or adx_val < adx_min:
         return None
 
-    # ---- Gate A: trend direction from EMA stack + DI ----
-    if px_close > ef > es and pdi > mdi:
+    # ---- Gate A: trend direction from EMA Stack or price crossing EMA50/200 ----
+    # Relaxed: Price just needs to be above EMA50 for LONG (or below for SHORT) and DI indicators agree
+    if px_close > ef and pdi > mdi:
         direction = "UP"
-    elif px_close < ef < es and mdi > pdi:
+    elif px_close < ef and mdi > pdi:
         direction = "DOWN"
     else:
         return None
-    ema_stack = True
+    
+    # We still record if it's a perfect stack for visual verification in logs
+    ema_stack = (px_close > ef > es) if direction == "UP" else (px_close < ef < es)
 
     # ---- Gate B: triggers (must agree with direction) ----
     triggers: list[str] = []

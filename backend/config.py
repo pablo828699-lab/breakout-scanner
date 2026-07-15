@@ -11,13 +11,13 @@ from typing import List
 # ---------------------------------------------------------------------------
 # Proximity / Level Detection
 # ---------------------------------------------------------------------------
-PROXIMITY_THRESHOLD_PCT: float = float(os.getenv("PROXIMITY_THRESHOLD_PCT", "0.005"))
-MIN_TOUCHES: int = int(os.getenv("MIN_TOUCHES", "3"))
+PROXIMITY_THRESHOLD_PCT: float = float(os.getenv("PROXIMITY_THRESHOLD_PCT", "0.012"))
+MIN_TOUCHES: int = int(os.getenv("MIN_TOUCHES", "2"))
 
 # ---------------------------------------------------------------------------
 # Volume Filter
 # ---------------------------------------------------------------------------
-VOLUME_MULTIPLIER: float = float(os.getenv("VOLUME_MULTIPLIER", "1.5"))
+VOLUME_MULTIPLIER: float = float(os.getenv("VOLUME_MULTIPLIER", "1.2"))
 VOLUME_SMA_PERIOD: int = int(os.getenv("VOLUME_SMA_PERIOD", "20"))
 
 # ---------------------------------------------------------------------------
@@ -25,7 +25,7 @@ VOLUME_SMA_PERIOD: int = int(os.getenv("VOLUME_SMA_PERIOD", "20"))
 # ---------------------------------------------------------------------------
 # Minimum penetration beyond the level, as a fraction of ATR, for the 1H body
 # close to count as a valid break (filters marginal pokes / stop-runs).
-PENETRATION_ATR_MULT: float = float(os.getenv("PENETRATION_ATR_MULT", "0.15"))
+PENETRATION_ATR_MULT: float = float(os.getenv("PENETRATION_ATR_MULT", "0.02"))
 
 # ---------------------------------------------------------------------------
 # ATR / Risk Management
@@ -61,19 +61,19 @@ DETECTION_MODE: str = os.getenv("DETECTION_MODE", "radar").lower()
 
 # Trend filter (daily timeframe)
 RADAR_ADX_PERIOD: int = int(os.getenv("RADAR_ADX_PERIOD", "14"))
-RADAR_ADX_MIN: float = float(os.getenv("RADAR_ADX_MIN", "23"))
+RADAR_ADX_MIN: float = float(os.getenv("RADAR_ADX_MIN", "18.0"))
 RADAR_EMA_FAST: int = int(os.getenv("RADAR_EMA_FAST", "50"))
 RADAR_EMA_SLOW: int = int(os.getenv("RADAR_EMA_SLOW", "200"))
 
 # Triggers
-RADAR_DONCHIAN_N: int = int(os.getenv("RADAR_DONCHIAN_N", "20"))       # new N-day high/low
-RADAR_IMPULSE_ATR_MULT: float = float(os.getenv("RADAR_IMPULSE_ATR_MULT", "1.5"))  # range > x*ATR
-RADAR_IMPULSE_VOLUME_MULT: float = float(os.getenv("RADAR_IMPULSE_VOLUME_MULT", "1.5"))
+RADAR_DONCHIAN_N: int = int(os.getenv("RADAR_DONCHIAN_N", "15"))       # new N-day high/low
+RADAR_IMPULSE_ATR_MULT: float = float(os.getenv("RADAR_IMPULSE_ATR_MULT", "1.2"))  # range > x*ATR
+RADAR_IMPULSE_VOLUME_MULT: float = float(os.getenv("RADAR_IMPULSE_VOLUME_MULT", "1.2"))
 RADAR_ROC_PERIOD: int = int(os.getenv("RADAR_ROC_PERIOD", "10"))       # momentum lookback (days)
 
 # De-duplication: don't re-alert the same asset+direction within this window.
 # Lets the radar re-fire on a genuinely new move without spamming the same day.
-ALERT_COOLDOWN_HOURS: float = float(os.getenv("ALERT_COOLDOWN_HOURS", "24"))
+ALERT_COOLDOWN_HOURS: float = float(os.getenv("ALERT_COOLDOWN_HOURS", "12"))
 
 # ---------------------------------------------------------------------------
 # Lookback Windows
