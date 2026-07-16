@@ -114,5 +114,34 @@
     "volume_ratio": 1.32,
     "roc_pct": 30.76,
     "timestamp": "2026-07-16 05:38 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "ETHUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1908.08,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.8,
+    "volume_ratio": 1.2,
+    "roc_pct": 7.4,
+    "timestamp": "2026-07-16 08:09 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "LDOUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.3691,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 32.2,
+    "volume_ratio": 1.32,
+    "roc_pct": 30.76,
+    "timestamp": "2026-07-16 08:09 UTC"
   }
 ]
