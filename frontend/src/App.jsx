@@ -97,17 +97,52 @@ export default function App() {
     localStorage.setItem('candidates', JSON.stringify(candidates));
   }, [candidates]);
 
+  const [isLoadedFromCloud, setIsLoadedFromCloud] = useState(false);
+
+  // Load state from cloud on mount
+  useEffect(() => {
+    const loadStateFromCloud = async () => {
+      try {
+        const resp = await fetch('https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9');
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data.openPositions) setOpenPositions(data.openPositions);
+          if (data.tradeHistory) setTradeHistory(data.tradeHistory);
+          if (data.kpis) setKpis(data.kpis);
+          console.log('Successfully synced state from cloud!');
+        }
+      } catch (e) {
+        console.error('Failed to load state from cloud, using local storage fallback:', e);
+      } finally {
+        setIsLoadedFromCloud(true);
+      }
+    };
+    loadStateFromCloud();
+  }, []);
+
+  // Sync state changes with localStorage and JSONBlob cloud storage (debounced)
   useEffect(() => {
     localStorage.setItem('openPositions', JSON.stringify(openPositions));
-  }, [openPositions]);
-
-  useEffect(() => {
     localStorage.setItem('tradeHistory', JSON.stringify(tradeHistory));
-  }, [tradeHistory]);
-
-  useEffect(() => {
     localStorage.setItem('kpis', JSON.stringify(kpis));
-  }, [kpis]);
+
+    if (!isLoadedFromCloud) return;
+
+    const saveStateToCloud = async () => {
+      try {
+        await fetch('https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ openPositions, tradeHistory, kpis })
+        });
+      } catch (e) {
+        console.error('Failed to sync state to cloud:', e);
+      }
+    };
+
+    const timer = setTimeout(saveStateToCloud, 1000);
+    return () => clearTimeout(timer);
+  }, [openPositions, tradeHistory, kpis, isLoadedFromCloud]);
 
   useEffect(() => {
     localStorage.setItem('capitalPerTrade', capitalPerTrade.toString());
