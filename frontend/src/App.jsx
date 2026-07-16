@@ -115,7 +115,7 @@ export default function App() {
   useEffect(() => {
     const loadStateFromCloud = async () => {
       try {
-        const resp = await fetch('https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9');
+        const resp = await fetch(`${BACKEND_URL}/api/cloud-state`);
         if (resp.ok) {
           const data = await resp.json();
           if (data.openPositions) setOpenPositions(data.openPositions);
@@ -143,7 +143,7 @@ export default function App() {
 
     const saveStateToCloud = async () => {
       try {
-        await fetch('https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9', {
+        await fetch(`${BACKEND_URL}/api/cloud-state`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ openPositions, tradeHistory, kpis })

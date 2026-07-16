@@ -42,9 +42,45 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self) -> None:
         self.send_response(200)
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, PUT, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
+
+    def do_PUT(self) -> None:
+        clean_path = self.path.split("?")[0].rstrip("/")
+        logger.info("HTTP PUT request: path=%s, clean_path=%s", self.path, clean_path)
+
+        if clean_path == "/api/cloud-state":
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                put_data = self.rfile.read(content_length)
+                
+                import requests
+                # Send PUT request to JSONBlob backend-to-backend (no CORS preflight constraints)
+                r = requests.put(
+                    'https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9',
+                    headers={'Content-Type': 'application/json'},
+                    data=put_data,
+                    timeout=10
+                )
+                
+                self.send_response(r.status_code)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(r.content)
+            except Exception as exc:
+                logger.error("HTTP cloud-state PUT proxy error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        else:
+            self.send_response(404)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
 
     def do_GET(self) -> None:
         # Strip trailing slashes and query parameters for robust routing
@@ -115,6 +151,23 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps(data).encode("utf-8"))
             except Exception as exc:
                 logger.error("HTTP candidates handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/api/cloud-state":
+            try:
+                import requests
+                r = requests.get('https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9', timeout=10)
+                self.send_response(r.status_code)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(r.content)
+            except Exception as exc:
+                logger.error("HTTP cloud-state GET proxy error: %s", exc)
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")
