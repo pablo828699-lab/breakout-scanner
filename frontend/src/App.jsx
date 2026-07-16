@@ -18,6 +18,13 @@ const BACKEND_URL = 'https://breakout-scanner-xg9f.onrender.com';
 
 export default function App() {
   const [candidates, setCandidates] = useState(() => {
+    // Clear old candidates cache version to prevent TypeError crashes or caching deadlocks
+    const cacheVersion = localStorage.getItem('candidates_cache_version');
+    if (cacheVersion !== 'v3') {
+      localStorage.removeItem('candidates');
+      localStorage.setItem('candidates_cache_version', 'v3');
+      return [];
+    }
     const saved = localStorage.getItem('candidates');
     if (!saved) return [];
     try {
@@ -122,13 +129,6 @@ export default function App() {
         setIsLoadedFromCloud(true);
       }
     };
-    
-    // Clear old candidates cache to avoid TypeError crashes
-    const cacheVersion = localStorage.getItem('candidates_cache_version');
-    if (cacheVersion !== 'v2') {
-      localStorage.removeItem('candidates');
-      localStorage.setItem('candidates_cache_version', 'v2');
-    }
     
     loadStateFromCloud();
   }, []);
