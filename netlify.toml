@@ -1,4 +1,4 @@
 [build]
   base = "frontend"
   publish = "dist"
-  command = "npm run build"
+  command = "cp ../backend/recent_signals.json public/recent_signals.json && npm run build"

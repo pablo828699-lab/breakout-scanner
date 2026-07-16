@@ -186,9 +186,9 @@ export default function App() {
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
-        const githubUrl = 'https://raw.githubusercontent.com/pablo828699-lab/breakout-scanner/main/backend/recent_signals.json';
-        const resp = await fetch(githubUrl);
-        if (!resp.ok) throw new Error('GitHub CDN response not ok');
+        const url = '/recent_signals.json';
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error('Signals JSON response not ok');
         const data = await resp.json();
         
         setCandidates((prevCandidates) => {
