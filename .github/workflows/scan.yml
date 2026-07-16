@@ -41,5 +41,5 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add backend/recent_signals.json
+          git add backend/recent_signals.json backend/last_alerts.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update recent signals [skip ci]" && git push)

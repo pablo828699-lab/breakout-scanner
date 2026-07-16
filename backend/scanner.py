@@ -37,6 +37,7 @@ class BreakoutScanner:
         )
         # Cooldown map: "TICKER:DIRECTION" -> last alert time (UTC).
         self._last_alert: Dict[str, datetime] = {}
+        self._load_last_alerts()
         self._open_positions: List[OpenPosition] = []
         self._last_scan_time: Optional[datetime] = None
 
@@ -270,6 +271,7 @@ class BreakoutScanner:
                             )
                             continue
                         self._last_alert[f"{signal.ticker}:{signal.direction}"] = alert_time
+                        self._save_last_alerts()
                         self._notifier.send_alert(signal)
                         signals.append(signal)
                         if isinstance(signal, RadarSignal):
@@ -360,4 +362,32 @@ class BreakoutScanner:
         """
         count = len(self._last_alert)
         self._last_alert.clear()
+        self._save_last_alerts()
         logger.info("Session reset — cleared %d cooldown entries.", count)
+
+    def _load_last_alerts(self) -> None:
+        import json
+        import os
+        filepath = os.path.join(os.path.dirname(__file__), "last_alerts.json")
+        if not os.path.exists(filepath):
+            return
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                for key, val in data.items():
+                    self._last_alert[key] = datetime.fromisoformat(val)
+            logger.info("Loaded %d alert cooldown records from disk.", len(self._last_alert))
+        except Exception as exc:
+            logger.warning("Failed to load last alerts: %s", exc)
+
+    def _save_last_alerts(self) -> None:
+        import json
+        import os
+        filepath = os.path.join(os.path.dirname(__file__), "last_alerts.json")
+        try:
+            data = {k: v.isoformat() for k, v in self._last_alert.items()}
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2)
+            logger.debug("Saved alert cooldown records to disk.")
+        except Exception as exc:
+            logger.error("Failed to save last alerts: %s", exc)
