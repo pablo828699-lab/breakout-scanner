@@ -325,6 +325,7 @@ class BreakoutScanner:
                     "adx": s.adx,
                     "volume_ratio": s.volume_ratio,
                     "roc_pct": s.roc_pct,
+                    "ema_stack": s.ema_stack,
                     "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC"),
                 })
             else:

@@ -253,6 +253,10 @@ export default function App() {
               volumeRatio: c.volume_ratio,
               atr: c.atr_value || (entryVal * (c.market === 'CRYPTO' ? 0.05 : 0.02)),
               timestamp: c.timestamp,
+              triggers: c.triggers || [],
+              adx: c.adx,
+              rocPct: c.roc_pct,
+              emaStack: c.ema_stack,
               status: 'pending'
             };
           })

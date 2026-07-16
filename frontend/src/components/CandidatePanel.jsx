@@ -85,6 +85,38 @@ export default function CandidatePanel({ candidates, onApprove, onReject }) {
                   </div>
                 </div>
 
+                {/* Radar Details (Only if indicators are present) */}
+                {candidate.adx !== undefined && (
+                  <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 rounded-lg bg-slate-950/30 p-3 border border-slate-800/40 text-[10px]">
+                    <div className="flex justify-between border-b border-slate-800/40 pb-1">
+                      <span className="text-slate-500 font-medium">Disparador:</span>
+                      <span className="font-semibold text-slate-300">
+                        {candidate.triggers.map(t => t.startsWith('DONCHIAN_') ? `Donchian(${t.split('_')[1]})` : (t === 'IMPULSE' ? 'Impulso' : t)).join(' + ')}
+                      </span>
+                    </div>
+                    <div className="flex justify-between border-b border-slate-800/40 pb-1">
+                      <span className="text-slate-500 font-medium">Fuerza (ADX):</span>
+                      <span className={`font-bold ${
+                        candidate.adx > 25 ? 'text-cyan-400' : (candidate.adx >= 20 ? 'text-blue-400' : 'text-slate-400')
+                      }`}>
+                        {candidate.adx.toFixed(1)} {candidate.adx > 25 ? '🔥' : ''}
+                      </span>
+                    </div>
+                    <div className="flex justify-between pt-0.5">
+                      <span className="text-slate-500 font-medium">EMAs:</span>
+                      <span className={`font-bold ${candidate.emaStack ? 'text-emerald-400' : 'text-blue-400'}`}>
+                        {candidate.emaStack ? 'Fase Madura ✓' : 'Fase Temprana'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between pt-0.5">
+                      <span className="text-slate-500 font-medium">Impulso (ROC):</span>
+                      <span className={`font-bold ${candidate.rocPct >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                        {candidate.rocPct ? `${candidate.rocPct > 0 ? '+' : ''}${candidate.rocPct.toFixed(1)}%` : '0.0%'}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 {/* Volume indicators and Action buttons */}
                 <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-800/40">
                   <div className="flex-1 max-w-[50%]">
