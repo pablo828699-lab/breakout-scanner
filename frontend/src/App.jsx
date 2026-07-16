@@ -182,95 +182,75 @@ export default function App() {
     return () => clearInterval(timer);
   }, [openPositions.length]);
 
-  // Fetch actual candidates from Render backend
+  // Fetch actual candidates from GitHub Raw CDN
   useEffect(() => {
     const fetchCandidates = async () => {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000);
-      
-      let data = [];
       try {
-        const resp = await fetch(`${BACKEND_URL}/api/candidates`, { signal: controller.signal });
-        clearTimeout(timeoutId);
-        if (resp.ok) {
-          data = await resp.json();
-        } else {
-          throw new Error('Render response not ok');
-        }
-      } catch (e) {
-        clearTimeout(timeoutId);
-        console.warn('Render backend unreachable, falling back to GitHub CDN...', e);
-        try {
-          const githubUrl = 'https://raw.githubusercontent.com/pablo828699-lab/breakout-scanner/main/backend/recent_signals.json';
-          const resp = await fetch(githubUrl);
-          if (resp.ok) {
-            data = await resp.json();
-          } else {
-            throw new Error('GitHub CDN response not ok');
-          }
-        } catch (githubErr) {
-          console.error('Failed to fetch candidates from both Render and GitHub', githubErr);
-          return;
-        }
-      }
+        const githubUrl = 'https://raw.githubusercontent.com/pablo828699-lab/breakout-scanner/main/backend/recent_signals.json';
+        const resp = await fetch(githubUrl);
+        if (!resp.ok) throw new Error('GitHub CDN response not ok');
+        const data = await resp.json();
         
-      setCandidates((prevCandidates) => {
-        const existingIds = new Set(prevCandidates.map(c => `${c.ticker}_${c.timestamp}`));
-        const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
-        const openIds = new Set(savedOpen.map(p => p.ticker));
-        const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
-        const ignoredSet = new Set(savedIgnored);
-        
-        const newCandidates = data
-          .map((c, index) => {
-            const isRadar = c.type === 'radar' || c.entry_price === undefined;
-            const entryVal = isRadar ? c.price : c.entry_price;
-            const directionVal = c.direction === 'UP' ? 'LONG' : (c.direction === 'DOWN' ? 'SHORT' : c.direction);
-            
-            // Calculate default SL and TP for radar signals (1:2 Risk/Reward)
-            let slVal = c.stop_loss;
-            let tpVal = c.take_profit;
-            
-            if (isRadar || !slVal || !tpVal) {
-              const isCrypto = c.market === 'CRYPTO';
-              // 2% for stocks, 5% for crypto
-              const slPct = isCrypto ? 0.05 : 0.02;
-              const tpPct = slPct * 2.0; // 1:2 R:R
-              
-              if (directionVal === 'LONG') {
-                slVal = entryVal * (1 - slPct);
-                tpVal = entryVal * (1 + tpPct);
-              } else {
-                slVal = entryVal * (1 + slPct);
-                tpVal = entryVal * (1 - tpPct);
-              }
-            }
-
-            return {
-              id: c.id || `fetched_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
-              ticker: c.ticker,
-              market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
-              direction: directionVal,
-              brokenLevel: isRadar ? entryVal : c.broken_level,
-              entry: entryVal,
-              stopLoss: slVal,
-              takeProfit: tpVal,
-              volumeRatio: c.volume_ratio,
-              atr: c.atr_value || (entryVal * (c.market === 'CRYPTO' ? 0.05 : 0.02)),
-              timestamp: c.timestamp,
-              triggers: c.triggers || [],
-              adx: c.adx,
-              rocPct: c.roc_pct,
-              emaStack: c.ema_stack,
-              status: 'pending'
-            };
-          })
-          .filter(c => !existingIds.has(`${c.ticker}_${c.timestamp}`) && 
-                       !openIds.has(c.ticker) &&
-                       !ignoredSet.has(`${c.ticker}_${c.timestamp}`));
+        setCandidates((prevCandidates) => {
+          const existingIds = new Set(prevCandidates.map(c => `${c.ticker}_${c.timestamp}`));
+          const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
+          const openIds = new Set(savedOpen.map(p => p.ticker));
+          const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
+          const ignoredSet = new Set(savedIgnored);
           
-        return [...prevCandidates, ...newCandidates];
-      });
+          const newCandidates = data
+            .map((c, index) => {
+              const isRadar = c.type === 'radar' || c.entry_price === undefined;
+              const entryVal = isRadar ? c.price : c.entry_price;
+              const directionVal = c.direction === 'UP' ? 'LONG' : (c.direction === 'DOWN' ? 'SHORT' : c.direction);
+              
+              // Calculate default SL and TP for radar signals (1:2 Risk/Reward)
+              let slVal = c.stop_loss;
+              let tpVal = c.take_profit;
+              
+              if (isRadar || !slVal || !tpVal) {
+                const isCrypto = c.market === 'CRYPTO';
+                // 2% for stocks, 5% for crypto
+                const slPct = isCrypto ? 0.05 : 0.02;
+                const tpPct = slPct * 2.0; // 1:2 R:R
+                
+                if (directionVal === 'LONG') {
+                  slVal = entryVal * (1 - slPct);
+                  tpVal = entryVal * (1 + tpPct);
+                } else {
+                  slVal = entryVal * (1 + slPct);
+                  tpVal = entryVal * (1 - tpPct);
+                }
+              }
+
+              return {
+                id: c.id || `fetched_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
+                ticker: c.ticker,
+                market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
+                direction: directionVal,
+                brokenLevel: isRadar ? entryVal : c.broken_level,
+                entry: entryVal,
+                stopLoss: slVal,
+                takeProfit: tpVal,
+                volumeRatio: c.volume_ratio,
+                atr: c.atr_value || (entryVal * (c.market === 'CRYPTO' ? 0.05 : 0.02)),
+                timestamp: c.timestamp,
+                triggers: c.triggers || [],
+                adx: c.adx,
+                rocPct: c.roc_pct,
+                emaStack: c.ema_stack,
+                status: 'pending'
+              };
+            })
+            .filter(c => !existingIds.has(`${c.ticker}_${c.timestamp}`) && 
+                         !openIds.has(c.ticker) &&
+                         !ignoredSet.has(`${c.ticker}_${c.timestamp}`));
+            
+          return [...prevCandidates, ...newCandidates];
+        });
+      } catch (err) {
+        console.error('Failed to fetch candidates from GitHub CDN:', err);
+      }
     };
 
     fetchCandidates();
