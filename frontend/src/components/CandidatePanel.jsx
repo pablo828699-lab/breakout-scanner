@@ -91,7 +91,9 @@ export default function CandidatePanel({ candidates, onApprove, onReject }) {
                     <div className="flex justify-between border-b border-slate-800/40 pb-1">
                       <span className="text-slate-500 font-medium">Disparador:</span>
                       <span className="font-semibold text-slate-300">
-                        {candidate.triggers.map(t => t.startsWith('DONCHIAN_') ? `Donchian(${t.split('_')[1]})` : (t === 'IMPULSE' ? 'Impulso' : t)).join(' + ')}
+                        {Array.isArray(candidate.triggers)
+                          ? candidate.triggers.map(t => t.startsWith('DONCHIAN_') ? `Donchian(${t.split('_')[1]})` : (t === 'IMPULSE' ? 'Impulso' : t)).join(' + ')
+                          : 'Radar'}
                       </span>
                     </div>
                     <div className="flex justify-between border-b border-slate-800/40 pb-1">
@@ -99,7 +101,7 @@ export default function CandidatePanel({ candidates, onApprove, onReject }) {
                       <span className={`font-bold ${
                         candidate.adx > 25 ? 'text-cyan-400' : (candidate.adx >= 20 ? 'text-blue-400' : 'text-slate-400')
                       }`}>
-                        {candidate.adx.toFixed(1)} {candidate.adx > 25 ? '🔥' : ''}
+                        {typeof candidate.adx === 'number' ? candidate.adx.toFixed(1) : 'N/A'} {candidate.adx > 25 ? '🔥' : ''}
                       </span>
                     </div>
                     <div className="flex justify-between pt-0.5">
@@ -111,7 +113,7 @@ export default function CandidatePanel({ candidates, onApprove, onReject }) {
                     <div className="flex justify-between pt-0.5">
                       <span className="text-slate-500 font-medium">Impulso (ROC):</span>
                       <span className={`font-bold ${candidate.rocPct >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
-                        {candidate.rocPct ? `${candidate.rocPct > 0 ? '+' : ''}${candidate.rocPct.toFixed(1)}%` : '0.0%'}
+                        {typeof candidate.rocPct === 'number' ? `${candidate.rocPct > 0 ? '+' : ''}${candidate.rocPct.toFixed(1)}%` : '0.0%'}
                       </span>
                     </div>
                   </div>

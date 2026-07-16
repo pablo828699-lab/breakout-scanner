@@ -122,6 +122,14 @@ export default function App() {
         setIsLoadedFromCloud(true);
       }
     };
+    
+    // Clear old candidates cache to avoid TypeError crashes
+    const cacheVersion = localStorage.getItem('candidates_cache_version');
+    if (cacheVersion !== 'v2') {
+      localStorage.removeItem('candidates');
+      localStorage.setItem('candidates_cache_version', 'v2');
+    }
+    
     loadStateFromCloud();
   }, []);
 
