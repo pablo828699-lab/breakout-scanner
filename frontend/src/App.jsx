@@ -22,8 +22,13 @@ export default function App() {
     if (!saved) return [];
     try {
       const parsed = JSON.parse(saved);
-      // Filter out any invalid candidates with missing/zero entry price so they can be re-fetched and mapped correctly
-      const validCandidates = parsed.filter(c => c.entry && c.entry > 0);
+      // Filter out any invalid candidates or old cached radar candidates that lack the new indicators so they can be re-fetched and mapped correctly
+      const validCandidates = parsed.filter(c => {
+        const hasEntry = c.entry && c.entry > 0;
+        // If it's a radar signal (or has no type), it must have the adx field populated, otherwise we discard to re-fetch
+        const hasRadarFields = c.type === 'breakout' || (c.adx !== undefined);
+        return hasEntry && hasRadarFields;
+      });
       
       // Remap any leftover valid ones if they have old directions
       return validCandidates.map((c) => {
