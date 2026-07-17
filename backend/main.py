@@ -20,6 +20,7 @@ import threading
 
 from dotenv import load_dotenv
 
+import requests
 import backend.config as cfg
 from backend.scanner import BreakoutScanner
 
@@ -195,9 +196,8 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
-        elif clean_path.startswith("/api/prices"):
+        elif clean_path == "/api/prices":
             try:
-                import requests
                 from urllib.parse import urlparse, parse_qs
                 query = parse_qs(urlparse(self.path).query)
                 tickers_str = query.get("tickers", [""])[0]
