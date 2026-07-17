@@ -195,51 +195,76 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
-                self.wfile.write(res.encode("utf-8"))
-        elif clean_path.startswith("/api/price"):
+        elif clean_path.startswith("/api/prices"):
             try:
+                import requests
                 from urllib.parse import urlparse, parse_qs
                 query = parse_qs(urlparse(self.path).query)
-                ticker = query.get("ticker", [""])[0]
-                if not ticker:
-                    raise ValueError("Missing 'ticker' query parameter")
+                tickers_str = query.get("tickers", [""])[0]
+                if not tickers_str:
+                    raise ValueError("Missing 'tickers' query parameter")
 
-                price = 0.0
-                # Try Binance public API first if it looks like a crypto pair (ends with USDT)
-                if ticker.endswith("USDT"):
+                tickers = [t.strip().upper() for t in tickers_str.split(",") if t.strip()]
+                prices = {}
+
+                crypto_tickers = [t for t in tickers if t.endswith("USDT")]
+                equity_tickers = [t for t in tickers if not t.endswith("USDT")]
+
+                # 1. Fetch all crypto prices in a single Binance API request
+                if crypto_tickers:
                     try:
-                        r = requests.get(f"https://api.binance.com/api/v3/ticker/price?symbol={ticker}", timeout=5)
-                        if r.status_code == 200:
-                            price = float(r.json().get("price", 0.0))
+                        # Binance allows batch fetching if no symbol is specified or passing a list
+                        if len(crypto_tickers) == 1:
+                            r = requests.get(f"https://data-api.binance.vision/api/v3/ticker/price?symbol={crypto_tickers[0]}", timeout=5)
+                            if r.status_code == 200:
+                                prices[crypto_tickers[0]] = float(r.json().get("price", 0.0))
+                        else:
+                            r = requests.get("https://data-api.binance.vision/api/v3/ticker/price", timeout=5)
+                            if r.status_code == 200:
+                                raw_data = r.json()
+                                crypto_set = set(crypto_tickers)
+                                for item in raw_data:
+                                    sym = item.get("symbol")
+                                    if sym in crypto_set:
+                                        prices[sym] = float(item.get("price", 0.0))
                     except Exception as e:
-                        logger.warning("Failed to fetch crypto price from Binance: %s. Trying yfinance fallback.", e)
+                        logger.error("Failed batch fetching crypto prices: %s", e)
 
-                # Fallback to yfinance if not crypto or if Binance failed
-                if price <= 0.0:
-                    import yfinance as yf
-                    yf_symbol = ticker.replace("USDT", "-USD") if ticker.endswith("USDT") else ticker
-                    tk = yf.Ticker(yf_symbol)
-                    
-                    # fast_info attributes are properties, not dict keys. Access safely:
+                # 2. Fetch equities
+                for ticker in equity_tickers:
                     try:
+                        import yfinance as yf
+                        tk = yf.Ticker(ticker)
                         price = float(getattr(tk.fast_info, 'last_price', 0.0) or getattr(tk.fast_info, 'regular_market_price', 0.0) or 0.0)
-                    except Exception:
-                        price = 0.0
-                        
-                    if price <= 0.0:
-                        # Try history if fast_info is empty
-                        hist = tk.history(period="1d")
-                        if not hist.empty:
-                            price = float(hist["Close"].iloc[-1])
+                        if price <= 0.0:
+                            hist = tk.history(period="1d")
+                            if not hist.empty:
+                                price = float(hist["Close"].iloc[-1])
+                        if price > 0:
+                            prices[ticker] = price
+                    except Exception as e:
+                        logger.error("Failed fetching equity price for %s: %s", ticker, e)
+
+                # 3. Fallback check for missing cryptos
+                for ticker in crypto_tickers:
+                    if ticker not in prices or prices[ticker] <= 0:
+                        try:
+                            import yfinance as yf
+                            yf_symbol = ticker.replace("USDT", "-USD")
+                            tk = yf.Ticker(yf_symbol)
+                            price = float(getattr(tk.fast_info, 'last_price', 0.0) or 0.0)
+                            if price > 0:
+                                prices[ticker] = price
+                        except Exception:
+                            pass
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
-                res = f'{{"ticker": "{ticker}", "price": {price}}}'
-                self.wfile.write(res.encode("utf-8"))
+                self.wfile.write(json.dumps(prices).encode("utf-8"))
             except Exception as exc:
-                logger.error("HTTP price handler error: %s", exc)
+                logger.error("HTTP prices handler error: %s", exc)
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")

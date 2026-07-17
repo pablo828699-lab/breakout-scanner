@@ -172,32 +172,19 @@ export default function App() {
     localStorage.setItem('ignoredCandidates', JSON.stringify(ignoredCandidates));
   }, [ignoredCandidates]);
 
-  // Fetch real-time prices for open positions via backend proxy every 10s
+  // Fetch real-time prices for open positions via backend proxy every 10s (batch request)
   useEffect(() => {
     if (openPositions.length === 0) return;
 
     const fetchLivePrices = async () => {
       try {
         const uniqueSymbols = [...new Set(openPositions.map(pos => pos.ticker))];
-        const priceMap = {};
-
-        // Fetch prices sequentially or in parallel from backend proxy
-        await Promise.all(
-          uniqueSymbols.map(async (sym) => {
-            try {
-              const r = await fetch(`${BACKEND_URL}/api/price?ticker=${sym}`);
-              if (r.ok) {
-                const d = await r.json();
-                if (d.price && d.price > 0) {
-                  priceMap[sym] = d.price;
-                }
-              }
-            } catch (_) {}
-          })
-        );
-
-        // Update positions with real prices
-        if (Object.keys(priceMap).length > 0) {
+        const tickersParam = uniqueSymbols.join(',');
+        
+        const resp = await fetch(`${BACKEND_URL}/api/prices?tickers=${tickersParam}`);
+        if (resp.ok) {
+          const priceMap = await resp.json();
+          
           setOpenPositions(prev =>
             prev.map(pos => {
               const livePrice = priceMap[pos.ticker];
