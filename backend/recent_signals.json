@@ -344,5 +344,171 @@
     "roc_pct": 29.69,
     "ema_stack": false,
     "timestamp": "2026-07-17 05:41 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "AAPL",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 332.740112,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 25.5,
+    "volume_ratio": 0.96,
+    "roc_pct": 13.21,
+    "ema_stack": true,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "V",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 358.829987,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 32.4,
+    "volume_ratio": 0.92,
+    "roc_pct": 4.0,
+    "ema_stack": true,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "MA",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 543.429993,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 27.0,
+    "volume_ratio": 0.74,
+    "roc_pct": 5.75,
+    "ema_stack": false,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "PFE",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 25.290001,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.1,
+    "volume_ratio": 0.96,
+    "roc_pct": 5.28,
+    "ema_stack": true,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "CSCO",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 112.300003,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 21.4,
+    "volume_ratio": 0.99,
+    "roc_pct": -5.93,
+    "ema_stack": false,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "ABT",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 101.709999,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 21.2,
+    "volume_ratio": 2.39,
+    "roc_pct": 7.98,
+    "ema_stack": false,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "TMO",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 533.030029,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 34.0,
+    "volume_ratio": 0.9,
+    "roc_pct": 5.82,
+    "ema_stack": false,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "DHR",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 203.199997,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 27.3,
+    "volume_ratio": 1.03,
+    "roc_pct": 5.83,
+    "ema_stack": false,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "ORCL",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 125.845001,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 36.3,
+    "volume_ratio": 1.48,
+    "roc_pct": -12.53,
+    "ema_stack": true,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "INTC",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 94.68,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.3,
+    "volume_ratio": 0.91,
+    "roc_pct": -23.65,
+    "ema_stack": false,
+    "timestamp": "2026-07-17 14:42 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "TAOUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 192.1,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.4,
+    "volume_ratio": 1.24,
+    "roc_pct": -10.86,
+    "ema_stack": true,
+    "timestamp": "2026-07-17 14:43 UTC"
   }
 ]
