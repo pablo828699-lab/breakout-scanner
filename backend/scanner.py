@@ -21,6 +21,7 @@ from backend.risk_manager import calculate_atr, calculate_risk_levels
 from backend.telegram_notifier import TelegramNotifier
 from backend.trend_radar import evaluate_trend_radar
 from backend.volume_filter import passes_volume_filter
+from backend.capitulation_engine import run_capitulation_scan, AsymmetricSignal
 
 logger = logging.getLogger(__name__)
 
@@ -298,6 +299,27 @@ class BreakoutScanner:
         )
         if signals:
             self._save_recent_signals(signals)
+
+        # --- Capitulation analysis (runs after normal scan) ---
+        try:
+            cap_signals = self._run_capitulation_scan(markets)
+            if cap_signals:
+                self._save_capitulation_signals(cap_signals)
+                for cs in cap_signals:
+                    alert_time = datetime.now(tz=timezone.utc)
+                    cooldown_key = f"CAP:{cs.ticker}:{cs.verdict}"
+                    if cooldown_key not in self._last_alert or \
+                       (alert_time - self._last_alert[cooldown_key]).total_seconds() > cfg.ALERT_COOLDOWN_HOURS * 3600:
+                        self._last_alert[cooldown_key] = alert_time
+                        self._save_last_alerts()
+                        self._notifier.send_alert(cs)
+                        logger.info(
+                            "📊 CAPITULATION ALERT sent: %s %s (R:R=1:%.1f, Confidence=%.0f%%)",
+                            cs.ticker, cs.verdict, cs.rr_ratio, cs.confidence_score * 100,
+                        )
+        except Exception as exc:
+            logger.error("Capitulation scan failed: %s", exc, exc_info=True)
+
         return signals
 
     def _save_recent_signals(self, new_signals: List[BreakoutSignal]) -> None:
@@ -350,6 +372,94 @@ class BreakoutScanner:
                 json.dump(signals_dict, f, indent=2)
         except Exception as exc:
             logger.error("Failed to save recent signals to disk: %s", exc)
+
+    def _run_capitulation_scan(
+        self, markets: Dict[str, List[str]],
+    ) -> List[AsymmetricSignal]:
+        """Run capitulation analysis on all tickers across open markets."""
+        tickers_with_data = []
+        benchmark_dfs = {}
+
+        # Fetch benchmark data
+        try:
+            spy_df = self._fetcher.fetch_sp500_daily("SPY")
+            if not spy_df.empty:
+                benchmark_dfs["US_EQUITIES"] = spy_df
+        except Exception:
+            pass
+        try:
+            btc_df = self._fetcher.fetch_crypto_daily("BTCUSDT")
+            if not btc_df.empty:
+                benchmark_dfs["CRYPTO"] = btc_df
+        except Exception:
+            pass
+
+        for market, tickers in markets.items():
+            for ticker in tickers:
+                try:
+                    if market == "US_EQUITIES":
+                        daily_df = self._fetcher.fetch_sp500_daily(ticker)
+                        hourly_df = self._fetcher.fetch_sp500_hourly(ticker)
+                    else:
+                        daily_df = self._fetcher.fetch_crypto_daily(ticker)
+                        hourly_df = self._fetcher.fetch_crypto_hourly(ticker)
+
+                    if not daily_df.empty and not hourly_df.empty:
+                        tickers_with_data.append((ticker, market, daily_df, hourly_df))
+                except Exception as exc:
+                    logger.debug("Capitulation data fetch failed for %s: %s", ticker, exc)
+
+        if not tickers_with_data:
+            return []
+
+        return run_capitulation_scan(tickers_with_data, benchmark_dfs=benchmark_dfs)
+
+    def _save_capitulation_signals(self, signals: List[AsymmetricSignal]) -> None:
+        import json
+        import os
+        filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
+
+        signals_dict = []
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    signals_dict = json.load(f)
+            except Exception:
+                signals_dict = []
+
+        for s in signals:
+            signals_dict.append({
+                "type": "asymmetric",
+                "ticker": s.ticker,
+                "market": s.market,
+                "verdict": s.verdict,
+                "drop_pct": s.drop_pct,
+                "entry_price": s.entry_price,
+                "stop_loss": s.stop_loss,
+                "take_profit": s.take_profit,
+                "rr_ratio": s.rr_ratio,
+                "position_size_qty": s.position_size_qty,
+                "poc": s.poc,
+                "vah": s.vah,
+                "val": s.val,
+                "fvg_zone": list(s.fvg_zone),
+                "ob_zone": list(s.ob_zone),
+                "msb_type": s.msb_type,
+                "is_idiosyncratic": s.is_idiosyncratic,
+                "fundamental_ok": s.fundamental_ok,
+                "confidence_score": s.confidence_score,
+                "analysis_summary": s.analysis_summary,
+                "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC"),
+            })
+
+        signals_dict = signals_dict[-30:]  # Keep last 30
+
+        try:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(signals_dict, f, indent=2)
+            logger.info("Saved %d capitulation signals to disk.", len(signals))
+        except Exception as exc:
+            logger.error("Failed to save capitulation signals: %s", exc)
 
     # ------------------------------------------------------------------
     #  Session management

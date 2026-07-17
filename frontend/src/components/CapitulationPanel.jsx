@@ -1,0 +1,359 @@
+import React from 'react';
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+const COLORS = {
+  bg: '#0a0e17',
+  card: '#111827',
+  border: '#1e293b',
+  greenPrimary: '#10b981',
+  greenLight: '#34d399',
+  redPrimary: '#ef4444',
+  redLight: '#f87171',
+  blue: '#3b82f6',
+  yellow: '#f59e0b',
+  textPrimary: '#f1f5f9',
+  textSecondary: '#94a3b8',
+};
+
+function isCrypto(market) {
+  if (!market) return false;
+  return market.toLowerCase().includes('crypto');
+}
+
+function fmtPrice(value, market) {
+  if (value == null || Number.isNaN(Number(value))) return '—';
+  const decimals = isCrypto(market) ? 4 : 2;
+  return Number(value).toFixed(decimals);
+}
+
+function fmtPct(value) {
+  if (value == null || Number.isNaN(Number(value))) return '—';
+  return `${(Number(value) * 100).toFixed(2)}%`;
+}
+
+function fmtRatio(value) {
+  if (value == null || Number.isNaN(Number(value))) return '—';
+  return `${Number(value).toFixed(2)}:1`;
+}
+
+function fmtZone(zone, market) {
+  if (!Array.isArray(zone) || zone.length < 2) return '—';
+  return `${fmtPrice(zone[0], market)} – ${fmtPrice(zone[1], market)}`;
+}
+
+function fmtConfidence(value) {
+  if (value == null || Number.isNaN(Number(value))) return 0;
+  return Math.round(Number(value) * 100);
+}
+
+// ---------------------------------------------------------------------------
+// Sub-components
+// ---------------------------------------------------------------------------
+
+function Badge({ label, bg, color }) {
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        padding: '2px 10px',
+        borderRadius: 9999,
+        fontSize: 11,
+        fontWeight: 700,
+        letterSpacing: 0.4,
+        textTransform: 'uppercase',
+        backgroundColor: bg,
+        color: color || '#fff',
+        marginLeft: 6,
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {label}
+    </span>
+  );
+}
+
+function VerdictBadge({ verdict }) {
+  const isApto = verdict === 'APTO_COMPRA_ASIMETRICA';
+  return (
+    <Badge
+      label={isApto ? 'APTO' : verdict === 'EVITAR' ? 'EVITAR' : (verdict ?? '—')}
+      bg={isApto ? 'rgba(16,185,129,0.18)' : 'rgba(239,68,68,0.18)'}
+      color={isApto ? COLORS.greenPrimary : COLORS.redPrimary}
+    />
+  );
+}
+
+function MarketBadge({ market }) {
+  if (!market) return null;
+  return (
+    <Badge
+      label={market}
+      bg="rgba(59,130,246,0.15)"
+      color={COLORS.blue}
+    />
+  );
+}
+
+function FundamentalBadge({ ok }) {
+  if (ok == null) return null;
+  return ok ? (
+    <Badge label="✔ Fundamental OK" bg="rgba(16,185,129,0.15)" color={COLORS.greenPrimary} />
+  ) : (
+    <Badge label="⚠ Fundamental" bg="rgba(245,158,11,0.15)" color={COLORS.yellow} />
+  );
+}
+
+function IdiosyncraticBadge({ value }) {
+  if (value == null) return null;
+  return value ? (
+    <Badge label="Idiosincrático" bg="rgba(59,130,246,0.13)" color={COLORS.blue} />
+  ) : (
+    <Badge label="Sistémico" bg="rgba(148,163,184,0.13)" color={COLORS.textSecondary} />
+  );
+}
+
+function SectionTitle({ children }) {
+  return (
+    <div
+      style={{
+        fontSize: 11,
+        fontWeight: 700,
+        textTransform: 'uppercase',
+        letterSpacing: 1,
+        color: COLORS.textSecondary,
+        marginBottom: 6,
+        marginTop: 14,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function LevelRow({ label, value, color }) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '3px 0',
+        fontSize: 13,
+      }}
+    >
+      <span style={{ color: COLORS.textSecondary }}>{label}</span>
+      <span style={{ color: color || COLORS.textPrimary, fontWeight: 600, fontFamily: 'monospace' }}>
+        {value}
+      </span>
+    </div>
+  );
+}
+
+function ConfidenceMeter({ value }) {
+  const pct = fmtConfidence(value);
+  const radius = 28;
+  const stroke = 5;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (pct / 100) * circumference;
+
+  let arcColor = COLORS.redPrimary;
+  if (pct >= 70) arcColor = COLORS.greenPrimary;
+  else if (pct >= 40) arcColor = COLORS.yellow;
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10 }}>
+      <svg width={70} height={70} style={{ transform: 'rotate(-90deg)' }}>
+        <circle
+          cx={35}
+          cy={35}
+          r={radius}
+          fill="none"
+          stroke={COLORS.border}
+          strokeWidth={stroke}
+        />
+        <circle
+          cx={35}
+          cy={35}
+          r={radius}
+          fill="none"
+          stroke={arcColor}
+          strokeWidth={stroke}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+        />
+      </svg>
+      <div>
+        <div style={{ fontSize: 22, fontWeight: 700, color: arcColor }}>{pct}%</div>
+        <div style={{ fontSize: 11, color: COLORS.textSecondary }}>Confianza</div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Signal Card
+// ---------------------------------------------------------------------------
+
+function SignalCard({ signal }) {
+  const {
+    ticker,
+    market,
+    verdict,
+    drop_pct,
+    entry_price,
+    stop_loss,
+    take_profit,
+    rr_ratio,
+    position_size_qty,
+    poc,
+    vah,
+    val,
+    fvg_zone,
+    ob_zone,
+    msb_type,
+    is_idiosyncratic,
+    fundamental_ok,
+    confidence_score,
+    analysis_summary,
+    timestamp,
+  } = signal || {};
+
+  return (
+    <div
+      style={{
+        backgroundColor: COLORS.card,
+        border: `1px solid ${COLORS.border}`,
+        borderRadius: 12,
+        padding: 20,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 0,
+      }}
+    >
+      {/* ---- Header ---- */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: 6,
+          marginBottom: 6,
+        }}
+      >
+        <span style={{ fontSize: 18, fontWeight: 700, color: COLORS.textPrimary }}>
+          {ticker ?? '—'}
+        </span>
+        <MarketBadge market={market} />
+        <VerdictBadge verdict={verdict} />
+        <FundamentalBadge ok={fundamental_ok} />
+        <IdiosyncraticBadge value={is_idiosyncratic} />
+      </div>
+
+      {/* ---- Drop % ---- */}
+      <div style={{ fontSize: 28, fontWeight: 800, color: COLORS.redPrimary, marginBottom: 4 }}>
+        {drop_pct != null ? fmtPct(drop_pct) : '—'}
+      </div>
+      <div style={{ fontSize: 11, color: COLORS.textSecondary, marginBottom: 8 }}>Caída</div>
+
+      {/* ---- Price Levels ---- */}
+      <SectionTitle>Niveles de Precio</SectionTitle>
+      <LevelRow label="Entrada" value={fmtPrice(entry_price, market)} color={COLORS.textPrimary} />
+      <LevelRow label="Stop Loss" value={fmtPrice(stop_loss, market)} color={COLORS.redPrimary} />
+      <LevelRow label="Objetivo" value={fmtPrice(take_profit, market)} color={COLORS.greenPrimary} />
+      <LevelRow label="R:R" value={fmtRatio(rr_ratio)} color={COLORS.blue} />
+
+      {/* ---- Volume Profile ---- */}
+      <SectionTitle>Perfil de Volumen</SectionTitle>
+      <LevelRow label="POC" value={fmtPrice(poc, market)} />
+      <LevelRow label="VAH" value={fmtPrice(vah, market)} />
+      <LevelRow label="VAL" value={fmtPrice(val, market)} />
+
+      {/* ---- SMC Zones ---- */}
+      <SectionTitle>Zonas SMC</SectionTitle>
+      <LevelRow label="FVG" value={fmtZone(fvg_zone, market)} />
+      <LevelRow label="Order Block" value={fmtZone(ob_zone, market)} />
+      <LevelRow label="MSB" value={msb_type ?? '—'} />
+
+      {/* ---- Position Size ---- */}
+      <SectionTitle>Tamaño Posición</SectionTitle>
+      <div style={{ fontSize: 15, fontWeight: 600, color: COLORS.textPrimary, fontFamily: 'monospace' }}>
+        {position_size_qty != null ? Number(position_size_qty).toFixed(4) : '—'}
+      </div>
+
+      {/* ---- Confidence ---- */}
+      <ConfidenceMeter value={confidence_score} />
+
+      {/* ---- Analysis Summary ---- */}
+      {analysis_summary && (
+        <>
+          <SectionTitle>Análisis</SectionTitle>
+          <div
+            style={{
+              fontSize: 12,
+              lineHeight: 1.55,
+              color: COLORS.textSecondary,
+              borderLeft: `3px solid ${COLORS.border}`,
+              paddingLeft: 10,
+            }}
+          >
+            {analysis_summary}
+          </div>
+        </>
+      )}
+
+      {/* ---- Timestamp ---- */}
+      {timestamp && (
+        <div style={{ fontSize: 10, color: COLORS.textSecondary, marginTop: 12, textAlign: 'right' }}>
+          {new Date(timestamp).toLocaleString('es-AR')}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Main Panel
+// ---------------------------------------------------------------------------
+
+export default function CapitulationPanel({ signals }) {
+  const list = Array.isArray(signals) ? signals : [];
+
+  if (list.length === 0) {
+    return (
+      <div
+        style={{
+          backgroundColor: COLORS.bg,
+          minHeight: 200,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 40,
+        }}
+      >
+        <span style={{ color: COLORS.textSecondary, fontSize: 14, fontStyle: 'italic' }}>
+          No hay señales de capitulación activas
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        backgroundColor: COLORS.bg,
+        padding: 24,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+        gap: 20,
+      }}
+    >
+      {list.map((sig, idx) => (
+        <SignalCard key={sig?.ticker ? `${sig.ticker}-${idx}` : idx} signal={sig} />
+      ))}
+    </div>
+  );
+}

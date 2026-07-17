@@ -12,7 +12,7 @@ from datetime import timezone
 
 import requests
 
-from backend.models import BreakoutSignal, RadarSignal
+from backend.models import AsymmetricSignal, BreakoutSignal, RadarSignal
 
 logger = logging.getLogger(__name__)
 
@@ -130,7 +130,9 @@ class TelegramNotifier:
 
         Returns ``True`` on success, ``False`` on failure.
         """
-        if isinstance(signal, RadarSignal):
+        if isinstance(signal, AsymmetricSignal):
+            text = self._format_asymmetric(signal)
+        elif isinstance(signal, RadarSignal):
             text = self._format_radar(signal)
         else:
             text = self._format_message(signal)
@@ -159,3 +161,52 @@ class TelegramNotifier:
         except Exception as exc:
             logger.error("Telegram send failed: %s", exc)
             return False
+
+    def _format_asymmetric(self, signal: AsymmetricSignal) -> str:
+        """Build a capitulation alert with full analysis details."""
+        market_label = _MARKET_LABELS.get(signal.market, signal.market)
+        ts = signal.timestamp.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        fmt = ".2f" if signal.market == "US_EQUITIES" else ".4f"
+
+        verdict_emoji = "🟢" if signal.verdict == "APTO_COMPRA_ASIMETRICA" else "🔴"
+        verdict_label = "APTO COMPRA ASIMÉTRICA" if signal.verdict == "APTO_COMPRA_ASIMETRICA" else "EVITAR"
+        shock_type = "Idiosincrática" if signal.is_idiosyncratic else "Sistémica"
+        fund_label = "✅ Solvente" if signal.fundamental_ok else "⚠️ Riesgo"
+
+        lines = [
+            f"🔬 ANÁLISIS DE CAPITULACIÓN",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"🏷️ {signal.ticker} — {market_label}",
+            f"{verdict_emoji} Veredicto: {verdict_label}",
+            f"📉 Caída: {signal.drop_pct * 100:.1f}% ({shock_type})",
+            f"📊 Confianza: {signal.confidence_score * 100:.0f}%",
+            f"━━━━━━━━━━━━━━━━━━",
+        ]
+
+        if signal.verdict == "APTO_COMPRA_ASIMETRICA":
+            lines.extend([
+                f"📍 Entrada: ${signal.entry_price:{fmt}}",
+                f"🛑 Stop Loss: ${signal.stop_loss:{fmt}}",
+                f"🎯 Take Profit: ${signal.take_profit:{fmt}}",
+                f"⚖️ R:R = 1:{signal.rr_ratio:.1f}",
+                f"📐 Tamaño: {signal.position_size_qty:.4f} unidades",
+                f"━━━━━━━━━━━━━━━━━━",
+                f"📊 POC: ${signal.poc:{fmt}}",
+                f"📊 VAH: ${signal.vah:{fmt}} | VAL: ${signal.val:{fmt}}",
+            ])
+
+            if signal.fvg_zone and signal.fvg_zone != (0.0, 0.0):
+                lines.append(f"🟦 FVG: ${signal.fvg_zone[0]:{fmt}} — ${signal.fvg_zone[1]:{fmt}}")
+            if signal.ob_zone and signal.ob_zone != (0.0, 0.0):
+                lines.append(f"🟧 OB: ${signal.ob_zone[0]:{fmt}} — ${signal.ob_zone[1]:{fmt}}")
+            if signal.msb_type and signal.msb_type != "n/a":
+                lines.append(f"🔄 MSB: {signal.msb_type}")
+
+        lines.extend([
+            f"💼 Fundamental: {fund_label}",
+            f"⏰ {ts}",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"📝 {signal.analysis_summary}",
+        ])
+
+        return "\n".join(lines)

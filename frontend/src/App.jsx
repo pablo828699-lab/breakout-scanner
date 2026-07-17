@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import KPICards from './components/KPICards';
 import CandidatePanel from './components/CandidatePanel';
+import CapitulationPanel from './components/CapitulationPanel';
 import AnalyticsChart from './components/AnalyticsChart';
 import OpenPositions from './components/OpenPositions';
 import TradeHistory from './components/TradeHistory';
@@ -97,6 +98,8 @@ export default function App() {
   const [isScanning, setIsScanning] = useState(false);
   const [approveModalCandidate, setApproveModalCandidate] = useState(null);
   const [approveModalSize, setApproveModalSize] = useState(1000);
+  const [capitulationSignals, setCapitulationSignals] = useState([]);
+  const [isScanningCap, setIsScanningCap] = useState(false);
 
   // Real-time clock update
   useEffect(() => {
@@ -314,6 +317,47 @@ export default function App() {
     }
   };
 
+  // Fetch capitulation signals
+  useEffect(() => {
+    const fetchCapitulation = async () => {
+      try {
+        const resp = await fetch(`${BACKEND_URL}/api/capitulation`);
+        if (resp.ok) {
+          const data = await resp.json();
+          setCapitulationSignals(Array.isArray(data) ? data : []);
+        }
+      } catch (e) {
+        console.warn('Could not fetch capitulation signals:', e);
+      }
+    };
+    fetchCapitulation();
+    const interval = setInterval(fetchCapitulation, 3 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Manual capitulation scan handler
+  const handleCapitulationScan = async () => {
+    if (isScanningCap) return;
+    setIsScanningCap(true);
+    try {
+      const resp = await fetch(`${BACKEND_URL}/scan-capitulation`);
+      if (resp.ok) {
+        alert('Análisis de capitulación iniciado. Los resultados aparecerán en ~2 minutos.');
+        setTimeout(async () => {
+          try {
+            const r = await fetch(`${BACKEND_URL}/api/capitulation`);
+            if (r.ok) setCapitulationSignals(await r.json());
+          } catch (_) {}
+        }, 120000);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error al iniciar el análisis de capitulación.');
+    } finally {
+      setIsScanningCap(false);
+    }
+  };
+
   // Handler to approve a breakout signal (move candidate to open positions)
   const handleApprove = (candidate, customSize) => {
     const tradeSize = customSize !== undefined ? customSize : capitalPerTrade;
@@ -490,6 +534,19 @@ export default function App() {
               >
                 {isScanning ? 'Escaneando...' : 'Escanear Ahora'}
               </button>
+
+              {/* Manual Capitulation Scan Button */}
+              <button
+                onClick={handleCapitulationScan}
+                disabled={isScanningCap}
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg border transition-all duration-300 ${
+                  isScanningCap
+                    ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
+                    : 'bg-purple-600/10 border-purple-500/30 text-purple-400 hover:bg-purple-600/20 hover:border-purple-500/60'
+                }`}
+              >
+                {isScanningCap ? 'Analizando...' : '🔬 Capitulación'}
+              </button>
               
               <div className="h-4 w-[1px] bg-slate-800" />
               
@@ -531,6 +588,11 @@ export default function App() {
             <AnalyticsChart data={dailyAnalytics} />
           </section>
         </div>
+
+        {/* Capitulation Analysis Module */}
+        <section className="w-full">
+          <CapitulationPanel signals={capitulationSignals} />
+        </section>
 
         {/* Open Positions monitoring */}
         <section className="w-full">

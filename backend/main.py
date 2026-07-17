@@ -174,6 +174,52 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/api/capitulation":
+            try:
+                filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
+                data = []
+                if os.path.exists(filepath):
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(json.dumps(data).encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP capitulation handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/scan-capitulation":
+            try:
+                logger.info("Manual capitulation scan triggered via HTTP.")
+                import threading
+                thread = threading.Thread(
+                    target=self.scanner._run_capitulation_scan,
+                    args=({"CRYPTO": self.scanner._fetcher.get_crypto_tickers()},),
+                    name="CapitulationScanThread",
+                )
+                thread.start()
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = '{"status": "processing", "message": "Capitulation scan started in background"}'
+                self.wfile.write(res.encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP capitulation scan handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
         elif clean_path == "" or clean_path == "/":
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
