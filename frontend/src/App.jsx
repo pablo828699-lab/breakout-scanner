@@ -329,21 +329,41 @@ export default function App() {
     }
   };
 
-  // Fetch capitulation signals
+  // Fetch capitulation signals (Dual-Fetch Fallback)
   useEffect(() => {
     const fetchCapitulation = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      
+      let data = [];
       try {
-        const resp = await fetch(`${BACKEND_URL}/api/capitulation`);
+        const resp = await fetch(`${BACKEND_URL}/api/capitulation`, { signal: controller.signal });
+        clearTimeout(timeoutId);
         if (resp.ok) {
-          const data = await resp.json();
-          setCapitulationSignals(Array.isArray(data) ? data : []);
+          data = await resp.json();
+          console.log("Successfully fetched capitulation signals from Render backend.");
+        } else {
+          throw new Error('Render response not ok');
         }
       } catch (e) {
-        console.warn('Could not fetch capitulation signals:', e);
+        clearTimeout(timeoutId);
+        console.warn('Render capitulation fetch failed or timed out — trying local fallback:', e);
+        try {
+          const resp = await fetch('/capitulation_signals.json');
+          if (resp.ok) {
+            data = await resp.json();
+            console.log("Successfully loaded cached capitulation signals from Netlify CDN.");
+          }
+        } catch (err) {
+          console.error("Local capitulation fallback failed:", err);
+        }
       }
+      
+      setCapitulationSignals(Array.isArray(data) ? data : []);
     };
+    
     fetchCapitulation();
-    const interval = setInterval(fetchCapitulation, 3 * 60 * 1000);
+    const interval = setInterval(fetchCapitulation, 2 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
