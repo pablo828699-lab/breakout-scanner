@@ -195,6 +195,33 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
+        elif clean_path.startswith("/api/price"):
+            try:
+                from urllib.parse import urlparse, parse_qs
+                query = parse_qs(urlparse(self.path).query)
+                ticker = query.get("ticker", [""])[0]
+                if not ticker:
+                    raise ValueError("Missing 'ticker' query parameter")
+
+                import yfinance as yf
+                tk = yf.Ticker(ticker)
+                info = tk.fast_info
+                price = float(info.get("lastPrice", 0) or info.get("regularMarketPrice", 0) or 0)
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"ticker": "{ticker}", "price": {price}}}'
+                self.wfile.write(res.encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP price handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/scan-capitulation":
             try:
                 logger.info("Manual capitulation scan triggered via HTTP.")

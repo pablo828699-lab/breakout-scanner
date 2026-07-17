@@ -172,24 +172,68 @@ export default function App() {
     localStorage.setItem('ignoredCandidates', JSON.stringify(ignoredCandidates));
   }, [ignoredCandidates]);
 
-  // Simulate minor price fluctuations for active open positions to bring the dashboard to life
+  // Fetch real-time prices for open positions from Binance (crypto) every 10s
   useEffect(() => {
     if (openPositions.length === 0) return;
 
-    const timer = setInterval(() => {
-      setOpenPositions((prevPositions) =>
-        prevPositions.map((pos) => {
-          // Volatility fluctuation: between -0.12% and +0.12%
-          const changePct = (Math.random() - 0.5) * 0.0024;
-          const nextPrice = pos.current * (1 + changePct);
-          return {
-            ...pos,
-            current: Math.max(0.000001, nextPrice)
-          };
-        })
-      );
-    }, 4000);
+    const fetchLivePrices = async () => {
+      try {
+        // Collect all unique crypto tickers that need price updates
+        const cryptoSymbols = openPositions
+          .filter(pos => pos.market === 'CRYPTO')
+          .map(pos => pos.ticker);
 
+        const equitySymbols = openPositions
+          .filter(pos => pos.market === 'US_EQUITIES')
+          .map(pos => pos.ticker);
+
+        const priceMap = {};
+
+        // Fetch crypto prices from Binance public API (no auth needed)
+        if (cryptoSymbols.length > 0) {
+          const uniqueCrypto = [...new Set(cryptoSymbols)];
+          const symbols = JSON.stringify(uniqueCrypto);
+          const resp = await fetch(
+            `https://data-api.binance.vision/api/v3/ticker/price?symbols=${encodeURIComponent(symbols)}`
+          );
+          if (resp.ok) {
+            const data = await resp.json();
+            for (const item of data) {
+              priceMap[item.symbol] = parseFloat(item.price);
+            }
+          }
+        }
+
+        // Fetch equity prices via backend proxy (yfinance on Render)
+        for (const sym of [...new Set(equitySymbols)]) {
+          try {
+            const r = await fetch(`${BACKEND_URL}/api/price?ticker=${sym}`);
+            if (r.ok) {
+              const d = await r.json();
+              if (d.price) priceMap[sym] = d.price;
+            }
+          } catch (_) {}
+        }
+
+        // Update positions with real prices
+        if (Object.keys(priceMap).length > 0) {
+          setOpenPositions(prev =>
+            prev.map(pos => {
+              const livePrice = priceMap[pos.ticker];
+              if (livePrice && livePrice > 0) {
+                return { ...pos, current: livePrice };
+              }
+              return pos;
+            })
+          );
+        }
+      } catch (err) {
+        console.warn('Live price fetch failed:', err);
+      }
+    };
+
+    fetchLivePrices();
+    const timer = setInterval(fetchLivePrices, 15000); // Every 15 seconds
     return () => clearInterval(timer);
   }, [openPositions.length]);
 
@@ -335,9 +379,16 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Manual capitulation scan handler
+  // Manual capitulation scan handler (PIN protected)
   const handleCapitulationScan = async () => {
     if (isScanningCap) return;
+
+    const pin = prompt('Ingrese la clave de seguridad para iniciar el análisis:');
+    if (pin !== '1234') {
+      alert('Clave incorrecta. Análisis cancelado.');
+      return;
+    }
+
     setIsScanningCap(true);
     try {
       const resp = await fetch(`${BACKEND_URL}/scan-capitulation`);
