@@ -510,5 +510,20 @@
     "roc_pct": -10.86,
     "ema_stack": true,
     "timestamp": "2026-07-17 14:43 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "LDOUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.3847,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 34.3,
+    "volume_ratio": 1.62,
+    "roc_pct": 29.69,
+    "ema_stack": false,
+    "timestamp": "2026-07-17 18:04 UTC"
   }
 ]
