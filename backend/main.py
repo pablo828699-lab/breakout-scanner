@@ -195,6 +195,7 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
+                self.wfile.write(res.encode("utf-8"))
         elif clean_path.startswith("/api/price"):
             try:
                 from urllib.parse import urlparse, parse_qs
@@ -203,10 +204,33 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 if not ticker:
                     raise ValueError("Missing 'ticker' query parameter")
 
-                import yfinance as yf
-                tk = yf.Ticker(ticker)
-                info = tk.fast_info
-                price = float(info.get("lastPrice", 0) or info.get("regularMarketPrice", 0) or 0)
+                price = 0.0
+                # Try Binance public API first if it looks like a crypto pair (ends with USDT)
+                if ticker.endswith("USDT"):
+                    try:
+                        r = requests.get(f"https://api.binance.com/api/v3/ticker/price?symbol={ticker}", timeout=5)
+                        if r.status_code == 200:
+                            price = float(r.json().get("price", 0.0))
+                    except Exception as e:
+                        logger.warning("Failed to fetch crypto price from Binance: %s. Trying yfinance fallback.", e)
+
+                # Fallback to yfinance if not crypto or if Binance failed
+                if price <= 0.0:
+                    import yfinance as yf
+                    yf_symbol = ticker.replace("USDT", "-USD") if ticker.endswith("USDT") else ticker
+                    tk = yf.Ticker(yf_symbol)
+                    
+                    # fast_info attributes are properties, not dict keys. Access safely:
+                    try:
+                        price = float(getattr(tk.fast_info, 'last_price', 0.0) or getattr(tk.fast_info, 'regular_market_price', 0.0) or 0.0)
+                    except Exception:
+                        price = 0.0
+                        
+                    if price <= 0.0:
+                        # Try history if fast_info is empty
+                        hist = tk.history(period="1d")
+                        if not hist.empty:
+                            price = float(hist["Close"].iloc[-1])
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")

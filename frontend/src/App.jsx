@@ -172,48 +172,29 @@ export default function App() {
     localStorage.setItem('ignoredCandidates', JSON.stringify(ignoredCandidates));
   }, [ignoredCandidates]);
 
-  // Fetch real-time prices for open positions from Binance (crypto) every 10s
+  // Fetch real-time prices for open positions via backend proxy every 10s
   useEffect(() => {
     if (openPositions.length === 0) return;
 
     const fetchLivePrices = async () => {
       try {
-        // Collect all unique crypto tickers that need price updates
-        const cryptoSymbols = openPositions
-          .filter(pos => pos.market === 'CRYPTO')
-          .map(pos => pos.ticker);
-
-        const equitySymbols = openPositions
-          .filter(pos => pos.market === 'US_EQUITIES')
-          .map(pos => pos.ticker);
-
+        const uniqueSymbols = [...new Set(openPositions.map(pos => pos.ticker))];
         const priceMap = {};
 
-        // Fetch crypto prices from Binance public API (no auth needed)
-        if (cryptoSymbols.length > 0) {
-          const uniqueCrypto = [...new Set(cryptoSymbols)];
-          const symbols = JSON.stringify(uniqueCrypto);
-          const resp = await fetch(
-            `https://data-api.binance.vision/api/v3/ticker/price?symbols=${encodeURIComponent(symbols)}`
-          );
-          if (resp.ok) {
-            const data = await resp.json();
-            for (const item of data) {
-              priceMap[item.symbol] = parseFloat(item.price);
-            }
-          }
-        }
-
-        // Fetch equity prices via backend proxy (yfinance on Render)
-        for (const sym of [...new Set(equitySymbols)]) {
-          try {
-            const r = await fetch(`${BACKEND_URL}/api/price?ticker=${sym}`);
-            if (r.ok) {
-              const d = await r.json();
-              if (d.price) priceMap[sym] = d.price;
-            }
-          } catch (_) {}
-        }
+        // Fetch prices sequentially or in parallel from backend proxy
+        await Promise.all(
+          uniqueSymbols.map(async (sym) => {
+            try {
+              const r = await fetch(`${BACKEND_URL}/api/price?ticker=${sym}`);
+              if (r.ok) {
+                const d = await r.json();
+                if (d.price && d.price > 0) {
+                  priceMap[sym] = d.price;
+                }
+              }
+            } catch (_) {}
+          })
+        );
 
         // Update positions with real prices
         if (Object.keys(priceMap).length > 0) {
@@ -233,7 +214,7 @@ export default function App() {
     };
 
     fetchLivePrices();
-    const timer = setInterval(fetchLivePrices, 15000); // Every 15 seconds
+    const timer = setInterval(fetchLivePrices, 10000); // Every 10 seconds
     return () => clearInterval(timer);
   }, [openPositions.length]);
 
