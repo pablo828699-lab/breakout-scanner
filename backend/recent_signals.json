@@ -314,5 +314,20 @@
     "volume_ratio": 1.32,
     "roc_pct": 30.76,
     "timestamp": "2026-07-16 15:00 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "TAOUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 190.3,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.4,
+    "volume_ratio": 1.24,
+    "roc_pct": -10.86,
+    "ema_stack": true,
+    "timestamp": "2026-07-17 02:39 UTC"
   }
 ]
