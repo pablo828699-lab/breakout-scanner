@@ -206,8 +206,11 @@ function SignalCard({ signal, onApprove, onReject }) {
     verdict,
     drop_pct,
     entry_price,
+    entry,
     stop_loss,
+    stopLoss,
     take_profit,
+    takeProfit,
     rr_ratio,
     position_size_qty,
     poc,
@@ -222,6 +225,11 @@ function SignalCard({ signal, onApprove, onReject }) {
     analysis_summary,
     timestamp,
   } = signal || {};
+
+  // Resolve properties that might be camelCased or snake_cased
+  const finalEntry = entry !== undefined ? entry : entry_price;
+  const finalStopLoss = stopLoss !== undefined ? stopLoss : stop_loss;
+  const finalTakeProfit = takeProfit !== undefined ? takeProfit : take_profit;
 
   const isApto = verdict === 'APTO_COMPRA_ASIMETRICA';
 
@@ -264,9 +272,9 @@ function SignalCard({ signal, onApprove, onReject }) {
 
       {/* ---- Price Levels ---- */}
       <SectionTitle>Niveles de Precio</SectionTitle>
-      <LevelRow label="Entrada" value={fmtPrice(entry_price, market)} color={COLORS.textPrimary} />
-      <LevelRow label="Stop Loss" value={fmtPrice(stop_loss, market)} color={COLORS.redPrimary} />
-      <LevelRow label="Objetivo" value={fmtPrice(take_profit, market)} color={COLORS.greenPrimary} />
+      <LevelRow label="Entrada" value={fmtPrice(finalEntry, market)} color={COLORS.textPrimary} />
+      <LevelRow label="Stop Loss" value={fmtPrice(finalStopLoss, market)} color={COLORS.redPrimary} />
+      <LevelRow label="Objetivo" value={fmtPrice(finalTakeProfit, market)} color={COLORS.greenPrimary} />
       <LevelRow label="R:R" value={fmtRatio(rr_ratio)} color={COLORS.blue} />
 
       {/* ---- Volume Profile ---- */}
