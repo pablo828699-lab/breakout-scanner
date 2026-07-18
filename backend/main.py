@@ -56,7 +56,6 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 content_length = int(self.headers.get('Content-Length', 0))
                 put_data = self.rfile.read(content_length)
                 
-                import requests
                 # Send PUT request to JSONBlob backend-to-backend (no CORS preflight constraints)
                 r = requests.put(
                     'https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9',
@@ -160,7 +159,6 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/api/cloud-state":
             try:
-                import requests
                 r = requests.get('https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9', timeout=10)
                 self.send_response(r.status_code)
                 self.send_header("Content-Type", "application/json")
