@@ -198,8 +198,9 @@ function ConfidenceMeter({ value }) {
 // Signal Card
 // ---------------------------------------------------------------------------
 
-function SignalCard({ signal }) {
+function SignalCard({ signal, onApprove, onReject }) {
   const {
+    id,
     ticker,
     market,
     verdict,
@@ -221,6 +222,8 @@ function SignalCard({ signal }) {
     analysis_summary,
     timestamp,
   } = signal || {};
+
+  const isApto = verdict === 'APTO_COMPRA_ASIMETRICA';
 
   return (
     <div
@@ -305,6 +308,62 @@ function SignalCard({ signal }) {
         </>
       )}
 
+      {/* ---- Action Buttons ---- */}
+      {isApto && (onApprove || onReject) && (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: 8,
+            marginTop: 18,
+            paddingTop: 12,
+            borderTop: `1px solid ${COLORS.border}`,
+          }}
+        >
+          {onReject && (
+            <button
+              onClick={() => onReject(id)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 8,
+                fontSize: 12,
+                fontWeight: 600,
+                backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                color: COLORS.textSecondary,
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s',
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(51, 65, 85, 0.8)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(30, 41, 59, 0.8)'}
+            >
+              Ignorar
+            </button>
+          )}
+          {onApprove && (
+            <button
+              onClick={() => onApprove(signal)}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 8,
+                fontSize: 12,
+                fontWeight: 700,
+                background: 'linear-gradient(to right, #2563eb, #0891b2)',
+                color: COLORS.textPrimary,
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 4px 6px -1px rgba(8, 145, 178, 0.15)',
+                transition: 'opacity 0.2s',
+              }}
+              onMouseEnter={(e) => e.target.style.opacity = '0.9'}
+              onMouseLeave={(e) => e.target.style.opacity = '1'}
+            >
+              Aprobar
+            </button>
+          )}
+        </div>
+      )}
+
       {/* ---- Timestamp ---- */}
       {timestamp && (
         <div style={{ fontSize: 10, color: COLORS.textSecondary, marginTop: 12, textAlign: 'right' }}>
@@ -319,7 +378,7 @@ function SignalCard({ signal }) {
 // Main Panel
 // ---------------------------------------------------------------------------
 
-export default function CapitulationPanel({ signals }) {
+export default function CapitulationPanel({ signals, onApprove, onReject }) {
   const list = Array.isArray(signals) ? signals : [];
 
   if (list.length === 0) {
@@ -352,7 +411,12 @@ export default function CapitulationPanel({ signals }) {
       }}
     >
       {list.map((sig, idx) => (
-        <SignalCard key={sig?.ticker ? `${sig.ticker}-${idx}` : idx} signal={sig} />
+        <SignalCard
+          key={sig?.ticker ? `${sig.ticker}-${idx}` : idx}
+          signal={sig}
+          onApprove={onApprove}
+          onReject={onReject}
+        />
       ))}
     </div>
   );

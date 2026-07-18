@@ -359,7 +359,45 @@ export default function App() {
         }
       }
       
-      setCapitulationSignals(Array.isArray(data) ? data : []);
+      // Filter out ignored ones
+      const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
+      const ignoredSet = new Set(savedIgnored);
+      const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
+      const openIds = new Set(savedOpen.map(p => p.ticker));
+
+      const mapped = data
+        .map((c, index) => {
+          const entryVal = c.entry_price || 0;
+          return {
+            id: c.id || `cap_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
+            ticker: c.ticker,
+            market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
+            direction: 'LONG', // Capitulation is always buy-oriented
+            brokenLevel: c.val || entryVal,
+            entry: entryVal,
+            stopLoss: c.stop_loss || 0,
+            takeProfit: c.take_profit || 0,
+            volumeRatio: c.volume_ratio || c.drop_pct || 0,
+            atr: entryVal * 0.02,
+            timestamp: c.timestamp,
+            type: 'capitulation',
+            verdict: c.verdict,
+            drop_pct: c.drop_pct,
+            confidence_score: c.confidence_score,
+            analysis_summary: c.analysis_summary,
+            poc: c.poc,
+            vah: c.vah,
+            val: c.val,
+            fvg_zone: c.fvg_zone,
+            ob_zone: c.ob_zone,
+            msb_type: c.msb_type,
+            is_idiosyncratic: c.is_idiosyncratic,
+            fundamental_ok: c.fundamental_ok
+          };
+        })
+        .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`) && !openIds.has(c.ticker));
+      
+      setCapitulationSignals(mapped);
     };
     
     fetchCapitulation();
@@ -385,7 +423,42 @@ export default function App() {
         setTimeout(async () => {
           try {
             const r = await fetch(`${BACKEND_URL}/api/capitulation`);
-            if (r.ok) setCapitulationSignals(await r.json());
+            if (r.ok) {
+              const capData = await r.json();
+              const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
+              const ignoredSet = new Set(savedIgnored);
+              const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
+              const openIds = new Set(savedOpen.map(p => p.ticker));
+              
+              const mapped = capData
+                .map((c, index) => ({
+                  id: c.id || `cap_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
+                  ticker: c.ticker,
+                  market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
+                  direction: 'LONG',
+                  brokenLevel: c.val || c.entry_price,
+                  entry: c.entry_price,
+                  stopLoss: c.stop_loss,
+                  takeProfit: c.take_profit,
+                  volume_ratio: c.volume_ratio,
+                  timestamp: c.timestamp,
+                  type: 'capitulation',
+                  verdict: c.verdict,
+                  drop_pct: c.drop_pct,
+                  confidence_score: c.confidence_score,
+                  analysis_summary: c.analysis_summary,
+                  poc: c.poc,
+                  vah: c.vah,
+                  val: c.val,
+                  fvg_zone: c.fvg_zone,
+                  ob_zone: c.ob_zone,
+                  msb_type: c.msb_type,
+                  is_idiosyncratic: c.is_idiosyncratic,
+                  fundamental_ok: c.fundamental_ok
+                }))
+                .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`) && !openIds.has(c.ticker));
+              setCapitulationSignals(mapped);
+            }
           } catch (_) {}
         }, 120000);
       }
@@ -397,7 +470,7 @@ export default function App() {
     }
   };
 
-  // Handler to approve a breakout signal (move candidate to open positions)
+  // Handler to approve a breakout or capitulation signal (move candidate to open positions)
   const handleApprove = (candidate, customSize) => {
     const tradeSize = customSize !== undefined ? customSize : capitalPerTrade;
     const newPosition = {
@@ -418,6 +491,7 @@ export default function App() {
 
     setOpenPositions([newPosition, ...openPositions]);
     setCandidates(candidates.filter((c) => c.id !== candidate.id));
+    setCapitulationSignals(capitulationSignals.filter((c) => c.id !== candidate.id));
     setKpis((prev) => ({
       ...prev,
       totalTrades: prev.totalTrades + 1
@@ -435,6 +509,19 @@ export default function App() {
       });
     }
     setCandidates(candidates.filter((c) => c.id !== id));
+  };
+
+  // Handler to reject/ignore a capitulation signal persistently
+  const handleRejectCapitulation = (id) => {
+    const signal = capitulationSignals.find((c) => c.id === id);
+    if (signal) {
+      const key = `${signal.ticker}_${signal.timestamp}`;
+      setIgnoredCandidates((prev) => {
+        if (prev.includes(key)) return prev;
+        return [...prev, key];
+      });
+    }
+    setCapitulationSignals(capitulationSignals.filter((c) => c.id !== id));
   };
 
   // Handler to close an open position (move it to closed trade history)
@@ -630,7 +717,14 @@ export default function App() {
 
         {/* Capitulation Analysis Module */}
         <section className="w-full">
-          <CapitulationPanel signals={capitulationSignals} />
+          <CapitulationPanel
+            signals={capitulationSignals}
+            onApprove={(signal) => {
+              setApproveModalCandidate(signal);
+              setApproveModalSize(capitalPerTrade);
+            }}
+            onReject={handleRejectCapitulation}
+          />
         </section>
 
         {/* Open Positions monitoring */}
