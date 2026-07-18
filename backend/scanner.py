@@ -424,11 +424,15 @@ class BreakoutScanner:
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
                     signals_dict = json.load(f)
-            except Exception:
-                signals_dict = []
+        # Deduplicate signals: newly computed signals overwrite existing ones for the same ticker
+        existing_by_ticker = {}
+        for item in signals_dict:
+            ticker_key = item.get("ticker")
+            if ticker_key:
+                existing_by_ticker[ticker_key] = item
 
         for s in signals:
-            signals_dict.append({
+            existing_by_ticker[s.ticker] = {
                 "type": "asymmetric",
                 "ticker": s.ticker,
                 "market": s.market,
@@ -450,9 +454,9 @@ class BreakoutScanner:
                 "confidence_score": s.confidence_score,
                 "analysis_summary": s.analysis_summary,
                 "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC"),
-            })
+            }
 
-        signals_dict = signals_dict[-30:]  # Keep last 30
+        signals_dict = list(existing_by_ticker.values())[-30:]  # Keep last 30
 
         try:
             with open(filepath, "w", encoding="utf-8") as f:

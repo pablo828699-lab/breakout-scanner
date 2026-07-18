@@ -272,7 +272,16 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
         elif clean_path == "/scan-capitulation":
             try:
                 logger.info("Manual capitulation scan triggered via HTTP.")
-                import threading
+                # Clean up existing signals file to force overwrite of everything
+                try:
+                    import os
+                    filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
+                    if os.path.exists(filepath):
+                        os.remove(filepath)
+                        logger.info("Cleared old capitulation signals file for fresh manual run.")
+                except Exception:
+                    pass
+
                 thread = threading.Thread(
                     target=self.scanner._run_capitulation_scan,
                     args=({
