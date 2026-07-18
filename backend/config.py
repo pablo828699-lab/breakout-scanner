@@ -93,7 +93,9 @@ SP500_TICKERS: List[str] = [
     "DHR", "NEE", "ORCL", "ADBE", "AMD", "INTC", "AMGN", "PM", "HON",
     "UPS", "IBM", "GE", "CAT", "BA",
     # Volatile High-Liquid additions (Capitulation & Trend Radar focus)
-    "NFLX", "MU", "PYPL", "SQ", "BABA", "COIN", "MSTR", "GS", "MRVL", "SMCI"
+    "NFLX", "MU", "PYPL", "SQ", "BABA", "COIN", "MSTR", "GS", "MRVL", "SMCI",
+    # Commodity ETFs (Gold, Silver, WTI Crude Oil)
+    "GLD", "SLV", "USO"
 ]
 
 # ---------------------------------------------------------------------------
