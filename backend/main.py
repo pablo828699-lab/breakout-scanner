@@ -275,7 +275,10 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 import threading
                 thread = threading.Thread(
                     target=self.scanner._run_capitulation_scan,
-                    args=({"CRYPTO": self.scanner._fetcher.get_crypto_tickers()},),
+                    args=({
+                        "CRYPTO": self.scanner._fetcher.get_crypto_tickers(),
+                        "US_EQUITIES": self.scanner._fetcher.get_sp500_tickers()
+                    },),
                     name="CapitulationScanThread",
                 )
                 thread.start()
