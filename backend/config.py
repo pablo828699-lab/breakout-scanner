@@ -83,7 +83,7 @@ DAILY_LOOKBACK_DAYS: int = int(os.getenv("DAILY_LOOKBACK_DAYS", "300"))
 HOURLY_LOOKBACK_DAYS: int = int(os.getenv("HOURLY_LOOKBACK_DAYS", "5"))
 
 # ---------------------------------------------------------------------------
-# S&P 500 — Top ~50 most liquid tickers (static list)
+# S&P 500 & Volatile Large Caps — watch list for scanner
 # ---------------------------------------------------------------------------
 SP500_TICKERS: List[str] = [
     "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "BRK-B",
@@ -92,6 +92,8 @@ SP500_TICKERS: List[str] = [
     "COST", "NKE", "MRK", "ACN", "LLY", "ABBV", "MCD", "TXN", "QCOM",
     "DHR", "NEE", "ORCL", "ADBE", "AMD", "INTC", "AMGN", "PM", "HON",
     "UPS", "IBM", "GE", "CAT", "BA",
+    # Volatile High-Liquid additions (Capitulation & Trend Radar focus)
+    "NFLX", "MU", "PYPL", "SQ", "BABA", "COIN", "MSTR", "GS", "MRVL", "SMCI"
 ]
 
 # ---------------------------------------------------------------------------
