@@ -303,17 +303,39 @@ def analyze_volume_profile(
         logger.warning("analyze_volume_profile: empty DataFrame received")
         return empty_result
 
-    # Select the last 150 completed bars to match your system's "Bars (range) = 150"
-    filtered = hourly_df.iloc[-150:]
+    # Filter to lookback window
+    if not isinstance(hourly_df.index, pd.DatetimeIndex):
+        logger.warning(
+            "analyze_volume_profile: index is not DatetimeIndex; "
+            "attempting to convert"
+        )
+        try:
+            hourly_df = hourly_df.copy()
+            hourly_df.index = pd.to_datetime(hourly_df.index)
+        except Exception:
+            logger.error(
+                "analyze_volume_profile: failed to convert index to datetime"
+            )
+            return empty_result
+
+    cutoff = hourly_df.index.max() - timedelta(days=lookback_days)
+    filtered = hourly_df.loc[hourly_df.index >= cutoff]
+
+    if filtered.empty:
+        logger.warning(
+            "analyze_volume_profile: no data within the last %d days",
+            lookback_days,
+        )
+        return empty_result
 
     logger.info(
-        "analyze_volume_profile: using last %d candles, price=%.4f",
+        "analyze_volume_profile: %d candles in last %d days, price=%.4f",
         len(filtered),
+        lookback_days,
         current_price,
     )
 
-    # Use exactly 24 bins to match your system's "Rows = 24"
-    profile = build_volume_profile(filtered, n_bins=24)
+    profile = build_volume_profile(filtered)
     poc = find_poc(profile)
     val, vah = find_value_area(profile)
     hvn_zones, lvn_zones = find_hvn_lvn(profile)
