@@ -424,6 +424,8 @@ class BreakoutScanner:
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
                     signals_dict = json.load(f)
+            except Exception:
+                signals_dict = []
         # Deduplicate signals: newly computed signals overwrite existing ones for the same ticker
         existing_by_ticker = {}
         for item in signals_dict:
