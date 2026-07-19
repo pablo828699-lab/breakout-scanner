@@ -269,6 +269,38 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/api/volume-profile":
+            try:
+                from urllib.parse import urlparse, parse_qs
+                query = parse_qs(urlparse(self.path).query)
+                ticker = query.get("ticker", [""])[0].strip().upper()
+                if not ticker:
+                    raise ValueError("Missing 'ticker' query parameter")
+
+                # Fetch hourly data
+                if ticker.endswith("USDT"):
+                    df = self.scanner._fetcher.fetch_crypto_hourly(ticker)
+                    price = self.scanner._fetcher.fetch_crypto_daily(ticker)["Close"].iloc[-1]
+                else:
+                    df = self.scanner._fetcher.fetch_sp500_hourly(ticker)
+                    price = self.scanner._fetcher.fetch_sp500_daily(ticker)["Close"].iloc[-1]
+
+                from backend.volume_profile import analyze_volume_profile
+                profile_res = analyze_volume_profile(df, float(price))
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(json.dumps(profile_res).encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP volume profile diagnostics error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/scan-capitulation":
             try:
                 logger.info("Manual capitulation scan triggered via HTTP.")
