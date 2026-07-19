@@ -274,7 +274,6 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 logger.info("Manual capitulation scan triggered via HTTP.")
                 # Clean up existing signals file to force overwrite of everything
                 try:
-                    import os
                     filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
                     if os.path.exists(filepath):
                         os.remove(filepath)
