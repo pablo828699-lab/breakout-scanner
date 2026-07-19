@@ -412,7 +412,45 @@ class BreakoutScanner:
         if not tickers_with_data:
             return []
 
-        return run_capitulation_scan(tickers_with_data, benchmark_dfs=benchmark_dfs)
+        signals = run_capitulation_scan(tickers_with_data, benchmark_dfs=benchmark_dfs)
+        
+        # Inject KO manually for testing and visualization
+        try:
+            ko_tuple = next((x for x in tickers_with_data if x[0] == "KO"), None)
+            if ko_tuple:
+                ticker, market, daily_df, hourly_df = ko_tuple
+                from backend.volume_profile import analyze_volume_profile
+                from backend.capitulation_engine import AsymmetricSignal
+                import datetime
+                profile = analyze_volume_profile(hourly_df, float(daily_df["Close"].iloc[-1]))
+                ko_signal = AsymmetricSignal(
+                    ticker="KO",
+                    market="US_EQUITIES",
+                    verdict="APTO",
+                    drop_pct=-3.96,
+                    entry_price=82.21,
+                    stop_loss=80.63,
+                    take_profit=86.96,
+                    rr_ratio=3.0,
+                    position_size_qty=100.0,
+                    poc=profile["poc"],
+                    vah=profile["vah"],
+                    val=profile["val"],
+                    fvg_zone=[80.0, 81.0],
+                    ob_zone=[79.0, 80.0],
+                    msb_type="bearish",
+                    is_idiosyncratic=True,
+                    fundamental_ok=True,
+                    confidence_score=85,
+                    analysis_summary="Simulated forced signal to audit TradingView volume profile alignment.",
+                    timestamp=datetime.datetime.now(datetime.timezone.utc)
+                )
+                signals = [s for s in signals if s.ticker != "KO"]
+                signals.append(ko_signal)
+        except Exception as e:
+            logger.error("Failed to inject KO: %s", e)
+
+        return signals
 
     def _save_capitulation_signals(self, signals: List[AsymmetricSignal]) -> None:
         import json
