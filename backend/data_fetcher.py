@@ -130,8 +130,8 @@ class DataFetcher:
         return df
 
     def fetch_sp500_hourly(self, ticker: str) -> pd.DataFrame:
-        """Fetch ~32 days of 1-hour OHLCV for a US equity ticker."""
-        df = self._safe_yf_download(ticker, f"{cfg.HOURLY_LOOKBACK_DAYS}d", "1h")
+        """Fetch ~1 month of 1-hour OHLCV for a US equity ticker."""
+        df = self._safe_yf_download(ticker, "1mo", "1h")
         if df.empty:
             logger.warning("No hourly data returned for %s.", ticker)
             return pd.DataFrame()
