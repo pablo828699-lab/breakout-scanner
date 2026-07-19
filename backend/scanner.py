@@ -450,6 +450,12 @@ class BreakoutScanner:
         except Exception as e:
             logger.error("Failed to inject KO: %s", e)
 
+        # Persist the calculated signals to capitulation_signals.json
+        try:
+            self._save_capitulation_signals(signals)
+        except Exception as exc:
+            logger.error("Failed persisting manual capitulation signals: %s", exc)
+
         return signals
 
     def _save_capitulation_signals(self, signals: List[AsymmetricSignal]) -> None:
