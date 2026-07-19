@@ -130,13 +130,23 @@ class DataFetcher:
         return df
 
     def fetch_sp500_hourly(self, ticker: str) -> pd.DataFrame:
-        """Fetch ~5 days of 1-hour OHLCV for a US equity ticker."""
+        """Fetch ~32 days of 1-hour OHLCV for a US equity ticker."""
         df = self._safe_yf_download(ticker, f"{cfg.HOURLY_LOOKBACK_DAYS}d", "1h")
         if df.empty:
             logger.warning("No hourly data returned for %s.", ticker)
             return pd.DataFrame()
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.droplevel(1)
+        
+        logger.info(
+            "fetch_sp500_hourly for %s: downloaded %d candles. Last candle: Open=%.4f Close=%.4f Vol=%.0f Time=%s",
+            ticker,
+            len(df),
+            float(df["Open"].iloc[-1]),
+            float(df["Close"].iloc[-1]),
+            float(df["Volume"].iloc[-1]),
+            str(df.index[-1])
+        )
         return df
 
     # ------------------------------------------------------------------
