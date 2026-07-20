@@ -95,7 +95,9 @@ SP500_TICKERS: List[str] = [
     # Volatile High-Liquid additions (Capitulation & Trend Radar focus)
     "NFLX", "MU", "PYPL", "SQ", "BABA", "COIN", "MSTR", "GS", "MRVL", "SMCI",
     # Commodity ETFs (Gold, Silver, WTI Crude Oil)
-    "GLD", "SLV", "USO"
+    "GLD", "SLV", "USO",
+    # Crypto Equities & Bitcoin Miners
+    "HUT", "KEEL", "RIOT", "MARA", "CLSK", "IREN", "CIFR", "WULF", "BITF"
 ]
 
 # ---------------------------------------------------------------------------
