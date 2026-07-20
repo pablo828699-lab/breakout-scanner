@@ -62,12 +62,12 @@
     "ticker": "ORCL",
     "market": "US_EQUITIES",
     "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0358,
-    "entry_price": 128.839996,
-    "stop_loss": 119.516236,
-    "take_profit": 156.811277,
-    "rr_ratio": 3.0,
-    "position_size_qty": 107.252864,
+    "drop_pct": -0.0398,
+    "entry_price": 141.0269,
+    "stop_loss": 119.504986,
+    "take_profit": 218.300537,
+    "rr_ratio": 3.59,
+    "position_size_qty": 46.46427,
     "poc": 141.0269,
     "vah": 154.211,
     "val": 128.819399,
@@ -83,8 +83,8 @@
     "is_idiosyncratic": true,
     "fundamental_ok": true,
     "confidence_score": 0.9,
-    "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 49 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.0 (MIN_RR) | Confianza: 90%",
-    "timestamp": "2026-07-20 19:53 UTC"
+    "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: POC_FALLBACK | 49 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.6 (FVG_TARGET) | Confianza: 90%",
+    "timestamp": "2026-07-20 21:12 UTC"
   },
   {
     "type": "asymmetric",
@@ -120,12 +120,12 @@
     "ticker": "TSLA",
     "market": "US_EQUITIES",
     "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0264,
+    "drop_pct": -0.0296,
     "entry_price": 393.661362,
-    "stop_loss": 368.417782,
-    "take_profit": 469.392104,
+    "stop_loss": 368.245729,
+    "take_profit": 469.908262,
     "rr_ratio": 3.0,
-    "position_size_qty": 39.614032,
+    "position_size_qty": 39.345862,
     "poc": 393.661362,
     "vah": 420.007916,
     "val": 382.737181,
@@ -142,6 +142,35 @@
     "fundamental_ok": true,
     "confidence_score": 0.9,
     "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: POC_FALLBACK | 67 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.0 (MIN_RR) | Confianza: 90%",
-    "timestamp": "2026-07-20 19:53 UTC"
+    "timestamp": "2026-07-20 21:12 UTC"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "LLY",
+    "market": "US_EQUITIES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0273,
+    "entry_price": 1143.599976,
+    "stop_loss": 1141.819,
+    "take_profit": 1148.942902,
+    "rr_ratio": 3.0,
+    "position_size_qty": 561.49001,
+    "poc": 1208.97968,
+    "vah": 1237.45876,
+    "val": 1162.513813,
+    "fvg_zone": [
+      1140.4599609375,
+      1143.5999755859375
+    ],
+    "ob_zone": [
+      1178.3199462890625,
+      1212.9599609375
+    ],
+    "msb_type": "bearish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.9,
+    "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 33 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.0 (MIN_RR) | Confianza: 90%",
+    "timestamp": "2026-07-20 21:12 UTC"
   }
 ]
