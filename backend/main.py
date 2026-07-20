@@ -175,11 +175,25 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/api/capitulation":
             try:
-                filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
+                # Always fetch fresh signals from GitHub raw repository first (cron outputs)
                 data = []
-                if os.path.exists(filepath):
-                    with open(filepath, "r", encoding="utf-8") as f:
-                        data = json.load(f)
+                try:
+                    r = requests.get(
+                        "https://raw.githubusercontent.com/pablo828699-lab/breakout-scanner/main/backend/capitulation_signals.json",
+                        timeout=5
+                    )
+                    if r.status_code == 200:
+                        data = r.json()
+                        logger.info("Successfully fetched fresh capitulation signals from GitHub Raw.")
+                except Exception as e:
+                    logger.warning("Failed to fetch capitulation signals from GitHub Raw, using local: %s", e)
+
+                # Fallback to local file if GitHub fetch returned nothing
+                if not data:
+                    filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
+                    if os.path.exists(filepath):
+                        with open(filepath, "r", encoding="utf-8") as f:
+                            data = json.load(f)
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
