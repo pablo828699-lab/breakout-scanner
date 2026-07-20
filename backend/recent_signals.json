@@ -525,5 +525,35 @@
     "roc_pct": 29.69,
     "ema_stack": false,
     "timestamp": "2026-07-17 18:04 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "ATOMUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 1.463,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 30.6,
+    "volume_ratio": 0.86,
+    "roc_pct": -4.83,
+    "ema_stack": true,
+    "timestamp": "2026-07-20 02:44 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "GRTUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.01642,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.9,
+    "volume_ratio": 0.8,
+    "roc_pct": -5.57,
+    "ema_stack": true,
+    "timestamp": "2026-07-20 02:44 UTC"
   }
 ]
