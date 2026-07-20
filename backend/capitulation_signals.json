@@ -62,15 +62,15 @@
     "ticker": "ORCL",
     "market": "US_EQUITIES",
     "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0252,
+    "drop_pct": -0.0358,
     "entry_price": 128.839996,
-    "stop_loss": 119.514247,
-    "take_profit": 157.073541,
-    "rr_ratio": 3.03,
-    "position_size_qty": 107.229989,
-    "poc": 140.711698,
-    "vah": 153.969198,
-    "val": 129.575399,
+    "stop_loss": 119.516236,
+    "take_profit": 156.811277,
+    "rr_ratio": 3.0,
+    "position_size_qty": 107.252864,
+    "poc": 141.0269,
+    "vah": 154.211,
+    "val": 128.819399,
     "fvg_zone": [
       184.93660808713287,
       187.0094029029616
@@ -83,8 +83,8 @@
     "is_idiosyncratic": true,
     "fundamental_ok": true,
     "confidence_score": 0.9,
-    "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 49 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.0 (FVG_TARGET) | Confianza: 90%",
-    "timestamp": "2026-07-20 18:02 UTC"
+    "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 49 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.0 (MIN_RR) | Confianza: 90%",
+    "timestamp": "2026-07-20 19:53 UTC"
   },
   {
     "type": "asymmetric",
@@ -114,5 +114,34 @@
     "confidence_score": 0.8,
     "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: POC_FALLBACK | 41 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.0 (MIN_RR) | Confianza: 80%",
     "timestamp": "2026-07-20 18:02 UTC"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "TSLA",
+    "market": "US_EQUITIES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0264,
+    "entry_price": 393.661362,
+    "stop_loss": 368.417782,
+    "take_profit": 469.392104,
+    "rr_ratio": 3.0,
+    "position_size_qty": 39.614032,
+    "poc": 393.661362,
+    "vah": 420.007916,
+    "val": 382.737181,
+    "fvg_zone": [
+      399.6300048828125,
+      402.80999755859375
+    ],
+    "ob_zone": [
+      401.8800048828125,
+      419.55999755859375
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.9,
+    "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: POC_FALLBACK | 67 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.0 (MIN_RR) | Confianza: 90%",
+    "timestamp": "2026-07-20 19:53 UTC"
   }
 ]
