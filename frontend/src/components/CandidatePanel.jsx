@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CandidatePanel({ candidates, onApprove, onReject }) {
+export default function CandidatePanel({ candidates, livePriceMap = {}, onApprove, onReject }) {
   const formatPrice = (val) => {
     if (val === undefined || val === null || isNaN(val)) return '0.00';
     if (val < 1) {
@@ -35,6 +35,7 @@ export default function CandidatePanel({ candidates, onApprove, onReject }) {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {candidates.map((candidate) => {
             const isLong = candidate.direction === 'LONG';
+            const livePrice = livePriceMap[candidate.ticker];
             
             return (
               <div
@@ -55,13 +56,20 @@ export default function CandidatePanel({ candidates, onApprove, onReject }) {
                     <p className="text-[10px] text-slate-500 mt-1">{candidate.timestamp}</p>
                   </div>
                   
-                  <span className={`inline-flex items-center text-xs font-bold px-2.5 py-1 rounded-md ${
-                    isLong 
-                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
-                      : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
-                  }`}>
-                    {isLong ? 'LONG ▲' : 'SHORT ▼'}
-                  </span>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className={`inline-flex items-center text-xs font-bold px-2.5 py-1 rounded-md ${
+                      isLong 
+                        ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
+                        : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                    }`}>
+                      {isLong ? 'LONG ▲' : 'SHORT ▼'}
+                    </span>
+                    {livePrice > 0 && (
+                      <span className="text-[10px] font-bold text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/40 font-mono animate-pulse">
+                        Live: ${formatPrice(livePrice)}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 mt-4 text-center">

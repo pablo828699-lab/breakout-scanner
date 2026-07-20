@@ -98,6 +98,8 @@ export default function App() {
   const [isScanning, setIsScanning] = useState(false);
   const [approveModalCandidate, setApproveModalCandidate] = useState(null);
   const [approveModalSize, setApproveModalSize] = useState(1000);
+  const [approveModalEntryPrice, setApproveModalEntryPrice] = useState(0);
+  const [livePriceMap, setLivePriceMap] = useState({});
   const [capitulationSignals, setCapitulationSignals] = useState([]);
   const [isScanningCap, setIsScanningCap] = useState(false);
 
@@ -172,19 +174,25 @@ export default function App() {
     localStorage.setItem('ignoredCandidates', JSON.stringify(ignoredCandidates));
   }, [ignoredCandidates]);
 
-  // Fetch real-time prices for open positions via backend proxy every 10s (batch request)
+  // Fetch real-time prices for candidates, capitulations, and open positions via backend proxy every 10s (batch request)
   useEffect(() => {
-    if (openPositions.length === 0) return;
-
     const fetchLivePrices = async () => {
       try {
-        const uniqueSymbols = [...new Set(openPositions.map(pos => pos.ticker))];
+        const allTickers = [
+          ...openPositions.map(pos => pos.ticker),
+          ...candidates.map(c => c.ticker),
+          ...capitulationSignals.map(c => c.ticker)
+        ];
+        const uniqueSymbols = [...new Set(allTickers)].filter(Boolean);
+        if (uniqueSymbols.length === 0) return;
+
         const tickersParam = uniqueSymbols.join(',');
-        
         const resp = await fetch(`${BACKEND_URL}/api/prices?tickers=${tickersParam}`);
         if (resp.ok) {
           const priceMap = await resp.json();
-          
+          setLivePriceMap(priceMap);
+
+          // Update open position current prices
           setOpenPositions(prev =>
             prev.map(pos => {
               const livePrice = priceMap[pos.ticker];
@@ -203,7 +211,7 @@ export default function App() {
     fetchLivePrices();
     const timer = setInterval(fetchLivePrices, 10000); // Every 10 seconds
     return () => clearInterval(timer);
-  }, [openPositions.length]);
+  }, [openPositions.length, candidates.length, capitulationSignals.length]);
 
   // Fetch actual candidates using Dual-Fetch Fallback
   useEffect(() => {
@@ -471,15 +479,18 @@ export default function App() {
   };
 
   // Handler to approve a breakout or capitulation signal (move candidate to open positions)
-  const handleApprove = (candidate, customSize) => {
+  const handleApprove = (candidate, customSize, customEntryPrice) => {
     const tradeSize = customSize !== undefined ? customSize : capitalPerTrade;
+    const actualEntry = (customEntryPrice !== undefined && Number(customEntryPrice) > 0) ? Number(customEntryPrice) : candidate.entry;
+    const currentPrice = livePriceMap[candidate.ticker] || actualEntry;
+
     const newPosition = {
       id: Date.now(),
       ticker: candidate.ticker,
       market: candidate.market,
       direction: candidate.direction,
-      entry: candidate.entry,
-      current: candidate.entry, // starts at entry price
+      entry: actualEntry,
+      current: currentPrice, // starts at live price or custom entry
       stopLoss: candidate.stopLoss,
       takeProfit: candidate.takeProfit,
       brokenLevel: candidate.brokenLevel,
@@ -702,9 +713,12 @@ export default function App() {
           <section className="lg:col-span-2">
             <CandidatePanel
               candidates={candidates}
+              livePriceMap={livePriceMap}
               onApprove={(candidate) => {
+                const live = livePriceMap[candidate.ticker];
                 setApproveModalCandidate(candidate);
                 setApproveModalSize(capitalPerTrade);
+                setApproveModalEntryPrice(live || candidate.entry);
               }}
               onReject={handleReject}
             />
@@ -719,9 +733,12 @@ export default function App() {
         <section className="w-full">
           <CapitulationPanel
             signals={capitulationSignals}
+            livePriceMap={livePriceMap}
             onApprove={(signal) => {
+              const live = livePriceMap[signal.ticker];
               setApproveModalCandidate(signal);
               setApproveModalSize(capitalPerTrade);
+              setApproveModalEntryPrice(live || signal.entry);
             }}
             onReject={handleRejectCapitulation}
           />
@@ -740,7 +757,7 @@ export default function App() {
           <TradeHistory history={tradeHistory} onDeleteTrade={handleDeleteTrade} />
         </section>
 
-        {/* Custom Modal for Approval Size */}
+        {/* Custom Modal for Approval Size & Entry Price */}
         {approveModalCandidate && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-md transition-all duration-300">
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl max-w-sm w-full shadow-2xl backdrop-blur-xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
@@ -757,9 +774,15 @@ export default function App() {
               
               <div className="text-xs text-slate-400 space-y-2">
                 <div className="flex justify-between">
-                  <span>Precio Entrada:</span>
-                  <span className="font-semibold text-slate-200">${approveModalCandidate.entry.toLocaleString()}</span>
+                  <span>Precio Alerta:</span>
+                  <span className="font-semibold text-slate-400">${approveModalCandidate.entry.toLocaleString()}</span>
                 </div>
+                {livePriceMap[approveModalCandidate.ticker] && (
+                  <div className="flex justify-between">
+                    <span>Cotización en Vivo:</span>
+                    <span className="font-bold text-cyan-400">${livePriceMap[approveModalCandidate.ticker].toLocaleString()}</span>
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <span>Stop Loss:</span>
                   <span className="font-semibold text-rose-400/90">${approveModalCandidate.stopLoss.toLocaleString()}</span>
@@ -770,8 +793,31 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="space-y-2 pt-2 border-t border-slate-800/60">
-                <label className="block text-xs font-semibold text-slate-400">
+              {/* Customizable Actual Entry Price */}
+              <div className="space-y-1.5 pt-2 border-t border-slate-800/60">
+                <label className="block text-xs font-semibold text-slate-300">
+                  Precio Real de Entrada (USD):
+                </label>
+                <div className="relative rounded-lg shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span className="text-slate-500 sm:text-sm">$</span>
+                  </div>
+                  <input
+                    type="number"
+                    step="any"
+                    value={approveModalEntryPrice}
+                    onChange={(e) => setApproveModalEntryPrice(Number(e.target.value))}
+                    className="block w-full pl-7 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-emerald-400 font-bold focus:outline-none focus:border-cyan-500 font-mono text-sm"
+                    placeholder="0.00"
+                    autoFocus
+                  />
+                </div>
+                <p className="text-[10px] text-slate-500">Ingresá el precio exacto al que ejecutaste la orden</p>
+              </div>
+
+              {/* Trade Capital Size */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-slate-300">
                   Importe de la Operación (USD):
                 </label>
                 <div className="relative rounded-lg shadow-sm">
@@ -784,7 +830,6 @@ export default function App() {
                     onChange={(e) => setApproveModalSize(Math.max(1, Number(e.target.value)))}
                     className="block w-full pl-7 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-slate-100 focus:outline-none focus:border-cyan-500 font-mono text-sm"
                     placeholder="1000"
-                    autoFocus
                   />
                 </div>
               </div>
@@ -798,7 +843,7 @@ export default function App() {
                 </button>
                 <button
                   onClick={() => {
-                    handleApprove(approveModalCandidate, approveModalSize);
+                    handleApprove(approveModalCandidate, approveModalSize, approveModalEntryPrice);
                     setApproveModalCandidate(null);
                   }}
                   className="flex-1 py-2 rounded-lg text-xs font-bold bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-slate-100 transition duration-200 shadow-lg shadow-cyan-900/20"

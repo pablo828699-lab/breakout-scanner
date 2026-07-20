@@ -198,7 +198,7 @@ function ConfidenceMeter({ value }) {
 // Signal Card
 // ---------------------------------------------------------------------------
 
-function SignalCard({ signal, onApprove, onReject }) {
+function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
   const {
     id,
     ticker,
@@ -230,6 +230,7 @@ function SignalCard({ signal, onApprove, onReject }) {
   const finalEntry = entry !== undefined ? entry : entry_price;
   const finalStopLoss = stopLoss !== undefined ? stopLoss : stop_loss;
   const finalTakeProfit = takeProfit !== undefined ? takeProfit : take_profit;
+  const livePrice = livePriceMap[ticker];
 
   const isApto = verdict === 'APTO_COMPRA_ASIMETRICA';
 
@@ -272,7 +273,10 @@ function SignalCard({ signal, onApprove, onReject }) {
 
       {/* ---- Price Levels ---- */}
       <SectionTitle>Niveles de Precio</SectionTitle>
-      <LevelRow label="Entrada" value={fmtPrice(finalEntry, market)} color={COLORS.textPrimary} />
+      {livePrice > 0 && (
+        <LevelRow label="Cotización en Vivo" value={`$${fmtPrice(livePrice, market)}`} color="#06b6d4" />
+      )}
+      <LevelRow label="Entrada Alerta" value={fmtPrice(finalEntry, market)} color={COLORS.textPrimary} />
       <LevelRow label="Stop Loss" value={fmtPrice(finalStopLoss, market)} color={COLORS.redPrimary} />
       <LevelRow label="Objetivo" value={fmtPrice(finalTakeProfit, market)} color={COLORS.greenPrimary} />
       <LevelRow label="R:R" value={fmtRatio(rr_ratio)} color={COLORS.blue} />
@@ -386,13 +390,15 @@ function SignalCard({ signal, onApprove, onReject }) {
 // Main Panel
 // ---------------------------------------------------------------------------
 
-export default function CapitulationPanel({ signals, onApprove, onReject }) {
+export default function CapitulationPanel({ signals, livePriceMap = {}, onApprove, onReject }) {
   const list = Array.isArray(signals) ? signals : [];
 
   if (list.length === 0) {
     return (
       <div
         style={{
+          border: `1px solid ${COLORS.border}`,
+          borderRadius: 16,
           backgroundColor: COLORS.bg,
           minHeight: 200,
           display: 'flex',
@@ -422,6 +428,7 @@ export default function CapitulationPanel({ signals, onApprove, onReject }) {
         <SignalCard
           key={sig?.ticker ? `${sig.ticker}-${idx}` : idx}
           signal={sig}
+          livePriceMap={livePriceMap}
           onApprove={onApprove}
           onReject={onReject}
         />
