@@ -675,5 +675,50 @@
     "roc_pct": -5.57,
     "ema_stack": true,
     "timestamp": "2026-07-20 15:11 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "RIOT",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 19.940001,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 31.0,
+    "volume_ratio": 1.02,
+    "roc_pct": -17.41,
+    "ema_stack": false,
+    "timestamp": "2026-07-20 18:00 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "IREN",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 40.860001,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 33.8,
+    "volume_ratio": 1.2,
+    "roc_pct": -13.4,
+    "ema_stack": false,
+    "timestamp": "2026-07-20 18:00 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "CIFR",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 20.93,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.2,
+    "volume_ratio": 0.95,
+    "roc_pct": -12.38,
+    "ema_stack": false,
+    "timestamp": "2026-07-20 18:00 UTC"
   }
 ]
