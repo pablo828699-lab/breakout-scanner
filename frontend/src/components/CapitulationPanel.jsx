@@ -251,18 +251,39 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
         style={{
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'space-between',
           flexWrap: 'wrap',
           gap: 6,
           marginBottom: 6,
         }}
       >
-        <span style={{ fontSize: 18, fontWeight: 700, color: COLORS.textPrimary }}>
-          {ticker ?? '—'}
-        </span>
-        <MarketBadge market={market} />
-        <VerdictBadge verdict={verdict} />
-        <FundamentalBadge ok={fundamental_ok} />
-        <IdiosyncraticBadge value={is_idiosyncratic} />
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
+          <span style={{ fontSize: 18, fontWeight: 700, color: COLORS.textPrimary }}>
+            {ticker ?? '—'}
+          </span>
+          <MarketBadge market={market} />
+          <VerdictBadge verdict={verdict} />
+          <FundamentalBadge ok={fundamental_ok} />
+          <IdiosyncraticBadge value={is_idiosyncratic} />
+        </div>
+
+        {livePrice > 0 && (
+          <span
+            style={{
+              fontSize: 12,
+              fontWeight: 700,
+              color: '#06b6d4',
+              backgroundColor: 'rgba(6,182,212,0.15)',
+              padding: '3px 10px',
+              borderRadius: 6,
+              border: '1px solid rgba(6,182,212,0.3)',
+              fontFamily: 'monospace',
+              letterSpacing: 0.5
+            }}
+          >
+            Live: ${fmtPrice(livePrice, market)}
+          </span>
+        )}
       </div>
 
       {/* ---- Drop % ---- */}
@@ -274,7 +295,9 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
       {/* ---- Price Levels ---- */}
       <SectionTitle>Niveles de Precio</SectionTitle>
       {livePrice > 0 && (
-        <LevelRow label="Cotización en Vivo" value={`$${fmtPrice(livePrice, market)}`} color="#06b6d4" />
+        <div style={{ backgroundColor: 'rgba(6,182,212,0.1)', padding: '4px 8px', borderRadius: 6, marginBottom: 4, border: '1px solid rgba(6,182,212,0.2)' }}>
+          <LevelRow label="Cotización en Vivo" value={`$${fmtPrice(livePrice, market)}`} color="#06b6d4" />
+        </div>
       )}
       <LevelRow label="Entrada Alerta" value={fmtPrice(finalEntry, market)} color={COLORS.textPrimary} />
       <LevelRow label="Stop Loss" value={fmtPrice(finalStopLoss, market)} color={COLORS.redPrimary} />
