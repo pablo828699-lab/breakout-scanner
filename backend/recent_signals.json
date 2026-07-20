@@ -555,5 +555,125 @@
     "roc_pct": -5.57,
     "ema_stack": true,
     "timestamp": "2026-07-20 02:44 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "WMT",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 113.470001,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 22.2,
+    "volume_ratio": 1.23,
+    "roc_pct": 2.15,
+    "ema_stack": false,
+    "timestamp": "2026-07-20 15:10 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "XOM",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 147.899994,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.7,
+    "volume_ratio": 1.1,
+    "roc_pct": 7.49,
+    "ema_stack": true,
+    "timestamp": "2026-07-20 15:10 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "INTC",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 97.784599,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 21.1,
+    "volume_ratio": 1.09,
+    "roc_pct": -21.03,
+    "ema_stack": false,
+    "timestamp": "2026-07-20 15:10 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "NFLX",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 67.669998,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 32.4,
+    "volume_ratio": 2.82,
+    "roc_pct": -11.2,
+    "ema_stack": true,
+    "timestamp": "2026-07-20 15:10 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "SMCI",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 23.995001,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.0,
+    "volume_ratio": 0.66,
+    "roc_pct": -11.17,
+    "ema_stack": true,
+    "timestamp": "2026-07-20 15:10 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "USO",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 124.059998,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.0,
+    "volume_ratio": 0.99,
+    "roc_pct": 19.22,
+    "ema_stack": true,
+    "timestamp": "2026-07-20 15:10 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "ATOMUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 1.484,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 30.6,
+    "volume_ratio": 0.86,
+    "roc_pct": -4.83,
+    "ema_stack": true,
+    "timestamp": "2026-07-20 15:10 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "GRTUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.01659,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.9,
+    "volume_ratio": 0.8,
+    "roc_pct": -5.57,
+    "ema_stack": true,
+    "timestamp": "2026-07-20 15:11 UTC"
   }
 ]

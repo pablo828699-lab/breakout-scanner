@@ -1,1 +1,60 @@
-[]
+[
+  {
+    "type": "asymmetric",
+    "ticker": "AAPL",
+    "market": "US_EQUITIES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0236,
+    "entry_price": 325.720001,
+    "stop_loss": 324.814901,
+    "take_profit": 328.435303,
+    "rr_ratio": 3.0,
+    "position_size_qty": 1104.850023,
+    "poc": 314.774107,
+    "vah": 334.980011,
+    "val": 287.220602,
+    "fvg_zone": [
+      328.7300109863281,
+      329.0
+    ],
+    "ob_zone": [
+      310.1499938964844,
+      315.4800109863281
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 47 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.0 (MIN_RR) | Confianza: 80%",
+    "timestamp": "2026-07-20 15:12 UTC"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "UPS",
+    "market": "US_EQUITIES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0333,
+    "entry_price": 116.459999,
+    "stop_loss": 112.98166,
+    "take_profit": 126.895017,
+    "rr_ratio": 3.0,
+    "position_size_qty": 287.493535,
+    "poc": 110.167898,
+    "vah": 113.437598,
+    "val": 105.029798,
+    "fvg_zone": [
+      115.43000030517578,
+      116.30999755859375
+    ],
+    "ob_zone": [
+      112.61000061035156,
+      113.9800033569336
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 0.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 14 zona(s) de confluencia SMC | R:R = 1:3.0 (MIN_RR) | Confianza: 80%",
+    "timestamp": "2026-07-20 15:12 UTC"
+  }
+]
