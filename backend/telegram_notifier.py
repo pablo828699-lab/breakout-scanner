@@ -106,8 +106,19 @@ class TelegramNotifier:
         
         # Volume relative explanation
         vol_desc = "Normal" if signal.volume_ratio < 1.2 else ("Alto" if signal.volume_ratio < 2.0 else "Institucional/Pánico")
-        
-        analyze_mkt = _ANALYZE_MARKET.get(signal.market, "crypto")
+
+        # Calculate trade levels (same logic as frontend App.jsx)
+        is_crypto = signal.market == "CRYPTO"
+        sl_pct = 0.05 if is_crypto else 0.02  # 5% crypto, 2% stocks
+        tp_pct = sl_pct * 2.0  # 1:2 R:R
+
+        entry = signal.price
+        if signal.direction == "UP":
+            sl = entry * (1 - sl_pct)
+            tp = entry * (1 + tp_pct)
+        else:
+            sl = entry * (1 + sl_pct)
+            tp = entry * (1 - tp_pct)
 
         return (
             f"📡 RADAR DE TENDENCIA\n"
@@ -117,9 +128,13 @@ class TelegramNotifier:
             f"⚡ Disparador: {triggers}\n"
             f"💪 ADX: {signal.adx:.1f} ({adx_strength})  |  {stack_desc}\n"
             f"📊 Volumen: {signal.volume_ratio:.1f}x ({vol_desc})  |  ROC: {signal.roc_pct:+.1f}%\n"
-            f"💵 Precio: ${signal.price:{fmt}}\n"
+            f"━━━━━━━━━━━━━━━━━━\n"
+            f"📍 Entrada: ${entry:{fmt}}\n"
+            f"🛑 Stop-Loss: ${sl:{fmt}} ({sl_pct*100:.0f}%)\n"
+            f"🎯 Take-Profit: ${tp:{fmt}} ({tp_pct*100:.0f}%)\n"
+            f"⚖️ R:R = 1:2\n"
+            f"━━━━━━━━━━━━━━━━━━\n"
             f"⏰ {ts}\n"
-            f"→ Analizar: analyze.py {signal.ticker} --market {analyze_mkt}\n"
             f"━━━━━━━━━━━━━━━━━━"
         )
 
