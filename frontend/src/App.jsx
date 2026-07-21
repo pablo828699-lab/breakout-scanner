@@ -56,27 +56,35 @@ export default function App() {
   
   const [openPositions, setOpenPositions] = useState(() => {
     const saved = localStorage.getItem('openPositions');
-    return saved ? JSON.parse(saved) : [];
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.length > 0) return parsed;
+      } catch (e) {}
+    }
+    return fallbackOpenPositions;
   });
   
   const [tradeHistory, setTradeHistory] = useState(() => {
     const saved = localStorage.getItem('tradeHistory');
-    return saved ? JSON.parse(saved) : [];
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.length > 0) return parsed;
+      } catch (e) {}
+    }
+    return fallbackTradeHistory;
   });
   
   const [kpis, setKpis] = useState(() => {
     const saved = localStorage.getItem('kpis');
-    return saved ? JSON.parse(saved) : {
-      todayPnL: 0,
-      todayPnLPct: 0,
-      winRate: 0,
-      totalTrades: 0,
-      winningTrades: 0,
-      losingTrades: 0,
-      avgWin: 0,
-      avgLoss: 0,
-      sharpeRatio: 0
-    };
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && (parsed.totalTrades > 0 || parsed.todayPnL !== 0)) return parsed;
+      } catch (e) {}
+    }
+    return fallbackKpis;
   });
 
   const [capitalPerTrade, setCapitalPerTrade] = useState(() => {
@@ -123,9 +131,9 @@ export default function App() {
         const resp = await fetch(`${BACKEND_URL}/api/cloud-state`);
         if (resp.ok) {
           const data = await resp.json();
-          if (data.openPositions) setOpenPositions(data.openPositions);
-          if (data.tradeHistory) setTradeHistory(data.tradeHistory);
-          if (data.kpis) setKpis(data.kpis);
+          if (data.openPositions && data.openPositions.length > 0) setOpenPositions(data.openPositions);
+          if (data.tradeHistory && data.tradeHistory.length > 0) setTradeHistory(data.tradeHistory);
+          if (data.kpis && (data.kpis.totalTrades > 0 || data.kpis.todayPnL !== 0)) setKpis(data.kpis);
           console.log('Successfully synced state from cloud!');
         }
       } catch (e) {
