@@ -76,6 +76,16 @@ export default function App() {
     return [];
   });
   
+  const [capitalPerTrade, setCapitalPerTrade] = useState(() => {
+    const saved = localStorage.getItem('capitalPerTrade');
+    return saved ? Number(saved) : 1000;
+  });
+
+  const [accountBalance, setAccountBalance] = useState(() => {
+    const saved = localStorage.getItem('accountBalance');
+    return saved ? Number(saved) : 100000;
+  });
+
   // Derive KPIs dynamically from tradeHistory so PnL always matches actual closed trades
   const kpis = React.useMemo(() => {
     const totalTrades = tradeHistory.length;
@@ -116,16 +126,6 @@ export default function App() {
       sharpeRatio: 1.82
     };
   }, [tradeHistory, accountBalance]);
-
-  const [capitalPerTrade, setCapitalPerTrade] = useState(() => {
-    const saved = localStorage.getItem('capitalPerTrade');
-    return saved ? Number(saved) : 1000;
-  });
-
-  const [accountBalance, setAccountBalance] = useState(() => {
-    const saved = localStorage.getItem('accountBalance');
-    return saved ? Number(saved) : 100000;
-  });
 
   const [ignoredCandidates, setIgnoredCandidates] = useState(() => {
     const saved = localStorage.getItem('ignoredCandidates');
