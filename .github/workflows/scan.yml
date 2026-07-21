@@ -37,6 +37,11 @@ jobs:
         run: |
           python -m backend.main --once
 
+      - name: Sync signals to Render backend
+        run: |
+          curl -s -X POST -H "Content-Type: application/json" --data-binary @backend/capitulation_signals.json https://breakout-scanner-xg9f.onrender.com/api/capitulation || true
+          curl -s -X POST -H "Content-Type: application/json" --data-binary @backend/recent_signals.json https://breakout-scanner-xg9f.onrender.com/api/candidates || true
+
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"

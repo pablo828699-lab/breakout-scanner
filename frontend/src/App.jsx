@@ -341,7 +341,7 @@ export default function App() {
   useEffect(() => {
     const fetchCapitulation = async () => {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
       
       let data = [];
       try {

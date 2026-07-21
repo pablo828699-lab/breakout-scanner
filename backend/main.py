@@ -43,9 +43,46 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
     def do_OPTIONS(self) -> None:
         self.send_response(200)
         self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, PUT, OPTIONS")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
+
+    def do_POST(self) -> None:
+        clean_path = self.path.split("?")[0].rstrip("/")
+        logger.info("HTTP POST request: path=%s, clean_path=%s", self.path, clean_path)
+
+        if clean_path in ("/api/capitulation", "/api/candidates"):
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length)
+                json_data = json.loads(post_data.decode('utf-8'))
+                
+                filename = "capitulation_signals.json" if clean_path == "/api/capitulation" else "recent_signals.json"
+                filepath = os.path.join(os.path.dirname(__file__), filename)
+                
+                with open(filepath, "w", encoding="utf-8") as f:
+                    json.dump(json_data, f, indent=2)
+                
+                logger.info("Successfully updated %s via HTTP POST (%d items).", filename, len(json_data) if isinstance(json_data, list) else 1)
+                
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "ok", "message": "Updated {filename}"}}'
+                self.wfile.write(res.encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP POST sync handler error for %s: %s", clean_path, exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        else:
+            self.send_response(404)
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
 
     def do_PUT(self) -> None:
         clean_path = self.path.split("?")[0].rstrip("/")
@@ -175,25 +212,11 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/api/capitulation":
             try:
-                # Always fetch fresh signals from GitHub raw repository first (cron outputs)
+                filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
                 data = []
-                try:
-                    r = requests.get(
-                        "https://raw.githubusercontent.com/pablo828699-lab/breakout-scanner/main/backend/capitulation_signals.json",
-                        timeout=5
-                    )
-                    if r.status_code == 200:
-                        data = r.json()
-                        logger.info("Successfully fetched fresh capitulation signals from GitHub Raw.")
-                except Exception as e:
-                    logger.warning("Failed to fetch capitulation signals from GitHub Raw, using local: %s", e)
-
-                # Fallback to local file if GitHub fetch returned nothing
-                if not data:
-                    filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
-                    if os.path.exists(filepath):
-                        with open(filepath, "r", encoding="utf-8") as f:
-                            data = json.load(f)
+                if os.path.exists(filepath):
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        data = json.load(f)
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
