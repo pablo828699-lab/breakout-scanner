@@ -1,21 +1,6 @@
 [
   {
     "type": "radar",
-    "ticker": "ETHUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 1924.81,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 23.1,
-    "volume_ratio": 1.39,
-    "roc_pct": 6.25,
-    "timestamp": "2026-07-15 22:38 UTC"
-  },
-  {
-    "type": "radar",
     "ticker": "POLUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -720,5 +705,35 @@
     "roc_pct": -12.38,
     "ema_stack": false,
     "timestamp": "2026-07-20 18:00 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "ORCL",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 125.684998,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 38.2,
+    "volume_ratio": 0.92,
+    "roc_pct": -15.27,
+    "ema_stack": true,
+    "timestamp": "2026-07-21 13:44 UTC"
+  },
+  {
+    "type": "radar",
+    "ticker": "USO",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 129.259995,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.4,
+    "volume_ratio": 1.12,
+    "roc_pct": 20.28,
+    "ema_stack": true,
+    "timestamp": "2026-07-21 13:44 UTC"
   }
 ]
