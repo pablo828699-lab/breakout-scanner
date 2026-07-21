@@ -154,48 +154,48 @@ function LevelRow({ label, value, color }) {
 
 function ConfidenceMeter({ value }) {
   const pct = fmtConfidence(value);
-  const radius = 28;
-  const stroke = 5;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (pct / 100) * circumference;
-
-  let arcColor = COLORS.redPrimary;
-  if (pct >= 70) arcColor = COLORS.greenPrimary;
-  else if (pct >= 40) arcColor = COLORS.yellow;
+  let barColor = COLORS.redPrimary;
+  if (pct >= 70) barColor = COLORS.greenPrimary;
+  else if (pct >= 40) barColor = COLORS.yellow;
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10 }}>
-      <svg width={70} height={70} style={{ transform: 'rotate(-90deg)' }}>
-        <circle
-          cx={35}
-          cy={35}
-          r={radius}
-          fill="none"
-          stroke={COLORS.border}
-          strokeWidth={stroke}
+    <div style={{ marginTop: 12 }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontSize: 11,
+          marginBottom: 4,
+        }}
+      >
+        <span style={{ color: COLORS.textSecondary, fontWeight: 700 }}>Puntuación Confianza</span>
+        <span style={{ color: barColor, fontWeight: 800, fontFamily: 'monospace' }}>{pct}%</span>
+      </div>
+      <div
+        style={{
+          height: 6,
+          borderRadius: 3,
+          backgroundColor: COLORS.border,
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            height: '100%',
+            width: `${pct}%`,
+            backgroundColor: barColor,
+            borderRadius: 3,
+            transition: 'width 0.4s ease',
+          }}
         />
-        <circle
-          cx={35}
-          cy={35}
-          r={radius}
-          fill="none"
-          stroke={arcColor}
-          strokeWidth={stroke}
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-        />
-      </svg>
-      <div>
-        <div style={{ fontSize: 22, fontWeight: 700, color: arcColor }}>{pct}%</div>
-        <div style={{ fontSize: 11, color: COLORS.textSecondary }}>Confianza</div>
       </div>
     </div>
   );
 }
 
 // ---------------------------------------------------------------------------
-// Signal Card
+// Card Component
 // ---------------------------------------------------------------------------
 
 function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
@@ -205,12 +205,12 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
     market,
     verdict,
     drop_pct,
-    entry_price,
     entry,
-    stop_loss,
+    entry_price,
     stopLoss,
-    take_profit,
+    stop_loss,
     takeProfit,
+    take_profit,
     rr_ratio,
     position_size_qty,
     poc,
@@ -226,11 +226,22 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
     timestamp,
   } = signal || {};
 
-  // Resolve properties that might be camelCased or snake_cased
+  // Resolve properties
   const finalEntry = entry !== undefined ? entry : entry_price;
   const finalStopLoss = stopLoss !== undefined ? stopLoss : stop_loss;
   const finalTakeProfit = takeProfit !== undefined ? takeProfit : take_profit;
   const livePrice = livePriceMap[ticker];
+
+  // Calculate R:R dynamically if missing
+  const risk = Math.abs((finalEntry || 0) - (finalStopLoss || 0));
+  const reward = Math.abs((finalTakeProfit || 0) - (finalEntry || 0));
+  const computedRR = (risk > 0 && reward > 0) ? (reward / risk) : null;
+  const displayRR = rr_ratio || computedRR;
+
+  // Status checks based on live price
+  const isTargetHit = livePrice > 0 && finalTakeProfit > 0 && livePrice >= finalTakeProfit;
+  const isStopHit = livePrice > 0 && finalStopLoss > 0 && livePrice <= finalStopLoss;
+  const isDiscountZone = livePrice > 0 && finalEntry > 0 && finalStopLoss > 0 && livePrice < finalEntry && livePrice > finalStopLoss;
 
   const isApto = verdict === 'APTO_COMPRA_ASIMETRICA';
 
@@ -263,6 +274,15 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
           </span>
           <MarketBadge market={market} />
           <VerdictBadge verdict={verdict} />
+          {isTargetHit && (
+            <Badge label="🎯 Target Alcanzado" bg="rgba(16,185,129,0.2)" color={COLORS.greenPrimary} />
+          )}
+          {isStopHit && (
+            <Badge label="🛑 Stop Loss Hit" bg="rgba(239,68,68,0.2)" color={COLORS.redPrimary} />
+          )}
+          {isDiscountZone && (
+            <Badge label="🏷️ Zona Descuento" bg="rgba(59,130,246,0.2)" color={COLORS.blue} />
+          )}
           {signal?.inPosition && (
             <Badge label="🟢 En Posición" bg="rgba(16,185,129,0.15)" color={COLORS.greenPrimary} />
           )}
@@ -305,7 +325,7 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
       <LevelRow label="Entrada Alerta" value={fmtPrice(finalEntry, market)} color={COLORS.textPrimary} />
       <LevelRow label="Stop Loss" value={fmtPrice(finalStopLoss, market)} color={COLORS.redPrimary} />
       <LevelRow label="Objetivo" value={fmtPrice(finalTakeProfit, market)} color={COLORS.greenPrimary} />
-      <LevelRow label="R:R" value={fmtRatio(rr_ratio)} color={COLORS.blue} />
+      <LevelRow label="R:R" value={fmtRatio(displayRR)} color={COLORS.blue} />
 
       {/* ---- Volume Profile ---- */}
       <SectionTitle>Perfil de Volumen</SectionTitle>
@@ -380,26 +400,30 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
           )}
           {onApprove && (
             <button
-              onClick={() => !signal?.inPosition && onApprove(signal)}
-              disabled={signal?.inPosition}
+              onClick={() => !signal?.inPosition && !isTargetHit && !isStopHit && onApprove(signal)}
+              disabled={signal?.inPosition || isTargetHit || isStopHit}
               style={{
                 padding: '6px 12px',
                 borderRadius: 8,
                 fontSize: 12,
                 fontWeight: 700,
-                background: signal?.inPosition 
+                background: (signal?.inPosition || isTargetHit)
                   ? 'rgba(16, 185, 129, 0.2)' 
-                  : 'linear-gradient(to right, #2563eb, #0891b2)',
-                color: signal?.inPosition ? COLORS.greenPrimary : COLORS.textPrimary,
-                border: signal?.inPosition ? '1px solid rgba(16, 185, 129, 0.4)' : 'none',
-                cursor: signal?.inPosition ? 'default' : 'pointer',
-                boxShadow: signal?.inPosition ? 'none' : '0 4px 6px -1px rgba(8, 145, 178, 0.15)',
+                  : (isStopHit ? 'rgba(239, 68, 68, 0.2)' : 'linear-gradient(to right, #2563eb, #0891b2)'),
+                color: (signal?.inPosition || isTargetHit) 
+                  ? COLORS.greenPrimary 
+                  : (isStopHit ? COLORS.redPrimary : COLORS.textPrimary),
+                border: (signal?.inPosition || isTargetHit) 
+                  ? '1px solid rgba(16, 185, 129, 0.4)' 
+                  : (isStopHit ? '1px solid rgba(239, 68, 68, 0.4)' : 'none'),
+                cursor: (signal?.inPosition || isTargetHit || isStopHit) ? 'default' : 'pointer',
+                boxShadow: (signal?.inPosition || isTargetHit || isStopHit) ? 'none' : '0 4px 6px -1px rgba(8, 145, 178, 0.15)',
                 transition: 'opacity 0.2s',
               }}
-              onMouseEnter={(e) => { if (!signal?.inPosition) e.target.style.opacity = '0.9'; }}
-              onMouseLeave={(e) => { if (!signal?.inPosition) e.target.style.opacity = '1'; }}
+              onMouseEnter={(e) => { if (!signal?.inPosition && !isTargetHit && !isStopHit) e.target.style.opacity = '0.9'; }}
+              onMouseLeave={(e) => { if (!signal?.inPosition && !isTargetHit && !isStopHit) e.target.style.opacity = '1'; }}
             >
-              {signal?.inPosition ? 'En Posición ✓' : 'Aprobar'}
+              {isTargetHit ? 'Target Alcanzado ✓' : (isStopHit ? 'Invalidado (SL Hit)' : (signal?.inPosition ? 'En Posición ✓' : 'Aprobar'))}
             </button>
           )}
         </div>
