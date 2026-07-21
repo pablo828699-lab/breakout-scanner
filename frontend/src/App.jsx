@@ -217,7 +217,7 @@ export default function App() {
   useEffect(() => {
     const fetchCandidates = async () => {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
       
       let data = [];
       try {
@@ -294,11 +294,11 @@ export default function App() {
               adx: c.adx,
               rocPct: c.roc_pct,
               emaStack: c.ema_stack,
+              inPosition: openIds.has(c.ticker),
               status: 'pending'
             };
           })
           .filter(c => !existingIds.has(`${c.ticker}_${c.timestamp}`) && 
-                       !openIds.has(c.ticker) &&
                        !ignoredSet.has(`${c.ticker}_${c.timestamp}`));
           
         return [...prevCandidates, ...newCandidates];
@@ -400,10 +400,11 @@ export default function App() {
             ob_zone: c.ob_zone,
             msb_type: c.msb_type,
             is_idiosyncratic: c.is_idiosyncratic,
-            fundamental_ok: c.fundamental_ok
+            fundamental_ok: c.fundamental_ok,
+            inPosition: openIds.has(c.ticker)
           };
         })
-        .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`) && !openIds.has(c.ticker));
+        .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`));
       
       setCapitulationSignals(mapped);
     };

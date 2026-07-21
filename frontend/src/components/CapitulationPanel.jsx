@@ -263,6 +263,9 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
           </span>
           <MarketBadge market={market} />
           <VerdictBadge verdict={verdict} />
+          {signal?.inPosition && (
+            <Badge label="🟢 En Posición" bg="rgba(16,185,129,0.15)" color={COLORS.greenPrimary} />
+          )}
           <FundamentalBadge ok={fundamental_ok} />
           <IdiosyncraticBadge value={is_idiosyncratic} />
         </div>
@@ -377,23 +380,26 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
           )}
           {onApprove && (
             <button
-              onClick={() => onApprove(signal)}
+              onClick={() => !signal?.inPosition && onApprove(signal)}
+              disabled={signal?.inPosition}
               style={{
                 padding: '6px 12px',
                 borderRadius: 8,
                 fontSize: 12,
                 fontWeight: 700,
-                background: 'linear-gradient(to right, #2563eb, #0891b2)',
-                color: COLORS.textPrimary,
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: '0 4px 6px -1px rgba(8, 145, 178, 0.15)',
+                background: signal?.inPosition 
+                  ? 'rgba(16, 185, 129, 0.2)' 
+                  : 'linear-gradient(to right, #2563eb, #0891b2)',
+                color: signal?.inPosition ? COLORS.greenPrimary : COLORS.textPrimary,
+                border: signal?.inPosition ? '1px solid rgba(16, 185, 129, 0.4)' : 'none',
+                cursor: signal?.inPosition ? 'default' : 'pointer',
+                boxShadow: signal?.inPosition ? 'none' : '0 4px 6px -1px rgba(8, 145, 178, 0.15)',
                 transition: 'opacity 0.2s',
               }}
-              onMouseEnter={(e) => e.target.style.opacity = '0.9'}
-              onMouseLeave={(e) => e.target.style.opacity = '1'}
+              onMouseEnter={(e) => { if (!signal?.inPosition) e.target.style.opacity = '0.9'; }}
+              onMouseLeave={(e) => { if (!signal?.inPosition) e.target.style.opacity = '1'; }}
             >
-              Aprobar
+              {signal?.inPosition ? 'En Posición ✓' : 'Aprobar'}
             </button>
           )}
         </div>

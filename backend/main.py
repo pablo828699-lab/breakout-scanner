@@ -93,21 +93,17 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 content_length = int(self.headers.get('Content-Length', 0))
                 put_data = self.rfile.read(content_length)
                 
-                # Send PUT request to JSONBlob backend-to-backend (no CORS preflight constraints)
-                r = requests.put(
-                    'https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9',
-                    headers={'Content-Type': 'application/json'},
-                    data=put_data,
-                    timeout=10
-                )
+                filepath = os.path.join(os.path.dirname(__file__), "cloud_state.json")
+                with open(filepath, "wb") as f:
+                    f.write(put_data)
                 
-                self.send_response(r.status_code)
+                self.send_response(200)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
-                self.wfile.write(r.content)
+                self.wfile.write(b'{"status": "ok"}')
             except Exception as exc:
-                logger.error("HTTP cloud-state PUT proxy error: %s", exc)
+                logger.error("HTTP cloud-state PUT handler error: %s", exc)
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")
@@ -196,14 +192,19 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/api/cloud-state":
             try:
-                r = requests.get('https://jsonblob.com/api/jsonBlob/019f6b43-4f24-7714-a721-e0abdf41d4e9', timeout=10)
-                self.send_response(r.status_code)
+                filepath = os.path.join(os.path.dirname(__file__), "cloud_state.json")
+                data = {}
+                if os.path.exists(filepath):
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+
+                self.send_response(200)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
-                self.wfile.write(r.content)
+                self.wfile.write(json.dumps(data).encode("utf-8"))
             except Exception as exc:
-                logger.error("HTTP cloud-state GET proxy error: %s", exc)
+                logger.error("HTTP cloud-state GET handler error: %s", exc)
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")
