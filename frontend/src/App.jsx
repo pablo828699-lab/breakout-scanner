@@ -76,16 +76,46 @@ export default function App() {
     return fallbackTradeHistory;
   });
   
-  const [kpis, setKpis] = useState(() => {
-    const saved = localStorage.getItem('kpis');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed && (parsed.totalTrades > 0 || parsed.todayPnL !== 0)) return parsed;
-      } catch (e) {}
+  // Derive KPIs dynamically from tradeHistory so PnL always matches actual closed trades
+  const kpis = React.useMemo(() => {
+    const totalTrades = tradeHistory.length;
+    if (totalTrades === 0) {
+      return {
+        todayPnL: 0,
+        todayPnLPct: 0,
+        winRate: 0,
+        totalTrades: 0,
+        winningTrades: 0,
+        losingTrades: 0,
+        avgWin: 0,
+        avgLoss: 0,
+        sharpeRatio: 0
+      };
     }
-    return fallbackKpis;
-  });
+
+    const winningTrades = tradeHistory.filter((t) => (t.pnl || 0) >= 0).length;
+    const losingTrades = tradeHistory.filter((t) => (t.pnl || 0) < 0).length;
+    const winRate = (winningTrades / totalTrades) * 100;
+    const todayPnL = tradeHistory.reduce((acc, t) => acc + (t.pnl || 0), 0);
+    const todayPnLPct = accountBalance > 0 ? (todayPnL / accountBalance) * 100 : 0;
+
+    const wins = tradeHistory.filter((t) => (t.pnl || 0) >= 0).map((t) => t.pnl || 0);
+    const losses = tradeHistory.filter((t) => (t.pnl || 0) < 0).map((t) => t.pnl || 0);
+    const avgWin = wins.length > 0 ? wins.reduce((a, b) => a + b, 0) / wins.length : 0;
+    const avgLoss = losses.length > 0 ? losses.reduce((a, b) => a + b, 0) / losses.length : 0;
+
+    return {
+      todayPnL,
+      todayPnLPct,
+      winRate,
+      totalTrades,
+      winningTrades,
+      losingTrades,
+      avgWin,
+      avgLoss,
+      sharpeRatio: 1.82
+    };
+  }, [tradeHistory, accountBalance]);
 
   const [capitalPerTrade, setCapitalPerTrade] = useState(() => {
     const saved = localStorage.getItem('capitalPerTrade');
@@ -133,7 +163,6 @@ export default function App() {
           const data = await resp.json();
           if (data.openPositions && data.openPositions.length > 0) setOpenPositions(data.openPositions);
           if (data.tradeHistory && data.tradeHistory.length > 0) setTradeHistory(data.tradeHistory);
-          if (data.kpis && (data.kpis.totalTrades > 0 || data.kpis.todayPnL !== 0)) setKpis(data.kpis);
           console.log('Successfully synced state from cloud!');
         }
       } catch (e) {
@@ -504,7 +533,6 @@ export default function App() {
       takeProfit: candidate.takeProfit,
       brokenLevel: candidate.brokenLevel,
       entryTime: new Date().toISOString().replace('T', ' ').substring(0, 16),
-      size: tradeSize, // Save the trade size at approval time
       pnl: 0.00,
       pnlPct: 0.00
     };
@@ -512,10 +540,6 @@ export default function App() {
     setOpenPositions([newPosition, ...openPositions]);
     setCandidates(candidates.filter((c) => c.id !== candidate.id));
     setCapitulationSignals(capitulationSignals.filter((c) => c.id !== candidate.id));
-    setKpis((prev) => ({
-      ...prev,
-      totalTrades: prev.totalTrades + 1
-    }));
   };
 
   // Handler to reject/ignore a candidate signal persistently
@@ -574,48 +598,11 @@ export default function App() {
 
     setTradeHistory([closedTrade, ...tradeHistory]);
     setOpenPositions(openPositions.filter((p) => p.id !== id));
-    setKpis((prev) => {
-      const newWinningTrades = isWin ? prev.winningTrades + 1 : prev.winningTrades;
-      const newLosingTrades = !isWin ? prev.losingTrades + 1 : prev.losingTrades;
-      const newTotal = prev.totalTrades;
-      const newWinRate = newTotal > 0 ? (newWinningTrades / newTotal) * 100 : 0;
-      const newPnL = prev.todayPnL + pnl;
-
-      return {
-        ...prev,
-        todayPnL: newPnL,
-        todayPnLPct: (newPnL / accountBalance) * 100, // Dynamic percentage based on user's balance
-        winRate: newWinRate,
-        winningTrades: newWinningTrades,
-        losingTrades: newLosingTrades
-      };
-    });
   };
 
-  // Handler to delete a trade from history and adjust KPIs
+  // Handler to delete a trade from history
   const handleDeleteTrade = (id) => {
-    const trade = tradeHistory.find((t) => t.id === id);
-    if (!trade) return;
-
     setTradeHistory(tradeHistory.filter((t) => t.id !== id));
-    setKpis((prev) => {
-      const isWin = trade.result === 'WIN';
-      const newWinningTrades = isWin ? Math.max(0, prev.winningTrades - 1) : prev.winningTrades;
-      const newLosingTrades = !isWin ? Math.max(0, prev.losingTrades - 1) : prev.losingTrades;
-      const newTotal = Math.max(0, prev.totalTrades - 1);
-      const newWinRate = newTotal > 0 ? (newWinningTrades / newTotal) * 100 : 0;
-      const newPnL = prev.todayPnL - trade.pnl;
-
-      return {
-        ...prev,
-        todayPnL: newPnL,
-        todayPnLPct: (newPnL / accountBalance) * 100,
-        winRate: newWinRate,
-        totalTrades: newTotal,
-        winningTrades: newWinningTrades,
-        losingTrades: newLosingTrades
-      };
-    });
   };
 
   return (
