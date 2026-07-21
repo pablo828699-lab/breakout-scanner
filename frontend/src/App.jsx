@@ -59,10 +59,10 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (parsed && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed)) return parsed;
       } catch (e) {}
     }
-    return fallbackOpenPositions;
+    return [];
   });
   
   const [tradeHistory, setTradeHistory] = useState(() => {
@@ -70,10 +70,10 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (parsed && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed)) return parsed;
       } catch (e) {}
     }
-    return fallbackTradeHistory;
+    return [];
   });
   
   // Derive KPIs dynamically from tradeHistory so PnL always matches actual closed trades
