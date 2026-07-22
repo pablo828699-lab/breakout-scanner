@@ -66,35 +66,45 @@ def detect_shock(
     volume = daily_df["Volume"].astype(float)
     low = daily_df["Low"].astype(float)
 
-    # Evaluate shock strictly on the latest candle (bar -1) to ensure signal reflects current market state
-    prev_close = float(close.iloc[-2])
-    if prev_close <= 0:
-        return None
+    # Evaluate shock over the last 2 bars (24h window) so recent intraday/daily shocks remain visible during market closures
+    lookback_bars = min(2, len(daily_df) - 21)
+    min_effective_drop = 0.0
+    best_bar_idx = -1
+    best_cap_low = float(low.iloc[-1])
+    best_vol_ratio = 1.0
 
-    daily_return = float((close.iloc[-1] / prev_close) - 1.0)
-    intraday_return = float((low.iloc[-1] / prev_close) - 1.0)
-    effective_drop = min(daily_return, intraday_return)
+    for i in range(-1, -1 - lookback_bars, -1):
+        prev_close = float(close.iloc[i - 1])
+        if prev_close <= 0:
+            continue
+        daily_return = float((close.iloc[i] / prev_close) - 1.0)
+        intraday_return = float((low.iloc[i] / prev_close) - 1.0)
+        effective_drop = min(daily_return, intraday_return)
 
-    vol_sma_20 = float(volume.iloc[-21:-1].mean())
-    vol_ratio = float(volume.iloc[-1] / vol_sma_20) if vol_sma_20 > 0 else 1.0
+        if effective_drop < min_effective_drop:
+            min_effective_drop = effective_drop
+            best_bar_idx = i
+            best_cap_low = float(low.iloc[i])
+            vol_sma_20 = float(volume.iloc[i - 20 : i].mean())
+            best_vol_ratio = float(volume.iloc[i] / vol_sma_20) if vol_sma_20 > 0 else 1.0
 
-    if effective_drop > threshold_pct:
-        return None  # Current candle drop does not meet threshold
+    if min_effective_drop > threshold_pct:
+        return None  # No 24h shock detected
 
-    capitulation_low = float(low.iloc[-1])
+    capitulation_low = best_cap_low
 
     logger.info(
-        "SHOCK detected on current candle: effective_return=%.2f%%, low=%.4f, vol_ratio=%.2fx",
-        effective_drop * 100, capitulation_low, vol_ratio,
+        "SHOCK detected (24h window): effective_return=%.2f%%, low=%.4f, vol_ratio=%.2fx (bar_idx=%d)",
+        min_effective_drop * 100, capitulation_low, best_vol_ratio, best_bar_idx,
     )
 
     return ShockResult(
         ticker="",  # Will be set by the caller
-        drop_pct=round(effective_drop, 4),
+        drop_pct=round(min_effective_drop, 4),
         is_idiosyncratic=True,  # Will be refined by benchmark comparison
         benchmark_drop_pct=0.0,  # Will be set by the caller
         capitulation_low=capitulation_low,
-        capitulation_volume_ratio=round(vol_ratio, 2),
+        capitulation_volume_ratio=round(best_vol_ratio, 2),
     )
 
 
