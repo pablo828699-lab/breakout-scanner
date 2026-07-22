@@ -7,7 +7,9 @@ full detection → confirmation → volume → risk pipeline for each one.
 
 from __future__ import annotations
 
+import json
 import logging
+import os
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
@@ -24,6 +26,32 @@ from backend.volume_filter import passes_volume_filter
 from backend.capitulation_engine import run_capitulation_scan, AsymmetricSignal
 
 logger = logging.getLogger(__name__)
+
+
+def parse_iso_timestamp(ts_val: str | datetime | None) -> datetime:
+    """Parse ISO 8601 string or legacy UTC string into a UTC-aware datetime."""
+    if ts_val is None:
+        return datetime.now(timezone.utc)
+    if isinstance(ts_val, datetime):
+        if ts_val.tzinfo is None:
+            return ts_val.replace(tzinfo=timezone.utc)
+        return ts_val
+    if not isinstance(ts_val, str):
+        return datetime.now(timezone.utc)
+    ts_str = ts_val.strip()
+    if ts_str.endswith(" UTC"):
+        try:
+            dt = datetime.strptime(ts_str, "%Y-%m-%d %H:%M UTC")
+            return dt.replace(tzinfo=timezone.utc)
+        except Exception:
+            pass
+    try:
+        dt = datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except Exception:
+        return datetime.now(timezone.utc)
 
 
 class BreakoutScanner:
@@ -304,7 +332,6 @@ class BreakoutScanner:
         try:
             cap_signals = self._run_capitulation_scan(markets)
             if cap_signals:
-                self._save_capitulation_signals(cap_signals)
                 for cs in cap_signals:
                     alert_time = datetime.now(tz=timezone.utc)
                     cooldown_key = f"CAP:{cs.ticker}:{cs.verdict}"
@@ -322,22 +349,42 @@ class BreakoutScanner:
 
         return signals
 
-    def _save_recent_signals(self, new_signals: List[BreakoutSignal]) -> None:
+    def _save_recent_signals(self, new_signals: List[BreakoutSignal | RadarSignal]) -> None:
         import json
         import os
         filepath = os.path.join(os.path.dirname(__file__), "recent_signals.json")
-        
-        signals_dict = []
+        now = datetime.now(timezone.utc)
+        ttl_seconds = 24 * 3600
+
+        existing_by_key: Dict[str, dict] = {}
         if os.path.exists(filepath):
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
-                    signals_dict = json.load(f)
-            except Exception:
-                signals_dict = []
-                
+                    items = json.load(f)
+                    for item in items:
+                        ticker = item.get("ticker")
+                        direction = item.get("direction", "")
+                        if not ticker:
+                            continue
+                        key = f"{ticker}:{direction}" if direction else ticker
+                        ts_val = item.get("last_updated") or item.get("first_detected") or item.get("timestamp")
+                        ts_dt = parse_iso_timestamp(ts_val)
+                        if (now - ts_dt).total_seconds() < ttl_seconds:
+                            existing_by_key[key] = item
+            except Exception as exc:
+                logger.warning("Failed loading existing recent signals: %s", exc)
+                existing_by_key = {}
+
         for s in new_signals:
+            key = f"{s.ticker}:{s.direction}" if getattr(s, "direction", None) else s.ticker
+            iso_ts = s.timestamp.isoformat()
+            first_detected = (
+                existing_by_key[key].get("first_detected")
+                if key in existing_by_key and existing_by_key[key].get("first_detected")
+                else iso_ts
+            )
             if isinstance(s, RadarSignal):
-                signals_dict.append({
+                item_dict = {
                     "type": "radar",
                     "ticker": s.ticker,
                     "market": s.market,
@@ -348,10 +395,12 @@ class BreakoutScanner:
                     "volume_ratio": s.volume_ratio,
                     "roc_pct": s.roc_pct,
                     "ema_stack": s.ema_stack,
-                    "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC"),
-                })
+                    "timestamp": iso_ts,
+                    "first_detected": first_detected,
+                    "last_updated": iso_ts,
+                }
             else:
-                signals_dict.append({
+                item_dict = {
                     "type": "breakout",
                     "ticker": s.ticker,
                     "market": s.market,
@@ -362,14 +411,24 @@ class BreakoutScanner:
                     "take_profit": s.take_profit,
                     "volume_ratio": s.volume_ratio,
                     "atr_value": s.atr_value,
-                    "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC"),
-                })
-            
-        signals_dict = signals_dict[-50:]
-        
+                    "timestamp": iso_ts,
+                    "first_detected": first_detected,
+                    "last_updated": iso_ts,
+                }
+            existing_by_key[key] = item_dict
+
+        signals_dict = list(existing_by_key.values())
+        signals_dict.sort(
+            key=lambda x: parse_iso_timestamp(x.get("last_updated") or x.get("timestamp")),
+            reverse=True,
+        )
+        if len(signals_dict) > 100:
+            signals_dict = signals_dict[:100]
+
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(signals_dict, f, indent=2)
+            self._sync_to_render_backend("/api/candidates", signals_dict)
         except Exception as exc:
             logger.error("Failed to save recent signals to disk: %s", exc)
 
@@ -426,22 +485,34 @@ class BreakoutScanner:
         import json
         import os
         filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
+        now = datetime.now(timezone.utc)
+        ttl_seconds = 24 * 3600
 
-        signals_dict = []
+        existing_by_ticker: Dict[str, dict] = {}
         if os.path.exists(filepath):
             try:
                 with open(filepath, "r", encoding="utf-8") as f:
-                    signals_dict = json.load(f)
-            except Exception:
-                signals_dict = []
-        # Deduplicate signals: newly computed signals overwrite existing ones for the same ticker
-        existing_by_ticker = {}
-        for item in signals_dict:
-            ticker_key = item.get("ticker")
-            if ticker_key:
-                existing_by_ticker[ticker_key] = item
+                    items = json.load(f)
+                    for item in items:
+                        ticker_key = item.get("ticker")
+                        if not ticker_key:
+                            continue
+                        ts_val = item.get("last_updated") or item.get("first_detected") or item.get("timestamp")
+                        ts_dt = parse_iso_timestamp(ts_val)
+                        verdict = item.get("verdict")
+                        if (now - ts_dt).total_seconds() < ttl_seconds and verdict != "INVALIDATED":
+                            existing_by_ticker[ticker_key] = item
+            except Exception as exc:
+                logger.warning("Failed loading existing capitulation signals: %s", exc)
+                existing_by_ticker = {}
 
         for s in signals:
+            iso_ts = s.timestamp.isoformat()
+            first_detected = (
+                existing_by_ticker[s.ticker].get("first_detected")
+                if s.ticker in existing_by_ticker and existing_by_ticker[s.ticker].get("first_detected")
+                else iso_ts
+            )
             existing_by_ticker[s.ticker] = {
                 "type": "asymmetric",
                 "ticker": s.ticker,
@@ -463,17 +534,47 @@ class BreakoutScanner:
                 "fundamental_ok": s.fundamental_ok,
                 "confidence_score": s.confidence_score,
                 "analysis_summary": s.analysis_summary,
-                "timestamp": s.timestamp.strftime("%Y-%m-%d %H:%M UTC"),
+                "timestamp": iso_ts,
+                "first_detected": first_detected,
+                "last_updated": iso_ts,
             }
 
-        signals_dict = list(existing_by_ticker.values())[-30:]  # Keep last 30
+        signals_dict = list(existing_by_ticker.values())
+        signals_dict.sort(
+            key=lambda x: parse_iso_timestamp(x.get("last_updated") or x.get("timestamp")),
+            reverse=True,
+        )
+        if len(signals_dict) > 100:
+            signals_dict = signals_dict[:100]
 
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(signals_dict, f, indent=2)
-            logger.info("Saved %d capitulation signals to disk.", len(signals))
+            logger.info("Saved %d capitulation signals to disk.", len(signals_dict))
+            self._sync_to_render_backend("/api/capitulation", signals_dict)
         except Exception as exc:
             logger.error("Failed to save capitulation signals: %s", exc)
+
+    def _sync_to_render_backend(self, endpoint_path: str, data: list) -> None:
+        """Sync json data directly to Render backend with retries and timeout for Cold-Start toleration."""
+        import os
+        import time
+        import requests
+        render_url = os.getenv("RENDER_BACKEND_URL", "https://breakout-scanner-xg9f.onrender.com").rstrip("/")
+        url = f"{render_url}{endpoint_path}"
+        
+        max_retries = 3
+        for attempt in range(1, max_retries + 1):
+            try:
+                resp = requests.post(url, json=data, timeout=30)
+                if resp.status_code == 200:
+                    logger.info("Successfully synced %d items to Render backend (%s).", len(data), endpoint_path)
+                    return
+                else:
+                    logger.warning("Render sync status %d on attempt %d/3 for %s: %s", resp.status_code, attempt, endpoint_path, resp.text)
+            except Exception as exc:
+                logger.warning("Render sync error on attempt %d/3 for %s: %s", attempt, endpoint_path, exc)
+            time.sleep(3)
 
     # ------------------------------------------------------------------
     #  Session management

@@ -3,12 +3,13 @@ Data fetching abstraction layer.
 
 - US Equities: yfinance
 - Crypto: Binance public REST API (no keys required for market data)
-- Fallback: Numpy-generated random-walk mock data for crypto
 """
 
 from __future__ import annotations
 
 import logging
+import random
+import time
 from datetime import datetime, timedelta, timezone
 from typing import List
 
@@ -19,6 +20,27 @@ import requests
 import backend.config as cfg
 
 logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Persistent HTTP Session & Browser Headers
+# ---------------------------------------------------------------------------
+DEFAULT_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+_shared_session: requests.Session | None = None
+
+
+def get_shared_session() -> requests.Session:
+    """Return a singleton requests.Session configured with realistic browser User-Agent headers."""
+    global _shared_session
+    if _shared_session is None:
+        _shared_session = requests.Session()
+        _shared_session.headers.update(DEFAULT_HEADERS)
+    return _shared_session
+
 
 # ---------------------------------------------------------------------------
 # Optional yfinance import (US Equities)
@@ -48,16 +70,22 @@ _BINANCE_HOSTS = (
 _working_host: str | None = None
 
 
-def _binance_request(path: str, params: dict | None = None, timeout: int = 15):
-    """GET a Binance public endpoint, falling back across hosts on failure.
+def _binance_request(
+    path: str,
+    params: dict | None = None,
+    timeout: int = 15,
+    max_retries: int = 3,
+    base_delay: float = 1.0,
+    session: requests.Session | None = None,
+) -> dict | list | None:
+    """GET a Binance public endpoint, falling back across hosts on failure with exponential backoff.
 
-    Tries the last known-good host first, then the rest. Returns the parsed JSON
-    on the first host that responds, or ``None`` if every host fails (network
-    error, timeout, or geo-block).
+    Tries the last known-good host first, then the rest. Reuses a persistent session.
+    Returns the parsed JSON on the first host that responds, or ``None`` if every host fails.
     """
     global _working_host
 
-    # Order: known-good host first, then the remaining hosts.
+    sess = session or get_shared_session()
     hosts = list(_BINANCE_HOSTS)
     if _working_host in hosts:
         hosts.remove(_working_host)
@@ -66,22 +94,57 @@ def _binance_request(path: str, params: dict | None = None, timeout: int = 15):
     last_error: str | None = None
     for host in hosts:
         url = f"{host}{path}"
-        try:
-            resp = requests.get(url, params=params, timeout=timeout)
-            if resp.status_code == 451:
-                last_error = f"{host} → 451 (geo-blocked)"
-                if _working_host != host:  # only log the first time we learn it
-                    logger.warning("Binance host %s geo-blocked (451) — trying next host.", host)
-                continue
-            resp.raise_for_status()
-            if _working_host != host:
-                logger.info("Binance host %s is working — caching as primary.", host)
-                _working_host = host
-            return resp.json()
-        except Exception as exc:
-            last_error = f"{host} → {type(exc).__name__}: {exc}"
-            logger.warning("Binance host %s failed (%s) — trying next host.", host, exc)
-            continue
+        for attempt in range(1, max_retries + 1):
+            try:
+                resp = sess.get(url, params=params, timeout=timeout)
+                if resp.status_code == 451:
+                    last_error = f"{host} → 451 (geo-blocked)"
+                    if _working_host != host:  # only log the first time we learn it
+                        logger.warning("Binance host %s geo-blocked (451) — trying next host.", host)
+                    break  # geo-blocked host won't recover on retry, move to next host
+
+                if resp.status_code in (429, 418) or resp.status_code >= 500:
+                    last_error = f"{host} → HTTP {resp.status_code}: {resp.text[:100]}"
+                    if attempt < max_retries:
+                        delay = base_delay * (2 ** (attempt - 1)) + random.uniform(0.1, 0.5)
+                        logger.warning(
+                            "Binance host %s returned status %d on attempt %d/%d — retrying in %.2fs...",
+                            host, resp.status_code, attempt, max_retries, delay
+                        )
+                        time.sleep(delay)
+                        continue
+                    else:
+                        logger.warning(
+                            "Binance host %s exhausted %d retries with status %d — trying next host.",
+                            host, max_retries, resp.status_code
+                        )
+                        break
+
+                resp.raise_for_status()
+                if _working_host != host:
+                    logger.info("Binance host %s is working — caching as primary.", host)
+                    _working_host = host
+                return resp.json()
+
+            except requests.exceptions.RequestException as exc:
+                last_error = f"{host} → {type(exc).__name__}: {exc}"
+                if attempt < max_retries:
+                    delay = base_delay * (2 ** (attempt - 1)) + random.uniform(0.1, 0.5)
+                    logger.warning(
+                        "Binance request to %s failed (%s) on attempt %d/%d — retrying in %.2fs...",
+                        url, exc, attempt, max_retries, delay
+                    )
+                    time.sleep(delay)
+                else:
+                    logger.warning(
+                        "Binance host %s failed after %d attempts (%s) — trying next host.",
+                        host, max_retries, exc
+                    )
+                    break
+            except Exception as exc:
+                last_error = f"{host} → {type(exc).__name__}: {exc}"
+                logger.error("Unexpected error requesting Binance host %s: %s", host, exc)
+                break
 
     _working_host = None  # reset so the next call re-probes from the top
     logger.error("All Binance hosts failed for %s. Last error: %s", path, last_error)
@@ -91,33 +154,67 @@ def _binance_request(path: str, params: dict | None = None, timeout: int = 15):
 class DataFetcher:
     """Unified data access for both US equities and crypto markets."""
 
-    def __init__(self) -> None:
+    def __init__(self, session: requests.Session | None = None) -> None:
         self._crypto_tickers_cache: List[str] | None = None
+        self._session = session or get_shared_session()
+        self._yf_session = self._session
+
+    def get_session(self) -> requests.Session:
+        """Return the persistent HTTP session used by this DataFetcher."""
+        return self._session
 
     # ------------------------------------------------------------------
     #  S&P 500  (yfinance)
     # ------------------------------------------------------------------
 
-    def _safe_yf_download(self, ticker: str, period: str, interval: str) -> pd.DataFrame:
-        """Safely fetch historical data from Yahoo Finance, redirecting stderr to silence failures."""
+    def _safe_yf_download(
+        self,
+        ticker: str,
+        period: str,
+        interval: str,
+        max_retries: int = 3,
+        base_delay: float = 1.0,
+    ) -> pd.DataFrame:
+        """Safely fetch historical data from Yahoo Finance using custom session with browser User-Agent and exponential backoff."""
         if not _YF_AVAILABLE:
             return pd.DataFrame()
-        import os
-        from contextlib import redirect_stderr
-        try:
-            with open(os.devnull, "w") as devnull:
-                with redirect_stderr(devnull):
-                    df = yf.download(
-                        ticker,
-                        period=period,
-                        interval=interval,
-                        progress=False,
-                        auto_adjust=True,
-                    )
-            return df
-        except Exception as exc:
-            logger.error("yfinance download error for %s: %s", ticker, exc)
-            return pd.DataFrame()
+
+        # Apply micro-pacing delay if configured
+        pace_delay = getattr(cfg, "REQUEST_PACE_DELAY_SEC", 0.0)
+        if pace_delay > 0:
+            time.sleep(pace_delay)
+
+        download_kwargs = {
+            "period": period,
+            "interval": interval,
+            "progress": False,
+            "auto_adjust": True,
+        }
+        if self._yf_session is not None:
+            download_kwargs["session"] = self._yf_session
+
+        for attempt in range(1, max_retries + 1):
+            try:
+                df = yf.download(ticker, **download_kwargs)
+                if df is not None and not df.empty:
+                    return df
+                logger.warning(
+                    "yfinance download returned empty DataFrame for %s (attempt %d/%d).",
+                    ticker, attempt, max_retries,
+                )
+            except Exception as exc:
+                logger.warning(
+                    "yfinance download error for %s on attempt %d/%d: %s",
+                    ticker, attempt, max_retries, exc,
+                )
+
+            if attempt < max_retries:
+                delay = base_delay * (2 ** (attempt - 1)) + random.uniform(0.1, 0.5)
+                logger.info("Retrying yfinance download for %s in %.2fs...", ticker, delay)
+                time.sleep(delay)
+
+        logger.error("yfinance download failed for %s after %d retries.", ticker, max_retries)
+        return pd.DataFrame()
 
     def fetch_sp500_daily(self, ticker: str) -> pd.DataFrame:
         """Fetch ~6 months of daily OHLCV for a US equity ticker."""
@@ -153,12 +250,16 @@ class DataFetcher:
     #  Crypto  (Binance public REST API)
     # ------------------------------------------------------------------
 
-    @staticmethod
-    def _binance_klines(symbol: str, interval: str, limit: int) -> pd.DataFrame:
+    def _binance_klines(self, symbol: str, interval: str, limit: int) -> pd.DataFrame:
         """Fetch klines from Binance public API (no authentication needed)."""
+        pace_delay = getattr(cfg, "REQUEST_PACE_DELAY_SEC", 0.0)
+        if pace_delay > 0:
+            time.sleep(pace_delay)
+
         raw = _binance_request(
             "/api/v3/klines",
             params={"symbol": symbol, "interval": interval, "limit": limit},
+            session=self._session,
         )
         if not raw:
             return pd.DataFrame()
@@ -193,7 +294,7 @@ class DataFetcher:
         return pd.DataFrame()
 
     def fetch_crypto_daily(self, symbol: str) -> pd.DataFrame:
-        """Fetch ~180 daily candles for a crypto pair (tries Binance, falls back to yfinance, then mock)."""
+        """Fetch ~180 daily candles for a crypto pair (tries Binance, falls back to yfinance)."""
         df = self._binance_klines(symbol, "1d", cfg.DAILY_LOOKBACK_DAYS)
         if df.empty:
             logger.warning("Binance daily empty for %s — trying Yahoo Finance fallback.", symbol)
@@ -201,12 +302,12 @@ class DataFetcher:
             df = self._fetch_yfinance_crypto(yf_symbol, f"{cfg.DAILY_LOOKBACK_DAYS}d", "1d")
 
         if df.empty:
-            logger.warning("Yahoo Finance fallback empty for %s — generating mock data.", symbol)
-            return self._generate_mock_ohlcv(180, base_price=50000.0 if "BTC" in symbol else 2000.0)
+            logger.error("Crypto daily data unavailable for %s across Binance and Yahoo Finance.", symbol)
+            return pd.DataFrame()
         return df
 
     def fetch_crypto_hourly(self, symbol: str) -> pd.DataFrame:
-        """Fetch ~120 hourly candles (tries Binance, falls back to yfinance, then mock)."""
+        """Fetch ~120 hourly candles (tries Binance, falls back to yfinance)."""
         limit = cfg.HOURLY_LOOKBACK_DAYS * 24
         df = self._binance_klines(symbol, "1h", limit)
         if df.empty:
@@ -215,8 +316,8 @@ class DataFetcher:
             df = self._fetch_yfinance_crypto(yf_symbol, f"{cfg.HOURLY_LOOKBACK_DAYS}d", "1h")
 
         if df.empty:
-            logger.warning("Yahoo Finance fallback empty for %s — generating mock data.", symbol)
-            return self._generate_mock_ohlcv(limit, base_price=50000.0 if "BTC" in symbol else 2000.0)
+            logger.error("Crypto hourly data unavailable for %s across Binance and Yahoo Finance.", symbol)
+            return pd.DataFrame()
         return df
 
     # ------------------------------------------------------------------
@@ -246,7 +347,7 @@ class DataFetcher:
         }
 
         try:
-            tickers_raw = _binance_request("/api/v3/ticker/24hr")
+            tickers_raw = _binance_request("/api/v3/ticker/24hr", session=self._session)
             if not tickers_raw:
                 raise RuntimeError("all Binance hosts unavailable")
 
@@ -281,7 +382,7 @@ class DataFetcher:
         return cfg.SP500_TICKERS
 
     # ------------------------------------------------------------------
-    #  Mock data generator (fallback)
+    #  Mock data generator (standalone utility, not auto-invoked)
     # ------------------------------------------------------------------
 
     @staticmethod

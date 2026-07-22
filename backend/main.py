@@ -40,6 +40,23 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
         # Redirect http.server logs to our logger
         logger.info("%s - - %s" % (self.address_string(), format % args))
 
+    def _enviar_respuesta_json(self, data: dict | list, status: int = 200) -> None:
+        """Envía una respuesta JSON con headers CORS."""
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(json.dumps(data).encode("utf-8"))
+
+    def _enviar_error_json(self, exc: Exception, status: int = 500) -> None:
+        """Envía un error JSON serializado de forma segura (sin interpolación manual)."""
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        payload = {"status": "error", "message": str(exc)}
+        self.wfile.write(json.dumps(payload).encode("utf-8"))
+
     def do_OPTIONS(self) -> None:
         self.send_response(200)
         self.send_header("Access-Control-Allow-Origin", "*")
@@ -342,14 +359,6 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
         elif clean_path == "/scan-capitulation":
             try:
                 logger.info("Manual capitulation scan triggered via HTTP.")
-                # Clean up existing signals file to force overwrite of everything
-                try:
-                    filepath = os.path.join(os.path.dirname(__file__), "capitulation_signals.json")
-                    if os.path.exists(filepath):
-                        os.remove(filepath)
-                        logger.info("Cleared old capitulation signals file for fresh manual run.")
-                except Exception:
-                    pass
 
                 thread = threading.Thread(
                     target=self.scanner._run_capitulation_scan,

@@ -9,7 +9,6 @@ with position sizing at 1% risk per trade.
 from __future__ import annotations
 
 import logging
-from dataclasses import replace
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -32,14 +31,20 @@ def calculate_entry_trigger(
     ob_zones: list[dict],
     poc: float,
     val: float,
+    capitulation_low: float = 0.0,
 ) -> dict:
     """Determine the optimal entry price based on confluence of SMC zones.
 
+    The entry price MUST be above ``capitulation_low`` so that the stop-loss
+    (anchored below the capitulation low) is always below entry, yielding a
+    positive risk value.
+
     Priority order:
-    1. Confluence zone (FVG + OB overlap) closest to current price
-    2. Bullish FVG closest to current price (from below)
-    3. Bullish Order Block closest to current price (from below)
-    4. POC or VAL as fallback
+    1. Confluence zone (FVG + OB overlap) closest to current price & above cap low
+    2. Bullish FVG closest to current price & above cap low
+    3. Bullish Order Block closest to current price & above cap low
+    4. POC or VAL as fallback (only if above cap low)
+    5. Current price as last resort
 
     Returns
     -------
@@ -47,44 +52,46 @@ def calculate_entry_trigger(
         ``{'entry_price': float, 'trigger_type': str, 'zone': tuple}``
     """
     # Filter for bullish zones below current price (potential support)
+    # BUT above capitulation_low so that entry > SL
     candidates = []
 
     # Priority 1: Confluence zones
     for z in (confluence_zones or []):
-        if z["zone_low"] <= current_price:
+        zone_high = z["zone_high"]
+        if z["zone_low"] <= current_price and zone_high > capitulation_low:
             candidates.append({
-                "entry_price": z["zone_high"],  # Enter at top of zone
+                "entry_price": zone_high,
                 "trigger_type": "CONFLUENCE",
-                "zone": (z["zone_low"], z["zone_high"]),
+                "zone": (z["zone_low"], zone_high),
                 "strength": z.get("strength", 2),
-                "distance": current_price - z["zone_high"],
+                "distance": abs(current_price - zone_high),
             })
 
     # Priority 2: Bullish FVGs
     for fvg in (fvg_zones or []):
-        if fvg.get("type") == "bullish" and fvg["low"] <= current_price:
+        if fvg.get("type") == "bullish" and fvg["low"] <= current_price and fvg["high"] > capitulation_low:
             candidates.append({
                 "entry_price": fvg["high"],
                 "trigger_type": "FVG",
                 "zone": (fvg["low"], fvg["high"]),
                 "strength": 1,
-                "distance": current_price - fvg["high"],
+                "distance": abs(current_price - fvg["high"]),
             })
 
     # Priority 3: Bullish Order Blocks
     for ob in (ob_zones or []):
-        if ob.get("type") == "bullish" and ob["low"] <= current_price:
+        if ob.get("type") == "bullish" and ob["low"] <= current_price and ob["high"] > capitulation_low:
             candidates.append({
                 "entry_price": ob["high"],
                 "trigger_type": "ORDER_BLOCK",
                 "zone": (ob["low"], ob["high"]),
                 "strength": 1,
-                "distance": current_price - ob["high"],
+                "distance": abs(current_price - ob["high"]),
             })
 
     if candidates:
         # Sort by strength (descending) then by proximity to current price (ascending)
-        candidates.sort(key=lambda c: (-c["strength"], abs(c["distance"])))
+        candidates.sort(key=lambda c: (-c["strength"], c["distance"]))
         best = candidates[0]
         return {
             "entry_price": best["entry_price"],
@@ -92,21 +99,21 @@ def calculate_entry_trigger(
             "zone": best["zone"],
         }
 
-    # Fallback: use VAL or POC
-    if val > 0 and val <= current_price:
+    # Fallback: use VAL or POC (only if above capitulation_low)
+    if val > capitulation_low and val <= current_price:
         return {
             "entry_price": val,
             "trigger_type": "VAL_FALLBACK",
             "zone": (val, val),
         }
-    if poc > 0:
+    if poc > capitulation_low:
         return {
             "entry_price": poc,
             "trigger_type": "POC_FALLBACK",
             "zone": (poc, poc),
         }
 
-    # Last resort: current price
+    # Last resort: current price (always above cap low after a bounce)
     return {
         "entry_price": current_price,
         "trigger_type": "MARKET",
@@ -161,9 +168,9 @@ def calculate_asymmetric_levels(
         if fvg.get("type") == "bearish" and fvg.get("low", 0) > entry_price:
             tp_candidates.append(("FVG_TARGET", fvg["low"]))
 
-    # Minimum TP = entry + risk * min_rr
-    min_tp = entry_price + (risk * min_rr)
-    tp_candidates.append(("MIN_RR", min_tp))
+    # NOTE: No synthetic MIN_RR fallback — TP must come from real technical
+    # levels (POC, VAH, FVG).  If no real target achieves min_rr, the signal
+    # is rejected.  This prevents the filter from accepting every single ticker.
 
     # Sort by distance (pick the closest that meets min_rr)
     tp_candidates.sort(key=lambda t: t[1])

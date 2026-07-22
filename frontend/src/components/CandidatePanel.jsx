@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatTimestamp, formatRelativeTime } from '../utils/dateUtils';
 
 export default function CandidatePanel({ candidates, livePriceMap = {}, onApprove, onReject }) {
   const formatPrice = (val) => {
@@ -39,7 +40,7 @@ export default function CandidatePanel({ candidates, livePriceMap = {}, onApprov
             
             return (
               <div
-                key={candidate.id}
+                key={candidate.id || `${candidate.ticker}_${candidate.timestamp}`}
                 className="relative overflow-hidden rounded-xl border border-slate-800/80 bg-slate-900/40 p-5 transition-all duration-300 hover:scale-[1.01] hover:border-slate-700 hover:bg-slate-900/60"
               >
                 {/* Diagonal background indicator */}
@@ -53,7 +54,7 @@ export default function CandidatePanel({ candidates, livePriceMap = {}, onApprov
                         {candidate.market}
                       </span>
                     </div>
-                    <p className="text-[10px] text-slate-500 mt-1">{candidate.timestamp}</p>
+                    <p className="text-[10px] text-slate-500 mt-1">{formatTimestamp(candidate.timestamp)} ({formatRelativeTime(candidate.timestamp)})</p>
                   </div>
                   
                   <div className="flex flex-col items-end gap-1">

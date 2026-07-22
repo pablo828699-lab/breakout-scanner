@@ -80,7 +80,7 @@ def analyze_capitulation(
 
     # Classify as idiosyncratic vs systemic
     if benchmark_df is not None:
-        shock = classify_shock(shock, benchmark_df)
+        shock = classify_shock(shock, benchmark_df, daily_df=daily_df)
 
     logger.info(
         "%s SHOCK: drop=%.2f%%, idiosyncratic=%s, cap_low=%.4f, vol_ratio=%.2fx",
@@ -167,6 +167,7 @@ def analyze_capitulation(
         ob_zones=structure.get("ob_1d", []) + structure.get("ob_4h", []),
         poc=profile["poc"],
         val=profile["val"],
+        capitulation_low=shock.capitulation_low,
     )
 
     entry_price = entry_trigger["entry_price"]
@@ -190,6 +191,7 @@ def analyze_capitulation(
 
     # Confidence score
     shock_dict = {
+        "drop_pct": shock.drop_pct,
         "is_idiosyncratic": shock.is_idiosyncratic,
         "capitulation_volume_ratio": shock.capitulation_volume_ratio,
     }
@@ -251,8 +253,6 @@ def _build_evitar_signal(
     fundamental: dict,
 ) -> AsymmetricSignal:
     """Build a signal with EVITAR verdict (for tracking/logging purposes)."""
-    current_price = shock.capitulation_low  # Approximation
-
     return AsymmetricSignal(
         ticker=ticker,
         market=market,

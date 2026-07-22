@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatTimestamp, formatRelativeTime } from '../utils/dateUtils';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -432,7 +433,7 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
       {/* ---- Timestamp ---- */}
       {timestamp && (
         <div style={{ fontSize: 10, color: COLORS.textSecondary, marginTop: 12, textAlign: 'right' }}>
-          {new Date(timestamp).toLocaleString('es-AR')}
+          {formatTimestamp(timestamp)} ({formatRelativeTime(timestamp)})
         </div>
       )}
     </div>
@@ -477,15 +478,18 @@ export default function CapitulationPanel({ signals, livePriceMap = {}, onApprov
         gap: 20,
       }}
     >
-      {list.map((sig, idx) => (
-        <SignalCard
-          key={sig?.ticker ? `${sig.ticker}-${idx}` : idx}
-          signal={sig}
-          livePriceMap={livePriceMap}
-          onApprove={onApprove}
-          onReject={onReject}
-        />
-      ))}
+      {list.map((sig, idx) => {
+        const key = sig?.id || (sig?.ticker && sig?.timestamp ? `${sig.ticker}_${sig.timestamp}` : `cap_${sig?.ticker || idx}`);
+        return (
+          <SignalCard
+            key={key}
+            signal={sig}
+            livePriceMap={livePriceMap}
+            onApprove={onApprove}
+            onReject={onReject}
+          />
+        );
+      })}
     </div>
   );
 }

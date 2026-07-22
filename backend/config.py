@@ -147,9 +147,10 @@ BINANCE_API_KEY: str = os.getenv("BINANCE_API_KEY", "")
 BINANCE_API_SECRET: str = os.getenv("BINANCE_API_SECRET", "")
 
 # ---------------------------------------------------------------------------
-# Scanner Timing
+# Scanner Timing & Rate-Limiting Micro-Pacing
 # ---------------------------------------------------------------------------
 SCAN_INTERVAL_MINUTES: int = int(os.getenv("SCAN_INTERVAL_MINUTES", "60"))
+REQUEST_PACE_DELAY_SEC: float = float(os.getenv("REQUEST_PACE_DELAY_SEC", "0.1"))
 
 # ---------------------------------------------------------------------------
 # Logging Configuration
@@ -193,5 +194,6 @@ def configure_logging() -> None:
             
     # Suppress noisy third-party loggers
     logging.getLogger("urllib3").setLevel(logging.WARNING)
-    logging.getLogger("yfinance").setLevel(logging.CRITICAL + 1)
+    logging.getLogger("yfinance").setLevel(logging.WARNING)
     logging.getLogger("binance").setLevel(logging.WARNING)
+

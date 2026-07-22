@@ -5,6 +5,8 @@ import CapitulationPanel from './components/CapitulationPanel';
 import AnalyticsChart from './components/AnalyticsChart';
 import OpenPositions from './components/OpenPositions';
 import TradeHistory from './components/TradeHistory';
+import { safeDateParse } from './utils/dateUtils';
+import { fetchCapitulationSignals, fetchCandidates, fetchLivePrices, BACKEND_URL } from './services/api';
 
 // Import fallback mock data in case localStorage is empty initially
 import {
@@ -14,8 +16,6 @@ import {
   tradeHistory as fallbackTradeHistory,
   dailyAnalytics
 } from './data/mockData';
-
-const BACKEND_URL = 'https://breakout-scanner-xg9f.onrender.com';
 
 export default function App() {
   const [candidates, setCandidates] = useState(() => {
@@ -131,6 +131,11 @@ export default function App() {
     const saved = localStorage.getItem('ignoredCandidates');
     return saved ? JSON.parse(saved) : [];
   });
+
+  const [approvedCandidates, setApprovedCandidates] = useState(() => {
+    const saved = localStorage.getItem('approvedCandidates');
+    return saved ? JSON.parse(saved) : [];
+  });
   
   const [time, setTime] = useState(new Date());
   const [isScanning, setIsScanning] = useState(false);
@@ -138,7 +143,10 @@ export default function App() {
   const [approveModalSize, setApproveModalSize] = useState(1000);
   const [approveModalEntryPrice, setApproveModalEntryPrice] = useState(0);
   const [livePriceMap, setLivePriceMap] = useState({});
-  const [capitulationSignals, setCapitulationSignals] = useState([]);
+  const [capitulationSignals, setCapitulationSignals] = useState(() => {
+    const saved = localStorage.getItem('capitulationSignals');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [isScanningCap, setIsScanningCap] = useState(false);
 
   // Real-time clock update
@@ -151,6 +159,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('candidates', JSON.stringify(candidates));
   }, [candidates]);
+
+  useEffect(() => {
+    localStorage.setItem('capitulationSignals', JSON.stringify(capitulationSignals));
+  }, [capitulationSignals]);
 
   const [isLoadedFromCloud, setIsLoadedFromCloud] = useState(false);
 
@@ -211,77 +223,44 @@ export default function App() {
     localStorage.setItem('ignoredCandidates', JSON.stringify(ignoredCandidates));
   }, [ignoredCandidates]);
 
+  useEffect(() => {
+    localStorage.setItem('approvedCandidates', JSON.stringify(approvedCandidates));
+  }, [approvedCandidates]);
+
   // Fetch real-time prices for candidates, capitulations, and open positions via backend proxy every 10s (batch request)
   useEffect(() => {
-    const fetchLivePrices = async () => {
-      try {
-        const allTickers = [
-          ...openPositions.map(pos => pos.ticker),
-          ...candidates.map(c => c.ticker),
-          ...capitulationSignals.map(c => c.ticker)
-        ];
-        const uniqueSymbols = [...new Set(allTickers)].filter(Boolean);
-        if (uniqueSymbols.length === 0) return;
+    const updateLivePrices = async () => {
+      const allTickers = [
+        ...openPositions.map(pos => pos.ticker),
+        ...candidates.map(c => c.ticker),
+        ...capitulationSignals.map(c => c.ticker)
+      ];
+      const priceMap = await fetchLivePrices(allTickers);
+      if (Object.keys(priceMap).length > 0) {
+        setLivePriceMap(priceMap);
 
-        const tickersParam = uniqueSymbols.join(',');
-        const resp = await fetch(`${BACKEND_URL}/api/prices?tickers=${tickersParam}`);
-        if (resp.ok) {
-          const priceMap = await resp.json();
-          setLivePriceMap(priceMap);
-
-          // Update open position current prices
-          setOpenPositions(prev =>
-            prev.map(pos => {
-              const livePrice = priceMap[pos.ticker];
-              if (livePrice && livePrice > 0) {
-                return { ...pos, current: livePrice };
-              }
-              return pos;
-            })
-          );
-        }
-      } catch (err) {
-        console.warn('Live price fetch failed:', err);
+        // Update open position current prices
+        setOpenPositions(prev =>
+          prev.map(pos => {
+            const livePrice = priceMap[pos.ticker];
+            if (livePrice && livePrice > 0) {
+              return { ...pos, current: livePrice };
+            }
+            return pos;
+          })
+        );
       }
     };
 
-    fetchLivePrices();
-    const timer = setInterval(fetchLivePrices, 10000); // Every 10 seconds
+    updateLivePrices();
+    const timer = setInterval(updateLivePrices, 10000); // Every 10 seconds
     return () => clearInterval(timer);
   }, [openPositions.length, candidates.length, capitulationSignals.length]);
 
-  // Fetch actual candidates using Dual-Fetch Fallback
+  // Fetch actual candidates using API Service
   useEffect(() => {
-    const fetchCandidates = async () => {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 12000);
-      
-      let data = [];
-      try {
-        const resp = await fetch(`${BACKEND_URL}/api/candidates`, { signal: controller.signal });
-        clearTimeout(timeoutId);
-        if (resp.ok) {
-          data = await resp.json();
-          console.log("Successfully fetched candidates from Render backend.");
-        } else {
-          throw new Error('Render response not ok');
-        }
-      } catch (e) {
-        clearTimeout(timeoutId);
-        console.warn('Render backend unreachable or asleep, falling back to local Netlify signals...', e);
-        try {
-          const resp = await fetch('/recent_signals.json');
-          if (resp.ok) {
-            data = await resp.json();
-            console.log("Successfully fetched candidates from Netlify CDN.");
-          } else {
-            throw new Error('Netlify JSON response not ok');
-          }
-        } catch (err) {
-          console.error('Failed to fetch candidates from both Render and Netlify:', err);
-          return;
-        }
-      }
+    const loadCandidates = async () => {
+      const data = await fetchCandidates();
         
       setCandidates((prevCandidates) => {
         const existingIds = new Set(prevCandidates.map(c => `${c.ticker}_${c.timestamp}`));
@@ -289,6 +268,8 @@ export default function App() {
         const openIds = new Set(savedOpen.map(p => p.ticker));
         const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
         const ignoredSet = new Set(savedIgnored);
+        const savedApproved = JSON.parse(localStorage.getItem('approvedCandidates') || '[]');
+        const approvedSet = new Set(savedApproved);
         
         const newCandidates = data
           .map((c, index) => {
@@ -316,7 +297,7 @@ export default function App() {
             }
 
             return {
-              id: c.id || `fetched_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
+              id: c.id || `fetched_${c.ticker}_${safeDateParse(c.timestamp)}_${index}`,
               ticker: c.ticker,
               market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
               direction: directionVal,
@@ -336,15 +317,16 @@ export default function App() {
             };
           })
           .filter(c => !existingIds.has(`${c.ticker}_${c.timestamp}`) && 
-                       !ignoredSet.has(`${c.ticker}_${c.timestamp}`));
+                       !ignoredSet.has(`${c.ticker}_${c.timestamp}`) &&
+                       !approvedSet.has(`${c.ticker}_${c.timestamp}`));
           
         return [...prevCandidates, ...newCandidates];
       });
     };
 
-    fetchCandidates();
+    loadCandidates();
     // Poll every 2 minutes
-    const interval = setInterval(fetchCandidates, 2 * 60 * 1000);
+    const interval = setInterval(loadCandidates, 2 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -374,39 +356,15 @@ export default function App() {
     }
   };
 
-  // Fetch capitulation signals (Dual-Fetch Fallback)
+  // Fetch capitulation signals (using API Service)
   useEffect(() => {
-    const fetchCapitulation = async () => {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 12000);
+    const loadCapitulation = async () => {
+      const data = await fetchCapitulationSignals();
       
-      let data = [];
-      try {
-        const resp = await fetch(`${BACKEND_URL}/api/capitulation`, { signal: controller.signal });
-        clearTimeout(timeoutId);
-        if (resp.ok) {
-          data = await resp.json();
-          console.log("Successfully fetched capitulation signals from Render backend.");
-        } else {
-          throw new Error('Render response not ok');
-        }
-      } catch (e) {
-        clearTimeout(timeoutId);
-        console.warn('Render capitulation fetch failed or timed out — trying local fallback:', e);
-        try {
-          const resp = await fetch('/capitulation_signals.json');
-          if (resp.ok) {
-            data = await resp.json();
-            console.log("Successfully loaded cached capitulation signals from Netlify CDN.");
-          }
-        } catch (err) {
-          console.error("Local capitulation fallback failed:", err);
-        }
-      }
-      
-      // Filter out ignored ones
       const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
       const ignoredSet = new Set(savedIgnored);
+      const savedApproved = JSON.parse(localStorage.getItem('approvedCandidates') || '[]');
+      const approvedSet = new Set(savedApproved);
       const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
       const openIds = new Set(savedOpen.map(p => p.ticker));
 
@@ -414,7 +372,7 @@ export default function App() {
         .map((c, index) => {
           const entryVal = c.entry_price || 0;
           return {
-            id: c.id || `cap_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
+            id: c.id || `cap_${c.ticker}_${safeDateParse(c.timestamp)}_${index}`,
             ticker: c.ticker,
             market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
             direction: 'LONG', // Capitulation is always buy-oriented
@@ -441,13 +399,13 @@ export default function App() {
             inPosition: openIds.has(c.ticker)
           };
         })
-        .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`));
+        .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`) && !approvedSet.has(`${c.ticker}_${c.timestamp}`));
       
       setCapitulationSignals(mapped);
     };
     
-    fetchCapitulation();
-    const interval = setInterval(fetchCapitulation, 2 * 60 * 1000);
+    loadCapitulation();
+    const interval = setInterval(loadCapitulation, 2 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -468,43 +426,42 @@ export default function App() {
         alert('Análisis de capitulación iniciado. Los resultados aparecerán en ~2 minutos.');
         setTimeout(async () => {
           try {
-            const r = await fetch(`${BACKEND_URL}/api/capitulation`);
-            if (r.ok) {
-              const capData = await r.json();
-              const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
-              const ignoredSet = new Set(savedIgnored);
-              const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
-              const openIds = new Set(savedOpen.map(p => p.ticker));
-              
-              const mapped = capData
-                .map((c, index) => ({
-                  id: c.id || `cap_${c.ticker}_${Date.parse(c.timestamp)}_${index}`,
-                  ticker: c.ticker,
-                  market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
-                  direction: 'LONG',
-                  brokenLevel: c.val || c.entry_price,
-                  entry: c.entry_price,
-                  stopLoss: c.stop_loss,
-                  takeProfit: c.take_profit,
-                  volume_ratio: c.volume_ratio,
-                  timestamp: c.timestamp,
-                  type: 'capitulation',
-                  verdict: c.verdict,
-                  drop_pct: c.drop_pct,
-                  confidence_score: c.confidence_score,
-                  analysis_summary: c.analysis_summary,
-                  poc: c.poc,
-                  vah: c.vah,
-                  val: c.val,
-                  fvg_zone: c.fvg_zone,
-                  ob_zone: c.ob_zone,
-                  msb_type: c.msb_type,
-                  is_idiosyncratic: c.is_idiosyncratic,
-                  fundamental_ok: c.fundamental_ok
-                }))
-                .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`) && !openIds.has(c.ticker));
-              setCapitulationSignals(mapped);
-            }
+            const capData = await fetchCapitulationSignals();
+            const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
+            const ignoredSet = new Set(savedIgnored);
+            const savedApproved = JSON.parse(localStorage.getItem('approvedCandidates') || '[]');
+            const approvedSet = new Set(savedApproved);
+            const savedOpen = JSON.parse(localStorage.getItem('openPositions') || '[]');
+            const openIds = new Set(savedOpen.map(p => p.ticker));
+            
+            const mapped = capData
+              .map((c, index) => ({
+                id: c.id || `cap_${c.ticker}_${safeDateParse(c.timestamp)}_${index}`,
+                ticker: c.ticker,
+                market: c.market === 'US_EQUITIES' ? 'US Equities' : 'Crypto',
+                direction: 'LONG',
+                brokenLevel: c.val || c.entry_price,
+                entry: c.entry_price,
+                stopLoss: c.stop_loss,
+                takeProfit: c.take_profit,
+                volume_ratio: c.volume_ratio,
+                timestamp: c.timestamp,
+                type: 'capitulation',
+                verdict: c.verdict,
+                drop_pct: c.drop_pct,
+                confidence_score: c.confidence_score,
+                analysis_summary: c.analysis_summary,
+                poc: c.poc,
+                vah: c.vah,
+                val: c.val,
+                fvg_zone: c.fvg_zone,
+                ob_zone: c.ob_zone,
+                msb_type: c.msb_type,
+                is_idiosyncratic: c.is_idiosyncratic,
+                fundamental_ok: c.fundamental_ok
+              }))
+              .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`) && !approvedSet.has(`${c.ticker}_${c.timestamp}`) && !openIds.has(c.ticker));
+            setCapitulationSignals(mapped);
           } catch (_) {}
         }, 120000);
       }
@@ -516,7 +473,7 @@ export default function App() {
     }
   };
 
-  // Handler to approve a breakout or capitulation signal (move candidate to open positions)
+  // Handler to approve a breakout or capitulation signal (move candidate to open positions and persist approval)
   const handleApprove = (candidate, customSize, customEntryPrice) => {
     const tradeSize = customSize !== undefined ? customSize : capitalPerTrade;
     const actualEntry = (customEntryPrice !== undefined && Number(customEntryPrice) > 0) ? Number(customEntryPrice) : candidate.entry;
@@ -536,6 +493,12 @@ export default function App() {
       pnl: 0.00,
       pnlPct: 0.00
     };
+
+    const key = `${candidate.ticker}_${candidate.timestamp}`;
+    setApprovedCandidates((prev) => {
+      if (prev.includes(key)) return prev;
+      return [...prev, key];
+    });
 
     setOpenPositions([newPosition, ...openPositions]);
     setCandidates(candidates.filter((c) => c.id !== candidate.id));

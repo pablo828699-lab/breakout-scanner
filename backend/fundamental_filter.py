@@ -18,7 +18,10 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+import requests
 import yfinance as yf
+
+from backend.data_fetcher import get_shared_session
 
 logger = logging.getLogger(__name__)
 
@@ -77,13 +80,17 @@ def _extract_latest_column(df: pd.DataFrame) -> pd.Series | None:
 # Public API
 # ---------------------------------------------------------------------------
 
-def fetch_fundamentals(ticker: str) -> dict[str, float | None] | None:
+def fetch_fundamentals(
+    ticker: str, session: requests.Session | None = None
+) -> dict[str, float | None] | None:
     """Fetch key solvency-related fundamentals for *ticker* via yfinance.
 
     Parameters
     ----------
     ticker : str
         US equity ticker symbol (e.g. ``"AAPL"``).
+    session : requests.Session | None
+        Optional shared HTTP session with configured User-Agent headers.
 
     Returns
     -------
@@ -93,7 +100,10 @@ def fetch_fundamentals(ticker: str) -> dict[str, float | None] | None:
         Returns ``None`` when data is completely unavailable.
     """
     try:
-        info = yf.Ticker(ticker)
+        if session is None:
+            session = get_shared_session()
+
+        info = yf.Ticker(ticker, session=session)
 
         income_stmt = _extract_latest_column(info.quarterly_financials)
         balance_sheet = _extract_latest_column(info.quarterly_balance_sheet)
@@ -309,6 +319,7 @@ def run_fundamental_filter(
     market: str,
     daily_df: pd.DataFrame | None = None,
     benchmark_df: pd.DataFrame | None = None,
+    session: requests.Session | None = None,
 ) -> dict[str, Any]:
     """Orchestrate the correct filter pipeline based on asset market.
 
@@ -322,6 +333,8 @@ def run_fundamental_filter(
         Daily OHLCV of the ticker (required for ``CRYPTO``).
     benchmark_df : pd.DataFrame | None
         Daily OHLCV of the benchmark, e.g. BTC-USD (required for ``CRYPTO``).
+    session : requests.Session | None
+        Optional shared HTTP session with configured User-Agent headers.
 
     Returns
     -------
@@ -333,7 +346,7 @@ def run_fundamental_filter(
     market_upper = market.upper().replace(" ", "_")
 
     if market_upper == "US_EQUITIES":
-        fundamentals = fetch_fundamentals(ticker)
+        fundamentals = fetch_fundamentals(ticker, session=session)
         if fundamentals is None:
             logger.warning(
                 "Fundamental filter FAIL for %s — no data available.", ticker

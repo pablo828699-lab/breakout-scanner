@@ -39,8 +39,10 @@ jobs:
 
       - name: Sync signals to Render backend
         run: |
-          curl -s -X POST -H "Content-Type: application/json" --data-binary @backend/capitulation_signals.json https://breakout-scanner-xg9f.onrender.com/api/capitulation || true
-          curl -s -X POST -H "Content-Type: application/json" --data-binary @backend/recent_signals.json https://breakout-scanner-xg9f.onrender.com/api/candidates || true
+          echo "Syncing capitulation signals..."
+          curl -s --retry 5 --retry-delay 10 --retry-connrefused --max-time 60 -X POST -H "Content-Type: application/json" --data-binary @backend/capitulation_signals.json https://breakout-scanner-xg9f.onrender.com/api/capitulation || echo "Capitulation sync warning"
+          echo "Syncing candidate signals..."
+          curl -s --retry 5 --retry-delay 10 --retry-connrefused --max-time 60 -X POST -H "Content-Type: application/json" --data-binary @backend/recent_signals.json https://breakout-scanner-xg9f.onrender.com/api/candidates || echo "Candidates sync warning"
 
       - name: Commit and push changes
         run: |
