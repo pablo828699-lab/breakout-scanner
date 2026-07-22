@@ -66,60 +66,35 @@ def detect_shock(
     volume = daily_df["Volume"].astype(float)
     low = daily_df["Low"].astype(float)
 
-    lookback_bars = min(3, len(daily_df) - 21)
-    min_effective_drop = 0.0
-    best_bar_idx = -1
-    best_cap_low = float(low.iloc[-1])
-    best_vol_ratio = 1.0
+    # Evaluate shock strictly on the latest candle (bar -1) to ensure signal reflects current market state
+    prev_close = float(close.iloc[-2])
+    if prev_close <= 0:
+        return None
 
-    for i in range(-1, -1 - lookback_bars, -1):
-        prev_close = float(close.iloc[i - 1])
-        if prev_close <= 0:
-            continue
-        daily_return = float((close.iloc[i] / prev_close) - 1.0)
-        intraday_return = float((low.iloc[i] / prev_close) - 1.0)
-        effective_drop = min(daily_return, intraday_return)
+    daily_return = float((close.iloc[-1] / prev_close) - 1.0)
+    intraday_return = float((low.iloc[-1] / prev_close) - 1.0)
+    effective_drop = min(daily_return, intraday_return)
 
-        if effective_drop < min_effective_drop:
-            min_effective_drop = effective_drop
-            best_bar_idx = i
-            best_cap_low = float(low.iloc[i])
-            vol_sma_20 = float(volume.iloc[i - 20 : i].mean())
-            best_vol_ratio = float(volume.iloc[i] / vol_sma_20) if vol_sma_20 > 0 else 1.0
+    vol_sma_20 = float(volume.iloc[-21:-1].mean())
+    vol_ratio = float(volume.iloc[-1] / vol_sma_20) if vol_sma_20 > 0 else 1.0
 
-    # ── Cumulative multi-day drop detector ──
-    # Catches gradual capitulations where no single bar hits the threshold
-    if min_effective_drop > threshold_pct and lookback_bars >= 2:
-        cumulative_threshold = threshold_pct * CUMULATIVE_DROP_MULT
-        ref_close = float(close.iloc[-1 - lookback_bars])
-        if ref_close > 0:
-            cumulative_drop = float((close.iloc[-1] / ref_close) - 1.0)
-            if cumulative_drop <= cumulative_threshold:
-                min_effective_drop = cumulative_drop
-                best_bar_idx = -lookback_bars
-                best_cap_low = float(low.iloc[-lookback_bars:].min())
-                vol_window = volume.iloc[-lookback_bars:]
-                vol_sma_20 = float(volume.iloc[-lookback_bars - 20 : -lookback_bars].mean())
-                best_vol_ratio = float(vol_window.mean() / vol_sma_20) if vol_sma_20 > 0 else 1.0
+    if effective_drop > threshold_pct:
+        return None  # Current candle drop does not meet threshold
 
-    if min_effective_drop > threshold_pct:
-        return None  # No shock detected in recent lookback
-
-    window_low = float(low.iloc[-lookback_bars:].min())
-    capitulation_low = min(best_cap_low, window_low)
+    capitulation_low = float(low.iloc[-1])
 
     logger.info(
-        "SHOCK detected: effective_return=%.2f%%, low=%.4f, vol_ratio=%.2fx (bar_idx=%d)",
-        min_effective_drop * 100, capitulation_low, best_vol_ratio, best_bar_idx,
+        "SHOCK detected on current candle: effective_return=%.2f%%, low=%.4f, vol_ratio=%.2fx",
+        effective_drop * 100, capitulation_low, vol_ratio,
     )
 
     return ShockResult(
         ticker="",  # Will be set by the caller
-        drop_pct=round(min_effective_drop, 4),
+        drop_pct=round(effective_drop, 4),
         is_idiosyncratic=True,  # Will be refined by benchmark comparison
         benchmark_drop_pct=0.0,  # Will be set by the caller
         capitulation_low=capitulation_low,
-        capitulation_volume_ratio=round(best_vol_ratio, 2),
+        capitulation_volume_ratio=round(vol_ratio, 2),
     )
 
 

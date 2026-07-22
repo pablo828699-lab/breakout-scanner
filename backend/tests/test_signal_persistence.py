@@ -57,12 +57,11 @@ class TestSignalPersistence(unittest.TestCase):
         dt_obj = parse_iso_timestamp(now_utc)
         self.assertEqual(dt_obj, now_utc)
 
-    def test_detect_shock_marginal_bar_preservation(self):
-        """Verify detect_shock retains shock detection over a 3-bar window despite day 2 stabilization."""
-        # Create a 25-day daily_df
+    def test_detect_shock_current_candle_policy(self):
+        """Verify detect_shock evaluates shock strictly on the latest candle."""
         dates = pd.date_range(end=datetime.now(timezone.utc), periods=25, freq="D")
-        close_prices = [100.0] * 22 + [95.0, 95.5, 96.0]  # Bar -3 dropped 5%, Bar -2 and -1 stabilized
-        low_prices = [99.5] * 22 + [94.5, 95.0, 95.5]
+        close_prices = [100.0] * 23 + [100.0, 95.0]  # Bar -1 dropped 5%
+        low_prices = [99.5] * 23 + [99.5, 94.5]
         volume_data = [10000.0] * 25
 
         daily_df = pd.DataFrame({
@@ -73,7 +72,6 @@ class TestSignalPersistence(unittest.TestCase):
             "Volume": volume_data,
         }, index=dates)
 
-        # Shock occurred at bar -3 (-5.0% drop). Day 2 (bar -2) and Day 3 (bar -1) are flat/rebounding.
         shock = detect_shock(daily_df, threshold_pct=-0.02)
         self.assertIsNotNone(shock)
         self.assertLessEqual(shock.drop_pct, -0.045)
