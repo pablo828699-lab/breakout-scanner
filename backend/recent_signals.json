@@ -4,18 +4,17 @@
     "ticker": "ONDOUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 0.4168,
+    "price": 0.4088,
     "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
+      "DONCHIAN_15"
     ],
-    "adx": 18.6,
-    "volume_ratio": 2.64,
-    "roc_pct": 23.9,
+    "adx": 20.7,
+    "volume_ratio": 1.49,
+    "roc_pct": 27.9,
     "ema_stack": false,
-    "timestamp": "2026-07-22T15:40:00.247907+00:00",
+    "timestamp": "2026-07-23T04:14:18.352860+00:00",
     "first_detected": "2026-07-22T02:26:48.618210+00:00",
-    "last_updated": "2026-07-22T15:40:00.247907+00:00"
+    "last_updated": "2026-07-23T04:14:18.352860+00:00"
   },
   {
     "type": "radar",
