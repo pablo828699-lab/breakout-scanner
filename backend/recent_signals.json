@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "ONDOUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.4024,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.7,
+    "volume_ratio": 1.49,
+    "roc_pct": 27.9,
+    "ema_stack": false,
+    "timestamp": "2026-07-23T17:20:20.218251+00:00",
+    "first_detected": "2026-07-22T02:26:48.618210+00:00",
+    "last_updated": "2026-07-23T17:20:20.218251+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "RIOT",
     "market": "US_EQUITIES",
     "direction": "UP",
@@ -67,39 +84,5 @@
     "timestamp": "2026-07-23T15:07:30.684540+00:00",
     "first_detected": "2026-07-23T15:07:30.684540+00:00",
     "last_updated": "2026-07-23T15:07:30.684540+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ONDOUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.4088,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 20.7,
-    "volume_ratio": 1.49,
-    "roc_pct": 27.9,
-    "ema_stack": false,
-    "timestamp": "2026-07-23T04:14:18.352860+00:00",
-    "first_detected": "2026-07-22T02:26:48.618210+00:00",
-    "last_updated": "2026-07-23T04:14:18.352860+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "RUNEUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.438,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.6,
-    "volume_ratio": 0.84,
-    "roc_pct": 11.85,
-    "ema_stack": false,
-    "timestamp": "2026-07-22T15:39:58.683792+00:00",
-    "first_detected": "2026-07-22T02:26:47.069106+00:00",
-    "last_updated": "2026-07-22T15:39:58.683792+00:00"
   }
 ]
