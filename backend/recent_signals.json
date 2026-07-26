@@ -4,7 +4,7 @@
     "ticker": "ARBUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.0824,
+    "price": 0.0827,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -12,25 +12,8 @@
     "volume_ratio": 0.28,
     "roc_pct": -6.78,
     "ema_stack": true,
-    "timestamp": "2026-07-26T03:21:20.187055+00:00",
+    "timestamp": "2026-07-26T16:57:04.360674+00:00",
     "first_detected": "2026-07-26T03:21:20.187055+00:00",
-    "last_updated": "2026-07-26T03:21:20.187055+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ATOMUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 1.384,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 36.6,
-    "volume_ratio": 0.97,
-    "roc_pct": -10.87,
-    "ema_stack": true,
-    "timestamp": "2026-07-25T16:09:33.109709+00:00",
-    "first_detected": "2026-07-24T02:52:39.678894+00:00",
-    "last_updated": "2026-07-25T16:09:33.109709+00:00"
+    "last_updated": "2026-07-26T16:57:04.360674+00:00"
   }
 ]
