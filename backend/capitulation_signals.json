@@ -6,10 +6,10 @@
     "verdict": "APTO_COMPRA_ASIMETRICA",
     "drop_pct": -0.0307,
     "entry_price": 0.04398,
-    "stop_loss": 0.042535,
+    "stop_loss": 0.042534,
     "take_profit": 0.048696,
     "rr_ratio": 3.26,
-    "position_size_qty": 692041.522491,
+    "position_size_qty": 691562.932227,
     "poc": 0.047426,
     "vah": 0.048696,
     "val": 0.04442,
@@ -26,9 +26,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.9,
     "analysis_summary": "Ca\u00edda de 3.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 32 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:3.3 (VAH) | Confianza: 90%",
-    "timestamp": "2026-07-26T11:19:18.112981+00:00",
+    "timestamp": "2026-07-26T13:17:20.449485+00:00",
     "first_detected": "2026-07-26T09:12:03.974649+00:00",
-    "last_updated": "2026-07-26T11:19:18.112981+00:00"
+    "last_updated": "2026-07-26T13:17:20.449485+00:00"
   },
   {
     "type": "asymmetric",
@@ -57,9 +57,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.65,
     "analysis_summary": "Ca\u00edda de 7.7% (sist\u00e9mica) | Entrada: POC_FALLBACK | 79 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.7 (VAH) | Confianza: 65%",
-    "timestamp": "2026-07-26T11:19:14.965104+00:00",
+    "timestamp": "2026-07-26T13:17:17.648640+00:00",
     "first_detected": "2026-07-22T13:48:54.393462+00:00",
-    "last_updated": "2026-07-26T11:19:14.965104+00:00"
+    "last_updated": "2026-07-26T13:17:17.648640+00:00"
   },
   {
     "type": "asymmetric",
@@ -88,9 +88,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.55,
     "analysis_summary": "Ca\u00edda de 5.1% (sist\u00e9mica) | Entrada: POC_FALLBACK | 53 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.6 (FVG_TARGET) | Confianza: 55%",
-    "timestamp": "2026-07-26T11:19:11.425338+00:00",
+    "timestamp": "2026-07-26T13:17:14.455253+00:00",
     "first_detected": "2026-07-23T15:09:41.359265+00:00",
-    "last_updated": "2026-07-26T11:19:11.425338+00:00"
+    "last_updated": "2026-07-26T13:17:14.455253+00:00"
   },
   {
     "type": "asymmetric",
@@ -119,9 +119,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.65,
     "analysis_summary": "Ca\u00edda de 4.2% (sist\u00e9mica) | Entrada: POC_FALLBACK | 33 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.4 (FVG_TARGET) | Confianza: 65%",
-    "timestamp": "2026-07-26T11:19:10.931363+00:00",
+    "timestamp": "2026-07-26T13:17:14.056343+00:00",
     "first_detected": "2026-07-23T15:09:40.425807+00:00",
-    "last_updated": "2026-07-26T11:19:10.931363+00:00"
+    "last_updated": "2026-07-26T13:17:14.056343+00:00"
   },
   {
     "type": "asymmetric",
@@ -150,9 +150,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.65,
     "analysis_summary": "Ca\u00edda de 2.9% (sist\u00e9mica) | Entrada: POC_FALLBACK | 51 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:10.9 (FVG_TARGET) | Confianza: 65%",
-    "timestamp": "2026-07-26T11:19:09.970828+00:00",
+    "timestamp": "2026-07-26T13:17:13.226524+00:00",
     "first_detected": "2026-07-22T01:09:41.627821+00:00",
-    "last_updated": "2026-07-26T11:19:09.970828+00:00"
+    "last_updated": "2026-07-26T13:17:13.226524+00:00"
   },
   {
     "type": "asymmetric",
@@ -181,9 +181,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.65,
     "analysis_summary": "Ca\u00edda de 4.8% (sist\u00e9mica) | Entrada: POC_FALLBACK | 44 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:5.7 (FVG_TARGET) | Confianza: 65%",
-    "timestamp": "2026-07-26T11:19:05.259133+00:00",
+    "timestamp": "2026-07-26T13:17:08.985776+00:00",
     "first_detected": "2026-07-23T15:09:34.213450+00:00",
-    "last_updated": "2026-07-26T11:19:05.259133+00:00"
+    "last_updated": "2026-07-26T13:17:08.985776+00:00"
   },
   {
     "type": "asymmetric",
@@ -212,9 +212,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.65,
     "analysis_summary": "Ca\u00edda de 2.9% (sist\u00e9mica) | Entrada: POC_FALLBACK | 11 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.8 (VAH) | Confianza: 65%",
-    "timestamp": "2026-07-26T11:19:04.875962+00:00",
+    "timestamp": "2026-07-26T13:17:08.555521+00:00",
     "first_detected": "2026-07-25T07:14:54.098523+00:00",
-    "last_updated": "2026-07-26T11:19:04.875962+00:00"
+    "last_updated": "2026-07-26T13:17:08.555521+00:00"
   },
   {
     "type": "asymmetric",
@@ -243,9 +243,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.75,
     "analysis_summary": "Ca\u00edda de 8.0% (sist\u00e9mica) | Entrada: POC_FALLBACK | 72 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:5.7 (FVG_TARGET) | Confianza: 75%",
-    "timestamp": "2026-07-26T11:19:04.000245+00:00",
+    "timestamp": "2026-07-26T13:17:07.738040+00:00",
     "first_detected": "2026-07-24T21:01:33.643898+00:00",
-    "last_updated": "2026-07-26T11:19:04.000245+00:00"
+    "last_updated": "2026-07-26T13:17:07.738040+00:00"
   },
   {
     "type": "asymmetric",
@@ -274,9 +274,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.55,
     "analysis_summary": "Ca\u00edda de 3.3% (sist\u00e9mica) | Entrada: POC_FALLBACK | 34 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.3 (FVG_TARGET) | Confianza: 55%",
-    "timestamp": "2026-07-26T11:19:03.511474+00:00",
+    "timestamp": "2026-07-26T13:17:07.315565+00:00",
     "first_detected": "2026-07-22T15:41:48.912054+00:00",
-    "last_updated": "2026-07-26T11:19:03.511474+00:00"
+    "last_updated": "2026-07-26T13:17:07.315565+00:00"
   },
   {
     "type": "asymmetric",
