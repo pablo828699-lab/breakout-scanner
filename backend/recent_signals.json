@@ -1,6 +1,57 @@
 [
   {
     "type": "radar",
+    "ticker": "ORCL",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 119.669998,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 40.3,
+    "volume_ratio": 1.18,
+    "roc_pct": -18.24,
+    "ema_stack": true,
+    "timestamp": "2026-07-27T15:41:36.808531+00:00",
+    "first_detected": "2026-07-27T15:41:36.808531+00:00",
+    "last_updated": "2026-07-27T15:41:36.808531+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ABT",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 105.529999,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 26.6,
+    "volume_ratio": 0.77,
+    "roc_pct": 10.5,
+    "ema_stack": false,
+    "timestamp": "2026-07-27T15:41:28.519338+00:00",
+    "first_detected": "2026-07-27T15:41:28.519338+00:00",
+    "last_updated": "2026-07-27T15:41:28.519338+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "TSLA",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 307.970001,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.2,
+    "volume_ratio": 1.46,
+    "roc_pct": -23.23,
+    "ema_stack": true,
+    "timestamp": "2026-07-27T15:41:19.356056+00:00",
+    "first_detected": "2026-07-27T15:41:19.356056+00:00",
+    "last_updated": "2026-07-27T15:41:19.356056+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "AAVEUSDT",
     "market": "CRYPTO",
     "direction": "UP",
