@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "AAVEUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 101.68,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 23.8,
+    "volume_ratio": 1.29,
+    "roc_pct": 11.27,
+    "ema_stack": false,
+    "timestamp": "2026-07-27T00:04:53.114928+00:00",
+    "first_detected": "2026-07-27T00:04:53.114928+00:00",
+    "last_updated": "2026-07-27T00:04:53.114928+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 3.88,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 35.8,
+    "volume_ratio": 0.89,
+    "roc_pct": 10.0,
+    "ema_stack": false,
+    "timestamp": "2026-07-27T00:04:52.214328+00:00",
+    "first_detected": "2026-07-27T00:04:52.214328+00:00",
+    "last_updated": "2026-07-27T00:04:52.214328+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ARBUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
