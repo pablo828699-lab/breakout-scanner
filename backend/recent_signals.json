@@ -4,7 +4,7 @@
     "ticker": "WLDUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.3271,
+    "price": 0.3198,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -12,16 +12,16 @@
     "volume_ratio": 0.85,
     "roc_pct": -15.83,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:15.602119+00:00",
+    "timestamp": "2026-07-28T14:01:54.853229+00:00",
     "first_detected": "2026-07-28T00:06:15.602119+00:00",
-    "last_updated": "2026-07-28T00:06:15.602119+00:00"
+    "last_updated": "2026-07-28T14:01:54.853229+00:00"
   },
   {
     "type": "radar",
     "ticker": "GRTUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.01527,
+    "price": 0.01497,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -30,16 +30,16 @@
     "volume_ratio": 1.39,
     "roc_pct": -10.64,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:14.362071+00:00",
+    "timestamp": "2026-07-28T14:01:53.530576+00:00",
     "first_detected": "2026-07-28T00:06:14.362071+00:00",
-    "last_updated": "2026-07-28T00:06:14.362071+00:00"
+    "last_updated": "2026-07-28T14:01:53.530576+00:00"
   },
   {
     "type": "radar",
     "ticker": "RENDERUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 1.41,
+    "price": 1.408,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -48,16 +48,16 @@
     "volume_ratio": 1.25,
     "roc_pct": -4.47,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:13.563304+00:00",
+    "timestamp": "2026-07-28T14:01:52.816069+00:00",
     "first_detected": "2026-07-28T00:06:13.563304+00:00",
-    "last_updated": "2026-07-28T00:06:13.563304+00:00"
+    "last_updated": "2026-07-28T14:01:52.816069+00:00"
   },
   {
     "type": "radar",
     "ticker": "FILUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.6962,
+    "price": 0.6955,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -66,16 +66,16 @@
     "volume_ratio": 2.16,
     "roc_pct": -9.2,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:12.766464+00:00",
+    "timestamp": "2026-07-28T14:01:52.109656+00:00",
     "first_detected": "2026-07-28T00:06:12.766464+00:00",
-    "last_updated": "2026-07-28T00:06:12.766464+00:00"
+    "last_updated": "2026-07-28T14:01:52.109656+00:00"
   },
   {
     "type": "radar",
     "ticker": "TIAUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.3265,
+    "price": 0.327,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -83,16 +83,16 @@
     "volume_ratio": 0.61,
     "roc_pct": -13.92,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:10.652564+00:00",
+    "timestamp": "2026-07-28T14:01:49.760467+00:00",
     "first_detected": "2026-07-28T00:06:10.652564+00:00",
-    "last_updated": "2026-07-28T00:06:10.652564+00:00"
+    "last_updated": "2026-07-28T14:01:49.760467+00:00"
   },
   {
     "type": "radar",
     "ticker": "SEIUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.04187,
+    "price": 0.04238,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -101,16 +101,16 @@
     "volume_ratio": 1.67,
     "roc_pct": -10.3,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:09.873579+00:00",
+    "timestamp": "2026-07-28T14:01:49.057311+00:00",
     "first_detected": "2026-07-28T00:06:09.873579+00:00",
-    "last_updated": "2026-07-28T00:06:09.873579+00:00"
+    "last_updated": "2026-07-28T14:01:49.057311+00:00"
   },
   {
     "type": "radar",
     "ticker": "ATOMUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 1.299,
+    "price": 1.293,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -119,16 +119,16 @@
     "volume_ratio": 1.68,
     "roc_pct": -14.03,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:08.784272+00:00",
+    "timestamp": "2026-07-28T14:01:48.077944+00:00",
     "first_detected": "2026-07-28T00:06:08.784272+00:00",
-    "last_updated": "2026-07-28T00:06:08.784272+00:00"
+    "last_updated": "2026-07-28T14:01:48.077944+00:00"
   },
   {
     "type": "radar",
     "ticker": "ARBUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.0772,
+    "price": 0.078,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -136,16 +136,16 @@
     "volume_ratio": 0.64,
     "roc_pct": -14.9,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:07.777238+00:00",
+    "timestamp": "2026-07-28T14:01:47.093577+00:00",
     "first_detected": "2026-07-28T00:06:07.777238+00:00",
-    "last_updated": "2026-07-28T00:06:07.777238+00:00"
+    "last_updated": "2026-07-28T14:01:47.093577+00:00"
   },
   {
     "type": "radar",
     "ticker": "POLUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.07344,
+    "price": 0.07347,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -153,16 +153,16 @@
     "volume_ratio": 0.97,
     "roc_pct": -11.3,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:06.974876+00:00",
+    "timestamp": "2026-07-28T14:01:46.377673+00:00",
     "first_detected": "2026-07-28T00:06:06.974876+00:00",
-    "last_updated": "2026-07-28T00:06:06.974876+00:00"
+    "last_updated": "2026-07-28T14:01:46.377673+00:00"
   },
   {
     "type": "radar",
     "ticker": "AVAXUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 6.404,
+    "price": 6.425,
     "triggers": [
       "IMPULSE"
     ],
@@ -170,9 +170,60 @@
     "volume_ratio": 1.25,
     "roc_pct": -2.78,
     "ema_stack": true,
-    "timestamp": "2026-07-28T00:06:04.019573+00:00",
+    "timestamp": "2026-07-28T14:01:43.040264+00:00",
     "first_detected": "2026-07-28T00:06:04.019573+00:00",
-    "last_updated": "2026-07-28T00:06:04.019573+00:00"
+    "last_updated": "2026-07-28T14:01:43.040264+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ABT",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 108.940002,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 28.0,
+    "volume_ratio": 0.89,
+    "roc_pct": 14.25,
+    "ema_stack": false,
+    "timestamp": "2026-07-28T14:01:16.647025+00:00",
+    "first_detected": "2026-07-27T15:41:28.519338+00:00",
+    "last_updated": "2026-07-28T14:01:16.647025+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "JPM",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 356.0,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.3,
+    "volume_ratio": 0.76,
+    "roc_pct": 6.48,
+    "ema_stack": true,
+    "timestamp": "2026-07-28T14:01:10.740758+00:00",
+    "first_detected": "2026-07-28T14:01:10.740758+00:00",
+    "last_updated": "2026-07-28T14:01:10.740758+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "AAPL",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 337.890015,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 27.7,
+    "volume_ratio": 0.81,
+    "roc_pct": 6.18,
+    "ema_stack": true,
+    "timestamp": "2026-07-28T14:01:07.631915+00:00",
+    "first_detected": "2026-07-28T14:01:07.631915+00:00",
+    "last_updated": "2026-07-28T14:01:07.631915+00:00"
   },
   {
     "type": "radar",
@@ -278,23 +329,6 @@
   },
   {
     "type": "radar",
-    "ticker": "ABT",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 105.529999,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 26.6,
-    "volume_ratio": 0.77,
-    "roc_pct": 10.5,
-    "ema_stack": false,
-    "timestamp": "2026-07-27T15:41:28.519338+00:00",
-    "first_detected": "2026-07-27T15:41:28.519338+00:00",
-    "last_updated": "2026-07-27T15:41:28.519338+00:00"
-  },
-  {
-    "type": "radar",
     "ticker": "TSLA",
     "market": "US_EQUITIES",
     "direction": "DOWN",
@@ -309,39 +343,5 @@
     "timestamp": "2026-07-27T15:41:19.356056+00:00",
     "first_detected": "2026-07-27T15:41:19.356056+00:00",
     "last_updated": "2026-07-27T15:41:19.356056+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "AAVEUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 100.65,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 23.8,
-    "volume_ratio": 1.29,
-    "roc_pct": 11.27,
-    "ema_stack": false,
-    "timestamp": "2026-07-27T12:20:42.645823+00:00",
-    "first_detected": "2026-07-27T00:04:53.114928+00:00",
-    "last_updated": "2026-07-27T12:20:42.645823+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 3.849,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 35.8,
-    "volume_ratio": 0.89,
-    "roc_pct": 10.0,
-    "ema_stack": false,
-    "timestamp": "2026-07-27T12:20:41.778642+00:00",
-    "first_detected": "2026-07-27T00:04:52.214328+00:00",
-    "last_updated": "2026-07-27T12:20:41.778642+00:00"
   }
 ]
