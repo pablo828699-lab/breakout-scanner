@@ -1,6 +1,57 @@
 [
   {
     "type": "radar",
+    "ticker": "WLDUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.3049,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.9,
+    "volume_ratio": 0.88,
+    "roc_pct": -15.36,
+    "ema_stack": true,
+    "timestamp": "2026-07-29T16:21:03.419394+00:00",
+    "first_detected": "2026-07-28T00:06:15.602119+00:00",
+    "last_updated": "2026-07-29T16:21:03.419394+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "POLUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.07169,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.5,
+    "volume_ratio": 0.87,
+    "roc_pct": -10.18,
+    "ema_stack": true,
+    "timestamp": "2026-07-29T16:20:58.807324+00:00",
+    "first_detected": "2026-07-28T00:06:06.974876+00:00",
+    "last_updated": "2026-07-29T16:20:58.807324+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "JPM",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 348.429993,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.3,
+    "volume_ratio": 0.76,
+    "roc_pct": 6.48,
+    "ema_stack": true,
+    "timestamp": "2026-07-29T16:20:25.672392+00:00",
+    "first_detected": "2026-07-29T16:20:25.672392+00:00",
+    "last_updated": "2026-07-29T16:20:25.672392+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "MRVL",
     "market": "US_EQUITIES",
     "direction": "DOWN",
@@ -238,39 +289,5 @@
     "timestamp": "2026-07-29T14:04:38.131592+00:00",
     "first_detected": "2026-07-29T14:04:38.131592+00:00",
     "last_updated": "2026-07-29T14:04:38.131592+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "WLDUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 0.3087,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.9,
-    "volume_ratio": 0.88,
-    "roc_pct": -15.36,
-    "ema_stack": true,
-    "timestamp": "2026-07-29T02:28:28.867237+00:00",
-    "first_detected": "2026-07-28T00:06:15.602119+00:00",
-    "last_updated": "2026-07-29T02:28:28.867237+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "POLUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 0.07138,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.5,
-    "volume_ratio": 0.87,
-    "roc_pct": -10.18,
-    "ema_stack": true,
-    "timestamp": "2026-07-29T02:28:23.509485+00:00",
-    "first_detected": "2026-07-28T00:06:06.974876+00:00",
-    "last_updated": "2026-07-29T02:28:23.509485+00:00"
   }
 ]
