@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Scan Cycle
+      - name: Run Scan Cycle & Send Telegram Alerts
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -37,6 +37,7 @@ jobs:
           python -m backend.main --once
 
       - name: Sync signals to Render backend
+        if: always()
         run: |
           echo "Syncing capitulation signals..."
           curl -s --retry 5 --retry-delay 10 --retry-connrefused --max-time 60 -X POST -H "Content-Type: application/json" --data-binary @backend/capitulation_signals.json https://breakout-scanner-xg9f.onrender.com/api/capitulation || echo "Capitulation sync warning"
@@ -44,8 +45,14 @@ jobs:
           curl -s --retry 5 --retry-delay 10 --retry-connrefused --max-time 60 -X POST -H "Content-Type: application/json" --data-binary @backend/recent_signals.json https://breakout-scanner-xg9f.onrender.com/api/candidates || echo "Candidates sync warning"
 
       - name: Commit and push changes
+        if: always()
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add backend/recent_signals.json backend/last_alerts.json backend/capitulation_signals.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update recent signals and capitulations [skip ci]" && git push)
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-update recent signals and capitulations [skip ci]"
+            git push || echo "Git push failed or permission denied - skipping push"
+          else
+            echo "No signal changes to commit."
+          fi
