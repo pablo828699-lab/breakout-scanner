@@ -1,1 +1,141 @@
-[]
+[
+  {
+    "type": "radar",
+    "ticker": "PYTHUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.04105,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 33.6,
+    "volume_ratio": 0.97,
+    "roc_pct": -17.86,
+    "ema_stack": true,
+    "timestamp": "2026-07-30T23:07:41.802749+00:00",
+    "first_detected": "2026-07-30T23:07:41.802749+00:00",
+    "last_updated": "2026-07-30T23:07:41.802749+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "WLDUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.3071,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 21.4,
+    "volume_ratio": 1.09,
+    "roc_pct": -14.01,
+    "ema_stack": true,
+    "timestamp": "2026-07-30T23:07:39.687837+00:00",
+    "first_detected": "2026-07-30T23:07:39.687837+00:00",
+    "last_updated": "2026-07-30T23:07:39.687837+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "FILUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.7156,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 22.1,
+    "volume_ratio": 2.34,
+    "roc_pct": -5.74,
+    "ema_stack": true,
+    "timestamp": "2026-07-30T23:07:37.306365+00:00",
+    "first_detected": "2026-07-30T23:07:37.306365+00:00",
+    "last_updated": "2026-07-30T23:07:37.306365+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 4.436,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 37.2,
+    "volume_ratio": 1.63,
+    "roc_pct": 13.45,
+    "ema_stack": false,
+    "timestamp": "2026-07-30T23:07:35.612375+00:00",
+    "first_detected": "2026-07-30T23:07:35.612375+00:00",
+    "last_updated": "2026-07-30T23:07:35.612375+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "TIAUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.3291,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 21.0,
+    "volume_ratio": 0.78,
+    "roc_pct": -11.01,
+    "ema_stack": true,
+    "timestamp": "2026-07-30T23:07:34.330154+00:00",
+    "first_detected": "2026-07-30T23:07:34.330154+00:00",
+    "last_updated": "2026-07-30T23:07:34.330154+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ATOMUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 1.283,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 45.6,
+    "volume_ratio": 1.16,
+    "roc_pct": -13.13,
+    "ema_stack": true,
+    "timestamp": "2026-07-30T23:07:33.017096+00:00",
+    "first_detected": "2026-07-30T23:07:33.017096+00:00",
+    "last_updated": "2026-07-30T23:07:33.017096+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "POLUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.07161,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.9,
+    "volume_ratio": 0.71,
+    "roc_pct": -11.68,
+    "ema_stack": true,
+    "timestamp": "2026-07-30T23:07:31.737174+00:00",
+    "first_detected": "2026-07-30T23:07:31.737174+00:00",
+    "last_updated": "2026-07-30T23:07:31.737174+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "APTUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.57,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 25.8,
+    "volume_ratio": 1.42,
+    "roc_pct": -5.2,
+    "ema_stack": true,
+    "timestamp": "2026-07-30T23:07:30.885697+00:00",
+    "first_detected": "2026-07-30T23:07:30.885697+00:00",
+    "last_updated": "2026-07-30T23:07:30.885697+00:00"
+  }
+]
