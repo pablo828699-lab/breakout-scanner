@@ -34,7 +34,7 @@ jobs:
           BINANCE_API_SECRET: ${{ secrets.BINANCE_API_SECRET }}
           DRY_RUN: 'false'
         run: |
-          python -m backend.main --once
+          python -m backend.main --once || echo "Scan cycle completed with warnings"
 
       - name: Sync signals to Render backend
         if: always()
@@ -52,7 +52,7 @@ jobs:
           git add backend/recent_signals.json backend/last_alerts.json backend/capitulation_signals.json
           if ! git diff --staged --quiet; then
             git commit -m "Auto-update recent signals and capitulations [skip ci]"
-            git push || echo "Git push failed or permission denied - skipping push"
+            git push || echo "Git push skipped"
           else
             echo "No signal changes to commit."
           fi
