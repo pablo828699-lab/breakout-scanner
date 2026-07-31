@@ -1,6 +1,24 @@
 [
   {
     "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 4.36,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 39.1,
+    "volume_ratio": 2.16,
+    "roc_pct": 22.02,
+    "ema_stack": false,
+    "timestamp": "2026-07-31T11:57:58.515755+00:00",
+    "first_detected": "2026-07-30T23:07:35.612375+00:00",
+    "last_updated": "2026-07-31T11:57:58.515755+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "BNBUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -68,24 +86,6 @@
     "timestamp": "2026-07-30T23:07:37.306365+00:00",
     "first_detected": "2026-07-30T23:07:37.306365+00:00",
     "last_updated": "2026-07-30T23:07:37.306365+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 4.436,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 37.2,
-    "volume_ratio": 1.63,
-    "roc_pct": 13.45,
-    "ema_stack": false,
-    "timestamp": "2026-07-30T23:07:35.612375+00:00",
-    "first_detected": "2026-07-30T23:07:35.612375+00:00",
-    "last_updated": "2026-07-30T23:07:35.612375+00:00"
   },
   {
     "type": "radar",
