@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "MA",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 571.909973,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 32.2,
+    "volume_ratio": 1.78,
+    "roc_pct": 4.68,
+    "ema_stack": false,
+    "timestamp": "2026-07-31T14:08:49.152977+00:00",
+    "first_detected": "2026-07-31T14:08:49.152977+00:00",
+    "last_updated": "2026-07-31T14:08:49.152977+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "META",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 545.788025,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.6,
+    "volume_ratio": 2.21,
+    "roc_pct": -18.89,
+    "ema_stack": true,
+    "timestamp": "2026-07-31T14:08:45.859230+00:00",
+    "first_detected": "2026-07-31T14:08:45.859230+00:00",
+    "last_updated": "2026-07-31T14:08:45.859230+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "UP",
