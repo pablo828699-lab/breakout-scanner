@@ -1,6 +1,24 @@
 [
   {
     "type": "radar",
+    "ticker": "BNBUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 588.14,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 23.7,
+    "volume_ratio": 1.68,
+    "roc_pct": 3.63,
+    "ema_stack": false,
+    "timestamp": "2026-07-31T02:35:14.312823+00:00",
+    "first_detected": "2026-07-31T02:35:14.312823+00:00",
+    "last_updated": "2026-07-31T02:35:14.312823+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PYTHUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
