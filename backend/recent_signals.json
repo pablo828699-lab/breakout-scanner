@@ -4,7 +4,7 @@
     "ticker": "LDOUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.2785,
+    "price": 0.2995,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -13,9 +13,94 @@
     "volume_ratio": 3.85,
     "roc_pct": -24.34,
     "ema_stack": true,
-    "timestamp": "2026-08-05T00:12:03.475582+00:00",
+    "timestamp": "2026-08-05T14:14:02.884391+00:00",
     "first_detected": "2026-08-05T00:12:03.475582+00:00",
-    "last_updated": "2026-08-05T00:12:03.475582+00:00"
+    "last_updated": "2026-08-05T14:14:02.884391+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "USO",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 114.510002,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.6,
+    "volume_ratio": 0.99,
+    "roc_pct": -10.14,
+    "ema_stack": false,
+    "timestamp": "2026-08-05T14:13:47.559816+00:00",
+    "first_detected": "2026-08-05T14:13:47.559816+00:00",
+    "last_updated": "2026-08-05T14:13:47.559816+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "GE",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 383.855011,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.4,
+    "volume_ratio": 1.06,
+    "roc_pct": 10.74,
+    "ema_stack": true,
+    "timestamp": "2026-08-05T14:13:37.831254+00:00",
+    "first_detected": "2026-08-04T15:30:56.586395+00:00",
+    "last_updated": "2026-08-05T14:13:37.831254+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "AMGN",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 412.839996,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 26.0,
+    "volume_ratio": 1.52,
+    "roc_pct": 6.49,
+    "ema_stack": true,
+    "timestamp": "2026-08-05T14:13:35.202271+00:00",
+    "first_detected": "2026-08-05T14:13:35.202271+00:00",
+    "last_updated": "2026-08-05T14:13:35.202271+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "PFE",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 25.43,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 21.7,
+    "volume_ratio": 1.61,
+    "roc_pct": 3.67,
+    "ema_stack": true,
+    "timestamp": "2026-08-05T14:13:26.364468+00:00",
+    "first_detected": "2026-08-05T14:13:26.364468+00:00",
+    "last_updated": "2026-08-05T14:13:26.364468+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "MSFT",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 488.820007,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 21.1,
+    "volume_ratio": 1.33,
+    "roc_pct": 23.9,
+    "ema_stack": false,
+    "timestamp": "2026-08-05T14:13:20.068159+00:00",
+    "first_detected": "2026-08-04T15:30:39.860156+00:00",
+    "last_updated": "2026-08-05T14:13:20.068159+00:00"
   },
   {
     "type": "radar",
@@ -33,23 +118,6 @@
     "timestamp": "2026-08-04T15:31:03.702223+00:00",
     "first_detected": "2026-08-04T15:31:03.702223+00:00",
     "last_updated": "2026-08-04T15:31:03.702223+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "GE",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 371.454987,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 18.7,
-    "volume_ratio": 0.85,
-    "roc_pct": 8.1,
-    "ema_stack": true,
-    "timestamp": "2026-08-04T15:30:56.586395+00:00",
-    "first_detected": "2026-08-04T15:30:56.586395+00:00",
-    "last_updated": "2026-08-04T15:30:56.586395+00:00"
   },
   {
     "type": "radar",
@@ -84,22 +152,5 @@
     "timestamp": "2026-08-04T15:30:40.972651+00:00",
     "first_detected": "2026-08-04T15:30:40.972651+00:00",
     "last_updated": "2026-08-04T15:30:40.972651+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "MSFT",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 498.464996,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 18.2,
-    "volume_ratio": 1.84,
-    "roc_pct": 21.22,
-    "ema_stack": false,
-    "timestamp": "2026-08-04T15:30:39.860156+00:00",
-    "first_detected": "2026-08-04T15:30:39.860156+00:00",
-    "last_updated": "2026-08-04T15:30:39.860156+00:00"
   }
 ]
