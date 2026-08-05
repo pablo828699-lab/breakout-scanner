@@ -1,6 +1,24 @@
 [
   {
     "type": "radar",
+    "ticker": "LDOUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.2785,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 32.9,
+    "volume_ratio": 3.85,
+    "roc_pct": -24.34,
+    "ema_stack": true,
+    "timestamp": "2026-08-05T00:12:03.475582+00:00",
+    "first_detected": "2026-08-05T00:12:03.475582+00:00",
+    "last_updated": "2026-08-05T00:12:03.475582+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "BABA",
     "market": "US_EQUITIES",
     "direction": "UP",
