@@ -1,6 +1,92 @@
 [
   {
     "type": "radar",
+    "ticker": "GLD",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 391.424988,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.5,
+    "volume_ratio": 2.27,
+    "roc_pct": 2.77,
+    "ema_stack": false,
+    "timestamp": "2026-08-06T14:02:34.492141+00:00",
+    "first_detected": "2026-08-06T14:02:34.492141+00:00",
+    "last_updated": "2026-08-06T14:02:34.492141+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BA",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 239.320007,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.0,
+    "volume_ratio": 1.08,
+    "roc_pct": 15.12,
+    "ema_stack": true,
+    "timestamp": "2026-08-06T14:02:25.987949+00:00",
+    "first_detected": "2026-08-06T14:02:25.987949+00:00",
+    "last_updated": "2026-08-06T14:02:25.987949+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "GE",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 384.850006,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.6,
+    "volume_ratio": 0.81,
+    "roc_pct": 11.73,
+    "ema_stack": true,
+    "timestamp": "2026-08-06T14:02:24.760967+00:00",
+    "first_detected": "2026-08-04T15:30:56.586395+00:00",
+    "last_updated": "2026-08-06T14:02:24.760967+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "AMGN",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 406.640015,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 28.1,
+    "volume_ratio": 2.34,
+    "roc_pct": 11.41,
+    "ema_stack": true,
+    "timestamp": "2026-08-06T14:02:22.363482+00:00",
+    "first_detected": "2026-08-05T14:13:35.202271+00:00",
+    "last_updated": "2026-08-06T14:02:22.363482+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "PFE",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 26.060101,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 22.5,
+    "volume_ratio": 1.19,
+    "roc_pct": 5.81,
+    "ema_stack": true,
+    "timestamp": "2026-08-06T14:02:13.802319+00:00",
+    "first_detected": "2026-08-05T14:13:26.364468+00:00",
+    "last_updated": "2026-08-06T14:02:13.802319+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "RENDERUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -67,57 +153,6 @@
     "timestamp": "2026-08-05T14:13:47.559816+00:00",
     "first_detected": "2026-08-05T14:13:47.559816+00:00",
     "last_updated": "2026-08-05T14:13:47.559816+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "GE",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 383.855011,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.4,
-    "volume_ratio": 1.06,
-    "roc_pct": 10.74,
-    "ema_stack": true,
-    "timestamp": "2026-08-05T14:13:37.831254+00:00",
-    "first_detected": "2026-08-04T15:30:56.586395+00:00",
-    "last_updated": "2026-08-05T14:13:37.831254+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "AMGN",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 412.839996,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 26.0,
-    "volume_ratio": 1.52,
-    "roc_pct": 6.49,
-    "ema_stack": true,
-    "timestamp": "2026-08-05T14:13:35.202271+00:00",
-    "first_detected": "2026-08-05T14:13:35.202271+00:00",
-    "last_updated": "2026-08-05T14:13:35.202271+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PFE",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 25.43,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 21.7,
-    "volume_ratio": 1.61,
-    "roc_pct": 3.67,
-    "ema_stack": true,
-    "timestamp": "2026-08-05T14:13:26.364468+00:00",
-    "first_detected": "2026-08-05T14:13:26.364468+00:00",
-    "last_updated": "2026-08-05T14:13:26.364468+00:00"
   },
   {
     "type": "radar",
