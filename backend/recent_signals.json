@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "RENDERUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 1.321,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 32.8,
+    "volume_ratio": 0.99,
+    "roc_pct": -10.89,
+    "ema_stack": true,
+    "timestamp": "2026-08-06T02:48:44.394579+00:00",
+    "first_detected": "2026-08-06T02:48:44.394579+00:00",
+    "last_updated": "2026-08-06T02:48:44.394579+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 4.119,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 37.5,
+    "volume_ratio": 1.32,
+    "roc_pct": 3.96,
+    "ema_stack": false,
+    "timestamp": "2026-08-06T02:48:42.556717+00:00",
+    "first_detected": "2026-08-06T02:48:42.556717+00:00",
+    "last_updated": "2026-08-06T02:48:42.556717+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "LDOUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -101,56 +135,5 @@
     "timestamp": "2026-08-05T14:13:20.068159+00:00",
     "first_detected": "2026-08-04T15:30:39.860156+00:00",
     "last_updated": "2026-08-05T14:13:20.068159+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "BABA",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 129.149994,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 26.8,
-    "volume_ratio": 1.2,
-    "roc_pct": 5.78,
-    "ema_stack": false,
-    "timestamp": "2026-08-04T15:31:03.702223+00:00",
-    "first_detected": "2026-08-04T15:31:03.702223+00:00",
-    "last_updated": "2026-08-04T15:31:03.702223+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "LLY",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 1126.405029,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 18.2,
-    "volume_ratio": 1.25,
-    "roc_pct": -2.23,
-    "ema_stack": false,
-    "timestamp": "2026-08-04T15:30:50.746671+00:00",
-    "first_detected": "2026-08-04T15:30:50.746671+00:00",
-    "last_updated": "2026-08-04T15:30:50.746671+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "AMZN",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 278.269989,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 22.3,
-    "volume_ratio": 1.98,
-    "roc_pct": 13.61,
-    "ema_stack": true,
-    "timestamp": "2026-08-04T15:30:40.972651+00:00",
-    "first_detected": "2026-08-04T15:30:40.972651+00:00",
-    "last_updated": "2026-08-04T15:30:40.972651+00:00"
   }
 ]
