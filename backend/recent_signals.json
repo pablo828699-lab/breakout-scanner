@@ -1,6 +1,91 @@
 [
   {
     "type": "radar",
+    "ticker": "PYPL",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 59.940399,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 44.2,
+    "volume_ratio": 0.57,
+    "roc_pct": 6.75,
+    "ema_stack": false,
+    "timestamp": "2026-08-07T14:13:42.081162+00:00",
+    "first_detected": "2026-08-07T14:13:42.081162+00:00",
+    "last_updated": "2026-08-07T14:13:42.081162+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "UPS",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 104.212502,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 21.5,
+    "volume_ratio": 1.67,
+    "roc_pct": -9.55,
+    "ema_stack": false,
+    "timestamp": "2026-08-07T14:13:38.683742+00:00",
+    "first_detected": "2026-08-07T14:13:38.683742+00:00",
+    "last_updated": "2026-08-07T14:13:38.683742+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "PFE",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 26.434999,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.9,
+    "volume_ratio": 1.28,
+    "roc_pct": 6.59,
+    "ema_stack": true,
+    "timestamp": "2026-08-07T14:13:28.776867+00:00",
+    "first_detected": "2026-08-07T14:13:28.776867+00:00",
+    "last_updated": "2026-08-07T14:13:28.776867+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BRK-B",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 521.080017,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 25.9,
+    "volume_ratio": 1.06,
+    "roc_pct": 6.88,
+    "ema_stack": true,
+    "timestamp": "2026-08-07T14:13:23.455493+00:00",
+    "first_detected": "2026-08-07T14:13:23.455493+00:00",
+    "last_updated": "2026-08-07T14:13:23.455493+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "MSFT",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 502.084991,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 26.3,
+    "volume_ratio": 0.93,
+    "roc_pct": 31.0,
+    "ema_stack": false,
+    "timestamp": "2026-08-07T14:13:21.203592+00:00",
+    "first_detected": "2026-08-07T14:13:21.203592+00:00",
+    "last_updated": "2026-08-07T14:13:21.203592+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "FILUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -33,91 +118,5 @@
     "timestamp": "2026-08-07T12:57:17.032017+00:00",
     "first_detected": "2026-08-07T00:40:05.913362+00:00",
     "last_updated": "2026-08-07T12:57:17.032017+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "GLD",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 391.424988,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 20.5,
-    "volume_ratio": 2.27,
-    "roc_pct": 2.77,
-    "ema_stack": false,
-    "timestamp": "2026-08-06T14:02:34.492141+00:00",
-    "first_detected": "2026-08-06T14:02:34.492141+00:00",
-    "last_updated": "2026-08-06T14:02:34.492141+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "BA",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 239.320007,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.0,
-    "volume_ratio": 1.08,
-    "roc_pct": 15.12,
-    "ema_stack": true,
-    "timestamp": "2026-08-06T14:02:25.987949+00:00",
-    "first_detected": "2026-08-06T14:02:25.987949+00:00",
-    "last_updated": "2026-08-06T14:02:25.987949+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "GE",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 384.850006,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 20.6,
-    "volume_ratio": 0.81,
-    "roc_pct": 11.73,
-    "ema_stack": true,
-    "timestamp": "2026-08-06T14:02:24.760967+00:00",
-    "first_detected": "2026-08-04T15:30:56.586395+00:00",
-    "last_updated": "2026-08-06T14:02:24.760967+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "AMGN",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 406.640015,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 28.1,
-    "volume_ratio": 2.34,
-    "roc_pct": 11.41,
-    "ema_stack": true,
-    "timestamp": "2026-08-06T14:02:22.363482+00:00",
-    "first_detected": "2026-08-05T14:13:35.202271+00:00",
-    "last_updated": "2026-08-06T14:02:22.363482+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PFE",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 26.060101,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 22.5,
-    "volume_ratio": 1.19,
-    "roc_pct": 5.81,
-    "ema_stack": true,
-    "timestamp": "2026-08-06T14:02:13.802319+00:00",
-    "first_detected": "2026-08-05T14:13:26.364468+00:00",
-    "last_updated": "2026-08-06T14:02:13.802319+00:00"
   }
 ]
