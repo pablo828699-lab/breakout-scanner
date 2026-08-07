@@ -517,6 +517,7 @@ class BreakoutScanner:
                 "type": "asymmetric",
                 "ticker": s.ticker,
                 "market": s.market,
+                "asset_class": getattr(s, "asset_class", "ACCIONES"),
                 "verdict": s.verdict,
                 "drop_pct": s.drop_pct,
                 "entry_price": s.entry_price,

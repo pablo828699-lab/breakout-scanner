@@ -35,6 +35,25 @@ from backend.risk_manager import calculate_atr
 
 logger = logging.getLogger(__name__)
 
+COMMODITY_TICKERS = {"GLD", "SLV", "USO", "UNG", "PPLT", "CPER", "GOLD", "SILVER", "BRENTOIL", "NATGAS", "PLATINUM", "COPPER"}
+INDEX_TICKERS = {"SPY", "EWJ", "EWY", "SOXL", "SPCX", "SP500", "JP225", "KR200", "XYZ100"}
+FOREX_TICKERS = {"FXE", "FXY", "EUR", "JPY"}
+
+
+def determine_asset_class(ticker: str, market: str) -> str:
+    """Categorize a ticker into ACCIONES, MATERIAS_PRIMAS, INDICES, FOREX, or CRIPTO."""
+    t_clean = ticker.replace("xyz:", "").upper()
+    if market == "CRYPTO" or ticker.endswith("USDT") or t_clean in ("BTC", "ETH", "SOL", "DOGE", "XRP", "ADA", "NEAR", "ZEC", "XMR", "UNI", "ENA", "ONDO", "WLD", "ACE", "PAXG", "LIT", "XPL", "PUMP", "CASHCAT"):
+        return "CRIPTO"
+    elif t_clean in COMMODITY_TICKERS:
+        return "MATERIAS_PRIMAS"
+    elif t_clean in INDEX_TICKERS:
+        return "INDICES"
+    elif t_clean in FOREX_TICKERS:
+        return "FOREX"
+    else:
+        return "ACCIONES"
+
 
 def analyze_capitulation(
     ticker: str,
@@ -249,11 +268,12 @@ def analyze_capitulation(
         confidence_score=confidence,
         analysis_summary=summary,
         timestamp=datetime.now(tz=timezone.utc),
+        asset_class=determine_asset_class(ticker, market),
     )
 
     logger.info(
-        "✅ %s VERDICT: %s | Entry=%.4f, SL=%.4f, TP=%.4f, R:R=1:%.1f, Confidence=%.0f%%",
-        ticker, signal.verdict, signal.entry_price, signal.stop_loss,
+        "✅ %s VERDICT: %s [%s] | Entry=%.4f, SL=%.4f, TP=%.4f, R:R=1:%.1f, Confidence=%.0f%%",
+        ticker, signal.verdict, signal.asset_class, signal.entry_price, signal.stop_loss,
         signal.take_profit, signal.rr_ratio, signal.confidence_score * 100,
     )
 
@@ -279,17 +299,18 @@ def _build_evitar_signal(
         take_profit=0.0,
         rr_ratio=0.0,
         position_size_qty=0.0,
-        poc=round(profile.get("poc", 0), 6),
-        vah=round(profile.get("vah", 0), 6),
-        val=round(profile.get("val", 0), 6),
+        poc=round(profile.get("poc", 0.0), 6),
+        vah=round(profile.get("vah", 0.0), 6),
+        val=round(profile.get("val", 0.0), 6),
         fvg_zone=(0.0, 0.0),
         ob_zone=(0.0, 0.0),
-        msb_type="n/a",
+        msb_type="no_msb",
         is_idiosyncratic=shock.is_idiosyncratic,
         fundamental_ok=fundamental.get("passed", False),
         confidence_score=0.0,
         analysis_summary=f"EVITAR — {fundamental.get('details', {}).get('risk_flags', ['R:R insuficiente'])}",
         timestamp=datetime.now(tz=timezone.utc),
+        asset_class=determine_asset_class(ticker, market),
     )
 
 

@@ -440,12 +440,49 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
   );
 }
 
+// Asset class categorization helper
+const COMMODITY_TICKERS = new Set(['GLD', 'SLV', 'USO', 'UNG', 'PPLT', 'CPER', 'GOLD', 'SILVER', 'BRENTOIL', 'NATGAS', 'PLATINUM', 'COPPER']);
+const INDEX_TICKERS = new Set(['SPY', 'EWJ', 'EWY', 'SOXL', 'SPCX', 'SP500', 'JP225', 'KR200', 'XYZ100']);
+const FOREX_TICKERS = new Set(['FXE', 'FXY', 'EUR', 'JPY']);
+
+function getAssetClass(sig) {
+  if (sig?.asset_class) {
+    if (sig.asset_class === 'MATERIAS_PRIMAS') return 'MATERIAS PRIMAS';
+    return sig.asset_class;
+  }
+  const ticker = (sig?.ticker || '').replace('xyz:', '').toUpperCase();
+  const market = (sig?.market || '').toLowerCase();
+  
+  if (market.includes('crypto') || (sig?.ticker && sig.ticker.endsWith('USDT'))) return 'CRIPTO';
+  if (COMMODITY_TICKERS.has(ticker)) return 'MATERIAS PRIMAS';
+  if (INDEX_TICKERS.has(ticker)) return 'ÍNDICES';
+  if (FOREX_TICKERS.has(ticker)) return 'FOREX';
+  return 'ACCIONES';
+}
+
 // ---------------------------------------------------------------------------
 // Main Panel
 // ---------------------------------------------------------------------------
 
 export default function CapitulationPanel({ signals, livePriceMap = {}, onApprove, onReject }) {
+  const [activeTab, setActiveTab] = React.useState('TODOS');
   const list = Array.isArray(signals) ? signals : [];
+
+  const categories = ['TODOS', 'ACCIONES', 'MATERIAS PRIMAS', 'ÍNDICES', 'FOREX', 'CRIPTO'];
+
+  const counts = React.useMemo(() => {
+    const acc = { TODOS: list.length, ACCIONES: 0, 'MATERIAS PRIMAS': 0, ÍNDICES: 0, FOREX: 0, CRIPTO: 0 };
+    list.forEach(s => {
+      const cls = getAssetClass(s);
+      if (acc[cls] !== undefined) acc[cls]++;
+    });
+    return acc;
+  }, [list]);
+
+  const filteredList = list.filter(sig => {
+    if (activeTab === 'TODOS') return true;
+    return getAssetClass(sig) === activeTab;
+  });
 
   if (list.length === 0) {
     return (
@@ -469,27 +506,70 @@ export default function CapitulationPanel({ signals, livePriceMap = {}, onApprov
   }
 
   return (
-    <div
-      style={{
-        backgroundColor: COLORS.bg,
-        padding: 24,
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-        gap: 20,
-      }}
-    >
-      {list.map((sig, idx) => {
-        const key = sig?.id || (sig?.ticker && sig?.timestamp ? `${sig.ticker}_${sig.timestamp}` : `cap_${sig?.ticker || idx}`);
-        return (
-          <SignalCard
-            key={key}
-            signal={sig}
-            livePriceMap={livePriceMap}
-            onApprove={onApprove}
-            onReject={onReject}
-          />
-        );
-      })}
+    <div style={{ backgroundColor: COLORS.bg, padding: 24 }}>
+      {/* Category Tabs */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
+        {categories.map(cat => {
+          const isActive = activeTab === cat;
+          const count = counts[cat] || 0;
+          return (
+            <button
+              key={cat}
+              onClick={() => setActiveTab(cat)}
+              style={{
+                padding: '8px 16px',
+                borderRadius: 8,
+                fontSize: 12,
+                fontWeight: 700,
+                cursor: 'pointer',
+                border: isActive ? '1px solid #3b82f6' : '1px solid #1e293b',
+                backgroundColor: isActive ? 'rgba(59, 130, 246, 0.2)' : '#111827',
+                color: isActive ? '#60a5fa' : '#94a3b8',
+                transition: 'all 0.2s',
+              }}
+            >
+              {cat} ({count})
+            </button>
+          );
+        })}
+      </div>
+
+      {filteredList.length === 0 ? (
+        <div
+          style={{
+            border: `1px solid ${COLORS.border}`,
+            borderRadius: 16,
+            backgroundColor: COLORS.card,
+            padding: 40,
+            textAlign: 'center',
+            color: COLORS.textSecondary,
+            fontSize: 14,
+          }}
+        >
+          No hay señales activas en la categoría "{activeTab}"
+        </div>
+      ) : (
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+            gap: 20,
+          }}
+        >
+          {filteredList.map((sig, idx) => {
+            const key = sig?.id || (sig?.ticker && sig?.timestamp ? `${sig.ticker}_${sig.timestamp}` : `cap_${sig?.ticker || idx}`);
+            return (
+              <SignalCard
+                key={key}
+                signal={sig}
+                livePriceMap={livePriceMap}
+                onApprove={onApprove}
+                onReject={onReject}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
