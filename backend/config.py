@@ -15,10 +15,11 @@ PROXIMITY_THRESHOLD_PCT: float = float(os.getenv("PROXIMITY_THRESHOLD_PCT", "0.0
 MIN_TOUCHES: int = int(os.getenv("MIN_TOUCHES", "2"))
 
 # ---------------------------------------------------------------------------
-# Volume Filter
+# Volume Filter & Liquidity
 # ---------------------------------------------------------------------------
 VOLUME_MULTIPLIER: float = float(os.getenv("VOLUME_MULTIPLIER", "1.2"))
 VOLUME_SMA_PERIOD: int = int(os.getenv("VOLUME_SMA_PERIOD", "20"))
+MIN_24H_VOLUME_USD: float = float(os.getenv("MIN_24H_VOLUME_USD", "800000.0"))
 
 # ---------------------------------------------------------------------------
 # Breakout Confirmation

@@ -71,6 +71,22 @@ def analyze_capitulation(
     logger.info("═══ Capitulation analysis started for %s (%s) ═══", ticker, market)
 
     # ──────────────────────────────────────────────────────────
+    # GATE 0: 24h Dollar Volume Liquidity Filter ($800k USD min)
+    # ──────────────────────────────────────────────────────────
+    try:
+        last_close = float(daily_df["Close"].iloc[-1])
+        last_volume = float(daily_df["Volume"].iloc[-1])
+        dollar_volume_24h = last_close * last_volume
+        if dollar_volume_24h < cfg.MIN_24H_VOLUME_USD:
+            logger.info(
+                "%s — 24h USD volume ($%.0f) below minimum threshold ($%.0f USD). Skipping.",
+                ticker, dollar_volume_24h, cfg.MIN_24H_VOLUME_USD,
+            )
+            return None
+    except Exception as exc:
+        logger.debug("%s — failed evaluating 24h dollar volume: %s", ticker, exc)
+
+    # ──────────────────────────────────────────────────────────
     # GATE 1: Shock Detection
     # ──────────────────────────────────────────────────────────
     shock = scan_for_shocks(daily_df, ticker, shock_threshold)
