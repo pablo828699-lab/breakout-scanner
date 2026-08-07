@@ -4,7 +4,7 @@
     "ticker": "FILUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.7022,
+    "price": 0.6973,
     "triggers": [
       "IMPULSE"
     ],
@@ -12,16 +12,16 @@
     "volume_ratio": 1.96,
     "roc_pct": 1.37,
     "ema_stack": true,
-    "timestamp": "2026-08-07T00:40:11.931809+00:00",
+    "timestamp": "2026-08-07T12:57:24.038918+00:00",
     "first_detected": "2026-08-07T00:40:11.931809+00:00",
-    "last_updated": "2026-08-07T00:40:11.931809+00:00"
+    "last_updated": "2026-08-07T12:57:24.038918+00:00"
   },
   {
     "type": "radar",
     "ticker": "ADAUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 0.202,
+    "price": 0.2013,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -30,9 +30,9 @@
     "volume_ratio": 2.35,
     "roc_pct": 29.31,
     "ema_stack": false,
-    "timestamp": "2026-08-07T00:40:05.913362+00:00",
+    "timestamp": "2026-08-07T12:57:17.032017+00:00",
     "first_detected": "2026-08-07T00:40:05.913362+00:00",
-    "last_updated": "2026-08-07T00:40:05.913362+00:00"
+    "last_updated": "2026-08-07T12:57:17.032017+00:00"
   },
   {
     "type": "radar",
@@ -119,39 +119,5 @@
     "timestamp": "2026-08-06T14:02:13.802319+00:00",
     "first_detected": "2026-08-05T14:13:26.364468+00:00",
     "last_updated": "2026-08-06T14:02:13.802319+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "RENDERUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 1.321,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 32.8,
-    "volume_ratio": 0.99,
-    "roc_pct": -10.89,
-    "ema_stack": true,
-    "timestamp": "2026-08-06T02:48:44.394579+00:00",
-    "first_detected": "2026-08-06T02:48:44.394579+00:00",
-    "last_updated": "2026-08-06T02:48:44.394579+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 4.119,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 37.5,
-    "volume_ratio": 1.32,
-    "roc_pct": 3.96,
-    "ema_stack": false,
-    "timestamp": "2026-08-06T02:48:42.556717+00:00",
-    "first_detected": "2026-08-06T02:48:42.556717+00:00",
-    "last_updated": "2026-08-06T02:48:42.556717+00:00"
   }
 ]
