@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "FILUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.7022,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 27.6,
+    "volume_ratio": 1.96,
+    "roc_pct": 1.37,
+    "ema_stack": true,
+    "timestamp": "2026-08-07T00:40:11.931809+00:00",
+    "first_detected": "2026-08-07T00:40:11.931809+00:00",
+    "last_updated": "2026-08-07T00:40:11.931809+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ADAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.202,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 20.6,
+    "volume_ratio": 2.35,
+    "roc_pct": 29.31,
+    "ema_stack": false,
+    "timestamp": "2026-08-07T00:40:05.913362+00:00",
+    "first_detected": "2026-08-07T00:40:05.913362+00:00",
+    "last_updated": "2026-08-07T00:40:05.913362+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "GLD",
     "market": "US_EQUITIES",
     "direction": "UP",
@@ -118,57 +153,5 @@
     "timestamp": "2026-08-06T02:48:42.556717+00:00",
     "first_detected": "2026-08-06T02:48:42.556717+00:00",
     "last_updated": "2026-08-06T02:48:42.556717+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "LDOUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 0.2995,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 32.9,
-    "volume_ratio": 3.85,
-    "roc_pct": -24.34,
-    "ema_stack": true,
-    "timestamp": "2026-08-05T14:14:02.884391+00:00",
-    "first_detected": "2026-08-05T00:12:03.475582+00:00",
-    "last_updated": "2026-08-05T14:14:02.884391+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "USO",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 114.510002,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 18.6,
-    "volume_ratio": 0.99,
-    "roc_pct": -10.14,
-    "ema_stack": false,
-    "timestamp": "2026-08-05T14:13:47.559816+00:00",
-    "first_detected": "2026-08-05T14:13:47.559816+00:00",
-    "last_updated": "2026-08-05T14:13:47.559816+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "MSFT",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 488.820007,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 21.1,
-    "volume_ratio": 1.33,
-    "roc_pct": 23.9,
-    "ema_stack": false,
-    "timestamp": "2026-08-05T14:13:20.068159+00:00",
-    "first_detected": "2026-08-04T15:30:39.860156+00:00",
-    "last_updated": "2026-08-05T14:13:20.068159+00:00"
   }
 ]
