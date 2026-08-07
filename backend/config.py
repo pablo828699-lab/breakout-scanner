@@ -83,47 +83,34 @@ DAILY_LOOKBACK_DAYS: int = int(os.getenv("DAILY_LOOKBACK_DAYS", "300"))
 HOURLY_LOOKBACK_DAYS: int = int(os.getenv("HOURLY_LOOKBACK_DAYS", "5"))
 
 # ---------------------------------------------------------------------------
-# S&P 500 & Volatile Large Caps — watch list for scanner
+# Equities, ETFs & Commodities — Strictly Hyperliquid Perps List (64 Assets)
 # ---------------------------------------------------------------------------
 SP500_TICKERS: List[str] = [
-    "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "BRK-B",
-    "JPM", "V", "JNJ", "WMT", "PG", "MA", "UNH", "HD", "DIS", "BAC",
-    "XOM", "PFE", "KO", "PEP", "CSCO", "ABT", "CRM", "AVGO", "TMO",
-    "COST", "NKE", "MRK", "ACN", "LLY", "ABBV", "MCD", "TXN", "QCOM",
-    "DHR", "NEE", "ORCL", "ADBE", "AMD", "INTC", "AMGN", "PM", "HON",
-    "UPS", "IBM", "GE", "CAT", "BA",
-    # Volatile High-Liquid additions (Capitulation & Trend Radar focus)
-    "NFLX", "MU", "PYPL", "SQ", "BABA", "COIN", "MSTR", "GS", "MRVL", "SMCI",
-    # Commodity ETFs (Gold, Silver, WTI Crude Oil)
-    "GLD", "SLV", "USO",
-    # Crypto Equities & Bitcoin Miners
-    "HUT", "KEEL", "RIOT", "MARA", "CLSK", "IREN", "CIFR", "WULF", "BITF"
+    # Megacap & Tech Perps
+    "AAPL", "MSFT", "GOOGL", "AMZN", "NVDA", "META", "TSLA", "IBM",
+    "NFLX", "MU", "BABA", "COIN", "MSTR", "MRVL", "AMD", "INTC",
+    "AVGO", "ORCL", "TSM", "ASML", "ARM", "DELL", "WDC",
+    # High-Beta & Growth Perps
+    "DKNG", "RKLB", "HIMS", "PLTR", "HOOD", "LLY", "CL", "USAR",
+    "BE", "STRC", "BOT", "SHAZ", "QNT", "NBIS", "CBRS", "SOXL",
+    "LITE", "SKHY", "CRCL", "DRAM", "CRWV", "BB", "LYTE",
+    "NOW", "SNDK", "SKHX", "KORU", "SPCX",
+    # ETFs, Commodities & FX (GOLD=GLD, SILVER=SLV, BRENTOIL=USO, NATGAS=UNG, SP500=SPY, JP225=EWJ, KR200=EWY, EUR=FXE, JPY=FXY, PLATINUM=PPLT, COPPER=CPER)
+    "GLD", "SLV", "USO", "UNG", "SPY", "EWJ", "EWY", "FXE", "FXY", "PPLT", "CPER"
 ]
 
 # ---------------------------------------------------------------------------
-# Crypto Tickers — fetched dynamically as top N by 24h volume from Binance
-# Fallback list used if the public API is unreachable.
+# Crypto Perps — Strictly Hyperliquid Perps List (19 Assets)
 # ---------------------------------------------------------------------------
 CRYPTO_TOP_N: int = int(os.getenv("CRYPTO_TOP_N", "40"))
-
-# When True (default) the radar runs on the curated watchlist below — liquid,
-# quality assets only. When False it falls back to the dynamic top-N by 24h
-# volume (noisier: pulls in wash-traded / tokenized-stock / new listings).
 CRYPTO_USE_WATCHLIST: bool = os.getenv("CRYPTO_USE_WATCHLIST", "true").lower() in ("true", "1", "yes")
 
-# Curated 40 — validated as TRADING on Binance spot. Grouped by category.
+# Strict Hyperliquid Crypto Perps List
 CRYPTO_WATCHLIST: List[str] = [
-    # Majors
-    "BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT", "ADAUSDT",
-    "AVAXUSDT", "DOGEUSDT", "TRXUSDT", "DOTUSDT", "LTCUSDT", "BCHUSDT", "XLMUSDT",
-    # Established L1 / L2
-    "NEARUSDT", "APTUSDT", "SUIUSDT", "POLUSDT", "ARBUSDT", "OPUSDT",
-    "ATOMUSDT", "INJUSDT", "SEIUSDT", "TIAUSDT", "HBARUSDT",
-    # DeFi / infrastructure
-    "LINKUSDT", "UNIUSDT", "AAVEUSDT", "LDOUSDT", "RUNEUSDT", "FILUSDT",
-    "RENDERUSDT", "GRTUSDT", "ONDOUSDT", "ICPUSDT",
-    # Liquid trending
-    "WLDUSDT", "ENAUSDT", "TAOUSDT", "PEPEUSDT", "JUPUSDT", "PYTHUSDT",
+    "BTCUSDT", "ETHUSDT", "SOLUSDT", "DOGEUSDT", "XRPUSDT", "ADAUSDT",
+    "NEARUSDT", "ZECUSDT", "XMRUSDT", "UNIUSDT", "ENAUSDT", "ONDOUSDT",
+    "WLDUSDT", "ACEUSDT", "PAXGUSDT", "LITUSDT", "XPLUSDT", "PUMPUSDT",
+    "CASHCATUSDT"
 ]
 
 CRYPTO_FALLBACK_TICKERS: List[str] = [
