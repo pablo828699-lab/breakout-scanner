@@ -19,11 +19,13 @@ import {
 
 export default function App() {
   const [candidates, setCandidates] = useState(() => {
-    // Clear old candidates cache version to prevent TypeError crashes or caching deadlocks
+    // Clear old state cache version to reset positions, history, PnL and win rate
     const cacheVersion = localStorage.getItem('candidates_cache_version');
-    if (cacheVersion !== 'v3') {
+    if (cacheVersion !== 'v4') {
       localStorage.removeItem('candidates');
-      localStorage.setItem('candidates_cache_version', 'v3');
+      localStorage.removeItem('openPositions');
+      localStorage.removeItem('tradeHistory');
+      localStorage.setItem('candidates_cache_version', 'v4');
       return [];
     }
     const saved = localStorage.getItem('candidates');
