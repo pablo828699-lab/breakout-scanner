@@ -114,6 +114,7 @@ class AsymmetricSignal:
     ob_zone: tuple        # (low, high) of the most relevant Order Block
     msb_type: str         # 'bullish_reversal', 'bearish_continuation', etc.
     is_idiosyncratic: bool
+    fundamental_ok: bool
     confidence_score: float  # 0.0 - 1.0
     analysis_summary: str
     timestamp: datetime

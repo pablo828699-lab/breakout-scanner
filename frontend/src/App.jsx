@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import KPICards from './components/KPICards';
 import CandidatePanel from './components/CandidatePanel';
 import CapitulationPanel from './components/CapitulationPanel';
-import AnalyticsChart from './components/AnalyticsChart';
-import OpenPositions from './components/OpenPositions';
-import TradeHistory from './components/TradeHistory';
 import { safeDateParse } from './utils/dateUtils';
 import { fetchCapitulationSignals, fetchCandidates, fetchLivePrices, BACKEND_URL } from './services/api';
 
@@ -664,58 +660,21 @@ export default function App() {
           </div>
         </header>
 
-        {/* Global KPIs cards row */}
-        <section className="w-full">
-          <KPICards kpis={kpis} />
-        </section>
-
-        {/* Primary Dashboard Content (Grid: Candidates + SVG Chart) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <section className="lg:col-span-2">
-            <CandidatePanel
-              candidates={candidates}
-              livePriceMap={livePriceMap}
-              onApprove={(candidate) => {
-                const live = livePriceMap[candidate.ticker];
-                setApproveModalCandidate(candidate);
-                setApproveModalSize(capitalPerTrade);
-                setApproveModalEntryPrice(live || candidate.entry);
-              }}
-              onReject={handleReject}
-            />
-          </section>
-          
-          <section className="lg:col-span-1">
-            <AnalyticsChart data={dailyAnalytics} />
-          </section>
-        </div>
-
         {/* Capitulation Analysis Module */}
         <section className="w-full">
           <CapitulationPanel
             signals={capitulationSignals}
             livePriceMap={livePriceMap}
-            onApprove={(signal) => {
-              const live = livePriceMap[signal.ticker];
-              setApproveModalCandidate(signal);
-              setApproveModalSize(capitalPerTrade);
-              setApproveModalEntryPrice(live || signal.entry);
-            }}
-            onReject={handleRejectCapitulation}
           />
         </section>
 
-        {/* Open Positions monitoring */}
+        {/* Breakout Candidates / Trend Radar */}
         <section className="w-full">
-          <OpenPositions
-            positions={openPositions}
-            onClosePosition={handleClosePosition}
+          <CandidatePanel
+            candidates={candidates}
+            livePriceMap={livePriceMap}
+            onReject={handleReject}
           />
-        </section>
-
-        {/* Trade history log */}
-        <section className="w-full">
-          <TradeHistory history={tradeHistory} onDeleteTrade={handleDeleteTrade} />
         </section>
 
         {/* Custom Modal for Approval Size & Entry Price */}
