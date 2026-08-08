@@ -285,11 +285,17 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                     except Exception as e:
                         logger.error("Failed batch fetching crypto prices: %s", e)
 
-                # 2. Fetch equities in parallel (Prioritize Hyperliquid 24/7 API, fallback to yfinance)
-                headers = {
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-                    "Content-Type": "application/json",
-                }
+                # Load cached signal prices for instant fallback (0ms latency)
+                cached_signal_prices = {}
+                try:
+                    cap_file = _PROJECT_ROOT / "backend" / "capitulation_signals.json"
+                    if cap_file.exists():
+                        with open(cap_file, "r", encoding="utf-8") as f:
+                            for item in json.load(f):
+                                if "ticker" in item and "entry_price" in item:
+                                    cached_signal_prices[item["ticker"].upper()] = float(item["entry_price"])
+                except Exception:
+                    pass
 
                 def fetch_equity_price(ticker):
                     now_ms = int(time.time() * 1000)
@@ -300,27 +306,27 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                             "req": {"coin": hl_coin, "interval": "1m", "startTime": now_ms - (15 * 60 * 1000), "endTime": now_ms}
                         }
                         try:
-                            r = requests.post("https://api.hyperliquid.xyz/info", json=payload, headers=headers, timeout=3)
+                            r = requests.post("https://api.hyperliquid.xyz/info", json=payload, headers=headers, timeout=1.5)
                             if r.status_code == 200:
                                 candles = r.json()
                                 if candles and isinstance(candles, list) and len(candles) > 0:
                                     return ticker, float(candles[-1]["c"])
-                        except Exception as exc:
-                            logger.debug("Hyperliquid live price attempt failed for %s: %s", ticker, exc)
+                        except Exception:
+                            pass
                     
+                    if ticker in cached_signal_prices:
+                        return ticker, cached_signal_prices[ticker]
+
                     try:
                         import yfinance as yf
                         tk = yf.Ticker(ticker)
                         price = float(getattr(tk.fast_info, 'last_price', 0.0) or getattr(tk.fast_info, 'regular_market_price', 0.0) or 0.0)
-                        if price <= 0.0:
-                            hist = tk.history(period="1d")
-                            if not hist.empty:
-                                price = float(hist["Close"].iloc[-1])
                         if price > 0:
                             return ticker, price
-                    except Exception as e:
-                        logger.error("Failed fetching equity price for %s: %s", ticker, e)
-                    return ticker, 0.0
+                    except Exception:
+                        pass
+
+                    return ticker, cached_signal_prices.get(ticker, 0.0)
 
                 if equity_tickers:
                     with ThreadPoolExecutor(max_workers=min(len(equity_tickers), 10)) as executor:
