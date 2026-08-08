@@ -5,7 +5,7 @@
  */
 
 export const BACKEND_URL = 'https://breakout-scanner-xg9f.onrender.com';
-export const DEFAULT_TIMEOUT_MS = 12000;
+export const DEFAULT_TIMEOUT_MS = 35000;
 
 /**
  * Fetch wrapper with AbortController timeout.

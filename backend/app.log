@@ -3624,3 +3624,1142 @@ gnals: Expecting property name enclosed in double quotes: line 1 column 3 (char 
 2026-07-21 21:30:33 | INFO     | backend.scanner           | Loaded 81 alert cooldown records from disk.
 2026-07-21 21:30:33 | INFO     | backend.scanner           | Saved 2 capitulation signals to disk.
 2026-07-21 21:30:33 | INFO     | backend.scanner           | Loaded 81 alert cooldown records from disk.
+2026-08-07 15:43:00 | INFO     | backend.scanner           | Loaded 132 alert cooldown records from disk.
+2026-08-07 15:43:00 | INFO     | __main__                  | Executing single scan cycle (--once flag detected)...
+2026-08-07 15:43:00 | INFO     | backend.scanner           | ═══ Scan cycle started at 18:43:00 UTC ═══
+2026-08-07 15:43:00 | INFO     | backend.data_fetcher      | Using curated crypto watchlist (40 assets).
+2026-08-07 15:43:00 | INFO     | backend.scanner           | Scanning US_EQUITIES (72 tickers)…
+2026-08-07 15:43:04 | INFO     | backend.trend_radar       | RADAR hit — dir=UP, ADX=26.3, triggers=['DONCHIAN_15'], vol=0.93x, ROC10=31.0%
+2026-08-07 15:43:07 | INFO     | backend.trend_radar       | RADAR hit — dir=UP, ADX=25.9, triggers=['DONCHIAN_15'], vol=1.06x, ROC10=6.9%
+2026-08-07 15:43:13 | INFO     | backend.trend_radar       | RADAR hit — dir=UP, ADX=23.9, triggers=['DONCHIAN_15'], vol=1.28x, ROC10=6.6%
+2026-08-07 15:43:24 | INFO     | backend.trend_radar       | RADAR hit — dir=DOWN, ADX=21.5, triggers=['IMPULSE'], vol=1.67x, ROC10=-9.6%
+2026-08-07 15:43:28 | INFO     | backend.trend_radar       | RADAR hit — dir=UP, ADX=44.2, triggers=['DONCHIAN_15'], vol=0.57x, ROC10=6.7%
+2026-08-07 15:43:30 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:30 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:43:30 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:30 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 1/3).
+2026-08-07 15:43:30 | INFO     | backend.data_fetcher      | Retrying yfinance download for SQ in 1.35s...
+2026-08-07 15:43:33 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:33 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:43:33 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:33 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 2/3).
+2026-08-07 15:43:33 | INFO     | backend.data_fetcher      | Retrying yfinance download for SQ in 2.15s...
+2026-08-07 15:43:35 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:35 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:43:35 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:35 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 3/3).
+2026-08-07 15:43:35 | ERROR    | backend.data_fetcher      | yfinance download failed for SQ after 3 retries.
+2026-08-07 15:43:35 | WARNING  | backend.data_fetcher      | No daily data returned for SQ.
+2026-08-07 15:43:43 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:43 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:43:43 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:43 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 1/3).
+2026-08-07 15:43:43 | INFO     | backend.data_fetcher      | Retrying yfinance download for BITF in 1.24s...
+2026-08-07 15:43:45 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:45 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:43:45 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:45 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 2/3).
+2026-08-07 15:43:45 | INFO     | backend.data_fetcher      | Retrying yfinance download for BITF in 2.27s...
+2026-08-07 15:43:48 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:48 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:43:48 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:43:48 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 3/3).
+2026-08-07 15:43:48 | ERROR    | backend.data_fetcher      | yfinance download failed for BITF after 3 retries.
+2026-08-07 15:43:48 | WARNING  | backend.data_fetcher      | No daily data returned for BITF.
+2026-08-07 15:43:48 | INFO     | backend.scanner           | Scanning CRYPTO (40 tickers)…
+2026-08-07 15:43:50 | INFO     | backend.data_fetcher      | Binance host https://api.binance.com is working — caching as primary.
+2026-08-07 15:43:52 | INFO     | backend.trend_radar       | RADAR hit — dir=UP, ADX=20.6, triggers=['DONCHIAN_15', 'IMPULSE'], vol=2.35x, ROC10=29.3%
+2026-08-07 15:44:04 | INFO     | backend.trend_radar       | RADAR hit — dir=DOWN, ADX=27.6, triggers=['IMPULSE'], vol=1.96x, ROC10=1.4%
+2026-08-07 15:44:10 | INFO     | backend.scanner           | ═══ Scan complete: 0 signal(s) found in 69.6s ═══
+2026-08-07 15:44:12 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for AAPL: downloaded 162 candles. Last candle: Open=311.9101 Close=311.9350 Vol=466854 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:12 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for MSFT: downloaded 162 candles. Last candle: Open=499.7050 Close=499.2100 Vol=325445 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:13 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for GOOGL: downloaded 162 candles. Last candle: Open=354.1700 Close=354.1850 Vol=258898 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:14 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for AMZN: downloaded 162 candles. Last candle: Open=275.1550 Close=274.2200 Vol=638537 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:15 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for NVDA: downloaded 162 candles. Last candle: Open=221.9600 Close=221.9500 Vol=1420916 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:16 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for META: downloaded 162 candles. Last candle: Open=592.2800 Close=591.1900 Vol=110013 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:16 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for TSLA: downloaded 162 candles. Last candle: Open=327.0000 Close=327.0800 Vol=462879 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:17 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for BRK-B: downloaded 162 candles. Last candle: Open=520.5045 Close=520.3350 Vol=74672 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:18 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for JPM: downloaded 162 candles. Last candle: Open=357.7100 Close=357.9000 Vol=59089 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:19 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for V: downloaded 162 candles. Last candle: Open=362.6000 Close=362.4300 Vol=75219 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:19 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for JNJ: downloaded 162 candles. Last candle: Open=256.2650 Close=256.5900 Vol=63384 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:20 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for WMT: downloaded 162 candles. Last candle: Open=111.3502 Close=111.2250 Vol=234655 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:21 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for PG: downloaded 162 candles. Last candle: Open=145.5900 Close=145.4428 Vol=127680 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:22 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for MA: downloaded 162 candles. Last candle: Open=562.9351 Close=562.5099 Vol=37885 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:23 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for UNH: downloaded 162 candles. Last candle: Open=409.7600 Close=409.3951 Vol=86249 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:24 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for HD: downloaded 162 candles. Last candle: Open=353.5450 Close=353.8550 Vol=62200 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:25 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for DIS: downloaded 162 candles. Last candle: Open=104.9500 Close=105.0600 Vol=306649 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:25 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for BAC: downloaded 162 candles. Last candle: Open=63.0450 Close=63.0950 Vol=258652 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:26 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for XOM: downloaded 162 candles. Last candle: Open=153.1500 Close=152.8501 Vol=203546 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:27 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for PFE: downloaded 162 candles. Last candle: Open=26.4650 Close=26.5350 Vol=1381501 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:28 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for KO: downloaded 162 candles. Last candle: Open=87.1100 Close=87.0450 Vol=152428 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:29 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for PEP: downloaded 162 candles. Last candle: Open=138.9850 Close=138.9150 Vol=73021 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:30 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for CSCO: downloaded 162 candles. Last candle: Open=120.7450 Close=120.9700 Vol=388575 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:31 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for ABT: downloaded 162 candles. Last candle: Open=107.3600 Close=107.2050 Vol=136976 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:32 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for CRM: downloaded 162 candles. Last candle: Open=191.6900 Close=191.5600 Vol=144838 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:33 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for AVGO: downloaded 162 candles. Last candle: Open=424.1700 Close=424.6350 Vol=177891 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:34 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for TMO: downloaded 162 candles. Last candle: Open=586.5451 Close=586.7500 Vol=33660 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:34 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for COST: downloaded 162 candles. Last candle: Open=945.5300 Close=943.9100 Vol=34792 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:35 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for NKE: downloaded 162 candles. Last candle: Open=41.8750 Close=41.7750 Vol=485102 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:36 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for MRK: downloaded 162 candles. Last candle: Open=128.3900 Close=128.5200 Vol=91882 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:37 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for ACN: downloaded 162 candles. Last candle: Open=174.9000 Close=174.6000 Vol=63316 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:38 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for LLY: downloaded 162 candles. Last candle: Open=1179.8700 Close=1180.0399 Vol=53390 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:39 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for ABBV: downloaded 162 candles. Last candle: Open=245.0200 Close=244.8800 Vol=43051 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:39 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for MCD: downloaded 162 candles. Last candle: Open=274.0600 Close=273.8800 Vol=70764 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:40 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for TXN: downloaded 162 candles. Last candle: Open=284.0200 Close=284.2600 Vol=65642 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:41 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for QCOM: downloaded 162 candles. Last candle: Open=166.4800 Close=166.4900 Vol=159814 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:42 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for DHR: downloaded 162 candles. Last candle: Open=203.4400 Close=203.7700 Vol=89213 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:43 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for NEE: downloaded 162 candles. Last candle: Open=84.9900 Close=84.8651 Vol=141692 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:44 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for ORCL: downloaded 162 candles. Last candle: Open=145.0350 Close=144.8700 Vol=232065 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:44 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for ADBE: downloaded 162 candles. Last candle: Open=265.6400 Close=264.7000 Vol=47360 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:45 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for AMD: downloaded 162 candles. Last candle: Open=479.1311 Close=478.8550 Vol=439495 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:46 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for INTC: downloaded 162 candles. Last candle: Open=100.8799 Close=100.8200 Vol=1101655 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:47 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for AMGN: downloaded 162 candles. Last candle: Open=407.8300 Close=407.9400 Vol=16574 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:48 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for PM: downloaded 162 candles. Last candle: Open=189.2750 Close=189.2701 Vol=37647 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:49 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for HON: downloaded 162 candles. Last candle: Open=245.6350 Close=245.4700 Vol=48469 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:50 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for UPS: downloaded 162 candles. Last candle: Open=104.5700 Close=104.6100 Vol=63673 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:51 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for IBM: downloaded 162 candles. Last candle: Open=235.4100 Close=235.4400 Vol=95295 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:52 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for GE: downloaded 162 candles. Last candle: Open=370.1750 Close=370.4900 Vol=43394 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:52 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for CAT: downloaded 162 candles. Last candle: Open=841.8790 Close=841.0700 Vol=51279 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:53 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for BA: downloaded 162 candles. Last candle: Open=233.1200 Close=233.4899 Vol=101878 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:54 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for NFLX: downloaded 162 candles. Last candle: Open=74.3400 Close=74.2350 Vol=360907 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:55 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for MU: downloaded 162 candles. Last candle: Open=868.7400 Close=868.1800 Vol=492544 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:56 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for PYPL: downloaded 162 candles. Last candle: Open=58.9800 Close=58.8850 Vol=103124 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:44:57 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:44:57 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:44:57 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:44:57 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 1/3).
+2026-08-07 15:44:57 | INFO     | backend.data_fetcher      | Retrying yfinance download for SQ in 1.41s...
+2026-08-07 15:44:59 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:44:59 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:44:59 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:44:59 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 2/3).
+2026-08-07 15:44:59 | INFO     | backend.data_fetcher      | Retrying yfinance download for SQ in 2.31s...
+2026-08-07 15:45:02 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:02 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:02 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:02 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 3/3).
+2026-08-07 15:45:02 | ERROR    | backend.data_fetcher      | yfinance download failed for SQ after 3 retries.
+2026-08-07 15:45:02 | WARNING  | backend.data_fetcher      | No daily data returned for SQ.
+2026-08-07 15:45:03 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:03 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:03 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:03 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 1/3).
+2026-08-07 15:45:03 | INFO     | backend.data_fetcher      | Retrying yfinance download for SQ in 1.18s...
+2026-08-07 15:45:05 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:05 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:05 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:05 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 2/3).
+2026-08-07 15:45:05 | INFO     | backend.data_fetcher      | Retrying yfinance download for SQ in 2.41s...
+2026-08-07 15:45:08 | ERROR    | yfinance                  | $SQ: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:08 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:08 | ERROR    | yfinance                  | ['SQ']: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:08 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for SQ (attempt 3/3).
+2026-08-07 15:45:08 | ERROR    | backend.data_fetcher      | yfinance download failed for SQ after 3 retries.
+2026-08-07 15:45:08 | WARNING  | backend.data_fetcher      | No hourly data returned for SQ.
+2026-08-07 15:45:09 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for BABA: downloaded 162 candles. Last candle: Open=128.3900 Close=128.3900 Vol=71450 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:09 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for COIN: downloaded 162 candles. Last candle: Open=152.7050 Close=151.8100 Vol=176314 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:10 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for MSTR: downloaded 162 candles. Last candle: Open=98.0856 Close=97.2700 Vol=576701 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:11 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for GS: downloaded 162 candles. Last candle: Open=1037.1500 Close=1037.9100 Vol=18591 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:12 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for MRVL: downloaded 162 candles. Last candle: Open=216.0000 Close=215.9300 Vol=219319 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:13 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for SMCI: downloaded 162 candles. Last candle: Open=31.0900 Close=30.9501 Vol=783415 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:13 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for GLD: downloaded 162 candles. Last candle: Open=397.6200 Close=397.6200 Vol=112092 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:14 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for SLV: downloaded 162 candles. Last candle: Open=57.1200 Close=57.1850 Vol=337266 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:15 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for USO: downloaded 162 candles. Last candle: Open=119.8200 Close=119.8950 Vol=40213 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:16 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for HUT: downloaded 162 candles. Last candle: Open=85.9450 Close=85.8500 Vol=95714 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:16 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for KEEL: downloaded 162 candles. Last candle: Open=3.8050 Close=3.8000 Vol=364691 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:17 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for RIOT: downloaded 162 candles. Last candle: Open=20.5900 Close=20.5900 Vol=223912 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:18 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for MARA: downloaded 162 candles. Last candle: Open=10.0700 Close=9.9800 Vol=1251773 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:19 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for CLSK: downloaded 162 candles. Last candle: Open=12.2400 Close=12.2500 Vol=684292 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:19 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for IREN: downloaded 162 candles. Last candle: Open=39.6650 Close=39.5300 Vol=453140 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:20 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for CIFR: downloaded 162 candles. Last candle: Open=17.1200 Close=17.1150 Vol=1607256 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:21 | INFO     | backend.data_fetcher      | fetch_sp500_hourly for WULF: downloaded 162 candles. Last candle: Open=16.8950 Close=16.8620 Vol=748006 Time=2026-08-07 14:30:00-04:00
+2026-08-07 15:45:22 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:22 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:22 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:22 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 1/3).
+2026-08-07 15:45:22 | INFO     | backend.data_fetcher      | Retrying yfinance download for BITF in 1.11s...
+2026-08-07 15:45:23 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:23 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:23 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:23 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 2/3).
+2026-08-07 15:45:23 | INFO     | backend.data_fetcher      | Retrying yfinance download for BITF in 2.44s...
+2026-08-07 15:45:26 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:26 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:26 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=300d) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:26 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 3/3).
+2026-08-07 15:45:26 | ERROR    | backend.data_fetcher      | yfinance download failed for BITF after 3 retries.
+2026-08-07 15:45:26 | WARNING  | backend.data_fetcher      | No daily data returned for BITF.
+2026-08-07 15:45:27 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:27 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:27 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:27 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 1/3).
+2026-08-07 15:45:27 | INFO     | backend.data_fetcher      | Retrying yfinance download for BITF in 1.12s...
+2026-08-07 15:45:29 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:29 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:29 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:29 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 2/3).
+2026-08-07 15:45:29 | INFO     | backend.data_fetcher      | Retrying yfinance download for BITF in 2.28s...
+2026-08-07 15:45:32 | ERROR    | yfinance                  | $BITF: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:32 | ERROR    | yfinance                  | 
+1 Failed download:
+2026-08-07 15:45:32 | ERROR    | yfinance                  | ['BITF']: possibly delisted; no price data found  (period=1mo) (Yahoo error = "No data found, symbol may be delisted")
+2026-08-07 15:45:32 | WARNING  | backend.data_fetcher      | yfinance download returned empty DataFrame for BITF (attempt 3/3).
+2026-08-07 15:45:32 | ERROR    | backend.data_fetcher      | yfinance download failed for BITF after 3 retries.
+2026-08-07 15:45:32 | WARNING  | backend.data_fetcher      | No hourly data returned for BITF.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation scan started — 110 tickers ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for AAPL (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | AAPL — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for MSFT (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | MSFT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for GOOGL (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | GOOGL — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for AMZN (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | AMZN — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for NVDA (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | NVDA — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for META (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | META — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for TSLA (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | TSLA — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for BRK-B (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | BRK-B — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for JPM (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | JPM — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for V (US_EQUITIES) ═══
+2026-08-07 15:46:09 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.33%, low=361.8550, vol_ratio=0.40x (bar_idx=-1)
+2026-08-07 15:46:09 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | V SHOCK: drop=-2.33%, idiosyncratic=True, cap_low=361.8550, vol_ratio=0.40x
+2026-08-07 15:46:09 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:09 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:09 | INFO     | backend.price_structure   | Price-structure analysis complete: 98 confluence zones found.
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | V STRUCTURE: msb_1d=5, fvg_1d=4, ob_1d=5, confluence=98
+2026-08-07 15:46:09 | INFO     | backend.capitulation_engine | V VOLUME PROFILE: POC=361.9991, VAH=370.9136, VAL=358.1786, price_vs_va=in_value_area
+2026-08-07 15:46:10 | INFO     | backend.fundamental_filter | Fundamentals for V: {'ebit': 7027000000.0, 'interest_expense': 194000000.0, 'current_assets': 31002000000.0, 'current_liabilities': 31467000000.0, 'inventory': None}
+2026-08-07 15:46:10 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=36.22, CR=0.99, QR=0.99, flags=['Liquidity stress (Current Ratio=0.99)']
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | V FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.99)']. Marking as EVITAR.
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for JNJ (US_EQUITIES) ═══
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | JNJ — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for WMT (US_EQUITIES) ═══
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | WMT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for PG (US_EQUITIES) ═══
+2026-08-07 15:46:10 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.10%, low=143.8800, vol_ratio=0.42x (bar_idx=-1)
+2026-08-07 15:46:10 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | PG SHOCK: drop=-2.10%, idiosyncratic=True, cap_low=143.8800, vol_ratio=0.42x
+2026-08-07 15:46:10 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:10 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:10 | INFO     | backend.price_structure   | Price-structure analysis complete: 55 confluence zones found.
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | PG STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=55
+2026-08-07 15:46:10 | INFO     | backend.capitulation_engine | PG VOLUME PROFILE: POC=146.2716, VAH=149.8016, VAL=143.8712, price_vs_va=in_value_area
+2026-08-07 15:46:11 | INFO     | backend.fundamental_filter | Fundamentals for PG: {'ebit': 4169000000.0, 'interest_expense': 236000000.0, 'current_assets': 26208000000.0, 'current_liabilities': 38694000000.0, 'inventory': 8170000000.0}
+2026-08-07 15:46:11 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=17.67, CR=0.68, QR=0.47, flags=['Liquidity stress (Current Ratio=0.68)']
+2026-08-07 15:46:11 | INFO     | backend.capitulation_engine | PG FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.68)']. Marking as EVITAR.
+2026-08-07 15:46:11 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for MA (US_EQUITIES) ═══
+2026-08-07 15:46:11 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.49%, low=561.6200, vol_ratio=0.60x (bar_idx=-1)
+2026-08-07 15:46:11 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:11 | INFO     | backend.capitulation_engine | MA SHOCK: drop=-2.49%, idiosyncratic=True, cap_low=561.6200, vol_ratio=0.60x
+2026-08-07 15:46:11 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:11 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:11 | INFO     | backend.price_structure   | Price-structure analysis complete: 63 confluence zones found.
+2026-08-07 15:46:11 | INFO     | backend.capitulation_engine | MA STRUCTURE: msb_1d=5, fvg_1d=7, ob_1d=5, confluence=63
+2026-08-07 15:46:11 | INFO     | backend.capitulation_engine | MA VOLUME PROFILE: POC=571.0876, VAH=583.7089, VAL=542.8399, price_vs_va=in_value_area
+2026-08-07 15:46:12 | INFO     | backend.fundamental_filter | Fundamentals for MA: {'ebit': 5704000000.0, 'interest_expense': 218000000.0, 'current_assets': 26522000000.0, 'current_liabilities': 25004000000.0, 'inventory': None}
+2026-08-07 15:46:12 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=26.17, CR=1.06, QR=1.06, flags=[]
+2026-08-07 15:46:12 | INFO     | backend.capitulation_engine | MA FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:12 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=564.6144, SL=560.7500, TP=583.7089, R:R=4.9 (VAH)
+2026-08-07 15:46:12 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=3.8644, qty=258.7734
+2026-08-07 15:46:12 | INFO     | backend.capitulation_engine | ✅ MA VERDICT: APTO_COMPRA_ASIMETRICA | Entry=564.6144, SL=560.7500, TP=583.7089, R:R=1:4.9, Confidence=80%
+2026-08-07 15:46:12 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for UNH (US_EQUITIES) ═══
+2026-08-07 15:46:12 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.51%, low=402.4000, vol_ratio=0.85x (bar_idx=-2)
+2026-08-07 15:46:12 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:12 | INFO     | backend.capitulation_engine | UNH SHOCK: drop=-2.51%, idiosyncratic=True, cap_low=402.4000, vol_ratio=0.85x
+2026-08-07 15:46:12 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:12 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:12 | INFO     | backend.price_structure   | Price-structure analysis complete: 60 confluence zones found.
+2026-08-07 15:46:12 | INFO     | backend.capitulation_engine | UNH STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=60
+2026-08-07 15:46:12 | INFO     | backend.capitulation_engine | UNH VOLUME PROFILE: POC=421.4134, VAH=436.0920, VAL=415.6696, price_vs_va=below_val
+2026-08-07 15:46:13 | INFO     | backend.fundamental_filter | Fundamentals for UNH: {'ebit': 8918000000.0, 'interest_expense': 955000000.0, 'current_assets': 91127000000.0, 'current_liabilities': 114124000000.0, 'inventory': None}
+2026-08-07 15:46:13 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=9.34, CR=0.80, QR=0.80, flags=['Liquidity stress (Current Ratio=0.8)']
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | UNH FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.8)']. Marking as EVITAR.
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for HD (US_EQUITIES) ═══
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | HD — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for DIS (US_EQUITIES) ═══
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | DIS — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for BAC (US_EQUITIES) ═══
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | BAC — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for XOM (US_EQUITIES) ═══
+2026-08-07 15:46:13 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.13%, low=151.5350, vol_ratio=0.41x (bar_idx=-1)
+2026-08-07 15:46:13 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | XOM SHOCK: drop=-2.13%, idiosyncratic=True, cap_low=151.5350, vol_ratio=0.41x
+2026-08-07 15:46:13 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:13 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:13 | INFO     | backend.price_structure   | Price-structure analysis complete: 32 confluence zones found.
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | XOM STRUCTURE: msb_1d=5, fvg_1d=8, ob_1d=5, confluence=32
+2026-08-07 15:46:13 | INFO     | backend.capitulation_engine | XOM VOLUME PROFILE: POC=154.4708, VAH=158.3905, VAL=150.5511, price_vs_va=in_value_area
+2026-08-07 15:46:14 | INFO     | backend.fundamental_filter | Fundamentals for XOM: {'ebit': 7262000000.0, 'interest_expense': 295000000.0, 'current_assets': 97787000000.0, 'current_liabilities': 94378000000.0, 'inventory': 24975000000.0}
+2026-08-07 15:46:14 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=24.62, CR=1.04, QR=0.77, flags=[]
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | XOM FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:14 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=155.0400, SL=151.2695
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | XOM — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for PFE (US_EQUITIES) ═══
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | PFE — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for KO (US_EQUITIES) ═══
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | KO — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for PEP (US_EQUITIES) ═══
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | PEP — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for CSCO (US_EQUITIES) ═══
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | CSCO — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ABT (US_EQUITIES) ═══
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | ABT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for CRM (US_EQUITIES) ═══
+2026-08-07 15:46:14 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-5.17%, low=183.0000, vol_ratio=1.05x (bar_idx=-2)
+2026-08-07 15:46:14 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | CRM SHOCK: drop=-5.17%, idiosyncratic=True, cap_low=183.0000, vol_ratio=1.05x
+2026-08-07 15:46:14 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:14 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:14 | INFO     | backend.price_structure   | Price-structure analysis complete: 72 confluence zones found.
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | CRM STRUCTURE: msb_1d=5, fvg_1d=10, ob_1d=5, confluence=72
+2026-08-07 15:46:14 | INFO     | backend.capitulation_engine | CRM VOLUME PROFILE: POC=170.6651, VAH=189.3687, VAL=166.2876, price_vs_va=above_vah
+2026-08-07 15:46:15 | INFO     | backend.fundamental_filter | Fundamentals for CRM: {'ebit': 3038000000.0, 'interest_expense': 317000000.0, 'current_assets': 21613000000.0, 'current_liabilities': 27502000000.0, 'inventory': None}
+2026-08-07 15:46:15 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=9.58, CR=0.79, QR=0.79, flags=['Liquidity stress (Current Ratio=0.79)']
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | CRM FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.79)']. Marking as EVITAR.
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for AVGO (US_EQUITIES) ═══
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | AVGO — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for TMO (US_EQUITIES) ═══
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | TMO — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for COST (US_EQUITIES) ═══
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | COST — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for NKE (US_EQUITIES) ═══
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | NKE — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for MRK (US_EQUITIES) ═══
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | MRK — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ACN (US_EQUITIES) ═══
+2026-08-07 15:46:15 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-7.60%, low=157.7600, vol_ratio=0.66x (bar_idx=-2)
+2026-08-07 15:46:15 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ACN SHOCK: drop=-7.60%, idiosyncratic=True, cap_low=157.7600, vol_ratio=0.66x
+2026-08-07 15:46:15 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:15 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:15 | INFO     | backend.price_structure   | Price-structure analysis complete: 43 confluence zones found.
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ACN STRUCTURE: msb_1d=5, fvg_1d=8, ob_1d=5, confluence=43
+2026-08-07 15:46:15 | INFO     | backend.capitulation_engine | ACN VOLUME PROFILE: POC=143.8521, VAH=147.6564, VAL=134.1300, price_vs_va=above_vah
+2026-08-07 15:46:16 | INFO     | backend.fundamental_filter | Fundamentals for ACN: {'ebit': 3220473000.0, 'interest_expense': 70645000.0, 'current_assets': 28938345000.0, 'current_liabilities': 21609107000.0, 'inventory': None}
+2026-08-07 15:46:16 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=45.59, CR=1.34, QR=1.34, flags=[]
+2026-08-07 15:46:16 | INFO     | backend.capitulation_engine | ACN FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:16 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=175.7000, SL=157.1267
+2026-08-07 15:46:16 | INFO     | backend.capitulation_engine | ACN — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:16 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for LLY (US_EQUITIES) ═══
+2026-08-07 15:46:16 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.58%, low=1161.2001, vol_ratio=0.45x (bar_idx=-1)
+2026-08-07 15:46:16 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:16 | INFO     | backend.capitulation_engine | LLY SHOCK: drop=-2.58%, idiosyncratic=True, cap_low=1161.2001, vol_ratio=0.45x
+2026-08-07 15:46:16 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:16 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:16 | INFO     | backend.price_structure   | Price-structure analysis complete: 52 confluence zones found.
+2026-08-07 15:46:16 | INFO     | backend.capitulation_engine | LLY STRUCTURE: msb_1d=5, fvg_1d=2, ob_1d=5, confluence=52
+2026-08-07 15:46:16 | INFO     | backend.capitulation_engine | LLY VOLUME PROFILE: POC=1157.0615, VAH=1202.5160, VAL=1138.6340, price_vs_va=in_value_area
+2026-08-07 15:46:17 | INFO     | backend.fundamental_filter | Fundamentals for LLY: {'ebit': 9778000000.0, 'interest_expense': None, 'current_assets': 54835000000.0, 'current_liabilities': 36634000000.0, 'inventory': 14529000000.0}
+2026-08-07 15:46:17 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=999.00, CR=1.50, QR=1.10, flags=[]
+2026-08-07 15:46:17 | INFO     | backend.capitulation_engine | LLY FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:17 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=1175.0000, SL=1157.6318
+2026-08-07 15:46:17 | INFO     | backend.capitulation_engine | LLY — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:17 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ABBV (US_EQUITIES) ═══
+2026-08-07 15:46:17 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.03%, low=241.2000, vol_ratio=0.79x (bar_idx=-2)
+2026-08-07 15:46:17 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:17 | INFO     | backend.capitulation_engine | ABBV SHOCK: drop=-2.03%, idiosyncratic=True, cap_low=241.2000, vol_ratio=0.79x
+2026-08-07 15:46:17 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:17 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:17 | INFO     | backend.price_structure   | Price-structure analysis complete: 66 confluence zones found.
+2026-08-07 15:46:17 | INFO     | backend.capitulation_engine | ABBV STRUCTURE: msb_1d=5, fvg_1d=10, ob_1d=5, confluence=66
+2026-08-07 15:46:17 | INFO     | backend.capitulation_engine | ABBV VOLUME PROFILE: POC=245.1405, VAH=257.4874, VAL=242.2508, price_vs_va=in_value_area
+2026-08-07 15:46:18 | INFO     | backend.fundamental_filter | Fundamentals for ABBV: {'ebit': 5024000000.0, 'interest_expense': 746000000.0, 'current_assets': 33669000000.0, 'current_liabilities': 41642000000.0, 'inventory': 5127000000.0}
+2026-08-07 15:46:18 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=6.73, CR=0.81, QR=0.69, flags=['Liquidity stress (Current Ratio=0.81)']
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | ABBV FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.81)']. Marking as EVITAR.
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for MCD (US_EQUITIES) ═══
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | MCD — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for TXN (US_EQUITIES) ═══
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | TXN — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for QCOM (US_EQUITIES) ═══
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | QCOM — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for DHR (US_EQUITIES) ═══
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | DHR — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for NEE (US_EQUITIES) ═══
+2026-08-07 15:46:18 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.29%, low=83.9400, vol_ratio=1.81x (bar_idx=-2)
+2026-08-07 15:46:18 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | NEE SHOCK: drop=-2.29%, idiosyncratic=True, cap_low=83.9400, vol_ratio=1.81x
+2026-08-07 15:46:18 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:18 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:18 | INFO     | backend.price_structure   | Price-structure analysis complete: 55 confluence zones found.
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | NEE STRUCTURE: msb_1d=5, fvg_1d=2, ob_1d=5, confluence=55
+2026-08-07 15:46:18 | INFO     | backend.capitulation_engine | NEE VOLUME PROFILE: POC=89.4150, VAH=90.6900, VAL=86.9400, price_vs_va=below_val
+2026-08-07 15:46:19 | INFO     | backend.fundamental_filter | Fundamentals for NEE: {'ebit': 3025000000.0, 'interest_expense': 487000000.0, 'current_assets': 15467000000.0, 'current_liabilities': 28974000000.0, 'inventory': 2616000000.0}
+2026-08-07 15:46:19 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=6.21, CR=0.53, QR=0.44, flags=['Liquidity stress (Current Ratio=0.53)']
+2026-08-07 15:46:19 | INFO     | backend.capitulation_engine | NEE FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.53)']. Marking as EVITAR.
+2026-08-07 15:46:19 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ORCL (US_EQUITIES) ═══
+2026-08-07 15:46:19 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.93%, low=138.7200, vol_ratio=0.60x (bar_idx=-2)
+2026-08-07 15:46:19 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:19 | INFO     | backend.capitulation_engine | ORCL SHOCK: drop=-3.93%, idiosyncratic=True, cap_low=138.7200, vol_ratio=0.60x
+2026-08-07 15:46:19 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:19 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:19 | INFO     | backend.price_structure   | Price-structure analysis complete: 67 confluence zones found.
+2026-08-07 15:46:19 | INFO     | backend.capitulation_engine | ORCL STRUCTURE: msb_1d=5, fvg_1d=14, ob_1d=5, confluence=67
+2026-08-07 15:46:19 | INFO     | backend.capitulation_engine | ORCL VOLUME PROFILE: POC=126.4700, VAH=132.9680, VAL=117.2360, price_vs_va=above_vah
+2026-08-07 15:46:20 | INFO     | backend.fundamental_filter | Fundamentals for ORCL: {'ebit': 6808000000.0, 'interest_expense': 1439000000.0, 'current_assets': 46567000000.0, 'current_liabilities': 41764000000.0, 'inventory': None}
+2026-08-07 15:46:20 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=4.73, CR=1.12, QR=1.12, flags=[]
+2026-08-07 15:46:20 | INFO     | backend.capitulation_engine | ORCL FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:20 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=147.5850, SL=138.2176, TP=218.3005, R:R=7.5 (FVG_TARGET)
+2026-08-07 15:46:20 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=9.3675, qty=106.7526
+2026-08-07 15:46:20 | INFO     | backend.capitulation_engine | ✅ ORCL VERDICT: APTO_COMPRA_ASIMETRICA | Entry=147.5850, SL=138.2176, TP=218.3005, R:R=1:7.5, Confidence=80%
+2026-08-07 15:46:20 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ADBE (US_EQUITIES) ═══
+2026-08-07 15:46:20 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.27%, low=250.8400, vol_ratio=0.87x (bar_idx=-2)
+2026-08-07 15:46:20 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:20 | INFO     | backend.capitulation_engine | ADBE SHOCK: drop=-3.27%, idiosyncratic=True, cap_low=250.8400, vol_ratio=0.87x
+2026-08-07 15:46:20 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:20 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:20 | INFO     | backend.price_structure   | Price-structure analysis complete: 70 confluence zones found.
+2026-08-07 15:46:20 | INFO     | backend.capitulation_engine | ADBE STRUCTURE: msb_1d=5, fvg_1d=10, ob_1d=5, confluence=70
+2026-08-07 15:46:20 | INFO     | backend.capitulation_engine | ADBE VOLUME PROFILE: POC=235.1848, VAH=254.7472, VAL=217.9936, price_vs_va=above_vah
+2026-08-07 15:46:21 | INFO     | backend.fundamental_filter | Fundamentals for ADBE: {'ebit': 2303000000.0, 'interest_expense': 65000000.0, 'current_assets': 9068000000.0, 'current_liabilities': 12078000000.0, 'inventory': None}
+2026-08-07 15:46:21 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=35.43, CR=0.75, QR=0.75, flags=['Liquidity stress (Current Ratio=0.75)']
+2026-08-07 15:46:21 | INFO     | backend.capitulation_engine | ADBE FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.75)']. Marking as EVITAR.
+2026-08-07 15:46:21 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for AMD (US_EQUITIES) ═══
+2026-08-07 15:46:21 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.70%, low=476.0600, vol_ratio=0.65x (bar_idx=-1)
+2026-08-07 15:46:21 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:21 | INFO     | backend.capitulation_engine | AMD SHOCK: drop=-2.70%, idiosyncratic=True, cap_low=476.0600, vol_ratio=0.65x
+2026-08-07 15:46:21 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:21 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:21 | INFO     | backend.price_structure   | Price-structure analysis complete: 47 confluence zones found.
+2026-08-07 15:46:21 | INFO     | backend.capitulation_engine | AMD STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=47
+2026-08-07 15:46:21 | INFO     | backend.capitulation_engine | AMD VOLUME PROFILE: POC=485.6284, VAH=538.6303, VAL=475.6010, price_vs_va=in_value_area
+2026-08-07 15:46:22 | INFO     | backend.fundamental_filter | Fundamentals for AMD: {'ebit': 1641000000.0, 'interest_expense': 37000000.0, 'current_assets': 28628000000.0, 'current_liabilities': 10506000000.0, 'inventory': 8045000000.0}
+2026-08-07 15:46:22 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=44.35, CR=2.72, QR=1.96, flags=[]
+2026-08-07 15:46:22 | INFO     | backend.capitulation_engine | AMD FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:22 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=477.7100, SL=473.9325, TP=496.7200, R:R=5.0 (FVG_TARGET)
+2026-08-07 15:46:22 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=3.7775, qty=264.7257
+2026-08-07 15:46:22 | INFO     | backend.capitulation_engine | ✅ AMD VERDICT: APTO_COMPRA_ASIMETRICA | Entry=477.7100, SL=473.9325, TP=496.7200, R:R=1:5.0, Confidence=80%
+2026-08-07 15:46:22 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for INTC (US_EQUITIES) ═══
+2026-08-07 15:46:22 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-5.40%, low=95.6000, vol_ratio=0.67x (bar_idx=-2)
+2026-08-07 15:46:22 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:22 | INFO     | backend.capitulation_engine | INTC SHOCK: drop=-5.40%, idiosyncratic=True, cap_low=95.6000, vol_ratio=0.67x
+2026-08-07 15:46:22 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:22 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:22 | INFO     | backend.price_structure   | Price-structure analysis complete: 31 confluence zones found.
+2026-08-07 15:46:22 | INFO     | backend.capitulation_engine | INTC STRUCTURE: msb_1d=5, fvg_1d=10, ob_1d=5, confluence=31
+2026-08-07 15:46:22 | INFO     | backend.capitulation_engine | INTC VOLUME PROFILE: POC=100.6960, VAH=105.9020, VAL=91.1060, price_vs_va=in_value_area
+2026-08-07 15:46:23 | INFO     | backend.fundamental_filter | Fundamentals for INTC: {'ebit': -10498000000.0, 'interest_expense': 321000000.0, 'current_assets': 57213000000.0, 'current_liabilities': 35670000000.0, 'inventory': 12492000000.0}
+2026-08-07 15:46:23 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-32.70, CR=1.60, QR=1.25, flags=['Low interest coverage (ICR=-32.7)']
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | INTC FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-32.7)']. Marking as EVITAR.
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for AMGN (US_EQUITIES) ═══
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | AMGN — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for PM (US_EQUITIES) ═══
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | PM — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for HON (US_EQUITIES) ═══
+2026-08-07 15:46:23 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.30%, low=239.9300, vol_ratio=1.55x (bar_idx=-2)
+2026-08-07 15:46:23 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | HON SHOCK: drop=-3.30%, idiosyncratic=True, cap_low=239.9300, vol_ratio=1.55x
+2026-08-07 15:46:23 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:23 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:23 | INFO     | backend.price_structure   | Price-structure analysis complete: 49 confluence zones found.
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | HON STRUCTURE: msb_1d=5, fvg_1d=7, ob_1d=5, confluence=49
+2026-08-07 15:46:23 | INFO     | backend.capitulation_engine | HON VOLUME PROFILE: POC=244.7642, VAH=252.0000, VAL=233.1240, price_vs_va=in_value_area
+2026-08-07 15:46:24 | INFO     | backend.fundamental_filter | Fundamentals for HON: {'ebit': 7892000000.0, 'interest_expense': 363000000.0, 'current_assets': 28079000000.0, 'current_liabilities': 23194000000.0, 'inventory': 6401000000.0}
+2026-08-07 15:46:24 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=21.74, CR=1.21, QR=0.93, flags=[]
+2026-08-07 15:46:24 | INFO     | backend.capitulation_engine | HON FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:24 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=245.3800, SL=239.4195
+2026-08-07 15:46:24 | INFO     | backend.capitulation_engine | HON — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:24 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for UPS (US_EQUITIES) ═══
+2026-08-07 15:46:24 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.27%, low=103.1000, vol_ratio=1.67x (bar_idx=-2)
+2026-08-07 15:46:24 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:24 | INFO     | backend.capitulation_engine | UPS SHOCK: drop=-4.27%, idiosyncratic=True, cap_low=103.1000, vol_ratio=1.67x
+2026-08-07 15:46:24 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:24 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:24 | INFO     | backend.price_structure   | Price-structure analysis complete: 43 confluence zones found.
+2026-08-07 15:46:24 | INFO     | backend.capitulation_engine | UPS STRUCTURE: msb_1d=5, fvg_1d=4, ob_1d=5, confluence=43
+2026-08-07 15:46:24 | INFO     | backend.capitulation_engine | UPS VOLUME PROFILE: POC=104.1979, VAH=109.4713, VAL=102.4401, price_vs_va=in_value_area
+2026-08-07 15:46:25 | INFO     | backend.fundamental_filter | Fundamentals for UPS: {'ebit': None, 'interest_expense': None, 'current_assets': 17794000000.0, 'current_liabilities': 14674000000.0, 'inventory': None}
+2026-08-07 15:46:25 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=999.00, CR=1.21, QR=1.21, flags=[]
+2026-08-07 15:46:25 | INFO     | backend.capitulation_engine | UPS FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:25 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=104.5200, SL=102.8867, TP=109.4713, R:R=3.0 (VAH)
+2026-08-07 15:46:25 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=1.6333, qty=612.2594
+2026-08-07 15:46:25 | INFO     | backend.capitulation_engine | ✅ UPS VERDICT: APTO_COMPRA_ASIMETRICA | Entry=104.5200, SL=102.8867, TP=109.4713, R:R=1:3.0, Confidence=80%
+2026-08-07 15:46:25 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for IBM (US_EQUITIES) ═══
+2026-08-07 15:46:25 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.17%, low=228.4400, vol_ratio=0.30x (bar_idx=-2)
+2026-08-07 15:46:25 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:25 | INFO     | backend.capitulation_engine | IBM SHOCK: drop=-3.17%, idiosyncratic=True, cap_low=228.4400, vol_ratio=0.30x
+2026-08-07 15:46:25 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:25 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:25 | INFO     | backend.price_structure   | Price-structure analysis complete: 44 confluence zones found.
+2026-08-07 15:46:25 | INFO     | backend.capitulation_engine | IBM STRUCTURE: msb_1d=5, fvg_1d=10, ob_1d=5, confluence=44
+2026-08-07 15:46:25 | INFO     | backend.capitulation_engine | IBM VOLUME PROFILE: POC=217.8832, VAH=223.0536, VAL=206.3491, price_vs_va=above_vah
+2026-08-07 15:46:26 | INFO     | backend.fundamental_filter | Fundamentals for IBM: {'ebit': 2965000000.0, 'interest_expense': 486000000.0, 'current_assets': 28398000000.0, 'current_liabilities': 35912000000.0, 'inventory': 1746000000.0}
+2026-08-07 15:46:26 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=6.10, CR=0.79, QR=0.74, flags=['Liquidity stress (Current Ratio=0.79)']
+2026-08-07 15:46:26 | INFO     | backend.capitulation_engine | IBM FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.79)']. Marking as EVITAR.
+2026-08-07 15:46:26 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for GE (US_EQUITIES) ═══
+2026-08-07 15:46:26 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.21%, low=372.7900, vol_ratio=0.92x (bar_idx=-2)
+2026-08-07 15:46:26 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:26 | INFO     | backend.capitulation_engine | GE SHOCK: drop=-2.21%, idiosyncratic=True, cap_low=372.7900, vol_ratio=0.92x
+2026-08-07 15:46:26 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:26 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:26 | INFO     | backend.price_structure   | Price-structure analysis complete: 64 confluence zones found.
+2026-08-07 15:46:26 | INFO     | backend.capitulation_engine | GE STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=64
+2026-08-07 15:46:26 | INFO     | backend.capitulation_engine | GE VOLUME PROFILE: POC=341.2379, VAH=361.6388, VAL=339.6686, price_vs_va=above_vah
+2026-08-07 15:46:27 | INFO     | backend.fundamental_filter | Fundamentals for GE: {'ebit': 3016000000.0, 'interest_expense': 215000000.0, 'current_assets': 39696000000.0, 'current_liabilities': 40428000000.0, 'inventory': 12440000000.0}
+2026-08-07 15:46:27 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=14.03, CR=0.98, QR=0.67, flags=['Liquidity stress (Current Ratio=0.98)']
+2026-08-07 15:46:27 | INFO     | backend.capitulation_engine | GE FUNDAMENTAL FILTER: FAILED — ['Liquidity stress (Current Ratio=0.98)']. Marking as EVITAR.
+2026-08-07 15:46:27 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for CAT (US_EQUITIES) ═══
+2026-08-07 15:46:27 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.44%, low=836.0100, vol_ratio=0.43x (bar_idx=-1)
+2026-08-07 15:46:27 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:27 | INFO     | backend.capitulation_engine | CAT SHOCK: drop=-2.44%, idiosyncratic=True, cap_low=836.0100, vol_ratio=0.43x
+2026-08-07 15:46:27 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:27 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:27 | INFO     | backend.price_structure   | Price-structure analysis complete: 31 confluence zones found.
+2026-08-07 15:46:27 | INFO     | backend.capitulation_engine | CAT STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=31
+2026-08-07 15:46:27 | INFO     | backend.capitulation_engine | CAT VOLUME PROFILE: POC=886.0274, VAH=910.6604, VAL=828.5504, price_vs_va=in_value_area
+2026-08-07 15:46:28 | INFO     | backend.fundamental_filter | Fundamentals for CAT: {'ebit': None, 'interest_expense': None, 'current_assets': 48568000000.0, 'current_liabilities': 35902000000.0, 'inventory': 19626000000.0}
+2026-08-07 15:46:28 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=999.00, CR=1.35, QR=0.81, flags=[]
+2026-08-07 15:46:28 | INFO     | backend.capitulation_engine | CAT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:28 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=845.0000, SL=833.4102, TP=886.0274, R:R=3.5 (POC)
+2026-08-07 15:46:28 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=11.5898, qty=86.2824
+2026-08-07 15:46:28 | INFO     | backend.capitulation_engine | ✅ CAT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=845.0000, SL=833.4102, TP=886.0274, R:R=1:3.5, Confidence=80%
+2026-08-07 15:46:28 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for BA (US_EQUITIES) ═══
+2026-08-07 15:46:28 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.69%, low=231.3300, vol_ratio=1.15x (bar_idx=-2)
+2026-08-07 15:46:28 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:28 | INFO     | backend.capitulation_engine | BA SHOCK: drop=-3.69%, idiosyncratic=True, cap_low=231.3300, vol_ratio=1.15x
+2026-08-07 15:46:28 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:28 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:28 | INFO     | backend.price_structure   | Price-structure analysis complete: 50 confluence zones found.
+2026-08-07 15:46:28 | INFO     | backend.capitulation_engine | BA STRUCTURE: msb_1d=5, fvg_1d=7, ob_1d=5, confluence=50
+2026-08-07 15:46:28 | INFO     | backend.capitulation_engine | BA VOLUME PROFILE: POC=214.6849, VAH=223.2385, VAL=203.9000, price_vs_va=above_vah
+2026-08-07 15:46:29 | INFO     | backend.fundamental_filter | Fundamentals for BA: {'ebit': None, 'interest_expense': None, 'current_assets': 124141000000.0, 'current_liabilities': 105547000000.0, 'inventory': 87225000000.0}
+2026-08-07 15:46:29 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=999.00, CR=1.18, QR=0.35, flags=[]
+2026-08-07 15:46:29 | INFO     | backend.capitulation_engine | BA FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:29 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=233.4899, SL=230.7967
+2026-08-07 15:46:29 | INFO     | backend.capitulation_engine | BA — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:29 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for NFLX (US_EQUITIES) ═══
+2026-08-07 15:46:29 | INFO     | backend.capitulation_engine | NFLX — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:29 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for MU (US_EQUITIES) ═══
+2026-08-07 15:46:29 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-7.41%, low=827.0000, vol_ratio=0.78x (bar_idx=-2)
+2026-08-07 15:46:29 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:29 | INFO     | backend.capitulation_engine | MU SHOCK: drop=-7.41%, idiosyncratic=True, cap_low=827.0000, vol_ratio=0.78x
+2026-08-07 15:46:29 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:29 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:29 | INFO     | backend.price_structure   | Price-structure analysis complete: 47 confluence zones found.
+2026-08-07 15:46:29 | INFO     | backend.capitulation_engine | MU STRUCTURE: msb_1d=5, fvg_1d=7, ob_1d=5, confluence=47
+2026-08-07 15:46:29 | INFO     | backend.capitulation_engine | MU VOLUME PROFILE: POC=872.0861, VAH=929.6030, VAL=803.6136, price_vs_va=in_value_area
+2026-08-07 15:46:30 | INFO     | backend.fundamental_filter | Fundamentals for MU: {'ebit': 33212000000.0, 'interest_expense': 0.0, 'current_assets': 66737000000.0, 'current_liabilities': 19488000000.0, 'inventory': 8567000000.0}
+2026-08-07 15:46:30 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=999.00, CR=3.42, QR=2.98, flags=[]
+2026-08-07 15:46:30 | INFO     | backend.capitulation_engine | MU FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:30 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=862.5000, SL=821.2629, TP=1019.0000, R:R=3.8 (FVG_TARGET)
+2026-08-07 15:46:30 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=41.2371, qty=24.2500
+2026-08-07 15:46:30 | INFO     | backend.capitulation_engine | ✅ MU VERDICT: APTO_COMPRA_ASIMETRICA | Entry=862.5000, SL=821.2629, TP=1019.0000, R:R=1:3.8, Confidence=80%
+2026-08-07 15:46:30 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for PYPL (US_EQUITIES) ═══
+2026-08-07 15:46:30 | INFO     | backend.capitulation_engine | PYPL — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:30 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for BABA (US_EQUITIES) ═══
+2026-08-07 15:46:30 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.31%, low=125.5600, vol_ratio=0.44x (bar_idx=-2)
+2026-08-07 15:46:30 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:30 | INFO     | backend.capitulation_engine | BABA SHOCK: drop=-2.31%, idiosyncratic=True, cap_low=125.5600, vol_ratio=0.44x
+2026-08-07 15:46:30 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:30 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:30 | INFO     | backend.price_structure   | Price-structure analysis complete: 74 confluence zones found.
+2026-08-07 15:46:30 | INFO     | backend.capitulation_engine | BABA STRUCTURE: msb_1d=5, fvg_1d=14, ob_1d=5, confluence=74
+2026-08-07 15:46:30 | INFO     | backend.capitulation_engine | BABA VOLUME PROFILE: POC=118.4279, VAH=122.4864, VAL=112.8233, price_vs_va=above_vah
+2026-08-07 15:46:32 | INFO     | backend.fundamental_filter | Fundamentals for BABA: {'ebit': 33598000000.0, 'interest_expense': 2241000000.0, 'current_assets': 610769000000.0, 'current_liabilities': 476398000000.0, 'inventory': 18909000000.0}
+2026-08-07 15:46:32 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=14.99, CR=1.28, QR=1.24, flags=[]
+2026-08-07 15:46:32 | INFO     | backend.capitulation_engine | BABA FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:32 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=127.7800, SL=125.3611
+2026-08-07 15:46:32 | INFO     | backend.capitulation_engine | BABA — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:32 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for COIN (US_EQUITIES) ═══
+2026-08-07 15:46:32 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.17%, low=145.1400, vol_ratio=0.77x (bar_idx=-2)
+2026-08-07 15:46:32 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:32 | INFO     | backend.capitulation_engine | COIN SHOCK: drop=-3.17%, idiosyncratic=True, cap_low=145.1400, vol_ratio=0.77x
+2026-08-07 15:46:32 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:32 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:32 | INFO     | backend.price_structure   | Price-structure analysis complete: 55 confluence zones found.
+2026-08-07 15:46:32 | INFO     | backend.capitulation_engine | COIN STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=55
+2026-08-07 15:46:32 | INFO     | backend.capitulation_engine | COIN VOLUME PROFILE: POC=149.7050, VAH=166.2332, VAL=145.0432, price_vs_va=in_value_area
+2026-08-07 15:46:33 | INFO     | backend.fundamental_filter | Fundamentals for COIN: {'ebit': -372895000.0, 'interest_expense': 22516000.0, 'current_assets': 17489307000.0, 'current_liabilities': 7218914000.0, 'inventory': None}
+2026-08-07 15:46:33 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-16.56, CR=2.42, QR=2.42, flags=['Low interest coverage (ICR=-16.56)']
+2026-08-07 15:46:33 | INFO     | backend.capitulation_engine | COIN FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-16.56)']. Marking as EVITAR.
+2026-08-07 15:46:33 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for MSTR (US_EQUITIES) ═══
+2026-08-07 15:46:33 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.98%, low=95.4400, vol_ratio=0.67x (bar_idx=-2)
+2026-08-07 15:46:33 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:33 | INFO     | backend.capitulation_engine | MSTR SHOCK: drop=-2.98%, idiosyncratic=True, cap_low=95.4400, vol_ratio=0.67x
+2026-08-07 15:46:33 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:33 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:33 | INFO     | backend.price_structure   | Price-structure analysis complete: 24 confluence zones found.
+2026-08-07 15:46:33 | INFO     | backend.capitulation_engine | MSTR STRUCTURE: msb_1d=5, fvg_1d=8, ob_1d=5, confluence=24
+2026-08-07 15:46:33 | INFO     | backend.capitulation_engine | MSTR VOLUME PROFILE: POC=97.1921, VAH=99.9614, VAL=93.1196, price_vs_va=in_value_area
+2026-08-07 15:46:34 | INFO     | backend.fundamental_filter | Fundamentals for MSTR: {'ebit': -8202449000.0, 'interest_expense': 15621000.0, 'current_assets': 2668630000.0, 'current_liabilities': 495107000.0, 'inventory': None}
+2026-08-07 15:46:34 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-525.09, CR=5.39, QR=5.39, flags=['Low interest coverage (ICR=-525.09)']
+2026-08-07 15:46:34 | INFO     | backend.capitulation_engine | MSTR FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-525.09)']. Marking as EVITAR.
+2026-08-07 15:46:34 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for GS (US_EQUITIES) ═══
+2026-08-07 15:46:34 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.79%, low=1030.7800, vol_ratio=0.83x (bar_idx=-2)
+2026-08-07 15:46:34 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:34 | INFO     | backend.capitulation_engine | GS SHOCK: drop=-2.79%, idiosyncratic=True, cap_low=1030.7800, vol_ratio=0.83x
+2026-08-07 15:46:34 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:34 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:34 | INFO     | backend.price_structure   | Price-structure analysis complete: 77 confluence zones found.
+2026-08-07 15:46:34 | INFO     | backend.capitulation_engine | GS STRUCTURE: msb_1d=5, fvg_1d=9, ob_1d=5, confluence=77
+2026-08-07 15:46:34 | INFO     | backend.capitulation_engine | GS VOLUME PROFILE: POC=1074.6595, VAH=1086.9998, VAL=991.8032, price_vs_va=in_value_area
+2026-08-07 15:46:35 | INFO     | backend.fundamental_filter | Fundamentals for GS: {'ebit': None, 'interest_expense': 18093000000.0, 'current_assets': None, 'current_liabilities': None, 'inventory': None}
+2026-08-07 15:46:35 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=0.00, CR=0.00, QR=0.00, flags=['Low interest coverage (ICR=0.0)', 'Unable to compute current ratio (missing data)', 'Liquidity stress (Current Ratio=0.0)']
+2026-08-07 15:46:35 | INFO     | backend.capitulation_engine | GS FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=0.0)', 'Unable to compute current ratio (missing data)', 'Liquidity stress (Current Ratio=0.0)']. Marking as EVITAR.
+2026-08-07 15:46:35 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for MRVL (US_EQUITIES) ═══
+2026-08-07 15:46:35 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.40%, low=201.7400, vol_ratio=0.70x (bar_idx=-2)
+2026-08-07 15:46:35 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:35 | INFO     | backend.capitulation_engine | MRVL SHOCK: drop=-4.40%, idiosyncratic=True, cap_low=201.7400, vol_ratio=0.70x
+2026-08-07 15:46:35 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:35 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:35 | INFO     | backend.price_structure   | Price-structure analysis complete: 59 confluence zones found.
+2026-08-07 15:46:35 | INFO     | backend.capitulation_engine | MRVL STRUCTURE: msb_1d=5, fvg_1d=12, ob_1d=5, confluence=59
+2026-08-07 15:46:35 | INFO     | backend.capitulation_engine | MRVL VOLUME PROFILE: POC=187.8598, VAH=211.5396, VAL=174.4199, price_vs_va=above_vah
+2026-08-07 15:46:36 | INFO     | backend.fundamental_filter | Fundamentals for MRVL: {'ebit': 339400000.0, 'interest_expense': 256100000.0, 'current_assets': 7464000000.0, 'current_liabilities': 2276800000.0, 'inventory': 1400900000.0}
+2026-08-07 15:46:36 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=1.33, CR=3.28, QR=2.66, flags=['Low interest coverage (ICR=1.33)']
+2026-08-07 15:46:36 | INFO     | backend.capitulation_engine | MRVL FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=1.33)']. Marking as EVITAR.
+2026-08-07 15:46:36 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for SMCI (US_EQUITIES) ═══
+2026-08-07 15:46:36 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.27%, low=29.3300, vol_ratio=0.61x (bar_idx=-2)
+2026-08-07 15:46:36 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:36 | INFO     | backend.capitulation_engine | SMCI SHOCK: drop=-3.27%, idiosyncratic=True, cap_low=29.3300, vol_ratio=0.61x
+2026-08-07 15:46:36 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:36 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:36 | INFO     | backend.price_structure   | Price-structure analysis complete: 33 confluence zones found.
+2026-08-07 15:46:36 | INFO     | backend.capitulation_engine | SMCI STRUCTURE: msb_1d=5, fvg_1d=9, ob_1d=5, confluence=33
+2026-08-07 15:46:36 | INFO     | backend.capitulation_engine | SMCI VOLUME PROFILE: POC=30.8360, VAH=32.2168, VAL=27.7984, price_vs_va=in_value_area
+2026-08-07 15:46:37 | INFO     | backend.fundamental_filter | Fundamentals for SMCI: {'ebit': 675452000.0, 'interest_expense': 64483000.0, 'current_assets': 21568286000.0, 'current_liabilities': 8122635000.0, 'inventory': 11103376000.0}
+2026-08-07 15:46:37 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=True, ICR=10.47, CR=2.66, QR=1.29, flags=[]
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | SMCI FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:37 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=31.4500, SL=29.1774, TP=44.7400, R:R=5.8 (FVG_TARGET)
+2026-08-07 15:46:37 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=2.2726, qty=440.0235
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | ✅ SMCI VERDICT: APTO_COMPRA_ASIMETRICA | Entry=31.4500, SL=29.1774, TP=44.7400, R:R=1:5.8, Confidence=80%
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for GLD (US_EQUITIES) ═══
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | GLD — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for SLV (US_EQUITIES) ═══
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | SLV — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for USO (US_EQUITIES) ═══
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | USO — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for HUT (US_EQUITIES) ═══
+2026-08-07 15:46:37 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-6.18%, low=85.0450, vol_ratio=1.12x (bar_idx=-1)
+2026-08-07 15:46:37 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | HUT SHOCK: drop=-6.18%, idiosyncratic=True, cap_low=85.0450, vol_ratio=1.12x
+2026-08-07 15:46:37 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:37 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:37 | INFO     | backend.price_structure   | Price-structure analysis complete: 42 confluence zones found.
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | HUT STRUCTURE: msb_1d=5, fvg_1d=2, ob_1d=5, confluence=42
+2026-08-07 15:46:37 | INFO     | backend.capitulation_engine | HUT VOLUME PROFILE: POC=102.2108, VAH=112.9640, VAL=92.9408, price_vs_va=below_val
+2026-08-07 15:46:38 | INFO     | backend.fundamental_filter | Fundamentals for HUT: {'ebit': -292834000.0, 'interest_expense': 9243000.0, 'current_assets': 216574000.0, 'current_liabilities': 252427000.0, 'inventory': None}
+2026-08-07 15:46:38 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-31.68, CR=0.86, QR=0.86, flags=['Low interest coverage (ICR=-31.68)', 'Liquidity stress (Current Ratio=0.86)']
+2026-08-07 15:46:38 | INFO     | backend.capitulation_engine | HUT FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-31.68)', 'Liquidity stress (Current Ratio=0.86)']. Marking as EVITAR.
+2026-08-07 15:46:38 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for KEEL (US_EQUITIES) ═══
+2026-08-07 15:46:38 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-5.60%, low=3.7100, vol_ratio=0.76x (bar_idx=-2)
+2026-08-07 15:46:38 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:38 | INFO     | backend.capitulation_engine | KEEL SHOCK: drop=-5.60%, idiosyncratic=True, cap_low=3.7100, vol_ratio=0.76x
+2026-08-07 15:46:38 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:38 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:38 | INFO     | backend.price_structure   | Price-structure analysis complete: 28 confluence zones found.
+2026-08-07 15:46:38 | INFO     | backend.capitulation_engine | KEEL STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=28
+2026-08-07 15:46:39 | INFO     | backend.capitulation_engine | KEEL VOLUME PROFILE: POC=4.0159, VAH=4.4482, VAL=3.6587, price_vs_va=in_value_area
+2026-08-07 15:46:40 | INFO     | backend.fundamental_filter | Fundamentals for KEEL: {'ebit': -123977000.0, 'interest_expense': 3600000.0, 'current_assets': 575646000.0, 'current_liabilities': 59944000.0, 'inventory': 10410000.0}
+2026-08-07 15:46:40 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-34.44, CR=9.60, QR=9.43, flags=['Low interest coverage (ICR=-34.44)']
+2026-08-07 15:46:40 | INFO     | backend.capitulation_engine | KEEL FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-34.44)']. Marking as EVITAR.
+2026-08-07 15:46:40 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for RIOT (US_EQUITIES) ═══
+2026-08-07 15:46:40 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.31%, low=20.5730, vol_ratio=0.88x (bar_idx=-2)
+2026-08-07 15:46:40 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:40 | INFO     | backend.capitulation_engine | RIOT SHOCK: drop=-4.31%, idiosyncratic=True, cap_low=20.5730, vol_ratio=0.88x
+2026-08-07 15:46:40 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:40 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:40 | INFO     | backend.price_structure   | Price-structure analysis complete: 39 confluence zones found.
+2026-08-07 15:46:40 | INFO     | backend.capitulation_engine | RIOT STRUCTURE: msb_1d=5, fvg_1d=8, ob_1d=5, confluence=39
+2026-08-07 15:46:40 | INFO     | backend.capitulation_engine | RIOT VOLUME PROFILE: POC=21.3823, VAH=23.0056, VAL=19.4498, price_vs_va=in_value_area
+2026-08-07 15:46:41 | INFO     | backend.fundamental_filter | Fundamentals for RIOT: {'ebit': -497568000.0, 'interest_expense': 2618000.0, 'current_assets': 462665000.0, 'current_liabilities': 429319000.0, 'inventory': None}
+2026-08-07 15:46:41 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-190.06, CR=1.08, QR=1.08, flags=['Low interest coverage (ICR=-190.06)']
+2026-08-07 15:46:41 | INFO     | backend.capitulation_engine | RIOT FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-190.06)']. Marking as EVITAR.
+2026-08-07 15:46:41 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for MARA (US_EQUITIES) ═══
+2026-08-07 15:46:41 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-9.06%, low=9.6850, vol_ratio=0.91x (bar_idx=-1)
+2026-08-07 15:46:41 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:41 | INFO     | backend.capitulation_engine | MARA SHOCK: drop=-9.06%, idiosyncratic=True, cap_low=9.6850, vol_ratio=0.91x
+2026-08-07 15:46:41 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:41 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:41 | INFO     | backend.price_structure   | Price-structure analysis complete: 64 confluence zones found.
+2026-08-07 15:46:41 | INFO     | backend.capitulation_engine | MARA STRUCTURE: msb_1d=5, fvg_1d=3, ob_1d=5, confluence=64
+2026-08-07 15:46:41 | INFO     | backend.capitulation_engine | MARA VOLUME PROFILE: POC=11.8017, VAH=12.6692, VAL=11.1424, price_vs_va=below_val
+2026-08-07 15:46:42 | INFO     | backend.fundamental_filter | Fundamentals for MARA: {'ebit': -1282609000.0, 'interest_expense': 10720000.0, 'current_assets': 611108000.0, 'current_liabilities': 331466000.0, 'inventory': None}
+2026-08-07 15:46:42 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-119.65, CR=1.84, QR=1.84, flags=['Low interest coverage (ICR=-119.65)']
+2026-08-07 15:46:42 | INFO     | backend.capitulation_engine | MARA FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-119.65)']. Marking as EVITAR.
+2026-08-07 15:46:42 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for CLSK (US_EQUITIES) ═══
+2026-08-07 15:46:42 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-7.33%, low=12.5100, vol_ratio=0.91x (bar_idx=-2)
+2026-08-07 15:46:42 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:42 | INFO     | backend.capitulation_engine | CLSK SHOCK: drop=-7.33%, idiosyncratic=True, cap_low=12.5100, vol_ratio=0.91x
+2026-08-07 15:46:42 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:42 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:42 | INFO     | backend.price_structure   | Price-structure analysis complete: 49 confluence zones found.
+2026-08-07 15:46:42 | INFO     | backend.capitulation_engine | CLSK STRUCTURE: msb_1d=5, fvg_1d=2, ob_1d=5, confluence=49
+2026-08-07 15:46:42 | INFO     | backend.capitulation_engine | CLSK VOLUME PROFILE: POC=14.4344, VAH=14.8187, VAL=12.6840, price_vs_va=below_val
+2026-08-07 15:46:43 | INFO     | backend.fundamental_filter | Fundamentals for CLSK: {'ebit': -386180000.0, 'interest_expense': 2054000.0, 'current_assets': 1099037000.0, 'current_liabilities': 133068000.0, 'inventory': None}
+2026-08-07 15:46:43 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-188.01, CR=8.26, QR=8.26, flags=['Low interest coverage (ICR=-188.01)']
+2026-08-07 15:46:43 | INFO     | backend.capitulation_engine | CLSK FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-188.01)']. Marking as EVITAR.
+2026-08-07 15:46:43 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for IREN (US_EQUITIES) ═══
+2026-08-07 15:46:43 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.65%, low=37.0800, vol_ratio=0.66x (bar_idx=-2)
+2026-08-07 15:46:43 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:43 | INFO     | backend.capitulation_engine | IREN SHOCK: drop=-4.65%, idiosyncratic=True, cap_low=37.0800, vol_ratio=0.66x
+2026-08-07 15:46:43 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:43 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:43 | INFO     | backend.price_structure   | Price-structure analysis complete: 38 confluence zones found.
+2026-08-07 15:46:43 | INFO     | backend.capitulation_engine | IREN STRUCTURE: msb_1d=5, fvg_1d=9, ob_1d=5, confluence=38
+2026-08-07 15:46:43 | INFO     | backend.capitulation_engine | IREN VOLUME PROFILE: POC=39.7267, VAH=42.2410, VAL=35.7334, price_vs_va=in_value_area
+2026-08-07 15:46:44 | INFO     | backend.fundamental_filter | Fundamentals for IREN: {'ebit': -239249000.0, 'interest_expense': 14837000.0, 'current_assets': 2424486000.0, 'current_liabilities': 651356000.0, 'inventory': None}
+2026-08-07 15:46:44 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-16.13, CR=3.72, QR=3.72, flags=['Low interest coverage (ICR=-16.13)']
+2026-08-07 15:46:44 | INFO     | backend.capitulation_engine | IREN FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-16.13)']. Marking as EVITAR.
+2026-08-07 15:46:44 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for CIFR (US_EQUITIES) ═══
+2026-08-07 15:46:44 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-6.95%, low=16.9450, vol_ratio=0.95x (bar_idx=-1)
+2026-08-07 15:46:44 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:44 | INFO     | backend.capitulation_engine | CIFR SHOCK: drop=-6.95%, idiosyncratic=True, cap_low=16.9450, vol_ratio=0.95x
+2026-08-07 15:46:44 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:44 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:44 | INFO     | backend.price_structure   | Price-structure analysis complete: 73 confluence zones found.
+2026-08-07 15:46:44 | INFO     | backend.capitulation_engine | CIFR STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=73
+2026-08-07 15:46:44 | INFO     | backend.capitulation_engine | CIFR VOLUME PROFILE: POC=19.0217, VAH=23.1986, VAL=17.6294, price_vs_va=below_val
+2026-08-07 15:46:45 | INFO     | backend.fundamental_filter | Fundamentals for CIFR: {'ebit': -54751000.0, 'interest_expense': 59158000.0, 'current_assets': 3893994000.0, 'current_liabilities': 1245699000.0, 'inventory': 76150000.0}
+2026-08-07 15:46:45 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-0.93, CR=3.13, QR=3.06, flags=['Low interest coverage (ICR=-0.93)']
+2026-08-07 15:46:45 | INFO     | backend.capitulation_engine | CIFR FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-0.93)']. Marking as EVITAR.
+2026-08-07 15:46:45 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for WULF (US_EQUITIES) ═══
+2026-08-07 15:46:45 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-5.05%, low=16.7300, vol_ratio=0.86x (bar_idx=-1)
+2026-08-07 15:46:45 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.34%, is_idiosyncratic=True
+2026-08-07 15:46:45 | INFO     | backend.capitulation_engine | WULF SHOCK: drop=-5.05%, idiosyncratic=True, cap_low=16.7300, vol_ratio=0.86x
+2026-08-07 15:46:45 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:45 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (47 rows).
+2026-08-07 15:46:45 | INFO     | backend.price_structure   | Price-structure analysis complete: 49 confluence zones found.
+2026-08-07 15:46:45 | INFO     | backend.capitulation_engine | WULF STRUCTURE: msb_1d=5, fvg_1d=8, ob_1d=5, confluence=49
+2026-08-07 15:46:45 | INFO     | backend.capitulation_engine | WULF VOLUME PROFILE: POC=17.9128, VAH=20.0755, VAL=17.5037, price_vs_va=below_val
+2026-08-07 15:46:46 | INFO     | backend.fundamental_filter | Fundamentals for WULF: {'ebit': -349056000.0, 'interest_expense': 67071000.0, 'current_assets': 2867428000.0, 'current_liabilities': 2384870000.0, 'inventory': None}
+2026-08-07 15:46:46 | INFO     | backend.fundamental_filter | Solvency evaluation: solvent=False, ICR=-5.20, CR=1.20, QR=1.20, flags=['Low interest coverage (ICR=-5.2)']
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | WULF FUNDAMENTAL FILTER: FAILED — ['Low interest coverage (ICR=-5.2)']. Marking as EVITAR.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for BTCUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | BTCUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ETHUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ETHUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for SOLUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.30%, low=72.3400, vol_ratio=1.00x (bar_idx=-2)
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | SOLUSDT SHOCK: drop=-2.30%, idiosyncratic=True, cap_low=72.3400, vol_ratio=1.00x
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Price-structure analysis complete: 11 confluence zones found.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | SOLUSDT STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=11
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | SOLUSDT VOLUME PROFILE: POC=73.7185, VAH=74.3170, VAL=73.2340, price_vs_va=in_value_area
+2026-08-07 15:46:46 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.842, asset_ret=0.0081, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | SOLUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=73.0800, SL=72.2320, TP=78.8300, R:R=6.8 (FVG_TARGET)
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.8480, qty=1179.1952
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ✅ SOLUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=73.0800, SL=72.2320, TP=78.8300, R:R=1:6.8, Confidence=80%
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for BNBUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | BNBUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for XRPUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.04%, low=1.0300, vol_ratio=1.63x (bar_idx=-2)
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | XRPUSDT SHOCK: drop=-3.04%, idiosyncratic=True, cap_low=1.0300, vol_ratio=1.63x
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Price-structure analysis complete: 33 confluence zones found.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | XRPUSDT STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=33
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | XRPUSDT VOLUME PROFILE: POC=1.0764, VAH=1.0852, VAL=1.0386, price_vs_va=below_val
+2026-08-07 15:46:46 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.788, asset_ret=-0.0189, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | XRPUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=1.0764, SL=1.0282
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | XRPUSDT — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ADAUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.72%, low=0.1859, vol_ratio=2.35x (bar_idx=-2)
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ADAUSDT SHOCK: drop=-2.72%, idiosyncratic=True, cap_low=0.1859, vol_ratio=2.35x
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Price-structure analysis complete: 23 confluence zones found.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ADAUSDT STRUCTURE: msb_1d=5, fvg_1d=9, ob_1d=5, confluence=23
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ADAUSDT VOLUME PROFILE: POC=0.1945, VAH=0.2008, VAL=0.1851, price_vs_va=in_value_area
+2026-08-07 15:46:46 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.566, asset_ret=-0.0060, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ADAUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=0.1994, SL=0.1853
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ADAUSDT — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for AVAXUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.67%, low=6.3500, vol_ratio=1.41x (bar_idx=-2)
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | AVAXUSDT SHOCK: drop=-4.67%, idiosyncratic=True, cap_low=6.3500, vol_ratio=1.41x
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Price-structure analysis complete: 23 confluence zones found.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | AVAXUSDT STRUCTURE: msb_1d=5, fvg_1d=2, ob_1d=5, confluence=23
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | AVAXUSDT VOLUME PROFILE: POC=6.4455, VAH=6.7067, VAL=6.3755, price_vs_va=in_value_area
+2026-08-07 15:46:46 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.453, asset_ret=-0.0065, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | AVAXUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=6.6450, SL=6.3396
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | AVAXUSDT — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for DOGEUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.60%, low=0.0682, vol_ratio=0.62x (bar_idx=-2)
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | DOGEUSDT SHOCK: drop=-2.60%, idiosyncratic=True, cap_low=0.0682, vol_ratio=0.62x
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Price-structure analysis complete: 9 confluence zones found.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | DOGEUSDT STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=9
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | DOGEUSDT VOLUME PROFILE: POC=0.0701, VAH=0.0706, VAL=0.0693, price_vs_va=in_value_area
+2026-08-07 15:46:46 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.700, asset_ret=0.0067, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | DOGEUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.0716, SL=0.0681, TP=0.0840, R:R=3.6 (FVG_TARGET)
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0035, qty=287604.2565
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ✅ DOGEUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.0716, SL=0.0681, TP=0.0840, R:R=1:3.5, Confidence=80%
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for TRXUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | TRXUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for DOTUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.21%, low=0.8150, vol_ratio=0.66x (bar_idx=-2)
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | DOTUSDT SHOCK: drop=-3.21%, idiosyncratic=True, cap_low=0.8150, vol_ratio=0.66x
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Price-structure analysis complete: 46 confluence zones found.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | DOTUSDT STRUCTURE: msb_1d=5, fvg_1d=7, ob_1d=5, confluence=46
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | DOTUSDT VOLUME PROFILE: POC=0.8227, VAH=0.8534, VAL=0.8136, price_vs_va=below_val
+2026-08-07 15:46:46 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.644, asset_ret=-0.0158, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | DOTUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.8380, SL=0.8136, TP=0.9200, R:R=3.4 (FVG_TARGET)
+2026-08-07 15:46:46 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0244, qty=40934.9544
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ✅ DOTUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.8380, SL=0.8136, TP=0.9200, R:R=1:3.4, Confidence=90%
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for LTCUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | LTCUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for BCHUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | BCHUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for XLMUSDT (CRYPTO) ═══
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.64%, low=0.1590, vol_ratio=1.31x (bar_idx=-2)
+2026-08-07 15:46:46 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | XLMUSDT SHOCK: drop=-3.64%, idiosyncratic=True, cap_low=0.1590, vol_ratio=1.31x
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:46 | INFO     | backend.price_structure   | Price-structure analysis complete: 13 confluence zones found.
+2026-08-07 15:46:46 | INFO     | backend.capitulation_engine | XLMUSDT STRUCTURE: msb_1d=5, fvg_1d=7, ob_1d=5, confluence=13
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | XLMUSDT VOLUME PROFILE: POC=0.1619, VAH=0.1701, VAL=0.1590, price_vs_va=in_value_area
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.645, asset_ret=-0.0068, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | XLMUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.1619, SL=0.1587, TP=0.1751, R:R=4.2 (FVG_TARGET)
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0031, qty=318471.3376
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ✅ XLMUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.1619, SL=0.1587, TP=0.1751, R:R=1:4.2, Confidence=70%
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for NEARUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.10%, low=1.5890, vol_ratio=1.13x (bar_idx=-1)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | NEARUSDT SHOCK: drop=-4.10%, idiosyncratic=True, cap_low=1.5890, vol_ratio=1.13x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 26 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | NEARUSDT STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=26
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | NEARUSDT VOLUME PROFILE: POC=1.7030, VAH=1.7519, VAL=1.6578, price_vs_va=below_val
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.496, asset_ret=-0.0392, bench_ret=0.0066, idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | NEARUSDT FUNDAMENTAL FILTER: FAILED — []. Marking as EVITAR.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for APTUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.03%, low=0.5800, vol_ratio=0.63x (bar_idx=-1)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | APTUSDT SHOCK: drop=-2.03%, idiosyncratic=True, cap_low=0.5800, vol_ratio=0.63x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 10 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | APTUSDT STRUCTURE: msb_1d=5, fvg_1d=3, ob_1d=5, confluence=10
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | APTUSDT VOLUME PROFILE: POC=0.5933, VAH=0.5968, VAL=0.5744, price_vs_va=in_value_area
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.648, asset_ret=-0.0169, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | APTUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.5840, SL=0.5788, TP=0.6490, R:R=12.6 (FVG_TARGET)
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0052, qty=193760.8991
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ✅ APTUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.5840, SL=0.5788, TP=0.6490, R:R=1:12.6, Confidence=80%
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for SUIUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.17%, low=0.6684, vol_ratio=1.11x (bar_idx=-2)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | SUIUSDT SHOCK: drop=-3.17%, idiosyncratic=True, cap_low=0.6684, vol_ratio=1.11x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 16 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | SUIUSDT STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=16
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | SUIUSDT VOLUME PROFILE: POC=0.6762, VAH=0.6909, VAL=0.6643, price_vs_va=in_value_area
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.786, asset_ret=-0.0049, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | SUIUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.6762, SL=0.6671, TP=0.7487, R:R=8.0 (FVG_TARGET)
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0090, qty=110692.9378
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ✅ SUIUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.6762, SL=0.6671, TP=0.7487, R:R=1:8.0, Confidence=80%
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for POLUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | POLUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ARBUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.10%, low=0.0771, vol_ratio=0.97x (bar_idx=-2)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ARBUSDT SHOCK: drop=-4.10%, idiosyncratic=True, cap_low=0.0771, vol_ratio=0.97x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 32 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ARBUSDT STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=32
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ARBUSDT VOLUME PROFILE: POC=0.0812, VAH=0.0841, VAL=0.0792, price_vs_va=below_val
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.408, asset_ret=-0.0051, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ARBUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=0.0855, SL=0.0769
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ARBUSDT — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for OPUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.07%, low=0.0853, vol_ratio=0.63x (bar_idx=-2)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | OPUSDT SHOCK: drop=-3.07%, idiosyncratic=True, cap_low=0.0853, vol_ratio=0.63x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 23 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | OPUSDT STRUCTURE: msb_1d=5, fvg_1d=3, ob_1d=5, confluence=23
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | OPUSDT VOLUME PROFILE: POC=0.0885, VAH=0.0892, VAL=0.0867, price_vs_va=below_val
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.748, asset_ret=-0.0046, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | OPUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.0872, SL=0.0851, TP=0.0992, R:R=5.7 (FVG_TARGET)
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0021, qty=471475.7190
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ✅ OPUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.0872, SL=0.0851, TP=0.0992, R:R=1:5.7, Confidence=90%
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ATOMUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.07%, low=1.3270, vol_ratio=0.83x (bar_idx=-2)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ATOMUSDT SHOCK: drop=-2.07%, idiosyncratic=True, cap_low=1.3270, vol_ratio=0.83x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 9 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ATOMUSDT STRUCTURE: msb_1d=5, fvg_1d=7, ob_1d=5, confluence=9
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ATOMUSDT VOLUME PROFILE: POC=1.3555, VAH=1.3856, VAL=1.3398, price_vs_va=in_value_area
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.577, asset_ret=-0.0059, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ATOMUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=1.3320, SL=1.3246, TP=1.3555, R:R=3.2 (POC)
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0074, qty=135924.9694
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ✅ ATOMUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=1.3320, SL=1.3246, TP=1.3555, R:R=1:3.2, Confidence=80%
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for INJUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-6.15%, low=4.5610, vol_ratio=0.77x (bar_idx=-2)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | INJUSDT SHOCK: drop=-6.15%, idiosyncratic=True, cap_low=4.5610, vol_ratio=0.77x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 57 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | INJUSDT STRUCTURE: msb_1d=5, fvg_1d=9, ob_1d=5, confluence=57
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | INJUSDT VOLUME PROFILE: POC=4.5152, VAH=4.9666, VAL=4.4190, price_vs_va=in_value_area
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.473, asset_ret=-0.0227, bench_ret=0.0066, idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | INJUSDT FUNDAMENTAL FILTER: FAILED — []. Marking as EVITAR.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for SEIUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | SEIUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for TIAUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.89%, low=0.3236, vol_ratio=0.56x (bar_idx=-1)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | TIAUSDT SHOCK: drop=-3.89%, idiosyncratic=True, cap_low=0.3236, vol_ratio=0.56x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 27 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | TIAUSDT STRUCTURE: msb_1d=5, fvg_1d=4, ob_1d=5, confluence=27
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | TIAUSDT VOLUME PROFILE: POC=0.3368, VAH=0.3423, VAL=0.3308, price_vs_va=below_val
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.711, asset_ret=-0.0330, bench_ret=0.0066, idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | TIAUSDT FUNDAMENTAL FILTER: FAILED — []. Marking as EVITAR.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for HBARUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | HBARUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for LINKUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | LINKUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for UNIUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.08%, low=3.9630, vol_ratio=1.11x (bar_idx=-2)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | UNIUSDT SHOCK: drop=-2.08%, idiosyncratic=True, cap_low=3.9630, vol_ratio=1.11x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 15 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | UNIUSDT STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=15
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | UNIUSDT VOLUME PROFILE: POC=4.0446, VAH=4.1374, VAL=3.9129, price_vs_va=in_value_area
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.515, asset_ret=-0.0017, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | UNIUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:47 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=4.0350, SL=3.9494
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | UNIUSDT — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for AAVEUSDT (CRYPTO) ═══
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.94%, low=87.1900, vol_ratio=0.71x (bar_idx=-2)
+2026-08-07 15:46:47 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | AAVEUSDT SHOCK: drop=-2.94%, idiosyncratic=True, cap_low=87.1900, vol_ratio=0.71x
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:47 | INFO     | backend.price_structure   | Price-structure analysis complete: 4 confluence zones found.
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | AAVEUSDT STRUCTURE: msb_1d=5, fvg_1d=3, ob_1d=5, confluence=4
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | AAVEUSDT VOLUME PROFILE: POC=90.2815, VAH=93.0982, VAL=89.5258, price_vs_va=below_val
+2026-08-07 15:46:47 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.686, asset_ret=-0.0056, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:47 | INFO     | backend.capitulation_engine | AAVEUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=90.5000, SL=86.9721
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | AAVEUSDT — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for LDOUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.81%, low=0.2839, vol_ratio=0.44x (bar_idx=-1)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | LDOUSDT SHOCK: drop=-2.81%, idiosyncratic=True, cap_low=0.2839, vol_ratio=0.44x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 25 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | LDOUSDT STRUCTURE: msb_1d=5, fvg_1d=9, ob_1d=5, confluence=25
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | LDOUSDT VOLUME PROFILE: POC=0.2963, VAH=0.3018, VAL=0.2798, price_vs_va=in_value_area
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.206, asset_ret=-0.0236, bench_ret=0.0066, idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | LDOUSDT FUNDAMENTAL FILTER: FAILED — []. Marking as EVITAR.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for RUNEUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | RUNEUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for FILUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-5.72%, low=0.6791, vol_ratio=1.96x (bar_idx=-2)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | FILUSDT SHOCK: drop=-5.72%, idiosyncratic=True, cap_low=0.6791, vol_ratio=1.96x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 4 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | FILUSDT STRUCTURE: msb_1d=5, fvg_1d=0, ob_1d=5, confluence=4
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | FILUSDT VOLUME PROFILE: POC=0.7160, VAH=0.7306, VAL=0.6986, price_vs_va=below_val
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.616, asset_ret=-0.0335, bench_ret=0.0066, idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | FILUSDT FUNDAMENTAL FILTER: FAILED — []. Marking as EVITAR.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for RENDERUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.68%, low=1.3050, vol_ratio=0.83x (bar_idx=-1)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | RENDERUSDT SHOCK: drop=-2.68%, idiosyncratic=True, cap_low=1.3050, vol_ratio=0.83x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 8 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | RENDERUSDT STRUCTURE: msb_1d=5, fvg_1d=3, ob_1d=5, confluence=8
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | RENDERUSDT VOLUME PROFILE: POC=1.3512, VAH=1.3638, VAL=1.3285, price_vs_va=below_val
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.723, asset_ret=-0.0201, bench_ret=0.0066, idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | RENDERUSDT FUNDAMENTAL FILTER: FAILED — []. Marking as EVITAR.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for GRTUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.30%, low=0.0143, vol_ratio=0.84x (bar_idx=-2)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | GRTUSDT SHOCK: drop=-3.30%, idiosyncratic=True, cap_low=0.0143, vol_ratio=0.84x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 20 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | GRTUSDT STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=20
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | GRTUSDT VOLUME PROFILE: POC=0.0145, VAH=0.0147, VAL=0.0144, price_vs_va=below_val
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.729, asset_ret=-0.0117, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | GRTUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.0148, SL=0.0143, TP=0.0163, R:R=3.4 (FVG_TARGET)
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0004, qty=2283105.0228
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ✅ GRTUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.0148, SL=0.0143, TP=0.0163, R:R=1:3.5, Confidence=80%
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ONDOUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.43%, low=0.3430, vol_ratio=1.06x (bar_idx=-1)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ONDOUSDT SHOCK: drop=-4.43%, idiosyncratic=True, cap_low=0.3430, vol_ratio=1.06x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 18 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ONDOUSDT STRUCTURE: msb_1d=5, fvg_1d=6, ob_1d=5, confluence=18
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ONDOUSDT VOLUME PROFILE: POC=0.3715, VAH=0.3894, VAL=0.3652, price_vs_va=below_val
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.716, asset_ret=-0.0371, bench_ret=0.0066, idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ONDOUSDT FUNDAMENTAL FILTER: FAILED — []. Marking as EVITAR.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ICPUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ICPUSDT — no shock detected (drop < 2%). Skipping.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for WLDUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-5.74%, low=0.2990, vol_ratio=0.93x (bar_idx=-2)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | WLDUSDT SHOCK: drop=-5.74%, idiosyncratic=True, cap_low=0.2990, vol_ratio=0.93x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 12 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | WLDUSDT STRUCTURE: msb_1d=5, fvg_1d=8, ob_1d=5, confluence=12
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | WLDUSDT VOLUME PROFILE: POC=0.3207, VAH=0.3296, VAL=0.3079, price_vs_va=below_val
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.569, asset_ret=0.0010, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | WLDUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.3010, SL=0.2979, TP=0.3115, R:R=3.4 (FVG_TARGET)
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0031, qty=324254.2153
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ✅ WLDUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.3010, SL=0.2979, TP=0.3115, R:R=1:3.4, Confidence=80%
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for ENAUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.60%, low=0.0900, vol_ratio=0.89x (bar_idx=-2)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ENAUSDT SHOCK: drop=-2.60%, idiosyncratic=True, cap_low=0.0900, vol_ratio=0.89x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 7 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ENAUSDT STRUCTURE: msb_1d=5, fvg_1d=2, ob_1d=5, confluence=7
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ENAUSDT VOLUME PROFILE: POC=0.0920, VAH=0.0937, VAL=0.0899, price_vs_va=above_vah
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.596, asset_ret=0.0097, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ENAUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=0.0935, SL=0.0896
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ENAUSDT — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for TAOUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.34%, low=190.9000, vol_ratio=0.77x (bar_idx=-2)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | TAOUSDT SHOCK: drop=-3.34%, idiosyncratic=True, cap_low=190.9000, vol_ratio=0.77x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 35 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | TAOUSDT STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=35
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | TAOUSDT VOLUME PROFILE: POC=191.3440, VAH=196.6480, VAL=187.9440, price_vs_va=in_value_area
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.608, asset_ret=-0.0036, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | TAOUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=194.2000, SL=190.5125, TP=226.2000, R:R=8.7 (FVG_TARGET)
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=3.6875, qty=271.1864
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ✅ TAOUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=194.2000, SL=190.5125, TP=226.2000, R:R=1:8.7, Confidence=80%
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for PEPEUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-3.82%, low=0.0000, vol_ratio=0.54x (bar_idx=-2)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | PEPEUSDT SHOCK: drop=-3.82%, idiosyncratic=True, cap_low=0.0000, vol_ratio=0.54x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 1 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | PEPEUSDT STRUCTURE: msb_1d=5, fvg_1d=2, ob_1d=5, confluence=1
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | PEPEUSDT VOLUME PROFILE: POC=0.0000, VAH=0.0000, VAL=0.0000, price_vs_va=below_val
+2026-08-07 15:46:48 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.549, asset_ret=-0.0071, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | PEPEUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:48 | INFO     | backend.asymmetric_trade  | No TP target achieves R:R >= 3.0 for entry=0.0000, SL=0.0000
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | PEPEUSDT — no valid R:R >= 3.0 achievable. Verdict: EVITAR.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for JUPUSDT (CRYPTO) ═══
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-4.77%, low=0.1796, vol_ratio=0.78x (bar_idx=-2)
+2026-08-07 15:46:48 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | JUPUSDT SHOCK: drop=-4.77%, idiosyncratic=True, cap_low=0.1796, vol_ratio=0.78x
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:48 | INFO     | backend.price_structure   | Price-structure analysis complete: 9 confluence zones found.
+2026-08-07 15:46:48 | INFO     | backend.capitulation_engine | JUPUSDT STRUCTURE: msb_1d=5, fvg_1d=2, ob_1d=5, confluence=9
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | JUPUSDT VOLUME PROFILE: POC=0.1877, VAH=0.1952, VAL=0.1839, price_vs_va=below_val
+2026-08-07 15:46:49 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.474, asset_ret=0.0033, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | JUPUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:49 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.1851, SL=0.1792, TP=0.2165, R:R=5.3 (FVG_TARGET)
+2026-08-07 15:46:49 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0059, qty=168067.2269
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | ✅ JUPUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.1851, SL=0.1792, TP=0.2165, R:R=1:5.3, Confidence=90%
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | ═══ Capitulation analysis started for PYTHUSDT (CRYPTO) ═══
+2026-08-07 15:46:49 | INFO     | backend.shock_detector    | SHOCK detected (24h window): effective_return=-2.20%, low=0.0378, vol_ratio=0.47x (bar_idx=-1)
+2026-08-07 15:46:49 | INFO     | backend.shock_detector    | Shock classification: benchmark_return=0.66%, is_idiosyncratic=True
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | PYTHUSDT SHOCK: drop=-2.20%, idiosyncratic=True, cap_low=0.0378, vol_ratio=0.47x
+2026-08-07 15:46:49 | INFO     | backend.price_structure   | Running SMC analysis on daily timeframe (300 rows).
+2026-08-07 15:46:49 | INFO     | backend.price_structure   | Running SMC analysis on 4H timeframe (31 rows).
+2026-08-07 15:46:49 | INFO     | backend.price_structure   | Price-structure analysis complete: 13 confluence zones found.
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | PYTHUSDT STRUCTURE: msb_1d=5, fvg_1d=5, ob_1d=5, confluence=13
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | PYTHUSDT VOLUME PROFILE: POC=0.0392, VAH=0.0397, VAL=0.0387, price_vs_va=below_val
+2026-08-07 15:46:49 | INFO     | backend.fundamental_filter | Correlation filter: corr=0.205, asset_ret=-0.0127, bench_ret=0.0066, idiosyncratic=False
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | PYTHUSDT FUNDAMENTAL FILTER: PASSED
+2026-08-07 15:46:49 | INFO     | backend.asymmetric_trade  | Asymmetric levels: entry=0.0392, SL=0.0377, TP=0.0438, R:R=3.2 (FVG_TARGET)
+2026-08-07 15:46:49 | INFO     | backend.asymmetric_trade  | Position sizing: capital=100000.00, risk_pct=1.00%, risk_amount=1000.00, risk_per_unit=0.0015, qty=686624.5537
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | ✅ PYTHUSDT VERDICT: APTO_COMPRA_ASIMETRICA | Entry=0.0392, SL=0.0377, TP=0.0438, R:R=1:3.2, Confidence=90%
+2026-08-07 15:46:49 | INFO     | backend.capitulation_engine | ═══ Capitulation scan complete — 20 signals found ═══
+2026-08-07 15:46:49 | INFO     | backend.scanner           | Saved 32 capitulation signals to disk.
+2026-08-07 15:47:20 | WARNING  | backend.scanner           | Render sync error on attempt 1/3 for /api/capitulation: HTTPSConnectionPool(host='breakout-scanner-xg9f.onrender.com', port=443): Read timed out. (read timeout=30)
+2026-08-07 15:47:24 | INFO     | backend.scanner           | Successfully synced 32 items to Render backend (/api/capitulation).
+2026-08-07 15:47:24 | INFO     | backend.telegram_notifier | [DRY-RUN] Telegram alert:
+🔬 ANÁLISIS DE CAPITULACIÓN
+━━━━━━━━━━━━━━━━━━
+🏷️ APTUSDT — Crypto (Binance Spot)
+🟢 Veredicto: APTO COMPRA ASIMÉTRICA
+📉 Caída: -2.0% (Idiosincrática)
+📊 Confianza: 80%
+━━━━━━━━━━━━━━━━━━
+📍 Entrada: $0.5840
+🛑 Stop Loss: $0.5788
+🎯 Take Profit: $0.6490
+⚖️ R:R = 1:12.6
+📐 Tamaño: 193760.8991 unidades
+━━━━━━━━━━━━━━━━━━
+📊 POC: $0.5933
+📊 VAH: $0.5968 | VAL: $0.5744
+🟦 FVG: $0.5840 — $0.5850
+🟧 OB: $0.5520 — $0.5770
+🔄 MSB: bearish_reversal
+💼 Fundamental: ✅ Solvente
+⏰ 2026-08-07 18:46 UTC
+━━━━━━━━━━━━━━━━━━
+📝 Caída de 2.0% (idiosincrática) | Entrada: ORDER_BLOCK | 10 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:12.6 (FVG_TARGET) | Confianza: 80%
+2026-08-07 15:47:24 | INFO     | backend.scanner           | 📊 CAPITULATION ALERT sent: APTUSDT APTO_COMPRA_ASIMETRICA (R:R=1:12.6, Confidence=80%)
+2026-08-07 15:47:24 | INFO     | __main__                  | Scan completed. 0 signal(s) found.
