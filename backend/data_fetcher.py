@@ -222,11 +222,12 @@ class DataFetcher:
         now_ms = int(time.time() * 1000)
         start_ms = now_ms - (30 * 24 * 3600 * 1000)
         
-        candidates = [ticker]
-        if ticker.endswith("USDT"):
-            candidates.append(ticker.replace("USDT", ""))
+        candidates = []
         if not ticker.startswith("xyz:"):
             candidates.append(f"xyz:{ticker}")
+        candidates.append(ticker)
+        if ticker.endswith("USDT"):
+            candidates.append(ticker.replace("USDT", ""))
 
         for coin_name in candidates:
             payload = {

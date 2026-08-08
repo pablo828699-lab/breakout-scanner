@@ -288,9 +288,7 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                     # Attempt Hyperliquid 24/7 live 1m price
                     try:
                         now_ms = int(time.time() * 1000)
-                        hl_candidates = [ticker]
-                        if not ticker.startswith("xyz:"):
-                            hl_candidates.append(f"xyz:{ticker}")
+                        hl_candidates = [f"xyz:{ticker}", ticker] if not ticker.startswith("xyz:") else [ticker]
                         
                         for hl_coin in hl_candidates:
                             payload = {
