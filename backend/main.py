@@ -284,6 +284,10 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                         logger.error("Failed batch fetching crypto prices: %s", e)
 
                 # 2. Fetch equities (Prioritize Hyperliquid 24/7 API, fallback to yfinance)
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+                    "Content-Type": "application/json",
+                }
                 for ticker in equity_tickers:
                     # Attempt Hyperliquid 24/7 live 1m price
                     try:
@@ -295,7 +299,7 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                                 "type": "candleSnapshot",
                                 "req": {"coin": hl_coin, "interval": "1m", "startTime": now_ms - (15 * 60 * 1000), "endTime": now_ms}
                             }
-                            r = requests.post("https://api.hyperliquid.xyz/info", json=payload, timeout=4)
+                            r = requests.post("https://api.hyperliquid.xyz/info", json=payload, headers=headers, timeout=5)
                             if r.status_code == 200:
                                 candles = r.json()
                                 if candles and isinstance(candles, list) and len(candles) > 0:
