@@ -216,8 +216,58 @@ class DataFetcher:
         logger.error("yfinance download failed for %s after %d retries.", ticker, max_retries)
         return pd.DataFrame()
 
+    def _fetch_hyperliquid_candles(self, ticker: str, interval: str = "1h") -> pd.DataFrame:
+        """Fetch 24/7 candles directly from Hyperliquid public API for a given symbol."""
+        url = "https://api.hyperliquid.xyz/info"
+        now_ms = int(time.time() * 1000)
+        start_ms = now_ms - (30 * 24 * 3600 * 1000)
+        
+        candidates = [ticker]
+        if ticker.endswith("USDT"):
+            candidates.append(ticker.replace("USDT", ""))
+        if not ticker.startswith("xyz:"):
+            candidates.append(f"xyz:{ticker}")
+
+        for coin_name in candidates:
+            payload = {
+                "type": "candleSnapshot",
+                "req": {
+                    "coin": coin_name,
+                    "interval": interval,
+                    "startTime": start_ms,
+                    "endTime": now_ms,
+                }
+            }
+            try:
+                resp = self._session.post(url, json=payload, timeout=8)
+                if resp.status_code == 200:
+                    raw_candles = resp.json()
+                    if raw_candles and isinstance(raw_candles, list) and len(raw_candles) > 10:
+                        records = []
+                        for c in raw_candles:
+                            records.append({
+                                "Open": float(c["o"]),
+                                "High": float(c["h"]),
+                                "Low": float(c["l"]),
+                                "Close": float(c["c"]),
+                                "Volume": float(c["v"]),
+                                "Timestamp": pd.to_datetime(c["t"], unit="ms", utc=True),
+                            })
+                        df = pd.DataFrame(records)
+                        df.set_index("Timestamp", inplace=True)
+                        logger.info("Hyperliquid API returned %d 24/7 %s candles for %s (%s).", len(df), interval, ticker, coin_name)
+                        return df
+            except Exception as exc:
+                logger.debug("Hyperliquid candle fetch attempt failed for %s (%s): %s", ticker, coin_name, exc)
+                
+        return pd.DataFrame()
+
     def fetch_sp500_daily(self, ticker: str) -> pd.DataFrame:
-        """Fetch ~6 months of daily OHLCV for a US equity ticker."""
+        """Fetch ~6 months of daily OHLCV for a US equity ticker, prioritizing Hyperliquid 24/7 API."""
+        hl_df = self._fetch_hyperliquid_candles(ticker, "1d")
+        if not hl_df.empty:
+            return hl_df
+
         df = self._safe_yf_download(ticker, f"{cfg.DAILY_LOOKBACK_DAYS}d", "1d")
         if df.empty:
             logger.warning("No daily data returned for %s.", ticker)
@@ -227,7 +277,11 @@ class DataFetcher:
         return df
 
     def fetch_sp500_hourly(self, ticker: str) -> pd.DataFrame:
-        """Fetch ~1 month of 1-hour OHLCV for a US equity ticker."""
+        """Fetch ~1 month of 1-hour OHLCV for a US equity ticker, prioritizing Hyperliquid 24/7 API."""
+        hl_df = self._fetch_hyperliquid_candles(ticker, "1h")
+        if not hl_df.empty:
+            return hl_df
+
         df = self._safe_yf_download(ticker, "1mo", "1h")
         if df.empty:
             logger.warning("No hourly data returned for %s.", ticker)
