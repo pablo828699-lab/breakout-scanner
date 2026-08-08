@@ -283,20 +283,42 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                     except Exception as e:
                         logger.error("Failed batch fetching crypto prices: %s", e)
 
-                # 2. Fetch equities
+                # 2. Fetch equities (Prioritize Hyperliquid 24/7 API, fallback to yfinance)
                 for ticker in equity_tickers:
+                    # Attempt Hyperliquid 24/7 live 1m price
                     try:
-                        import yfinance as yf
-                        tk = yf.Ticker(ticker)
-                        price = float(getattr(tk.fast_info, 'last_price', 0.0) or getattr(tk.fast_info, 'regular_market_price', 0.0) or 0.0)
-                        if price <= 0.0:
-                            hist = tk.history(period="1d")
-                            if not hist.empty:
-                                price = float(hist["Close"].iloc[-1])
-                        if price > 0:
-                            prices[ticker] = price
-                    except Exception as e:
-                        logger.error("Failed fetching equity price for %s: %s", ticker, e)
+                        now_ms = int(time.time() * 1000)
+                        hl_candidates = [ticker]
+                        if not ticker.startswith("xyz:"):
+                            hl_candidates.append(f"xyz:{ticker}")
+                        
+                        for hl_coin in hl_candidates:
+                            payload = {
+                                "type": "candleSnapshot",
+                                "req": {"coin": hl_coin, "interval": "1m", "startTime": now_ms - (15 * 60 * 1000), "endTime": now_ms}
+                            }
+                            r = requests.post("https://api.hyperliquid.xyz/info", json=payload, timeout=4)
+                            if r.status_code == 200:
+                                candles = r.json()
+                                if candles and isinstance(candles, list) and len(candles) > 0:
+                                    prices[ticker] = float(candles[-1]["c"])
+                                    break
+                    except Exception as exc:
+                        logger.debug("Hyperliquid live price attempt failed for %s: %s", ticker, exc)
+
+                    if ticker not in prices or prices[ticker] <= 0:
+                        try:
+                            import yfinance as yf
+                            tk = yf.Ticker(ticker)
+                            price = float(getattr(tk.fast_info, 'last_price', 0.0) or getattr(tk.fast_info, 'regular_market_price', 0.0) or 0.0)
+                            if price <= 0.0:
+                                hist = tk.history(period="1d")
+                                if not hist.empty:
+                                    price = float(hist["Close"].iloc[-1])
+                            if price > 0:
+                                prices[ticker] = price
+                        except Exception as e:
+                            logger.error("Failed fetching equity price for %s: %s", ticker, e)
 
                 # 3. Fallback check for missing cryptos
                 for ticker in crypto_tickers:
