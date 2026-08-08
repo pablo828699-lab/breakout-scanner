@@ -299,6 +299,10 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
 
                 def fetch_equity_price(ticker):
                     now_ms = int(time.time() * 1000)
+                    headers = {
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+                        "Content-Type": "application/json",
+                    }
                     hl_candidates = [f"xyz:{ticker}", ticker] if not ticker.startswith("xyz:") else [ticker]
                     for hl_coin in hl_candidates:
                         payload = {
