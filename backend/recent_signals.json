@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 4338.18,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 23.6,
+    "volume_ratio": 1.84,
+    "roc_pct": 8.02,
+    "ema_stack": false,
+    "timestamp": "2026-08-08T03:23:02.346677+00:00",
+    "first_detected": "2026-08-08T03:23:02.346677+00:00",
+    "last_updated": "2026-08-08T03:23:02.346677+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ONDOUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.3528,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 22.5,
+    "volume_ratio": 1.2,
+    "roc_pct": -14.35,
+    "ema_stack": true,
+    "timestamp": "2026-08-08T03:23:01.051906+00:00",
+    "first_detected": "2026-08-08T03:23:01.051906+00:00",
+    "last_updated": "2026-08-08T03:23:01.051906+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PYPL",
     "market": "US_EQUITIES",
     "direction": "UP",
