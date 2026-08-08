@@ -4,7 +4,7 @@
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 4338.18,
+    "price": 4342.73,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -13,16 +13,16 @@
     "volume_ratio": 1.84,
     "roc_pct": 8.02,
     "ema_stack": false,
-    "timestamp": "2026-08-08T03:23:02.346677+00:00",
+    "timestamp": "2026-08-08T15:26:52.665788+00:00",
     "first_detected": "2026-08-08T03:23:02.346677+00:00",
-    "last_updated": "2026-08-08T03:23:02.346677+00:00"
+    "last_updated": "2026-08-08T15:26:52.665788+00:00"
   },
   {
     "type": "radar",
     "ticker": "ONDOUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.3528,
+    "price": 0.3557,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -30,128 +30,8 @@
     "volume_ratio": 1.2,
     "roc_pct": -14.35,
     "ema_stack": true,
-    "timestamp": "2026-08-08T03:23:01.051906+00:00",
+    "timestamp": "2026-08-08T15:26:51.373146+00:00",
     "first_detected": "2026-08-08T03:23:01.051906+00:00",
-    "last_updated": "2026-08-08T03:23:01.051906+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PYPL",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 59.940399,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 44.2,
-    "volume_ratio": 0.57,
-    "roc_pct": 6.75,
-    "ema_stack": false,
-    "timestamp": "2026-08-07T14:13:42.081162+00:00",
-    "first_detected": "2026-08-07T14:13:42.081162+00:00",
-    "last_updated": "2026-08-07T14:13:42.081162+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UPS",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 104.212502,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 21.5,
-    "volume_ratio": 1.67,
-    "roc_pct": -9.55,
-    "ema_stack": false,
-    "timestamp": "2026-08-07T14:13:38.683742+00:00",
-    "first_detected": "2026-08-07T14:13:38.683742+00:00",
-    "last_updated": "2026-08-07T14:13:38.683742+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PFE",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 26.434999,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 23.9,
-    "volume_ratio": 1.28,
-    "roc_pct": 6.59,
-    "ema_stack": true,
-    "timestamp": "2026-08-07T14:13:28.776867+00:00",
-    "first_detected": "2026-08-07T14:13:28.776867+00:00",
-    "last_updated": "2026-08-07T14:13:28.776867+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "BRK-B",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 521.080017,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 25.9,
-    "volume_ratio": 1.06,
-    "roc_pct": 6.88,
-    "ema_stack": true,
-    "timestamp": "2026-08-07T14:13:23.455493+00:00",
-    "first_detected": "2026-08-07T14:13:23.455493+00:00",
-    "last_updated": "2026-08-07T14:13:23.455493+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "MSFT",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 502.084991,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 26.3,
-    "volume_ratio": 0.93,
-    "roc_pct": 31.0,
-    "ema_stack": false,
-    "timestamp": "2026-08-07T14:13:21.203592+00:00",
-    "first_detected": "2026-08-07T14:13:21.203592+00:00",
-    "last_updated": "2026-08-07T14:13:21.203592+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "FILUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 0.6973,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 27.6,
-    "volume_ratio": 1.96,
-    "roc_pct": 1.37,
-    "ema_stack": true,
-    "timestamp": "2026-08-07T12:57:24.038918+00:00",
-    "first_detected": "2026-08-07T00:40:11.931809+00:00",
-    "last_updated": "2026-08-07T12:57:24.038918+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ADAUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.2013,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 20.6,
-    "volume_ratio": 2.35,
-    "roc_pct": 29.31,
-    "ema_stack": false,
-    "timestamp": "2026-08-07T12:57:17.032017+00:00",
-    "first_detected": "2026-08-07T00:40:05.913362+00:00",
-    "last_updated": "2026-08-07T12:57:17.032017+00:00"
+    "last_updated": "2026-08-08T15:26:51.373146+00:00"
   }
 ]
