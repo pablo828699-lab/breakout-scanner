@@ -35,8 +35,8 @@ export default function CandidatePanel({ candidates, livePriceMap = {}, onApprov
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {candidates.map((candidate) => {
-            const isLong = candidate.direction === 'LONG';
-            const livePrice = livePriceMap[candidate.ticker];
+            const cleanTicker = (candidate?.ticker || '').replace('xyz:', '');
+            const livePrice = livePriceMap[candidate.ticker] || livePriceMap[cleanTicker] || livePriceMap[`xyz:${cleanTicker}`] || candidate.entry;
             
             return (
               <div

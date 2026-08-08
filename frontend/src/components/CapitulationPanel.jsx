@@ -231,7 +231,8 @@ function SignalCard({ signal, livePriceMap = {}, onApprove, onReject }) {
   const finalEntry = entry !== undefined ? entry : entry_price;
   const finalStopLoss = stopLoss !== undefined ? stopLoss : stop_loss;
   const finalTakeProfit = takeProfit !== undefined ? takeProfit : take_profit;
-  const livePrice = livePriceMap[ticker];
+  const cleanTicker = (ticker || '').replace('xyz:', '');
+  const livePrice = livePriceMap[ticker] || livePriceMap[cleanTicker] || livePriceMap[`xyz:${cleanTicker}`] || finalEntry;
 
   // Calculate R:R dynamically if missing
   const risk = Math.abs((finalEntry || 0) - (finalStopLoss || 0));
