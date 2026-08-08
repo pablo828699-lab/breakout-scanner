@@ -358,6 +358,7 @@ export default function App() {
   useEffect(() => {
     const loadCapitulation = async () => {
       const data = await fetchCapitulationSignals();
+      if (!Array.isArray(data) || data.length === 0) return;
       
       const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
       const ignoredSet = new Set(savedIgnored);
@@ -399,7 +400,9 @@ export default function App() {
         })
         .filter(c => !ignoredSet.has(`${c.ticker}_${c.timestamp}`) && !approvedSet.has(`${c.ticker}_${c.timestamp}`));
       
-      setCapitulationSignals(mapped);
+      if (mapped.length > 0) {
+        setCapitulationSignals(mapped);
+      }
     };
     
     loadCapitulation();
