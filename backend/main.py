@@ -310,25 +310,13 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                             "req": {"coin": hl_coin, "interval": "1m", "startTime": now_ms - (15 * 60 * 1000), "endTime": now_ms}
                         }
                         try:
-                            r = requests.post("https://api.hyperliquid.xyz/info", json=payload, headers=headers, timeout=1.5)
+                            r = requests.post("https://api.hyperliquid.xyz/info", json=payload, headers=headers, timeout=3.5)
                             if r.status_code == 200:
                                 candles = r.json()
                                 if candles and isinstance(candles, list) and len(candles) > 0:
                                     return ticker, float(candles[-1]["c"])
                         except Exception:
                             pass
-                    
-                    if ticker in cached_signal_prices:
-                        return ticker, cached_signal_prices[ticker]
-
-                    try:
-                        import yfinance as yf
-                        tk = yf.Ticker(ticker)
-                        price = float(getattr(tk.fast_info, 'last_price', 0.0) or getattr(tk.fast_info, 'regular_market_price', 0.0) or 0.0)
-                        if price > 0:
-                            return ticker, price
-                    except Exception:
-                        pass
 
                     return ticker, cached_signal_prices.get(ticker, 0.0)
 

@@ -668,6 +668,8 @@ export default function App() {
           <CapitulationPanel
             signals={capitulationSignals}
             livePriceMap={livePriceMap}
+            onApprove={handleApproveModal}
+            onReject={handleRejectCapitulation}
           />
         </section>
 
