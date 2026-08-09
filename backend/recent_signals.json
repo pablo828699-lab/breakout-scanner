@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "ACEUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.1452,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 43.4,
+    "volume_ratio": 1.98,
+    "roc_pct": 102.81,
+    "ema_stack": false,
+    "timestamp": "2026-08-09T01:26:54.081097+00:00",
+    "first_detected": "2026-08-09T01:26:54.081097+00:00",
+    "last_updated": "2026-08-09T01:26:54.081097+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "UP",
