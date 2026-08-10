@@ -27,9 +27,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.8,
     "analysis_summary": "Ca\u00edda de 11.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 17 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:4.0 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-10T09:18:03.306679+00:00",
+    "timestamp": "2026-08-10T11:06:57.991872+00:00",
     "first_detected": "2026-08-07T23:47:10.289813+00:00",
-    "last_updated": "2026-08-10T09:18:03.306679+00:00"
+    "last_updated": "2026-08-10T11:06:57.991872+00:00"
   },
   {
     "type": "asymmetric",
@@ -37,14 +37,14 @@
     "market": "US_EQUITIES",
     "asset_class": "ACCIONES",
     "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0239,
+    "drop_pct": -0.0311,
     "entry_price": 139.18,
-    "stop_loss": 136.38625,
-    "take_profit": 159.9348,
-    "rr_ratio": 7.43,
-    "position_size_qty": 357.941834,
+    "stop_loss": 135.351607,
+    "take_profit": 158.658,
+    "rr_ratio": 5.09,
+    "position_size_qty": 261.206203,
     "poc": 141.4212,
-    "vah": 159.9348,
+    "vah": 158.658,
     "val": 122.9076,
     "fvg_zone": [
       0.0,
@@ -58,10 +58,74 @@
     "is_idiosyncratic": true,
     "fundamental_ok": true,
     "confidence_score": 0.7,
-    "analysis_summary": "Ca\u00edda de 2.4% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 28 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:7.4 (VAH) | Confianza: 70%",
-    "timestamp": "2026-08-10T09:18:02.281614+00:00",
+    "analysis_summary": "Ca\u00edda de 3.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 30 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:5.1 (VAH) | Confianza: 70%",
+    "timestamp": "2026-08-10T11:06:56.648747+00:00",
     "first_detected": "2026-08-10T05:25:14.337706+00:00",
-    "last_updated": "2026-08-10T09:18:02.281614+00:00"
+    "last_updated": "2026-08-10T11:06:56.648747+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "HIMS",
+    "market": "US_EQUITIES",
+    "asset_class": "ACCIONES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0325,
+    "entry_price": 30.936,
+    "stop_loss": 30.825518,
+    "take_profit": 31.54616,
+    "rr_ratio": 5.52,
+    "position_size_qty": 9051.248167,
+    "poc": 25.07376,
+    "vah": 31.54616,
+    "val": 24.72072,
+    "fvg_zone": [
+      31.167,
+      31.196
+    ],
+    "ob_zone": [
+      31.196,
+      32.418
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 3.2% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 44 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:5.5 (VAH) | Confianza: 80%",
+    "timestamp": "2026-08-10T11:06:54.118754+00:00",
+    "first_detected": "2026-08-10T11:06:54.118754+00:00",
+    "last_updated": "2026-08-10T11:06:54.118754+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "DKNG",
+    "market": "US_EQUITIES",
+    "asset_class": "ACCIONES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0216,
+    "entry_price": 24.022,
+    "stop_loss": 23.785625,
+    "take_profit": 26.159,
+    "rr_ratio": 9.04,
+    "position_size_qty": 4230.565838,
+    "poc": 22.7394,
+    "vah": 23.998,
+    "val": 22.1304,
+    "fvg_zone": [
+      24.088,
+      24.175
+    ],
+    "ob_zone": [
+      21.448,
+      23.751
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 2.2% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 43 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:9.0 (FVG_TARGET) | Confianza: 80%",
+    "timestamp": "2026-08-10T11:06:53.610549+00:00",
+    "first_detected": "2026-08-08T04:54:49.206387+00:00",
+    "last_updated": "2026-08-10T11:06:53.610549+00:00"
   },
   {
     "type": "asymmetric",
@@ -190,37 +254,5 @@
     "timestamp": "2026-08-09T21:30:23.170230+00:00",
     "first_detected": "2026-08-07T23:47:03.177207+00:00",
     "last_updated": "2026-08-09T21:30:23.170230+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "DKNG",
-    "market": "US_EQUITIES",
-    "asset_class": "ACCIONES",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0203,
-    "entry_price": 24.175,
-    "stop_loss": 23.514589,
-    "take_profit": 26.159,
-    "rr_ratio": 3.0,
-    "position_size_qty": 1514.208576,
-    "poc": 22.7394,
-    "vah": 23.998,
-    "val": 22.1304,
-    "fvg_zone": [
-      24.088,
-      24.175
-    ],
-    "ob_zone": [
-      21.448,
-      23.751
-    ],
-    "msb_type": "bullish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 2.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 38 zona(s) de confluencia SMC | R:R = 1:3.0 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-09T20:30:03.429325+00:00",
-    "first_detected": "2026-08-08T04:54:49.206387+00:00",
-    "last_updated": "2026-08-09T20:30:03.429325+00:00"
   }
 ]
