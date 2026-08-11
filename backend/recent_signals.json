@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.002724,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 37.8,
+    "volume_ratio": 1.49,
+    "roc_pct": 34.22,
+    "ema_stack": false,
+    "timestamp": "2026-08-11T15:59:38.243407+00:00",
+    "first_detected": "2026-08-10T01:28:22.818270+00:00",
+    "last_updated": "2026-08-11T15:59:38.243407+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -67,39 +84,5 @@
     "timestamp": "2026-08-11T14:19:59.009857+00:00",
     "first_detected": "2026-08-10T14:55:48.586522+00:00",
     "last_updated": "2026-08-11T14:19:59.009857+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PUMPUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.002837,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 37.8,
-    "volume_ratio": 1.49,
-    "roc_pct": 34.22,
-    "ema_stack": false,
-    "timestamp": "2026-08-11T03:41:39.122683+00:00",
-    "first_detected": "2026-08-10T01:28:22.818270+00:00",
-    "last_updated": "2026-08-11T03:41:39.122683+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "FXE",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 106.595001,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 20.4,
-    "volume_ratio": 2.55,
-    "roc_pct": 1.73,
-    "ema_stack": false,
-    "timestamp": "2026-08-10T14:55:53.256505+00:00",
-    "first_detected": "2026-08-10T14:55:53.256505+00:00",
-    "last_updated": "2026-08-10T14:55:53.256505+00:00"
   }
 ]
