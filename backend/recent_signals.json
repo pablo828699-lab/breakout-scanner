@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.002837,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 37.8,
+    "volume_ratio": 1.49,
+    "roc_pct": 34.22,
+    "ema_stack": false,
+    "timestamp": "2026-08-11T03:41:39.122683+00:00",
+    "first_detected": "2026-08-10T01:28:22.818270+00:00",
+    "last_updated": "2026-08-11T03:41:39.122683+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -33,24 +50,6 @@
     "timestamp": "2026-08-11T01:26:28.634092+00:00",
     "first_detected": "2026-08-11T01:26:28.634092+00:00",
     "last_updated": "2026-08-11T01:26:28.634092+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PUMPUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.002692,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 36.3,
-    "volume_ratio": 1.3,
-    "roc_pct": 34.66,
-    "ema_stack": false,
-    "timestamp": "2026-08-10T14:56:00.939643+00:00",
-    "first_detected": "2026-08-10T01:28:22.818270+00:00",
-    "last_updated": "2026-08-10T14:56:00.939643+00:00"
   },
   {
     "type": "radar",
