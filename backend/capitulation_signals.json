@@ -1,6 +1,262 @@
 [
   {
     "type": "asymmetric",
+    "ticker": "ACEUSDT",
+    "market": "CRYPTO",
+    "asset_class": "CRIPTO",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.1493,
+    "entry_price": 0.1101,
+    "stop_loss": 0.1022,
+    "take_profit": 0.13512,
+    "rr_ratio": 3.17,
+    "position_size_qty": 126582.278481,
+    "poc": 0.11649,
+    "vah": 0.13512,
+    "val": 0.10338,
+    "fvg_zone": [
+      0.0,
+      0.0
+    ],
+    "ob_zone": [
+      0.1119,
+      0.1248
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.7,
+    "analysis_summary": "Ca\u00edda de 14.9% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 10 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.2 (VAH) | Confianza: 70%",
+    "timestamp": "2026-08-12T15:58:51.457887+00:00",
+    "first_detected": "2026-08-12T01:45:10.312118+00:00",
+    "last_updated": "2026-08-12T15:58:51.457887+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "WLDUSDT",
+    "market": "CRYPTO",
+    "asset_class": "CRIPTO",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0478,
+    "entry_price": 0.3374,
+    "stop_loss": 0.32347,
+    "take_profit": 0.3933,
+    "rr_ratio": 4.01,
+    "position_size_qty": 71787.508973,
+    "poc": 0.338917,
+    "vah": 0.352092,
+    "val": 0.323634,
+    "fvg_zone": [
+      0.312,
+      0.3124
+    ],
+    "ob_zone": [
+      0.3127,
+      0.3264
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 4.8% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 26 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:4.0 (FVG_TARGET) | Confianza: 80%",
+    "timestamp": "2026-08-12T15:58:51.430447+00:00",
+    "first_detected": "2026-08-11T05:06:55.977874+00:00",
+    "last_updated": "2026-08-12T15:58:51.430447+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "XMRUSDT",
+    "market": "CRYPTO",
+    "asset_class": "CRIPTO",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.1099,
+    "entry_price": 117.1,
+    "stop_loss": 107.557143,
+    "take_profit": 154.9,
+    "rr_ratio": 3.96,
+    "position_size_qty": 104.790421,
+    "poc": 126.509,
+    "vah": 129.2,
+    "val": 119.678,
+    "fvg_zone": [
+      0.0,
+      0.0
+    ],
+    "ob_zone": [
+      118.0,
+      122.7
+    ],
+    "msb_type": "bearish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 11.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 17 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:4.0 (FVG_TARGET) | Confianza: 80%",
+    "timestamp": "2026-08-12T15:58:51.347629+00:00",
+    "first_detected": "2026-08-07T23:47:10.289813+00:00",
+    "last_updated": "2026-08-12T15:58:51.347629+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "XRPUSDT",
+    "market": "CRYPTO",
+    "asset_class": "CRIPTO",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0205,
+    "entry_price": 1.0194,
+    "stop_loss": 0.990225,
+    "take_profit": 1.1139,
+    "rr_ratio": 3.24,
+    "position_size_qty": 34275.921165,
+    "poc": 1.020723,
+    "vah": 1.033902,
+    "val": 1.001814,
+    "fvg_zone": [
+      1.1207,
+      1.1288
+    ],
+    "ob_zone": [
+      1.03,
+      1.0638
+    ],
+    "msb_type": "bearish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 2.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 31 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.2 (FVG_TARGET) | Confianza: 80%",
+    "timestamp": "2026-08-12T15:58:51.239350+00:00",
+    "first_detected": "2026-08-11T20:02:08.712500+00:00",
+    "last_updated": "2026-08-12T15:58:51.239350+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "DOGEUSDT",
+    "market": "CRYPTO",
+    "asset_class": "CRIPTO",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0227,
+    "entry_price": 0.07039,
+    "stop_loss": 0.070143,
+    "take_profit": 0.07135,
+    "rr_ratio": 3.89,
+    "position_size_qty": 4048582.995951,
+    "poc": 0.070001,
+    "vah": 0.07135,
+    "val": 0.069551,
+    "fvg_zone": [
+      0.07024,
+      0.07027
+    ],
+    "ob_zone": [
+      0.06822,
+      0.07018
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 2.3% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 23 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.9 (VAH) | Confianza: 80%",
+    "timestamp": "2026-08-12T15:58:51.211678+00:00",
+    "first_detected": "2026-08-12T15:58:51.211678+00:00",
+    "last_updated": "2026-08-12T15:58:51.211678+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "HIMS",
+    "market": "US_EQUITIES",
+    "asset_class": "ACCIONES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0404,
+    "entry_price": 29.41,
+    "stop_loss": 29.07195,
+    "take_profit": 31.554299,
+    "rr_ratio": 6.34,
+    "position_size_qty": 2958.143622,
+    "poc": 31.554299,
+    "vah": 33.992399,
+    "val": 28.419599,
+    "fvg_zone": [
+      31.167,
+      31.196
+    ],
+    "ob_zone": [
+      31.395,
+      31.763
+    ],
+    "msb_type": "bearish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 4.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 24 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:6.3 (POC) | Confianza: 80%",
+    "timestamp": "2026-08-12T15:58:46.030448+00:00",
+    "first_detected": "2026-08-10T11:06:54.118754+00:00",
+    "last_updated": "2026-08-12T15:58:46.030448+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "AVGO",
+    "market": "US_EQUITIES",
+    "asset_class": "ACCIONES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0215,
+    "entry_price": 415.68,
+    "stop_loss": 412.511071,
+    "take_profit": 432.67,
+    "rr_ratio": 5.36,
+    "position_size_qty": 315.564028,
+    "poc": 422.551,
+    "vah": 432.67,
+    "val": 386.7972,
+    "fvg_zone": [
+      394.96,
+      411.6
+    ],
+    "ob_zone": [
+      386.14,
+      389.97
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 2.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 29 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:5.4 (VAH) | Confianza: 80%",
+    "timestamp": "2026-08-12T15:58:44.032231+00:00",
+    "first_detected": "2026-08-11T20:01:59.592899+00:00",
+    "last_updated": "2026-08-12T15:58:44.032231+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "TSLA",
+    "market": "US_EQUITIES",
+    "asset_class": "ACCIONES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0277,
+    "entry_price": 328.57,
+    "stop_loss": 323.432143,
+    "take_profit": 361.97,
+    "rr_ratio": 6.5,
+    "position_size_qty": 194.633677,
+    "poc": 307.5278,
+    "vah": 323.312,
+    "val": 302.8352,
+    "fvg_zone": [
+      0.0,
+      0.0
+    ],
+    "ob_zone": [
+      320.33,
+      328.57
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.7,
+    "analysis_summary": "Ca\u00edda de 2.8% (idiosincr\u00e1tica) | Entrada: ORDER_BLOCK | 10 zona(s) de confluencia SMC | R:R = 1:6.5 (FVG_TARGET) | Confianza: 70%",
+    "timestamp": "2026-08-12T15:58:42.205091+00:00",
+    "first_detected": "2026-08-12T14:55:36.553426+00:00",
+    "last_updated": "2026-08-12T15:58:42.205091+00:00"
+  },
+  {
+    "type": "asymmetric",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "asset_class": "CRIPTO",
@@ -33,102 +289,6 @@
   },
   {
     "type": "asymmetric",
-    "ticker": "ACEUSDT",
-    "market": "CRYPTO",
-    "asset_class": "CRIPTO",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.1493,
-    "entry_price": 0.1101,
-    "stop_loss": 0.102196,
-    "take_profit": 0.13512,
-    "rr_ratio": 3.17,
-    "position_size_qty": 126518.218623,
-    "poc": 0.11649,
-    "vah": 0.13512,
-    "val": 0.10338,
-    "fvg_zone": [
-      0.0,
-      0.0
-    ],
-    "ob_zone": [
-      0.1119,
-      0.1248
-    ],
-    "msb_type": "bullish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.7,
-    "analysis_summary": "Ca\u00edda de 14.9% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 10 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.2 (VAH) | Confianza: 70%",
-    "timestamp": "2026-08-12T14:55:44.250148+00:00",
-    "first_detected": "2026-08-12T01:45:10.312118+00:00",
-    "last_updated": "2026-08-12T14:55:44.250148+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "WLDUSDT",
-    "market": "CRYPTO",
-    "asset_class": "CRIPTO",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0478,
-    "entry_price": 0.3365,
-    "stop_loss": 0.32342,
-    "take_profit": 0.3933,
-    "rr_ratio": 4.34,
-    "position_size_qty": 76452.599388,
-    "poc": 0.338772,
-    "vah": 0.352072,
-    "val": 0.323344,
-    "fvg_zone": [
-      0.312,
-      0.3124
-    ],
-    "ob_zone": [
-      0.3127,
-      0.3264
-    ],
-    "msb_type": "bullish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 4.8% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 26 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:4.3 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-12T14:55:44.223427+00:00",
-    "first_detected": "2026-08-11T05:06:55.977874+00:00",
-    "last_updated": "2026-08-12T14:55:44.223427+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "XMRUSDT",
-    "market": "CRYPTO",
-    "asset_class": "CRIPTO",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.1099,
-    "entry_price": 117.1,
-    "stop_loss": 107.557143,
-    "take_profit": 154.9,
-    "rr_ratio": 3.96,
-    "position_size_qty": 104.790421,
-    "poc": 126.509,
-    "vah": 129.2,
-    "val": 119.678,
-    "fvg_zone": [
-      0.0,
-      0.0
-    ],
-    "ob_zone": [
-      118.0,
-      122.7
-    ],
-    "msb_type": "bearish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 11.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 17 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:4.0 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-12T14:55:44.143053+00:00",
-    "first_detected": "2026-08-07T23:47:10.289813+00:00",
-    "last_updated": "2026-08-12T14:55:44.143053+00:00"
-  },
-  {
-    "type": "asymmetric",
     "ticker": "NEARUSDT",
     "market": "CRYPTO",
     "asset_class": "CRIPTO",
@@ -158,102 +318,6 @@
     "timestamp": "2026-08-12T14:55:44.089010+00:00",
     "first_detected": "2026-08-11T21:44:19.069830+00:00",
     "last_updated": "2026-08-12T14:55:44.089010+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "XRPUSDT",
-    "market": "CRYPTO",
-    "asset_class": "CRIPTO",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0205,
-    "entry_price": 1.0194,
-    "stop_loss": 0.990302,
-    "take_profit": 1.1139,
-    "rr_ratio": 3.25,
-    "position_size_qty": 34366.623136,
-    "poc": 1.020723,
-    "vah": 1.033902,
-    "val": 1.001814,
-    "fvg_zone": [
-      1.1207,
-      1.1288
-    ],
-    "ob_zone": [
-      1.03,
-      1.0638
-    ],
-    "msb_type": "bearish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 2.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 34 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.2 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-12T14:55:44.035488+00:00",
-    "first_detected": "2026-08-11T20:02:08.712500+00:00",
-    "last_updated": "2026-08-12T14:55:44.035488+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "HIMS",
-    "market": "US_EQUITIES",
-    "asset_class": "ACCIONES",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0386,
-    "entry_price": 30.333,
-    "stop_loss": 29.249411,
-    "take_profit": 34.074,
-    "rr_ratio": 3.45,
-    "position_size_qty": 922.859128,
-    "poc": 29.78096,
-    "vah": 32.25224,
-    "val": 25.66216,
-    "fvg_zone": [
-      31.167,
-      31.196
-    ],
-    "ob_zone": [
-      31.395,
-      31.763
-    ],
-    "msb_type": "bearish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 3.9% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 32 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.5 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-12T14:55:39.679142+00:00",
-    "first_detected": "2026-08-10T11:06:54.118754+00:00",
-    "last_updated": "2026-08-12T14:55:39.679142+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "TSLA",
-    "market": "US_EQUITIES",
-    "asset_class": "ACCIONES",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0276,
-    "entry_price": 328.57,
-    "stop_loss": 323.506429,
-    "take_profit": 361.97,
-    "rr_ratio": 6.6,
-    "position_size_qty": 197.489084,
-    "poc": 307.5278,
-    "vah": 323.312,
-    "val": 302.8352,
-    "fvg_zone": [
-      0.0,
-      0.0
-    ],
-    "ob_zone": [
-      320.33,
-      328.57
-    ],
-    "msb_type": "bullish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.7,
-    "analysis_summary": "Ca\u00edda de 2.8% (idiosincr\u00e1tica) | Entrada: ORDER_BLOCK | 10 zona(s) de confluencia SMC | R:R = 1:6.6 (FVG_TARGET) | Confianza: 70%",
-    "timestamp": "2026-08-12T14:55:36.553426+00:00",
-    "first_detected": "2026-08-12T14:55:36.553426+00:00",
-    "last_updated": "2026-08-12T14:55:36.553426+00:00"
   },
   {
     "type": "asymmetric",
@@ -446,38 +510,6 @@
     "timestamp": "2026-08-12T11:07:27.714448+00:00",
     "first_detected": "2026-08-12T11:07:27.714448+00:00",
     "last_updated": "2026-08-12T11:07:27.714448+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "AVGO",
-    "market": "US_EQUITIES",
-    "asset_class": "ACCIONES",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0215,
-    "entry_price": 415.68,
-    "stop_loss": 412.859464,
-    "take_profit": 432.67,
-    "rr_ratio": 6.02,
-    "position_size_qty": 354.542541,
-    "poc": 422.551,
-    "vah": 432.67,
-    "val": 385.448,
-    "fvg_zone": [
-      394.96,
-      411.6
-    ],
-    "ob_zone": [
-      386.14,
-      389.97
-    ],
-    "msb_type": "bullish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 2.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 33 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:6.0 (VAH) | Confianza: 80%",
-    "timestamp": "2026-08-12T11:07:25.443484+00:00",
-    "first_detected": "2026-08-11T20:01:59.592899+00:00",
-    "last_updated": "2026-08-12T11:07:25.443484+00:00"
   },
   {
     "type": "asymmetric",
