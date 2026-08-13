@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "ONDOUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.335,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.1,
+    "volume_ratio": 0.85,
+    "roc_pct": -12.96,
+    "ema_stack": true,
+    "timestamp": "2026-08-13T19:00:10.641904+00:00",
+    "first_detected": "2026-08-11T01:26:28.634092+00:00",
+    "last_updated": "2026-08-13T19:00:10.641904+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -50,22 +67,5 @@
     "timestamp": "2026-08-13T14:54:50.149426+00:00",
     "first_detected": "2026-08-13T14:54:50.149426+00:00",
     "last_updated": "2026-08-13T14:54:50.149426+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ONDOUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 0.3363,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 18.1,
-    "volume_ratio": 0.85,
-    "roc_pct": -12.96,
-    "ema_stack": true,
-    "timestamp": "2026-08-13T06:14:59.006143+00:00",
-    "first_detected": "2026-08-11T01:26:28.634092+00:00",
-    "last_updated": "2026-08-13T06:14:59.006143+00:00"
   }
 ]
