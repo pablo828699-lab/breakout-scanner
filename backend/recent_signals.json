@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "SPY",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 777.969971,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.3,
+    "volume_ratio": 0.73,
+    "roc_pct": 4.88,
+    "ema_stack": true,
+    "timestamp": "2026-08-14T14:18:55.644468+00:00",
+    "first_detected": "2026-08-14T14:18:55.644468+00:00",
+    "last_updated": "2026-08-14T14:18:55.644468+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ONDOUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
