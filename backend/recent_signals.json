@@ -4,7 +4,7 @@
     "ticker": "ACEUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 0.16,
+    "price": 0.2201,
     "triggers": [
       "IMPULSE"
     ],
@@ -12,8 +12,8 @@
     "volume_ratio": 2.6,
     "roc_pct": 43.24,
     "ema_stack": false,
-    "timestamp": "2026-08-18T01:04:08.379524+00:00",
+    "timestamp": "2026-08-18T13:40:26.315653+00:00",
     "first_detected": "2026-08-18T01:04:08.379524+00:00",
-    "last_updated": "2026-08-18T01:04:08.379524+00:00"
+    "last_updated": "2026-08-18T13:40:26.315653+00:00"
   }
 ]
