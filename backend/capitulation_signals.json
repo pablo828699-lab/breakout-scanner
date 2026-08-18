@@ -1,35 +1,35 @@
 [
   {
     "type": "asymmetric",
-    "ticker": "WLDUSDT",
+    "ticker": "XPLUSDT",
     "market": "CRYPTO",
     "asset_class": "CRIPTO",
     "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0413,
-    "entry_price": 0.3432,
-    "stop_loss": 0.339868,
-    "take_profit": 0.357452,
-    "rr_ratio": 4.28,
-    "position_size_qty": 300120.048019,
-    "poc": 0.342965,
-    "vah": 0.357452,
-    "val": 0.337258,
+    "drop_pct": -0.0204,
+    "entry_price": 0.07881,
+    "stop_loss": 0.074373,
+    "take_profit": 0.09692,
+    "rr_ratio": 4.08,
+    "position_size_qty": 225377.507325,
+    "poc": 0.077645,
+    "vah": 0.078487,
+    "val": 0.076579,
     "fvg_zone": [
-      0.312,
-      0.3124
+      0.0,
+      0.0
     ],
     "ob_zone": [
-      0.3245,
-      0.3432
+      0.0754,
+      0.07844
     ],
     "msb_type": "bullish_reversal",
     "is_idiosyncratic": true,
     "fundamental_ok": true,
     "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 4.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 21 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:4.3 (VAH) | Confianza: 80%",
-    "timestamp": "2026-08-18T01:06:04.157582+00:00",
-    "first_detected": "2026-08-17T20:24:22.387637+00:00",
-    "last_updated": "2026-08-18T01:06:04.157582+00:00"
+    "analysis_summary": "Ca\u00edda de 2.0% (idiosincr\u00e1tica) | Entrada: ORDER_BLOCK | 10 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:4.1 (FVG_TARGET) | Confianza: 80%",
+    "timestamp": "2026-08-18T02:54:26.970120+00:00",
+    "first_detected": "2026-08-11T20:02:08.987074+00:00",
+    "last_updated": "2026-08-18T02:54:26.970120+00:00"
   },
   {
     "type": "asymmetric",
@@ -59,9 +59,9 @@
     "fundamental_ok": true,
     "confidence_score": 0.8,
     "analysis_summary": "Ca\u00edda de 11.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 17 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:4.0 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-18T01:06:04.127543+00:00",
+    "timestamp": "2026-08-18T02:54:26.858130+00:00",
     "first_detected": "2026-08-07T23:47:10.289813+00:00",
-    "last_updated": "2026-08-18T01:06:04.127543+00:00"
+    "last_updated": "2026-08-18T02:54:26.858130+00:00"
   },
   {
     "type": "asymmetric",
@@ -71,10 +71,10 @@
     "verdict": "APTO_COMPRA_ASIMETRICA",
     "drop_pct": -0.0255,
     "entry_price": 95.769,
-    "stop_loss": 93.777857,
+    "stop_loss": 93.763714,
     "take_profit": 102.41,
-    "rr_ratio": 3.34,
-    "position_size_qty": 502.224099,
+    "rr_ratio": 3.31,
+    "position_size_qty": 498.681984,
     "poc": 94.51485,
     "vah": 95.67188,
     "val": 87.73796,
@@ -90,10 +90,10 @@
     "is_idiosyncratic": true,
     "fundamental_ok": true,
     "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 2.5% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 22 zona(s) de confluencia SMC | R:R = 1:3.3 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-18T01:05:59.030515+00:00",
+    "analysis_summary": "Ca\u00edda de 2.5% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 22 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.3 (FVG_TARGET) | Confianza: 80%",
+    "timestamp": "2026-08-18T02:54:16.584207+00:00",
     "first_detected": "2026-08-17T15:23:28.472229+00:00",
-    "last_updated": "2026-08-18T01:05:59.030515+00:00"
+    "last_updated": "2026-08-18T02:54:16.584207+00:00"
   },
   {
     "type": "asymmetric",
@@ -103,10 +103,10 @@
     "verdict": "APTO_COMPRA_ASIMETRICA",
     "drop_pct": -0.0232,
     "entry_price": 171.25,
-    "stop_loss": 170.76625,
+    "stop_loss": 170.748929,
     "take_profit": 175.9006,
-    "rr_ratio": 9.61,
-    "position_size_qty": 2067.183463,
+    "rr_ratio": 9.28,
+    "position_size_qty": 1995.725157,
     "poc": 175.9006,
     "vah": 180.13,
     "val": 162.004,
@@ -118,14 +118,78 @@
       152.7,
       158.32
     ],
-    "msb_type": "bearish_reversal",
+    "msb_type": "bullish_reversal",
     "is_idiosyncratic": true,
     "fundamental_ok": true,
     "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 2.3% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 37 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:9.6 (POC) | Confianza: 80%",
-    "timestamp": "2026-08-18T01:05:58.564959+00:00",
+    "analysis_summary": "Ca\u00edda de 2.3% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 37 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:9.3 (POC) | Confianza: 80%",
+    "timestamp": "2026-08-18T02:54:15.987779+00:00",
     "first_detected": "2026-08-17T21:24:31.813130+00:00",
-    "last_updated": "2026-08-18T01:05:58.564959+00:00"
+    "last_updated": "2026-08-18T02:54:15.987779+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "NFLX",
+    "market": "US_EQUITIES",
+    "asset_class": "ACCIONES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0406,
+    "entry_price": 75.55,
+    "stop_loss": 75.404196,
+    "take_profit": 76.42,
+    "rr_ratio": 5.97,
+    "position_size_qty": 6858.5224,
+    "poc": 72.78051,
+    "vah": 74.41574,
+    "val": 70.76052,
+    "fvg_zone": [
+      74.296,
+      74.517
+    ],
+    "ob_zone": [
+      73.837,
+      74.296
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 4.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 44 zona(s) de confluencia SMC | R:R = 1:6.0 (FVG_TARGET) | Confianza: 80%",
+    "timestamp": "2026-08-18T02:54:08.072273+00:00",
+    "first_detected": "2026-08-18T01:05:54.002985+00:00",
+    "last_updated": "2026-08-18T02:54:08.072273+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "WLDUSDT",
+    "market": "CRYPTO",
+    "asset_class": "CRIPTO",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0413,
+    "entry_price": 0.3432,
+    "stop_loss": 0.339868,
+    "take_profit": 0.357452,
+    "rr_ratio": 4.28,
+    "position_size_qty": 300120.048019,
+    "poc": 0.342965,
+    "vah": 0.357452,
+    "val": 0.337258,
+    "fvg_zone": [
+      0.312,
+      0.3124
+    ],
+    "ob_zone": [
+      0.3245,
+      0.3432
+    ],
+    "msb_type": "bullish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 4.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 21 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:4.3 (VAH) | Confianza: 80%",
+    "timestamp": "2026-08-18T01:06:04.157582+00:00",
+    "first_detected": "2026-08-17T20:24:22.387637+00:00",
+    "last_updated": "2026-08-18T01:06:04.157582+00:00"
   },
   {
     "type": "asymmetric",
@@ -193,38 +257,6 @@
   },
   {
     "type": "asymmetric",
-    "ticker": "NFLX",
-    "market": "US_EQUITIES",
-    "asset_class": "ACCIONES",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0406,
-    "entry_price": 75.55,
-    "stop_loss": 75.404643,
-    "take_profit": 76.42,
-    "rr_ratio": 5.99,
-    "position_size_qty": 6879.613641,
-    "poc": 72.78051,
-    "vah": 74.41574,
-    "val": 70.76052,
-    "fvg_zone": [
-      74.296,
-      74.517
-    ],
-    "ob_zone": [
-      73.837,
-      74.296
-    ],
-    "msb_type": "bullish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 4.1% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 44 zona(s) de confluencia SMC | R:R = 1:6.0 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-18T01:05:54.002985+00:00",
-    "first_detected": "2026-08-18T01:05:54.002985+00:00",
-    "last_updated": "2026-08-18T01:05:54.002985+00:00"
-  },
-  {
-    "type": "asymmetric",
     "ticker": "AMZN",
     "market": "US_EQUITIES",
     "asset_class": "ACCIONES",
@@ -254,38 +286,6 @@
     "timestamp": "2026-08-18T01:05:52.480788+00:00",
     "first_detected": "2026-08-17T20:24:12.397025+00:00",
     "last_updated": "2026-08-18T01:05:52.480788+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "XPLUSDT",
-    "market": "CRYPTO",
-    "asset_class": "CRIPTO",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0254,
-    "entry_price": 0.0755,
-    "stop_loss": 0.07382,
-    "take_profit": 0.08843,
-    "rr_ratio": 7.7,
-    "position_size_qty": 595238.095238,
-    "poc": 0.077645,
-    "vah": 0.078599,
-    "val": 0.076692,
-    "fvg_zone": [
-      0.0,
-      0.0
-    ],
-    "ob_zone": [
-      0.0754,
-      0.07844
-    ],
-    "msb_type": "bullish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.9,
-    "analysis_summary": "Ca\u00edda de 2.5% (idiosincr\u00e1tica) | Entrada: ORDER_BLOCK | 9 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:7.7 (FVG_TARGET) | Confianza: 90%",
-    "timestamp": "2026-08-17T23:22:15.900655+00:00",
-    "first_detected": "2026-08-11T20:02:08.987074+00:00",
-    "last_updated": "2026-08-17T23:22:15.900655+00:00"
   },
   {
     "type": "asymmetric",
