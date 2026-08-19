@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "ACEUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.238,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 55.3,
+    "volume_ratio": 2.47,
+    "roc_pct": 57.34,
+    "ema_stack": false,
+    "timestamp": "2026-08-19T02:54:37.706424+00:00",
+    "first_detected": "2026-08-18T01:04:08.379524+00:00",
+    "last_updated": "2026-08-19T02:54:37.706424+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -15,22 +32,5 @@
     "timestamp": "2026-08-19T01:05:19.708618+00:00",
     "first_detected": "2026-08-19T01:05:19.708618+00:00",
     "last_updated": "2026-08-19T01:05:19.708618+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ACEUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.2201,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 53.6,
-    "volume_ratio": 2.6,
-    "roc_pct": 43.24,
-    "ema_stack": false,
-    "timestamp": "2026-08-18T13:40:26.315653+00:00",
-    "first_detected": "2026-08-18T01:04:08.379524+00:00",
-    "last_updated": "2026-08-18T13:40:26.315653+00:00"
   }
 ]
