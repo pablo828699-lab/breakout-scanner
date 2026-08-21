@@ -1,6 +1,76 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.003806,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 49.3,
+    "volume_ratio": 2.33,
+    "roc_pct": 37.9,
+    "ema_stack": true,
+    "timestamp": "2026-08-21T01:08:23.263540+00:00",
+    "first_detected": "2026-08-21T01:08:23.263540+00:00",
+    "last_updated": "2026-08-21T01:08:23.263540+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ACEUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.2408,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 58.5,
+    "volume_ratio": 1.84,
+    "roc_pct": 106.23,
+    "ema_stack": false,
+    "timestamp": "2026-08-21T01:08:21.769108+00:00",
+    "first_detected": "2026-08-21T01:08:21.769108+00:00",
+    "last_updated": "2026-08-21T01:08:21.769108+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.1195,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 20.6,
+    "volume_ratio": 3.46,
+    "roc_pct": 32.5,
+    "ema_stack": false,
+    "timestamp": "2026-08-21T01:08:20.543814+00:00",
+    "first_detected": "2026-08-21T01:08:20.543814+00:00",
+    "last_updated": "2026-08-21T01:08:20.543814+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ADAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.2036,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 18.4,
+    "volume_ratio": 2.16,
+    "roc_pct": 4.19,
+    "ema_stack": false,
+    "timestamp": "2026-08-21T01:08:18.631215+00:00",
+    "first_detected": "2026-08-21T01:08:18.631215+00:00",
+    "last_updated": "2026-08-21T01:08:18.631215+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -173,22 +243,5 @@
     "timestamp": "2026-08-20T13:43:37.844825+00:00",
     "first_detected": "2026-08-20T13:43:37.844825+00:00",
     "last_updated": "2026-08-20T13:43:37.844825+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ACEUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.1917,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 55.3,
-    "volume_ratio": 2.47,
-    "roc_pct": 57.34,
-    "ema_stack": false,
-    "timestamp": "2026-08-19T15:28:41.057247+00:00",
-    "first_detected": "2026-08-18T01:04:08.379524+00:00",
-    "last_updated": "2026-08-19T15:28:41.057247+00:00"
   }
 ]
