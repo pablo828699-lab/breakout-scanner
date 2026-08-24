@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "XRPUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1.4825,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 39.1,
+    "volume_ratio": 2.11,
+    "roc_pct": 50.62,
+    "ema_stack": false,
+    "timestamp": "2026-08-24T18:36:18.613870+00:00",
+    "first_detected": "2026-08-20T01:04:25.934577+00:00",
+    "last_updated": "2026-08-24T18:36:18.613870+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "DOGEUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.0894,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 32.7,
+    "volume_ratio": 1.84,
+    "roc_pct": 33.1,
+    "ema_stack": false,
+    "timestamp": "2026-08-24T18:36:17.899018+00:00",
+    "first_detected": "2026-08-20T01:04:25.137163+00:00",
+    "last_updated": "2026-08-24T18:36:17.899018+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -204,39 +238,5 @@
     "timestamp": "2026-08-24T13:49:12.438198+00:00",
     "first_detected": "2026-08-24T13:49:12.438198+00:00",
     "last_updated": "2026-08-24T13:49:12.438198+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "XRPUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 1.4664,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 39.1,
-    "volume_ratio": 2.11,
-    "roc_pct": 50.62,
-    "ema_stack": false,
-    "timestamp": "2026-08-24T05:36:00.429252+00:00",
-    "first_detected": "2026-08-20T01:04:25.934577+00:00",
-    "last_updated": "2026-08-24T05:36:00.429252+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "DOGEUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.09151,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 32.7,
-    "volume_ratio": 1.84,
-    "roc_pct": 33.1,
-    "ema_stack": false,
-    "timestamp": "2026-08-24T05:35:59.709813+00:00",
-    "first_detected": "2026-08-20T01:04:25.137163+00:00",
-    "last_updated": "2026-08-24T05:35:59.709813+00:00"
   }
 ]
