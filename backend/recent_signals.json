@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.00501,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 56.4,
+    "volume_ratio": 2.4,
+    "roc_pct": 79.75,
+    "ema_stack": true,
+    "timestamp": "2026-08-24T04:54:39.724217+00:00",
+    "first_detected": "2026-08-21T01:08:23.263540+00:00",
+    "last_updated": "2026-08-24T04:54:39.724217+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.1667,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 32.6,
+    "volume_ratio": 3.22,
+    "roc_pct": 87.91,
+    "ema_stack": false,
+    "timestamp": "2026-08-24T04:54:37.446460+00:00",
+    "first_detected": "2026-08-21T01:08:20.543814+00:00",
+    "last_updated": "2026-08-24T04:54:37.446460+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -152,41 +187,5 @@
     "timestamp": "2026-08-23T17:18:08.112349+00:00",
     "first_detected": "2026-08-20T01:04:25.137163+00:00",
     "last_updated": "2026-08-23T17:18:08.112349+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PUMPUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.005086,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 54.0,
-    "volume_ratio": 4.45,
-    "roc_pct": 80.18,
-    "ema_stack": true,
-    "timestamp": "2026-08-23T16:21:10.955614+00:00",
-    "first_detected": "2026-08-21T01:08:23.263540+00:00",
-    "last_updated": "2026-08-23T16:21:10.955614+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ENAUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.1652,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 28.7,
-    "volume_ratio": 4.76,
-    "roc_pct": 82.58,
-    "ema_stack": false,
-    "timestamp": "2026-08-23T16:21:08.586102+00:00",
-    "first_detected": "2026-08-21T01:08:20.543814+00:00",
-    "last_updated": "2026-08-23T16:21:08.586102+00:00"
   }
 ]
