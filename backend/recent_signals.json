@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "SOLUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 101.4,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 30.1,
+    "volume_ratio": 2.18,
+    "roc_pct": 31.26,
+    "ema_stack": false,
+    "timestamp": "2026-08-25T04:35:53.799606+00:00",
+    "first_detected": "2026-08-22T01:04:09.749036+00:00",
+    "last_updated": "2026-08-25T04:35:53.799606+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -136,23 +153,6 @@
     "timestamp": "2026-08-24T16:34:14.680335+00:00",
     "first_detected": "2026-08-22T01:04:11.456373+00:00",
     "last_updated": "2026-08-24T16:34:14.680335+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "SOLUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 97.09,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 26.5,
-    "volume_ratio": 1.9,
-    "roc_pct": 25.1,
-    "ema_stack": false,
-    "timestamp": "2026-08-24T16:34:12.856432+00:00",
-    "first_detected": "2026-08-22T01:04:09.749036+00:00",
-    "last_updated": "2026-08-24T16:34:12.856432+00:00"
   },
   {
     "type": "radar",
