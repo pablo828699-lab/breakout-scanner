@@ -7,13 +7,13 @@
     "verdict": "APTO_COMPRA_ASIMETRICA",
     "drop_pct": -0.067,
     "entry_price": 0.3574,
-    "stop_loss": 0.355023,
+    "stop_loss": 0.354986,
     "take_profit": 0.373422,
-    "rr_ratio": 6.74,
-    "position_size_qty": 420698.359276,
+    "rr_ratio": 6.64,
+    "position_size_qty": 414250.207125,
     "poc": 0.373422,
-    "vah": 0.394076,
-    "val": 0.363544,
+    "vah": 0.390484,
+    "val": 0.359952,
     "fvg_zone": [
       0.3366,
       0.3413
@@ -25,11 +25,11 @@
     "msb_type": "bullish_reversal",
     "is_idiosyncratic": true,
     "fundamental_ok": true,
-    "confidence_score": 0.9,
-    "analysis_summary": "Ca\u00edda de 6.7% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 23 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:6.7 (POC) | Confianza: 90%",
-    "timestamp": "2026-08-26T16:17:09.097969+00:00",
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 6.7% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 15 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:6.6 (POC) | Confianza: 80%",
+    "timestamp": "2026-08-26T18:58:28.957675+00:00",
     "first_detected": "2026-08-26T01:09:25.547046+00:00",
-    "last_updated": "2026-08-26T16:17:09.097969+00:00"
+    "last_updated": "2026-08-26T18:58:28.957675+00:00"
   },
   {
     "type": "asymmetric",
@@ -59,9 +59,41 @@
     "fundamental_ok": true,
     "confidence_score": 0.8,
     "analysis_summary": "Ca\u00edda de 11.0% (idiosincr\u00e1tica) | Entrada: CONFLUENCE | 17 zona(s) de confluencia SMC | Precio bajo VAL (sobreventa) | R:R = 1:4.0 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-26T16:17:09.013753+00:00",
+    "timestamp": "2026-08-26T18:58:28.875799+00:00",
     "first_detected": "2026-08-07T23:47:10.289813+00:00",
-    "last_updated": "2026-08-26T16:17:09.013753+00:00"
+    "last_updated": "2026-08-26T18:58:28.875799+00:00"
+  },
+  {
+    "type": "asymmetric",
+    "ticker": "AVGO",
+    "market": "US_EQUITIES",
+    "asset_class": "ACCIONES",
+    "verdict": "APTO_COMPRA_ASIMETRICA",
+    "drop_pct": -0.0201,
+    "entry_price": 360.9646,
+    "stop_loss": 349.760536,
+    "take_profit": 394.7568,
+    "rr_ratio": 3.02,
+    "position_size_qty": 89.253328,
+    "poc": 360.9646,
+    "vah": 394.7568,
+    "val": 350.25,
+    "fvg_zone": [
+      0.0,
+      0.0
+    ],
+    "ob_zone": [
+      386.14,
+      389.97
+    ],
+    "msb_type": "bearish_reversal",
+    "is_idiosyncratic": true,
+    "fundamental_ok": true,
+    "confidence_score": 0.8,
+    "analysis_summary": "Ca\u00edda de 2.0% (idiosincr\u00e1tica) | Entrada: POC_FALLBACK | 37 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.0 (VAH) | Confianza: 80%",
+    "timestamp": "2026-08-26T18:58:21.384322+00:00",
+    "first_detected": "2026-08-24T06:54:02.920830+00:00",
+    "last_updated": "2026-08-26T18:58:21.384322+00:00"
   },
   {
     "type": "asymmetric",
@@ -702,38 +734,6 @@
     "timestamp": "2026-08-25T23:23:57.153064+00:00",
     "first_detected": "2026-08-24T06:54:03.315006+00:00",
     "last_updated": "2026-08-25T23:23:57.153064+00:00"
-  },
-  {
-    "type": "asymmetric",
-    "ticker": "AVGO",
-    "market": "US_EQUITIES",
-    "asset_class": "ACCIONES",
-    "verdict": "APTO_COMPRA_ASIMETRICA",
-    "drop_pct": -0.0326,
-    "entry_price": 363.9175,
-    "stop_loss": 357.928571,
-    "take_profit": 383.22,
-    "rr_ratio": 3.22,
-    "position_size_qty": 166.974763,
-    "poc": 363.9175,
-    "vah": 398.68,
-    "val": 355.42,
-    "fvg_zone": [
-      0.0,
-      0.0
-    ],
-    "ob_zone": [
-      386.14,
-      389.97
-    ],
-    "msb_type": "bearish_reversal",
-    "is_idiosyncratic": true,
-    "fundamental_ok": true,
-    "confidence_score": 0.8,
-    "analysis_summary": "Ca\u00edda de 3.3% (idiosincr\u00e1tica) | Entrada: POC_FALLBACK | 44 zona(s) de confluencia SMC | Precio dentro del Value Area | R:R = 1:3.2 (FVG_TARGET) | Confianza: 80%",
-    "timestamp": "2026-08-25T23:23:55.506522+00:00",
-    "first_detected": "2026-08-24T06:54:02.920830+00:00",
-    "last_updated": "2026-08-25T23:23:55.506522+00:00"
   },
   {
     "type": "asymmetric",
