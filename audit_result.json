@@ -1,0 +1,48 @@
+{
+  "total_scanned_pairs": 204,
+  "approved_longs": [
+    {
+      "ticker": "xyz:GIGADEV",
+      "hl_symbol": "xyz:GIGADEV",
+      "direction": "LONG",
+      "verdict": "APROBADO",
+      "primary_reason": "Todas las validaciones aprobadas (100%)",
+      "rejection_reasons": [],
+      "current_price": 58.565,
+      "poc": 52.77211,
+      "vah": 58.0163,
+      "val": 50.840039999999995,
+      "rsi": 43.632898212408385,
+      "rsi_slope": 1.6706797539317648,
+      "macd_hist": 0.06342906360418832,
+      "atr": 1.0045000000000002,
+      "leverage": 8.0,
+      "sl_price": 55.63675,
+      "tp_price": 65.885625,
+      "estimated_liq_price": 51.61040625,
+      "rr_ratio": 2.5000000000000036,
+      "order_execution_mode": "LIMIT en POC ($52.77)",
+      "microstructure": {
+        "hl_symbol": "xyz:GIGADEV",
+        "raw_ticker": "xyz:GIGADEV",
+        "dex": "xyz",
+        "mark_price": 58.508,
+        "mid_price": 58.47,
+        "bid_price": 57.7189,
+        "ask_price": 59.0267,
+        "spread_pct": 0.02215607513210124,
+        "requires_limit_order": true,
+        "funding_8h": -0.0002982316,
+        "funding_daily": -0.0008946948000000001,
+        "open_interest": 31872.52,
+        "volume_24h": 1394290.0886599994,
+        "has_sufficient_liquidity": true,
+        "min_required_vol": 800000.0
+      },
+      "phase1_passed": true,
+      "phase2_passed": true,
+      "phase3_passed": true
+    }
+  ],
+  "approved_shorts": []
+}

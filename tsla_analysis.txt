@@ -1,0 +1,101 @@
+--- HYPERLIQUID xyz:TSLA LONG ---
+{
+  "ticker": "xyz:TSLA",
+  "hl_symbol": "xyz:TSLA",
+  "direction": "LONG",
+  "verdict": "RECHAZADO",
+  "primary_reason": "Tendencia Macro 1D no alcista (Close $330.71 <= EMA50 $354.76)",
+  "rejection_reasons": [
+    "Tendencia Macro 1D no alcista (Close $330.71 <= EMA50 $354.76)",
+    "RSI 1H sin pendiente ascendente (51.4, slope -0.9)"
+  ],
+  "current_price": 330.725,
+  "poc": 322.0874,
+  "vah": 326.4264,
+  "val": 302.128,
+  "rsi": 51.377996672628754,
+  "rsi_slope": -0.8513662285428722,
+  "macd_hist": -0.02398701014113583,
+  "atr": 1.9378571428571507,
+  "leverage": 8.0,
+  "sl_price": 314.18875,
+  "tp_price": 372.065625,
+  "estimated_liq_price": 291.45140625,
+  "rr_ratio": 2.5,
+  "order_execution_mode": "MARKET",
+  "microstructure": {
+    "hl_symbol": "xyz:TSLA",
+    "raw_ticker": "xyz:TSLA",
+    "dex": "xyz",
+    "mark_price": 330.72,
+    "mid_price": 330.725,
+    "bid_price": 330.715,
+    "ask_price": 330.74,
+    "spread_pct": 7.558807522535558e-05,
+    "requires_limit_order": false,
+    "funding_8h": 6.25e-06,
+    "funding_daily": 1.8750000000000002e-05,
+    "open_interest": 114415.554,
+    "volume_24h": 18698931.687069986,
+    "has_sufficient_liquidity": true,
+    "min_required_vol": 800000.0
+  },
+  "phase1_passed": false,
+  "phase2_passed": true,
+  "phase3_passed": true
+}
+--- HYPERLIQUID xyz:TSLA SHORT ---
+{
+  "ticker": "xyz:TSLA",
+  "hl_symbol": "xyz:TSLA",
+  "direction": "SHORT",
+  "verdict": "RECHAZADO",
+  "primary_reason": "RSI 1H insuficiente para Short (51.4 <= 65)",
+  "rejection_reasons": [
+    "RSI 1H insuficiente para Short (51.4 <= 65)",
+    "MACD 1H Histograma en aumento alcista (-0.02, delta 0.07)",
+    "Bloqueo Soporte < 5.0% (1.30%)"
+  ],
+  "current_price": 330.725,
+  "poc": 322.0874,
+  "vah": 326.4264,
+  "val": 302.128,
+  "rsi": 51.377996672628754,
+  "rsi_slope": -0.8513662285428722,
+  "macd_hist": -0.02398701014113583,
+  "atr": 1.9378571428571507,
+  "leverage": 8.0,
+  "sl_price": 347.26125,
+  "tp_price": 289.38437500000003,
+  "estimated_liq_price": 369.99859375,
+  "rr_ratio": 2.5,
+  "order_execution_mode": "MARKET",
+  "microstructure": {
+    "hl_symbol": "xyz:TSLA",
+    "raw_ticker": "xyz:TSLA",
+    "dex": "xyz",
+    "mark_price": 330.72,
+    "mid_price": 330.725,
+    "bid_price": 330.715,
+    "ask_price": 330.74,
+    "spread_pct": 7.558807522535558e-05,
+    "requires_limit_order": false,
+    "funding_8h": 6.25e-06,
+    "funding_daily": 1.8750000000000002e-05,
+    "open_interest": 114415.554,
+    "volume_24h": 18698931.687069986,
+    "has_sufficient_liquidity": true,
+    "min_required_vol": 800000.0
+  },
+  "phase1_passed": false,
+  "phase2_passed": true,
+  "phase3_passed": true
+}
+--- TSLA 1D CANDLES ---
+                             Open    High     Low   Close     Volume
+Timestamp                                                           
+2026-08-06 00:00:00+00:00  321.54  323.00  315.56  320.54  53916.592
+2026-08-07 00:00:00+00:00  320.54  333.62  319.67  329.05  72859.904
+2026-08-08 00:00:00+00:00  329.09  331.92  328.54  331.92  10236.509
+2026-08-09 00:00:00+00:00  331.88  332.57  329.56  329.78  13420.475
+2026-08-10 00:00:00+00:00  329.77  332.85  326.43  330.73  51869.397

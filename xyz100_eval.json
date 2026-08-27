@@ -1,0 +1,56 @@
+XYZ100 LONG: {
+  "ticker": "xyz:XYZ100",
+  "hl_symbol": "xyz:XYZ100",
+  "direction": "LONG",
+  "verdict": "RECHAZADO",
+  "primary_reason": "Sin snapshot de microestructura en Hyperliquid (xyz:XYZ100)",
+  "rejection_reasons": [
+    "Sin snapshot de microestructura en Hyperliquid (xyz:XYZ100)"
+  ],
+  "current_price": 0.0,
+  "poc": 0.0,
+  "vah": 0.0,
+  "val": 0.0,
+  "rsi": 50.0,
+  "rsi_slope": 0.0,
+  "macd_hist": 0.0,
+  "atr": 0.0,
+  "leverage": 5.0,
+  "sl_price": 0.0,
+  "tp_price": 0.0,
+  "estimated_liq_price": 0.0,
+  "rr_ratio": 0.0,
+  "order_execution_mode": "MARKET",
+  "microstructure": null,
+  "phase1_passed": false,
+  "phase2_passed": false,
+  "phase3_passed": false
+}
+XYZ100 SHORT: {
+  "ticker": "xyz:XYZ100",
+  "hl_symbol": "xyz:XYZ100",
+  "direction": "SHORT",
+  "verdict": "RECHAZADO",
+  "primary_reason": "Sin snapshot de microestructura en Hyperliquid (xyz:XYZ100)",
+  "rejection_reasons": [
+    "Sin snapshot de microestructura en Hyperliquid (xyz:XYZ100)"
+  ],
+  "current_price": 0.0,
+  "poc": 0.0,
+  "vah": 0.0,
+  "val": 0.0,
+  "rsi": 50.0,
+  "rsi_slope": 0.0,
+  "macd_hist": 0.0,
+  "atr": 0.0,
+  "leverage": 5.0,
+  "sl_price": 0.0,
+  "tp_price": 0.0,
+  "estimated_liq_price": 0.0,
+  "rr_ratio": 0.0,
+  "order_execution_mode": "MARKET",
+  "microstructure": null,
+  "phase1_passed": false,
+  "phase2_passed": false,
+  "phase3_passed": false
+}

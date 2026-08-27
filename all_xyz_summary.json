@@ -1,0 +1,1547 @@
+{
+  "xyz:XYZ100": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 29561.5,
+      "rsi": 31.0,
+      "vol_24h": 277.77,
+      "reasons": [
+        "Precio 1H bajo media m\u00f3vil EMA21 ($29561.50 <= $29713.03)",
+        "Bloqueo Resistencia < 5.0% (2.24%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 29561.5,
+      "rsi": 31.0,
+      "vol_24h": 277.77,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $29563.00 sobre EMA21 $29515.31 o EMA50 $29286.65)",
+        "RSI 1H insuficiente para Short (31.0 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-8.46, delta 5.85)",
+        "Bloqueo Soporte < 5.0% (0.46%)"
+      ]
+    }
+  },
+  "xyz:TSLA": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 339.615,
+      "rsi": 54.2,
+      "vol_24h": 33.22,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $339.62 bajo EMA21 $335.89 o EMA50 $350.36)",
+        "RSI 1H sin pendiente ascendente confirmada (54.2, Delta t-1 -0.4, live Delta -0.0)",
+        "Bloqueo Resistencia < 5.0% (1.39%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 339.615,
+      "rsi": 54.2,
+      "vol_24h": 33.22,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $339.62 sobre EMA21 $335.89 o EMA50 $350.36)",
+        "Precio 1H sobre media m\u00f3vil EMA21 ($339.62 >= $337.89)",
+        "RSI 1H insuficiente para Short (54.2 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (0.65, delta 0.08)",
+        "Bloqueo Soporte < 5.0% (2.46%)"
+      ]
+    }
+  },
+  "xyz:NVDA": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 220.175,
+      "rsi": 31.5,
+      "vol_24h": 53.82,
+      "reasons": [
+        "Precio 1H bajo media m\u00f3vil EMA21 ($220.18 <= $221.79)",
+        "Bloqueo Resistencia < 5.0% (3.56%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $199.26 vs SL: $209.17)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 220.175,
+      "rsi": 31.5,
+      "vol_24h": 53.82,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $220.16 sobre EMA21 $218.01 o EMA50 $212.14)",
+        "RSI 1H sin pendiente descendente confirmada (31.5, Delta t-1 1.2, live Delta 0.2)",
+        "MACD 1H Histograma en aumento alcista (-0.09, delta 0.07)",
+        "Bloqueo Soporte < 5.0% (0.63%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $241.09 vs SL: $231.18)"
+      ]
+    }
+  },
+  "xyz:GOLD": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 4369.15,
+      "rsi": 32.8,
+      "vol_24h": 67.65,
+      "reasons": [
+        "Precio 1H bajo media m\u00f3vil EMA21 ($4369.15 <= $4391.44)",
+        "Bloqueo Resistencia < 5.0% (1.56%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $4023.26 vs SL: $4150.69)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 4369.15,
+      "rsi": 32.8,
+      "vol_24h": 67.65,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $4369.20 sobre EMA21 $4292.42 o EMA50 $4230.29)",
+        "RSI 1H insuficiente para Short (32.8 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-4.25, delta 0.15)",
+        "Bloqueo Soporte < 5.0% (0.30%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $4715.04 vs SL: $4587.61)"
+      ]
+    }
+  },
+  "xyz:HOOD": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 93.691,
+      "rsi": 38.2,
+      "vol_24h": 3.94,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $93.69 bajo EMA21 $95.30 o EMA50 $96.46)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($93.69 <= $94.53)",
+        "Bloqueo Resistencia < 5.0% (2.82%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 93.691,
+      "rsi": 38.2,
+      "vol_24h": 3.94,
+      "reasons": [
+        "RSI 1H insuficiente para Short (38.2 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.12, delta 0.04)",
+        "Bloqueo Soporte < 5.0% (1.57%)"
+      ]
+    }
+  },
+  "xyz:INTC": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 96.309,
+      "rsi": 25.7,
+      "vol_24h": 48.08,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $96.32 bajo EMA21 $100.22 o EMA50 $102.79)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($96.31 <= $99.48)",
+        "RSI 1H sin pendiente ascendente confirmada (25.7, Delta t-1 -0.8, live Delta -0.0)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 96.309,
+      "rsi": 25.7,
+      "vol_24h": 48.08,
+      "reasons": [
+        "RSI 1H insuficiente para Short (25.7 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.37, delta 0.06)",
+        "Bloqueo Soporte < 5.0% (0.70%)"
+      ]
+    }
+  },
+  "xyz:PLTR": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 173.155,
+      "rsi": 55.7,
+      "vol_24h": 7.09,
+      "reasons": [
+        "Bloqueo Resistencia < 5.0% (1.75%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 173.155,
+      "rsi": 55.7,
+      "vol_24h": 7.09,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $173.18 sobre EMA21 $161.32 o EMA50 $147.84)",
+        "Precio 1H sobre media m\u00f3vil EMA21 ($173.16 >= $172.17)",
+        "RSI 1H insuficiente para Short (55.7 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (0.32, delta 0.01)",
+        "Bloqueo Soporte < 5.0% (2.19%)"
+      ]
+    }
+  },
+  "xyz:COIN": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 149.13,
+      "rsi": 48.8,
+      "vol_24h": 9.74,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $149.13 bajo EMA21 $151.86 o EMA50 $156.51)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($149.13 <= $149.13)",
+        "Bloqueo Resistencia < 5.0% (2.17%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 149.13,
+      "rsi": 48.8,
+      "vol_24h": 9.74,
+      "reasons": [
+        "RSI 1H insuficiente para Short (48.8 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.01, delta 0.06)",
+        "Bloqueo Soporte < 5.0% (1.72%)"
+      ]
+    }
+  },
+  "xyz:META": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 551.075,
+      "rsi": 26.6,
+      "vol_24h": 26.78,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $551.14 bajo EMA21 $586.13 o EMA50 $594.23)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($551.08 <= $561.76)",
+        "RSI 1H sin pendiente ascendente confirmada (26.6, Delta t-1 -3.2, live Delta -0.1)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $498.72 vs SL: $523.52)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 551.075,
+      "rsi": 26.6,
+      "vol_24h": 26.78,
+      "reasons": [
+        "RSI 1H insuficiente para Short (26.6 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.72, delta 0.07)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $603.43 vs SL: $578.63)"
+      ]
+    }
+  },
+  "xyz:AAPL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 310.405,
+      "rsi": 70.5,
+      "vol_24h": 19.21,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $310.44 bajo EMA21 $310.44 o EMA50 $311.10)",
+        "MACD 1H Histograma en ca\u00edda/deterioro (0.47, delta -0.00)",
+        "Bloqueo Resistencia < 5.0% (0.38%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $280.92 vs SL: $294.88)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 310.405,
+      "rsi": 70.5,
+      "vol_24h": 19.21,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $310.44 sobre EMA21 $310.44 o EMA50 $311.10)",
+        "Precio 1H sobre media m\u00f3vil EMA21 ($310.40 >= $307.52)",
+        "RSI 1H sin pendiente descendente confirmada (70.5, Delta t-1 3.5, live Delta -0.5)",
+        "Bloqueo Soporte < 5.0% (2.37%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $339.89 vs SL: $325.93)"
+      ]
+    }
+  },
+  "xyz:MSFT": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 481.735,
+      "rsi": 45.2,
+      "vol_24h": 24.3,
+      "reasons": [
+        "Precio 1H bajo media m\u00f3vil EMA21 ($481.74 <= $482.10)",
+        "MACD 1H Histograma en ca\u00edda/deterioro (0.51, delta -0.03)",
+        "Bloqueo Resistencia < 5.0% (2.27%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $435.97 vs SL: $457.65)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 481.735,
+      "rsi": 45.2,
+      "vol_24h": 24.3,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $481.72 sobre EMA21 $475.46 o EMA50 $445.55)",
+        "RSI 1H insuficiente para Short (45.2 <= 65 sin volumen 1.8x SMA20)",
+        "Bloqueo Soporte < 5.0% (0.94%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $527.50 vs SL: $505.82)"
+      ]
+    }
+  },
+  "xyz:ORCL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 143.74,
+      "rsi": 41.8,
+      "vol_24h": 6.1,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $143.81 bajo EMA21 $144.01 o EMA50 $145.16)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($143.74 <= $144.29)",
+        "RSI 1H sin pendiente ascendente confirmada (41.8, Delta t-1 -2.3, live Delta -0.4)",
+        "Bloqueo Resistencia < 5.0% (4.59%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 143.74,
+      "rsi": 41.8,
+      "vol_24h": 6.1,
+      "reasons": [
+        "RSI 1H insuficiente para Short (41.8 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (0.30, delta 0.02)",
+        "Bloqueo Soporte < 5.0% (1.84%)"
+      ]
+    }
+  },
+  "xyz:GOOGL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 343.955,
+      "rsi": 52.5,
+      "vol_24h": 27.73,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $344.00 bajo EMA21 $349.23 o EMA50 $351.26)",
+        "Bloqueo Resistencia < 5.0% (1.32%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $311.28 vs SL: $326.76)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 343.955,
+      "rsi": 52.5,
+      "vol_24h": 27.73,
+      "reasons": [
+        "Precio 1H sobre media m\u00f3vil EMA21 ($343.95 >= $343.41)",
+        "RSI 1H insuficiente para Short (52.5 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (0.32, delta 0.04)",
+        "Bloqueo Soporte < 5.0% (1.02%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $376.63 vs SL: $361.15)"
+      ]
+    }
+  },
+  "xyz:AMZN": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 261.99,
+      "rsi": 53.9,
+      "vol_24h": 9.95,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $262.08 bajo EMA21 $263.65 o EMA50 $257.27)",
+        "Bloqueo Resistencia < 5.0% (1.79%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $237.10 vs SL: $248.89)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 261.99,
+      "rsi": 53.9,
+      "vol_24h": 9.95,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $262.08 sobre EMA21 $263.65 o EMA50 $257.27)",
+        "Precio 1H sobre media m\u00f3vil EMA21 ($261.99 >= $261.02)",
+        "RSI 1H insuficiente para Short (53.9 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (0.30, delta 0.05)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $286.88 vs SL: $275.09)"
+      ]
+    }
+  },
+  "xyz:AMD": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 479.545,
+      "rsi": 23.8,
+      "vol_24h": 16.41,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $479.49 bajo EMA21 $495.34 o EMA50 $498.24)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($479.55 <= $492.13)",
+        "RSI 1H sin pendiente ascendente confirmada (23.8, Delta t-1 -0.4, live Delta 0.1)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 479.545,
+      "rsi": 23.8,
+      "vol_24h": 16.41,
+      "reasons": [
+        "RSI 1H insuficiente para Short (23.8 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-1.21, delta 0.25)",
+        "Bloqueo Soporte < 5.0% (0.92%)"
+      ]
+    }
+  },
+  "xyz:MU": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 941.105,
+      "rsi": 31.6,
+      "vol_24h": 251.93,
+      "reasons": [
+        "Precio 1H bajo media m\u00f3vil EMA21 ($941.11 <= $970.55)",
+        "RSI 1H sin pendiente ascendente confirmada (31.6, Delta t-1 -1.5, live Delta -0.0)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 941.135,
+      "rsi": 31.6,
+      "vol_24h": 251.93,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $941.05 sobre EMA21 $924.24 o EMA50 $921.80)",
+        "RSI 1H insuficiente para Short (31.6 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-4.22, delta 0.46)",
+        "Bloqueo Soporte < 5.0% (0.88%)"
+      ]
+    }
+  },
+  "xyz:SNDK": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 1627.9,
+      "rsi": 34.0,
+      "vol_24h": 584.76,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $1627.50 bajo EMA21 $1476.47 o EMA50 $1512.34)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($1627.90 <= $1690.46)",
+        "RSI 1H sin pendiente ascendente confirmada (34.0, Delta t-1 -2.5, live Delta 0.1)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 1627.9,
+      "rsi": 34.0,
+      "vol_24h": 584.76,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $1627.50 sobre EMA21 $1476.47 o EMA50 $1512.34)",
+        "RSI 1H insuficiente para Short (34.0 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-10.72, delta 0.74)",
+        "Bloqueo Soporte < 5.0% (0.87%)"
+      ]
+    }
+  },
+  "xyz:MSTR": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 95.561,
+      "rsi": 40.6,
+      "vol_24h": 16.78,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $95.56 bajo EMA21 $96.32 o EMA50 $100.47)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($95.56 <= $96.25)",
+        "Bloqueo Resistencia < 5.0% (2.62%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 95.561,
+      "rsi": 40.6,
+      "vol_24h": 16.78,
+      "reasons": [
+        "RSI 1H insuficiente para Short (40.6 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.25, delta 0.02)",
+        "Bloqueo Soporte < 5.0% (2.46%)"
+      ]
+    }
+  },
+  "xyz:CRCL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 72.929,
+      "rsi": 47.6,
+      "vol_24h": 24.24,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $72.97 bajo EMA21 $68.81 o EMA50 $69.79)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($72.93 <= $73.12)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 72.929,
+      "rsi": 47.6,
+      "vol_24h": 24.24,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $72.97 sobre EMA21 $68.81 o EMA50 $69.79)",
+        "RSI 1H insuficiente para Short (47.6 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.11, delta 0.04)",
+        "Bloqueo Soporte < 5.0% (2.92%)"
+      ]
+    }
+  },
+  "xyz:NFLX": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 78.838,
+      "rsi": 77.2,
+      "vol_24h": 1.05,
+      "reasons": [
+        "RSI 1H sobrecomprado (77.2 >= 70 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en ca\u00edda/deterioro (0.35, delta -0.02)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 78.838,
+      "rsi": 77.2,
+      "vol_24h": 1.05,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $78.83 sobre EMA21 $75.48 o EMA50 $75.18)",
+        "Precio 1H sobre media m\u00f3vil EMA21 ($78.84 >= $77.40)",
+        "RSI 1H sin pendiente descendente confirmada (77.2, Delta t-1 0.1, live Delta 0.0)",
+        "Bloqueo Soporte < 5.0% (4.21%)"
+      ]
+    }
+  },
+  "xyz:LLY": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 1217.85,
+      "rsi": 81.6,
+      "vol_24h": 1.44,
+      "reasons": [
+        "RSI 1H sin pendiente ascendente confirmada (81.6, Delta t-1 -0.6, live Delta -1.0)",
+        "MACD 1H Histograma en ca\u00edda/deterioro (3.62, delta -0.12)",
+        "Bloqueo Resistencia < 5.0% (0.31%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 1217.85,
+      "rsi": 81.6,
+      "vol_24h": 1.44,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $1218.30 sobre EMA21 $1189.58 o EMA50 $1174.92)",
+        "Precio 1H sobre media m\u00f3vil EMA21 ($1217.85 >= $1197.42)",
+        "Bloqueo Soporte < 5.0% (4.45%)"
+      ]
+    }
+  },
+  "xyz:SKHX": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 1122.25,
+      "rsi": 30.4,
+      "vol_24h": 709.02,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $1122.00 bajo EMA21 $1142.68 o EMA50 $1219.89)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($1122.25 <= $1162.90)",
+        "RSI 1H sin pendiente ascendente confirmada (30.4, Delta t-1 -0.2, live Delta 0.2)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 1122.25,
+      "rsi": 30.4,
+      "vol_24h": 709.02,
+      "reasons": [
+        "RSI 1H insuficiente para Short (30.4 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-5.71, delta 0.84)",
+        "Bloqueo Soporte < 5.0% (1.05%)"
+      ]
+    }
+  },
+  "xyz:TSM": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 413.425,
+      "rsi": 22.9,
+      "vol_24h": 3.27,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $413.63 bajo EMA21 $420.45 o EMA50 $420.17)",
+        "Precio 1H bajo media m\u00f3vil EMA21 ($413.43 <= $420.64)",
+        "RSI 1H sin pendiente ascendente confirmada (22.9, Delta t-1 -1.0, live Delta -0.3)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 413.425,
+      "rsi": 22.9,
+      "vol_24h": 3.27,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $413.63 sobre EMA21 $420.45 o EMA50 $420.17)",
+        "RSI 1H insuficiente para Short (22.9 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.96, delta 0.12)",
+        "Bloqueo Soporte < 5.0% (0.44%)"
+      ]
+    }
+  },
+  "xyz:JPY": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 159.56,
+      "rsi": 54.7,
+      "vol_24h": 3.68,
+      "reasons": [
+        "Tendencia Macro 1D no alcista (Close $159.53 bajo EMA21 $159.52 o EMA50 $160.22)",
+        "Bloqueo Resistencia < 5.0% (0.12%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 159.56,
+      "rsi": 54.7,
+      "vol_24h": 3.68,
+      "reasons": [
+        "Tendencia Macro 1D no bajista (Close $159.53 sobre EMA21 $159.52 o EMA50 $160.22)",
+        "Precio 1H sobre media m\u00f3vil EMA21 ($159.56 >= $159.52)",
+        "RSI 1H insuficiente para Short (54.7 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.02, delta 0.00)",
+        "Bloqueo Soporte < 5.0% (0.27%)"
+      ]
+    }
+  },
+  "xyz:EUR": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:SILVER": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 63.9575,
+      "rsi": 26.6,
+      "vol_24h": 92.73,
+      "reasons": [
+        "Precio 1H bajo media m\u00f3vil EMA21 ($63.96 <= $64.94)",
+        "RSI 1H sin pendiente ascendente confirmada (26.6, Delta t-1 -0.8, live Delta 0.0)",
+        "Bloqueo Resistencia < 5.0% (4.10%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $58.89 vs SL: $60.76)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 63.9575,
+      "rsi": 26.6,
+      "vol_24h": 92.73,
+      "reasons": [
+        "RSI 1H insuficiente para Short (26.6 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.16, delta 0.00)",
+        "Bloqueo Soporte < 5.0% (0.59%)",
+        "Riesgo de Liquidaci\u00f3n prematura (Liq: $69.02 vs SL: $67.16)"
+      ]
+    }
+  },
+  "xyz:BABA": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": 127.705,
+      "rsi": 54.9,
+      "vol_24h": 4.57,
+      "reasons": [
+        "Bloqueo Resistencia < 5.0% (2.07%)"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": 127.705,
+      "rsi": 54.9,
+      "vol_24h": 4.57,
+      "reasons": [
+        "Precio 1H sobre media m\u00f3vil EMA21 ($127.70 >= $127.23)",
+        "RSI 1H insuficiente para Short (54.9 <= 65 sin volumen 1.8x SMA20)",
+        "MACD 1H Histograma en aumento alcista (-0.16, delta 0.01)",
+        "Bloqueo Soporte < 5.0% (3.24%)"
+      ]
+    }
+  },
+  "xyz:CL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:COPPER": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:NATGAS": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:SMSN": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:PLATINUM": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:CRWV": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:GME": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:KR200": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:JP225": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:HYUNDAI": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:KIOXIA": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:EWY": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:EWJ": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:BRENTOIL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:SP500": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:LITE": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:PURRDAT": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:MRVL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:RKLB": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:DRAM": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:CBRS": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:ARM": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:GBP": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:SPCX": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:MINIMAX": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:BB": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:DELL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:AVGO": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:NBIS": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:WDC": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:NOK": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:SMH": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:BE": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:ZHIPU": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:BOT": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:AMAT": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:GIGADEV": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:SHAZ": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:SKHY": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:CXMT": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:KORU": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:UNITREE": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:LYTE": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  },
+  "xyz:SOXL": {
+    "LONG": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    },
+    "SHORT": {
+      "verdict": "RECHAZADO",
+      "price": null,
+      "rsi": 0,
+      "vol_24h": 0,
+      "reasons": [
+        "Datos OHLCV 1H insuficientes"
+      ]
+    }
+  }
+}

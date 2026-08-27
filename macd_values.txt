@@ -1,0 +1,5 @@
+-5 Close: 29737.0 MACD: -11.9968 Signal: 1.3224 Hist: -13.3193
+-4 Close: 29665.0 MACD: -17.7631 Signal: -2.4947 Hist: -15.2684
+-3 Close: 29648.0 MACD: -23.4345 Signal: -6.6827 Hist: -16.7519
+-2 Close: 29669.0 MACD: -25.9357 Signal: -10.5333 Hist: -15.4024
+-1 Close: 29662.0 MACD: -28.1581 Signal: -14.0582 Hist: -14.0999

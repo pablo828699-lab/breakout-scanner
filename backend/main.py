@@ -11,7 +11,7 @@ Usage
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import logging
 import os
@@ -70,13 +70,18 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
         clean_path = self.path.split("?")[0].rstrip("/")
         logger.info("HTTP POST request: path=%s, clean_path=%s", self.path, clean_path)
 
-        if clean_path in ("/api/capitulation", "/api/candidates"):
+        if clean_path in ("/api/capitulation", "/api/candidates", "/api/momentum"):
             try:
                 content_length = int(self.headers.get('Content-Length', 0))
                 post_data = self.rfile.read(content_length)
                 json_data = json.loads(post_data.decode('utf-8'))
                 
-                filename = "capitulation_signals.json" if clean_path == "/api/capitulation" else "recent_signals.json"
+                if clean_path == "/api/capitulation":
+                    filename = "capitulation_signals.json"
+                elif clean_path == "/api/momentum":
+                    filename = "momentum_signals.json"
+                else:
+                    filename = "recent_signals.json"
                 filepath = os.path.join(os.path.dirname(__file__), filename)
                 
                 with open(filepath, "w", encoding="utf-8") as f:
@@ -251,6 +256,27 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/api/momentum":
+            try:
+                filepath = os.path.join(os.path.dirname(__file__), "momentum_signals.json")
+                data = []
+                if os.path.exists(filepath):
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(json.dumps(data).encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP momentum handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/api/prices":
             try:
                 from urllib.parse import urlparse, parse_qs
@@ -344,14 +370,19 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 self.wfile.write(json.dumps(prices).encode("utf-8"))
+            except (ConnectionAbortedError, BrokenPipeError):
+                pass
             except Exception as exc:
                 logger.error("HTTP prices handler error: %s", exc)
-                self.send_response(500)
-                self.send_header("Content-Type", "application/json")
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                res = f'{{"status": "error", "message": "{str(exc)}"}}'
-                self.wfile.write(res.encode("utf-8"))
+                try:
+                    self.send_response(500)
+                    self.send_header("Content-Type", "application/json")
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.end_headers()
+                    res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                    self.wfile.write(res.encode("utf-8"))
+                except Exception:
+                    pass
         elif clean_path == "/api/volume-profile":
             try:
                 from urllib.parse import urlparse, parse_qs
@@ -360,13 +391,15 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 if not ticker:
                     raise ValueError("Missing 'ticker' query parameter")
 
-                # Fetch hourly data
-                if ticker.endswith("USDT"):
-                    df = self.scanner._fetcher.fetch_crypto_hourly(ticker)
-                    price = self.scanner._fetcher.fetch_crypto_daily(ticker)["Close"].iloc[-1]
-                else:
-                    df = self.scanner._fetcher.fetch_sp500_hourly(ticker)
-                    price = self.scanner._fetcher.fetch_sp500_daily(ticker)["Close"].iloc[-1]
+                # Fetch hourly data using unified fetch_candles
+                from backend.data_fetcher import fetch_candles
+                df = fetch_candles(ticker, timeframe="1h", limit=200)
+                df_daily = fetch_candles(ticker, timeframe="1d", limit=10)
+                
+                if df is None or df.empty or df_daily is None or df_daily.empty:
+                    raise ValueError(f"No OHLCV data available for ticker '{ticker}'")
+                    
+                price = float(df_daily["Close"].iloc[-1])
 
                 from backend.volume_profile import analyze_volume_profile
                 profile_res = analyze_volume_profile(df, float(price))
@@ -406,6 +439,91 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(res.encode("utf-8"))
             except Exception as exc:
                 logger.error("HTTP capitulation scan handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/scan-momentum":
+            try:
+                logger.info("Manual momentum scan triggered via HTTP.")
+
+                thread = threading.Thread(
+                    target=self.scanner._run_momentum_scan,
+                    args=({
+                        "CRYPTO": self.scanner._fetcher.get_crypto_tickers(),
+                        "US_EQUITIES": self.scanner._fetcher.get_sp500_tickers()
+                    },),
+                    name="MomentumScanThread",
+                )
+                thread.start()
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = '{"status": "processing", "message": "Momentum scan started in background"}'
+                self.wfile.write(res.encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP momentum scan handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/api/perp-screener":
+            try:
+                from urllib.parse import urlparse, parse_qs
+                from backend.perp_screener import evaluate_perp_candidate, scan_perps_universe
+
+                query = parse_qs(urlparse(self.path).query)
+                tickers_str = query.get("tickers", [""])[0].strip()
+                direction = query.get("direction", ["LONG"])[0].strip().upper()
+                ticker_single = query.get("ticker", [""])[0].strip().upper()
+
+                try:
+                    leverage = float(query.get("leverage", ["5"])[0])
+                except ValueError:
+                    leverage = 5.0
+
+                if ticker_single:
+                    res = evaluate_perp_candidate(ticker_single, direction=direction, leverage=leverage)
+                else:
+                    target_tickers = [t.strip().upper() for t in tickers_str.split(",") if t.strip()] if tickers_str else None
+                    res = scan_perps_universe(target_tickers, leverage=leverage)
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(json.dumps(res, indent=2).encode("utf-8"))
+            except (ConnectionAbortedError, BrokenPipeError):
+                pass
+            except Exception as exc:
+                logger.error("HTTP perp-screener handler error: %s", exc)
+                try:
+                    self.send_response(500)
+                    self.send_header("Content-Type", "application/json")
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.end_headers()
+                    res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                    self.wfile.write(res.encode("utf-8"))
+                except Exception:
+                    pass
+        elif clean_path == "/api/perp-journal":
+            try:
+                from backend.perp_journal import update_paper_positions
+                journal_res = update_paper_positions()
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(json.dumps(journal_res, indent=2).encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP perp-journal handler error: %s", exc)
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")
@@ -491,8 +609,8 @@ def main() -> None:
     server_address = ("", port)
     
     try:
-        httpd = HTTPServer(server_address, ScannerHTTPHandler)
-        logger.info("Starting HTTP Server on port %d... Ready for cron triggers.", port)
+        httpd = ThreadingHTTPServer(server_address, ScannerHTTPHandler)
+        logger.info("Starting Multi-Threaded HTTP Server on port %d... Ready for cron triggers.", port)
         httpd.serve_forever()
     except KeyboardInterrupt:
         logger.info("HTTP Server stopped by user (Ctrl+C).")

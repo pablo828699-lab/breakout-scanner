@@ -1,0 +1,2 @@
+XYZ KEYS: []
+XYZ100 MICRO: {'hl_symbol': 'xyz:XYZ100', 'raw_ticker': 'xyz:XYZ100', 'dex': 'xyz', 'mark_price': 29515.0, 'mid_price': 29514.5, 'bid_price': 29514.0, 'ask_price': 29515.0, 'spread_pct': 3.38810774182619e-05, 'requires_limit_order': False, 'funding_8h': 2.8291e-06, 'funding_daily': 8.487300000000001e-06, 'is_short_squeeze_catalyst': False, 'is_long_squeeze_catalyst': False, 'open_interest': 7574.1018, 'volume_24h': 189281944.25200006, 'has_sufficient_liquidity': True, 'min_required_vol': 800000.0}

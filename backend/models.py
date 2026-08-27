@@ -116,7 +116,33 @@ class AsymmetricSignal:
     is_idiosyncratic: bool
     fundamental_ok: bool
     confidence_score: float  # 0.0 - 1.0
-    analysis_summary: str
     timestamp: datetime
     asset_class: str = "ACCIONES"  # 'ACCIONES', 'MATERIAS_PRIMAS', 'INDICES', 'FOREX', 'CRIPTO'
+
+
+@dataclass
+class MomentumSignal:
+    """Explosive trend acceleration opportunity detected by the Momentum engine.
+
+    Combines TTM Squeeze, Relative Volume (RVOL), Rate of Change (ROC),
+    and fast EMA Ribbon alignment into an asymmetric trend-following signal.
+    """
+
+    ticker: str
+    market: str                     # 'US_EQUITIES' or 'CRYPTO'
+    direction: str                  # 'LONG' or 'SHORT'
+    trigger: str                    # 'SQUEEZE_BREAKOUT', 'IMPULSE_MOMENTUM', 'EMA_EXPANSION'
+    entry_price: float
+    stop_loss: float
+    take_profit: float
+    rr_ratio: float
+    rvol: float                     # Volume vs 20-day SMA
+    roc_10: float                   # % change over 10 days
+    rsi: float                      # 14-period RSI
+    squeeze_status: str             # 'FIRED_BULLISH', 'FIRED_BEARISH', 'SQUEEZE_ON'
+    ema_stack: bool                 # True if EMA 9 > 21 > 50 (or vice versa for SHORT)
+    confidence_score: float         # 0.0 - 1.0
+    analysis_summary: str
+    timestamp: datetime
+    asset_class: str = "ACCIONES"
 

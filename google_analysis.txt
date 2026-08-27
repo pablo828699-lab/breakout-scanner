@@ -1,0 +1,103 @@
+--- HYPERLIQUID xyz:GOOGL LONG ---
+{
+  "ticker": "xyz:GOOGL",
+  "hl_symbol": "xyz:GOOGL",
+  "direction": "LONG",
+  "verdict": "RECHAZADO",
+  "primary_reason": "Tendencia Macro 1D no alcista (Close $354.73 <= EMA50 $353.21)",
+  "rejection_reasons": [
+    "Tendencia Macro 1D no alcista (Close $354.73 <= EMA50 $353.21)",
+    "Bloqueo Resistencia < 5.0% (0.16%)",
+    "Riesgo de Liquidaci\u00f3n prematura (Liq: $321.03 vs SL: $336.99)"
+  ],
+  "current_price": 354.73,
+  "poc": 320.1544,
+  "vah": 355.3036,
+  "val": 315.33,
+  "rsi": 37.562763100509265,
+  "rsi_slope": 2.5139953593074083,
+  "macd_hist": -0.24722357248434135,
+  "atr": 1.3600000000000054,
+  "leverage": 10.0,
+  "sl_price": 336.99350000000004,
+  "tp_price": 399.07125,
+  "estimated_liq_price": 321.03065000000004,
+  "rr_ratio": 2.500000000000003,
+  "order_execution_mode": "MARKET",
+  "microstructure": {
+    "hl_symbol": "xyz:GOOGL",
+    "raw_ticker": "xyz:GOOGL",
+    "dex": "xyz",
+    "mark_price": 354.71,
+    "mid_price": 354.72,
+    "bid_price": 354.7,
+    "ask_price": 354.749,
+    "spread_pct": 0.000138125829812163,
+    "requires_limit_order": false,
+    "funding_8h": 6.25e-06,
+    "funding_daily": 1.8750000000000002e-05,
+    "open_interest": 356873.4580000001,
+    "volume_24h": 22107523.416260008,
+    "has_sufficient_liquidity": true,
+    "min_required_vol": 800000.0
+  },
+  "phase1_passed": false,
+  "phase2_passed": true,
+  "phase3_passed": false
+}
+--- HYPERLIQUID xyz:GOOGL SHORT ---
+{
+  "ticker": "xyz:GOOGL",
+  "hl_symbol": "xyz:GOOGL",
+  "direction": "SHORT",
+  "verdict": "RECHAZADO",
+  "primary_reason": "Tendencia Macro 1D no bajista (Close $354.73 >= EMA50 $353.21)",
+  "rejection_reasons": [
+    "Tendencia Macro 1D no bajista (Close $354.73 >= EMA50 $353.21)",
+    "RSI 1H insuficiente para Short (37.9 <= 65)",
+    "Bloqueo Soporte < 5.0% (0.53%)",
+    "Riesgo de Liquidaci\u00f3n prematura (Liq: $388.46 vs SL: $372.50)"
+  ],
+  "current_price": 354.76,
+  "poc": 320.1544,
+  "vah": 355.3036,
+  "val": 315.33,
+  "rsi": 37.863394689704194,
+  "rsi_slope": 2.8146269485023367,
+  "macd_hist": -0.245309042569812,
+  "atr": 1.3600000000000054,
+  "leverage": 10.0,
+  "sl_price": 372.498,
+  "tp_price": 310.41499999999996,
+  "estimated_liq_price": 388.4622,
+  "rr_ratio": 2.5000000000000018,
+  "order_execution_mode": "MARKET",
+  "microstructure": {
+    "hl_symbol": "xyz:GOOGL",
+    "raw_ticker": "xyz:GOOGL",
+    "dex": "xyz",
+    "mark_price": 354.71,
+    "mid_price": 354.72,
+    "bid_price": 354.7,
+    "ask_price": 354.749,
+    "spread_pct": 0.000138125829812163,
+    "requires_limit_order": false,
+    "funding_8h": 6.25e-06,
+    "funding_daily": 1.8750000000000002e-05,
+    "open_interest": 356873.4580000001,
+    "volume_24h": 22107523.416260008,
+    "has_sufficient_liquidity": true,
+    "min_required_vol": 800000.0
+  },
+  "phase1_passed": false,
+  "phase2_passed": true,
+  "phase3_passed": false
+}
+--- GOOGL 1D CANDLES ---
+                             Open    High     Low   Close      Volume
+Timestamp                                                            
+2026-08-06 00:00:00+00:00  365.07  366.83  357.07  359.22  142973.321
+2026-08-07 00:00:00+00:00  359.19  359.82  353.94  355.05   68374.078
+2026-08-08 00:00:00+00:00  355.02  357.37  354.49  356.93   14182.098
+2026-08-09 00:00:00+00:00  356.85  359.93  355.60  356.70   26976.355
+2026-08-10 00:00:00+00:00  356.64  358.05  352.89  354.76   47355.540

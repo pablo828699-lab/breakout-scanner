@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import CandidatePanel from './components/CandidatePanel';
 import CapitulationPanel from './components/CapitulationPanel';
+import MomentumPanel from './components/MomentumPanel';
+import PerpScreenerPanel from './components/PerpScreenerPanel';
 import { safeDateParse } from './utils/dateUtils';
-import { fetchCapitulationSignals, fetchCandidates, fetchLivePrices, BACKEND_URL } from './services/api';
+import { fetchCapitulationSignals, fetchCandidates, fetchMomentumSignals, fetchLivePrices, BACKEND_URL } from './services/api';
 
 // Import fallback mock data in case localStorage is empty initially
 import {
@@ -147,6 +149,12 @@ export default function App() {
   });
   const [isScanningCap, setIsScanningCap] = useState(false);
 
+  const [momentumSignals, setMomentumSignals] = useState(() => {
+    const saved = localStorage.getItem('momentumSignals');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [isScanningMom, setIsScanningMom] = useState(false);
+
   // Real-time clock update
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -161,6 +169,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('capitulationSignals', JSON.stringify(capitulationSignals));
   }, [capitulationSignals]);
+
+  useEffect(() => {
+    localStorage.setItem('momentumSignals', JSON.stringify(momentumSignals));
+  }, [momentumSignals]);
 
   const [isLoadedFromCloud, setIsLoadedFromCloud] = useState(false);
 
@@ -225,13 +237,14 @@ export default function App() {
     localStorage.setItem('approvedCandidates', JSON.stringify(approvedCandidates));
   }, [approvedCandidates]);
 
-  // Fetch real-time prices for candidates, capitulations, and open positions via backend proxy every 10s (batch request)
+  // Fetch real-time prices for candidates, capitulations, momentums, and open positions via backend proxy every 10s (batch request)
   useEffect(() => {
     const updateLivePrices = async () => {
       const allTickers = [
         ...openPositions.map(pos => pos.ticker),
         ...candidates.map(c => c.ticker),
-        ...capitulationSignals.map(c => c.ticker)
+        ...capitulationSignals.map(c => c.ticker),
+        ...momentumSignals.map(m => m.ticker)
       ];
       const priceMap = await fetchLivePrices(allTickers);
       if (Object.keys(priceMap).length > 0) {
@@ -253,7 +266,23 @@ export default function App() {
     updateLivePrices();
     const timer = setInterval(updateLivePrices, 10000); // Every 10 seconds
     return () => clearInterval(timer);
-  }, [openPositions.length, candidates.length, capitulationSignals.length]);
+  }, [openPositions.length, candidates.length, capitulationSignals.length, momentumSignals.length]);
+
+  // Fetch momentum signals using API service
+  useEffect(() => {
+    const loadMomentum = async () => {
+      const data = await fetchMomentumSignals();
+      setMomentumSignals(() => {
+        const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
+        const ignoredSet = new Set(savedIgnored);
+        return data.filter(s => !ignoredSet.has(`${s.ticker}_${s.direction}_${s.timestamp}`));
+      });
+    };
+
+    loadMomentum();
+    const timer = setInterval(loadMomentum, 30000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Fetch actual candidates using API Service
   useEffect(() => {
@@ -503,7 +532,8 @@ export default function App() {
 
     setOpenPositions([newPosition, ...openPositions]);
     setCandidates(candidates.filter((c) => c.id !== candidate.id));
-    setCapitulationSignals(capitulationSignals.filter((c) => c.id !== candidate.id));
+    setCapitulationSignals(capitulationSignals.filter((c) => c.ticker !== candidate.ticker));
+    setMomentumSignals(momentumSignals.filter((c) => c.ticker !== candidate.ticker));
   };
 
   // Handler to reject/ignore a candidate signal persistently
@@ -521,7 +551,7 @@ export default function App() {
 
   // Handler to reject/ignore a capitulation signal persistently
   const handleRejectCapitulation = (id) => {
-    const signal = capitulationSignals.find((c) => c.id === id);
+    const signal = capitulationSignals.find((c) => c.id === id || `${c.ticker}_${c.timestamp}` === id);
     if (signal) {
       const key = `${signal.ticker}_${signal.timestamp}`;
       setIgnoredCandidates((prev) => {
@@ -529,7 +559,37 @@ export default function App() {
         return [...prev, key];
       });
     }
-    setCapitulationSignals(capitulationSignals.filter((c) => c.id !== id));
+    setCapitulationSignals(capitulationSignals.filter((c) => (c.id !== id && `${c.ticker}_${c.timestamp}` !== id)));
+  };
+
+  // Handler to reject/ignore a momentum signal persistently
+  const handleRejectMomentum = (id) => {
+    const signal = momentumSignals.find((c) => `${c.ticker}_${c.direction}_${c.timestamp}` === id || c.ticker === id);
+    if (signal) {
+      const key = `${signal.ticker}_${signal.direction}_${signal.timestamp}`;
+      setIgnoredCandidates((prev) => {
+        if (prev.includes(key)) return prev;
+        return [...prev, key];
+      });
+    }
+    setMomentumSignals(momentumSignals.filter((c) => `${c.ticker}_${c.direction}_${c.timestamp}` !== id && c.ticker !== id));
+  };
+
+  const handleScanMomentum = async () => {
+    setIsScanningMom(true);
+    try {
+      await fetch(`${BACKEND_URL}/scan-momentum`);
+      setTimeout(async () => {
+        const data = await fetchMomentumSignals();
+        if (Array.isArray(data) && data.length > 0) {
+          setMomentumSignals(data);
+        }
+        setIsScanningMom(false);
+      }, 6000);
+    } catch (err) {
+      console.error('Momentum scan failed:', err);
+      setIsScanningMom(false);
+    }
   };
 
   // Handler to close an open position (move it to closed trade history)
@@ -644,6 +704,19 @@ export default function App() {
               >
                 {isScanningCap ? 'Analizando...' : '🔬 Capitulación'}
               </button>
+
+              {/* Manual Momentum Scan Button */}
+              <button
+                onClick={handleScanMomentum}
+                disabled={isScanningMom}
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg border transition-all duration-300 ${
+                  isScanningMom
+                    ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
+                    : 'bg-indigo-600/10 border-indigo-500/30 text-indigo-400 hover:bg-indigo-600/20 hover:border-indigo-500/60'
+                }`}
+              >
+                {isScanningMom ? 'Buscando...' : '🚀 Momentum'}
+              </button>
               
               <div className="h-4 w-[1px] bg-slate-800" />
               
@@ -663,12 +736,29 @@ export default function App() {
           </div>
         </header>
 
+        {/* Hyperliquid Perpetuals Screener Module */}
+        <section className="w-full">
+          <PerpScreenerPanel apiBaseUrl={BACKEND_URL} />
+        </section>
+
+        {/* Momentum & Squeeze Acceleration Module */}
+        <section className="w-full">
+          <MomentumPanel
+            signals={momentumSignals}
+            livePriceMap={livePriceMap}
+            onApprove={(c) => setApproveModalCandidate(c)}
+            onReject={handleRejectMomentum}
+            onScan={handleScanMomentum}
+            isScanning={isScanningMom}
+          />
+        </section>
+
         {/* Capitulation Analysis Module */}
         <section className="w-full">
           <CapitulationPanel
             signals={capitulationSignals}
             livePriceMap={livePriceMap}
-            onApprove={handleApproveModal}
+            onApprove={(c) => setApproveModalCandidate(c)}
             onReject={handleRejectCapitulation}
           />
         </section>

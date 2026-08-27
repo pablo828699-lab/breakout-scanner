@@ -1,0 +1,128 @@
+TOTAL TRADEABLE XYZ TICKERS: 63
+XYZ CANDIDATE: xyz:XYZ100
+XYZ CANDIDATE: xyz:TSLA
+XYZ CANDIDATE: xyz:NVDA
+XYZ CANDIDATE: xyz:GOLD
+XYZ CANDIDATE: xyz:HOOD
+XYZ CANDIDATE: xyz:INTC
+XYZ CANDIDATE: xyz:PLTR
+XYZ CANDIDATE: xyz:COIN
+XYZ CANDIDATE: xyz:META
+XYZ CANDIDATE: xyz:AAPL
+XYZ CANDIDATE: xyz:MSFT
+XYZ CANDIDATE: xyz:ORCL
+XYZ CANDIDATE: xyz:GOOGL
+XYZ CANDIDATE: xyz:AMZN
+XYZ CANDIDATE: xyz:AMD
+XYZ CANDIDATE: xyz:MU
+XYZ CANDIDATE: xyz:SNDK
+XYZ CANDIDATE: xyz:MSTR
+XYZ CANDIDATE: xyz:CRCL
+XYZ CANDIDATE: xyz:NFLX
+XYZ CANDIDATE: xyz:LLY
+XYZ CANDIDATE: xyz:SKHX
+XYZ CANDIDATE: xyz:TSM
+XYZ CANDIDATE: xyz:JPY
+XYZ CANDIDATE: xyz:SILVER
+XYZ CANDIDATE: xyz:BABA
+XYZ CANDIDATE: xyz:CL
+XYZ CANDIDATE: xyz:COPPER
+XYZ CANDIDATE: xyz:NATGAS
+XYZ CANDIDATE: xyz:SMSN
+XYZ CANDIDATE: xyz:PLATINUM
+XYZ CANDIDATE: xyz:USAR
+XYZ CANDIDATE: xyz:CRWV
+XYZ CANDIDATE: xyz:JP225
+XYZ CANDIDATE: xyz:KIOXIA
+XYZ CANDIDATE: xyz:EWY
+XYZ CANDIDATE: xyz:BRENTOIL
+XYZ CANDIDATE: xyz:HIMS
+XYZ CANDIDATE: xyz:SP500
+XYZ CANDIDATE: xyz:LITE
+XYZ CANDIDATE: xyz:PURRDAT
+XYZ CANDIDATE: xyz:MRVL
+XYZ CANDIDATE: xyz:RKLB
+XYZ CANDIDATE: xyz:DRAM
+XYZ CANDIDATE: xyz:CBRS
+XYZ CANDIDATE: xyz:ARM
+XYZ CANDIDATE: xyz:SPCX
+XYZ CANDIDATE: xyz:ASML
+XYZ CANDIDATE: xyz:MINIMAX
+XYZ CANDIDATE: xyz:BB
+XYZ CANDIDATE: xyz:DELL
+XYZ CANDIDATE: xyz:IBM
+XYZ CANDIDATE: xyz:AVGO
+XYZ CANDIDATE: xyz:NBIS
+XYZ CANDIDATE: xyz:BE
+XYZ CANDIDATE: xyz:ZHIPU
+XYZ CANDIDATE: xyz:BOT
+XYZ CANDIDATE: xyz:SHAZ
+XYZ CANDIDATE: xyz:SKHY
+XYZ CANDIDATE: xyz:CXMT
+XYZ CANDIDATE: xyz:KORU
+XYZ CANDIDATE: xyz:UNITREE
+XYZ CANDIDATE: xyz:SOXL
+APPROVED XYZ COUNT: 2
+!!! APPROVED XYZ: xyz:CBRS LONG: APROBADO SHORT: RECHAZADO
+!!! APPROVED XYZ: xyz:KORU LONG: APROBADO SHORT: RECHAZADO
+REJECTED: xyz:XYZ100 | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:TSLA | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:NVDA | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:GOLD | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:HOOD | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:INTC | LONG: ['Tendencia Macro 1D no alcista (Close $97.64 bajo EMA21 $98.36 o EMA50 $102.94)', 'Precio 1H bajo media móvil EMA21 ($97.64 <= $97.72)', 'RSI 1H sin pendiente ascendente confirmada (46.9, Delta t-1 -0.0, live Delta 0.0)', 'Bloqueo Resistencia < 5.0% (2.43%)'] | SHORT: ['RSI 1H insuficiente para Short (46.9 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.16, delta 0.00)', 'Bloqueo Soporte < 5.0% (2.25%)']
+REJECTED: xyz:PLTR | LONG: ['RSI 1H sin pendiente ascendente confirmada (51.5, Delta t-1 -3.0, live Delta -0.0)', 'MACD 1H Histograma en caída/deterioro (0.04, delta -0.06)', 'Bloqueo Resistencia < 5.0% (2.81%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $174.37 sobre EMA21 $149.45 o EMA50 $139.42)', 'Precio 1H sobre media móvil EMA21 ($174.37 >= $174.22)', 'RSI 1H insuficiente para Short (51.5 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (1.48%)']
+REJECTED: xyz:COIN | LONG: ['Tendencia Macro 1D no alcista (Close $148.71 bajo EMA21 $153.73 o EMA50 $158.63)', 'Precio 1H bajo media móvil EMA21 ($148.72 <= $149.00)', 'Bloqueo Resistencia < 5.0% (2.70%)'] | SHORT: ['RSI 1H insuficiente para Short (44.6 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.09, delta 0.04)', 'Bloqueo Soporte < 5.0% (1.51%)']
+REJECTED: xyz:META | LONG: ['Tendencia Macro 1D no alcista (Close $599.86 bajo EMA21 $593.02 o EMA50 $598.87)', 'Precio 1H bajo media móvil EMA21 ($599.87 <= $599.98)', 'MACD 1H Histograma en caída/deterioro (-0.15, delta -0.20)', 'Bloqueo Resistencia < 5.0% (2.13%)', 'Riesgo de Liquidación prematura (Liq: $542.88 vs SL: $569.87)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $599.86 sobre EMA21 $593.02 o EMA50 $598.87)', 'RSI 1H insuficiente para Short (51.0 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (1.24%)', 'Riesgo de Liquidación prematura (Liq: $656.85 vs SL: $629.86)']
+REJECTED: xyz:AAPL | LONG: ['Tendencia Macro 1D no alcista (Close $304.95 bajo EMA21 $314.64 o EMA50 $312.82)', 'Precio 1H bajo media móvil EMA21 ($304.96 <= $306.93)', 'Bloqueo Resistencia < 5.0% (1.59%)', 'Riesgo de Liquidación prematura (Liq: $275.99 vs SL: $289.71)'] | SHORT: ['RSI 1H insuficiente para Short (31.9 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.24, delta 0.03)', 'Riesgo de Liquidación prematura (Liq: $333.93 vs SL: $320.21)']
+REJECTED: xyz:MSFT | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:ORCL | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:GOOGL | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:AMZN | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:AMD | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:MU | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($866.52 >= $864.58)', 'RSI 1H insuficiente para Short (50.8 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.74, delta 0.36)', 'Bloqueo Soporte < 5.0% (2.46%)']
+REJECTED: xyz:SNDK | LONG: ['Tendencia Macro 1D no alcista (Close $1270.20 bajo EMA21 $1326.07 o EMA50 $1475.46)', 'RSI 1H sin pendiente ascendente confirmada (64.2, Delta t-1 -0.5, live Delta 0.2)', 'MACD 1H Histograma en caída/deterioro (0.99, delta -0.27)', 'Bloqueo Resistencia < 5.0% (1.22%)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($1270.45 >= $1258.06)', 'RSI 1H insuficiente para Short (64.2 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (3.46%)']
+REJECTED: xyz:MSTR | LONG: ['Tendencia Macro 1D no alcista (Close $96.28 bajo EMA21 $97.26 o EMA50 $102.16)', 'Precio 1H bajo media móvil EMA21 ($96.27 <= $97.02)', 'Bloqueo Resistencia < 5.0% (2.20%)'] | SHORT: ['RSI 1H insuficiente para Short (39.0 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.02, delta 0.02)', 'Bloqueo Soporte < 5.0% (1.06%)']
+REJECTED: xyz:CRCL | LONG: ['Tendencia Macro 1D no alcista (Close $71.67 bajo EMA21 $65.25 o EMA50 $68.89)', 'RSI 1H sobrecomprado (72.4 >= 70 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en caída/deterioro (0.32, delta -0.04)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $71.68 sobre EMA21 $65.25 o EMA50 $68.89)', 'Precio 1H sobre media móvil EMA21 ($71.68 >= $69.47)', 'RSI 1H sin pendiente descendente confirmada (72.4, Delta t-1 2.3, live Delta 0.0)']
+REJECTED: xyz:NFLX | LONG: ['Tendencia Macro 1D no alcista (Close $74.84 bajo EMA21 $73.25 o EMA50 $74.34)', 'Precio 1H bajo media móvil EMA21 ($74.83 <= $75.55)'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:LLY | LONG: ['Precio 1H bajo media móvil EMA21 ($1212.55 <= $1221.63)', 'RSI 1H sin pendiente ascendente confirmada (35.5, Delta t-1 -2.6, live Delta -0.7)', 'MACD 1H Histograma en caída/deterioro (-3.14, delta -0.05)', 'Bloqueo Resistencia < 5.0% (1.25%)'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:SKHX | LONG: ['Bloqueo Resistencia < 5.0% (0.23%)'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:TSM | LONG: ['RSI 1H sin pendiente ascendente confirmada (50.9, Delta t-1 -2.3, live Delta -0.4)', 'MACD 1H Histograma en caída/deterioro (-0.05, delta -0.01)', 'Bloqueo Resistencia < 5.0% (0.72%)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($422.05 >= $421.93)', 'RSI 1H insuficiente para Short (50.9 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (0.82%)']
+REJECTED: xyz:JPY | LONG: ['Sin snapshot de microestructura en Hyperliquid (xyz:JPY)'] | SHORT: ['Sin snapshot de microestructura en Hyperliquid (xyz:JPY)']
+REJECTED: xyz:SILVER | LONG: ['Sin snapshot de microestructura en Hyperliquid (xyz:SILVER)'] | SHORT: ['RSI 1H insuficiente para Short (45.8 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.06, delta 0.01)', 'Bloqueo Soporte < 5.0% (0.65%)', 'Riesgo de Liquidación prematura (Liq: $69.84 vs SL: $67.95)']
+REJECTED: xyz:BABA | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Datos OHLCV 1H insuficientes']
+REJECTED: xyz:CL | LONG: ['Datos OHLCV 1H insuficientes'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($82.66 >= $82.14)', 'RSI 1H insuficiente para Short (58.4 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.08, delta 0.01)', 'Bloqueo Soporte < 5.0% (2.92%)', 'Riesgo de Liquidación prematura (Liq: $89.21 vs SL: $86.80)']
+REJECTED: xyz:COPPER | LONG: ['Precio 1H bajo media móvil EMA21 ($6.68 <= $6.69)', 'RSI 1H sin pendiente ascendente confirmada (47.5, Delta t-1 -2.9, live Delta 0.4)', 'MACD 1H Histograma en caída/deterioro (-0.00, delta -0.00)', 'Bloqueo Resistencia < 5.0% (1.02%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $6.68 sobre EMA21 $6.55 o EMA50 $6.44)', 'RSI 1H insuficiente para Short (47.5 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (0.61%)']
+REJECTED: xyz:NATGAS | LONG: ['Tendencia Macro 1D no alcista (Close $2.79 bajo EMA21 $2.78 o EMA50 $2.89)', 'Precio 1H bajo media móvil EMA21 ($2.79 <= $2.80)', 'RSI 1H sin pendiente ascendente confirmada (48.1, Delta t-1 -2.0, live Delta -0.1)', 'MACD 1H Histograma en caída/deterioro (-0.00, delta -0.00)', 'Bloqueo Resistencia < 5.0% (0.23%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $2.79 sobre EMA21 $2.78 o EMA50 $2.89)', 'RSI 1H insuficiente para Short (48.1 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (0.51%)']
+REJECTED: xyz:SMSN | LONG: ['Tendencia Macro 1D no alcista (Close $172.72 bajo EMA21 $170.28 o EMA50 $179.25)', 'MACD 1H Histograma en caída/deterioro (0.09, delta -0.03)', 'Bloqueo Resistencia < 5.0% (0.29%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $172.72 sobre EMA21 $170.28 o EMA50 $179.25)', 'Precio 1H sobre media móvil EMA21 ($172.75 >= $169.97)', 'RSI 1H sin pendiente descendente confirmada (69.9, Delta t-1 1.2, live Delta 0.1)']
+REJECTED: xyz:PLATINUM | LONG: ['Precio 1H bajo media móvil EMA21 ($1745.45 <= $1752.11)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $1745.60 sobre EMA21 $1693.53 o EMA50 $1688.30)', 'RSI 1H insuficiente para Short (43.4 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-1.72, delta 0.25)', 'Bloqueo Soporte < 5.0% (0.51%)']
+REJECTED: xyz:USAR | LONG: ['Tendencia Macro 1D no alcista (Close $18.97 bajo EMA21 $17.27 o EMA50 $18.08)', 'MACD 1H Histograma en caída/deterioro (0.14, delta -0.03)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $18.97 sobre EMA21 $17.27 o EMA50 $18.08)', 'Precio 1H sobre media móvil EMA21 ($18.98 >= $18.63)', 'RSI 1H insuficiente para Short (60.4 <= 65 sin volumen 1.8x SMA20)']
+REJECTED: xyz:CRWV | LONG: ['Tendencia Macro 1D no alcista (Close $97.21 bajo EMA21 $84.39 o EMA50 $86.36)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $97.20 sobre EMA21 $84.39 o EMA50 $86.36)', 'Precio 1H sobre media móvil EMA21 ($96.42 >= $90.34)', 'MACD 1H Histograma en aumento alcista (0.90, delta 0.23)']
+REJECTED: xyz:JP225 | LONG: ['Tendencia Macro 1D no alcista (Close $67016.00 bajo EMA21 $65545.30 o EMA50 $65947.57)', 'MACD 1H Histograma en caída/deterioro (-24.09, delta -3.20)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $67016.00 sobre EMA21 $65545.30 o EMA50 $65947.57)', 'Precio 1H sobre media móvil EMA21 ($67022.00 >= $67009.64)', 'RSI 1H insuficiente para Short (52.0 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (1.18%)']
+REJECTED: xyz:KIOXIA | LONG: ['MACD 1H Histograma en caída/deterioro (0.95, delta -0.08)', 'Bloqueo Resistencia < 5.0% (1.24%)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($301.81 >= $297.33)', 'RSI 1H insuficiente para Short (59.9 <= 65 sin volumen 1.8x SMA20)']
+REJECTED: xyz:EWY | LONG: ['Tendencia Macro 1D no alcista (Close $167.56 bajo EMA21 $165.98 o EMA50 $172.26)', 'MACD 1H Histograma en caída/deterioro (0.12, delta -0.01)', 'Bloqueo Resistencia < 5.0% (0.64%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $167.58 sobre EMA21 $165.98 o EMA50 $172.26)', 'Precio 1H sobre media móvil EMA21 ($167.59 >= $166.29)', 'RSI 1H insuficiente para Short (62.4 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (3.25%)']
+REJECTED: xyz:BRENTOIL | LONG: ['Tendencia Macro 1D no alcista (Close $87.71 bajo EMA21 $84.74 o EMA50 $84.75)', 'RSI 1H sin pendiente ascendente confirmada (58.2, Delta t-1 -0.3, live Delta 0.1)', 'Bloqueo Resistencia < 5.0% (1.24%)', 'Riesgo de Liquidación prematura (Liq: $80.77 vs SL: $83.33)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $87.70 sobre EMA21 $84.74 o EMA50 $84.75)', 'Precio 1H sobre media móvil EMA21 ($87.71 >= $87.21)', 'RSI 1H insuficiente para Short (58.2 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.08, delta 0.01)', 'Bloqueo Soporte < 5.0% (2.62%)', 'Riesgo de Liquidación prematura (Liq: $94.66 vs SL: $92.10)']
+REJECTED: xyz:HIMS | LONG: ['Tendencia Macro 1D no alcista (Close $30.29 bajo EMA21 $30.61 o EMA50 $30.98)', 'Precio 1H bajo media móvil EMA21 ($30.30 <= $30.49)', 'RSI 1H sin pendiente ascendente confirmada (47.7, Delta t-1 -1.7, live Delta 0.1)', 'MACD 1H Histograma en caída/deterioro (0.08, delta -0.04)'] | SHORT: ['RSI 1H insuficiente para Short (47.7 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (3.79%)']
+REJECTED: xyz:SP500 | LONG: ['Precio 1H bajo media móvil EMA21 ($7729.15 <= $7743.12)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $7729.10 sobre EMA21 $7615.67 o EMA50 $7533.94)', 'RSI 1H insuficiente para Short (35.8 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-2.74, delta 0.41)', 'Bloqueo Soporte < 5.0% (0.18%)']
+REJECTED: xyz:LITE | LONG: ['Precio 1H bajo media móvil EMA21 ($818.19 <= $820.99)', 'RSI 1H sin pendiente ascendente confirmada (44.1, Delta t-1 -2.4, live Delta 0.1)', 'MACD 1H Histograma en caída/deterioro (3.71, delta -0.19)', 'Bloqueo Resistencia < 5.0% (3.39%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $818.12 sobre EMA21 $805.20 o EMA50 $804.27)', 'Bloqueo Soporte < 5.0% (4.44%)']
+REJECTED: xyz:PURRDAT | LONG: ['Tendencia Macro 1D no alcista (Close $6.58 bajo EMA21 $6.67 o EMA50 $7.13)', 'Precio 1H bajo media móvil EMA21 ($6.57 <= $6.59)', 'RSI 1H sin pendiente ascendente confirmada (43.5, Delta t-1 -0.1, live Delta -1.8)', 'MACD 1H Histograma en caída/deterioro (0.00, delta -0.00)', 'Bloqueo Resistencia < 5.0% (1.72%)'] | SHORT: ['RSI 1H insuficiente para Short (43.5 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (0.50%)']
+REJECTED: xyz:MRVL | LONG: ['Tendencia Macro 1D no alcista (Close $213.96 bajo EMA21 $208.26 o EMA50 $216.90)', 'Bloqueo Resistencia < 5.0% (1.35%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $213.96 sobre EMA21 $208.26 o EMA50 $216.90)', 'Precio 1H sobre media móvil EMA21 ($213.84 >= $211.44)', 'RSI 1H insuficiente para Short (59.0 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.81, delta 0.08)', 'Bloqueo Soporte < 5.0% (3.36%)']
+REJECTED: xyz:RKLB | LONG: ['Tendencia Macro 1D no alcista (Close $80.10 bajo EMA21 $75.04 o EMA50 $80.24)', 'MACD 1H Histograma en caída/deterioro (0.80, delta -0.07)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $80.10 sobre EMA21 $75.04 o EMA50 $80.24)', 'Precio 1H sobre media móvil EMA21 ($80.07 >= $78.07)', 'RSI 1H insuficiente para Short (59.0 <= 65 sin volumen 1.8x SMA20)']
+REJECTED: xyz:DRAM | LONG: ['Tendencia Macro 1D no alcista (Close $51.09 bajo EMA21 $52.62 o EMA50 $56.02)', 'Bloqueo Resistencia < 5.0% (0.70%)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($51.09 >= $50.72)', 'RSI 1H insuficiente para Short (59.6 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.04, delta 0.00)', 'Bloqueo Soporte < 5.0% (3.43%)']
+REJECTED: xyz:ARM | LONG: ['Tendencia Macro 1D no alcista (Close $268.80 bajo EMA21 $270.90 o EMA50 $288.79)', 'Precio 1H bajo media móvil EMA21 ($268.73 <= $269.59)', 'RSI 1H sin pendiente ascendente confirmada (43.4, Delta t-1 -1.1, live Delta -0.2)', 'Bloqueo Resistencia < 5.0% (1.75%)'] | SHORT: ['RSI 1H insuficiente para Short (43.4 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.33, delta 0.01)', 'Bloqueo Soporte < 5.0% (1.13%)']
+REJECTED: xyz:SPCX | LONG: ['Tendencia Macro 1D no alcista (Close $132.97 bajo EMA21 $124.83 o EMA50 $136.34)', 'Precio 1H bajo media móvil EMA21 ($133.00 <= $134.53)', 'RSI 1H sin pendiente ascendente confirmada (42.2, Delta t-1 -0.8, live Delta 0.0)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $132.99 sobre EMA21 $124.83 o EMA50 $136.35)', 'RSI 1H insuficiente para Short (42.3 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.41, delta 0.09)', 'Bloqueo Soporte < 5.0% (2.15%)']
+REJECTED: xyz:ASML | LONG: ['Tendencia Macro 1D no alcista (Close $1799.80 bajo EMA21 $1723.38 o EMA50 $1738.42)', 'MACD 1H Histograma en caída/deterioro (1.17, delta -0.20)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $1799.80 sobre EMA21 $1723.38 o EMA50 $1738.42)', 'Precio 1H sobre media móvil EMA21 ($1799.10 >= $1781.45)', 'RSI 1H insuficiente para Short (63.0 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (3.82%)']
+REJECTED: xyz:MINIMAX | LONG: ['Tendencia Macro 1D no alcista (Close $41.67 bajo EMA21 $35.62 o EMA50 $39.75)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $41.67 sobre EMA21 $35.62 o EMA50 $39.75)', 'Precio 1H sobre media móvil EMA21 ($41.69 >= $41.69)', 'RSI 1H insuficiente para Short (49.4 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.00, delta 0.01)', 'Bloqueo Soporte < 5.0% (2.93%)']
+REJECTED: xyz:BB | LONG: ['Tendencia Macro 1D no alcista (Close $8.99 bajo EMA21 $8.92 o EMA50 $9.25)', 'MACD 1H Histograma en caída/deterioro (0.01, delta -0.00)', 'Bloqueo Resistencia < 5.0% (0.19%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $8.99 sobre EMA21 $8.92 o EMA50 $9.25)', 'Precio 1H sobre media móvil EMA21 ($9.00 >= $8.99)', 'RSI 1H insuficiente para Short (51.7 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (2.19%)']
+REJECTED: xyz:DELL | LONG: ['Precio 1H bajo media móvil EMA21 ($446.90 <= $449.30)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $446.69 sobre EMA21 $435.28 o EMA50 $428.39)', 'RSI 1H insuficiente para Short (43.3 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.50, delta 0.54)', 'Bloqueo Soporte < 5.0% (3.46%)']
+REJECTED: xyz:IBM | LONG: ['Tendencia Macro 1D no alcista (Close $237.91 bajo EMA21 $232.48 o EMA50 $244.44)', 'RSI 1H sin pendiente ascendente confirmada (53.8, Delta t-1 -2.8, live Delta 0.7)', 'MACD 1H Histograma en caída/deterioro (0.04, delta -0.05)', 'Bloqueo Resistencia < 5.0% (1.16%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $237.91 sobre EMA21 $232.48 o EMA50 $244.44)', 'Precio 1H sobre media móvil EMA21 ($238.03 >= $237.61)', 'RSI 1H insuficiente para Short (53.8 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (1.10%)']
+REJECTED: xyz:AVGO | LONG: ['Precio 1H bajo media móvil EMA21 ($416.68 <= $420.61)', 'Bloqueo Resistencia < 5.0% (2.65%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $415.99 sobre EMA21 $405.49 o EMA50 $397.02)', 'RSI 1H insuficiente para Short (35.7 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.59, delta 0.11)', 'Bloqueo Soporte < 5.0% (0.88%)']
+REJECTED: xyz:NBIS | LONG: ['Tendencia Macro 1D no alcista (Close $199.20 bajo EMA21 $197.32 o EMA50 $206.50)', 'Bloqueo Resistencia < 5.0% (0.80%)'] | SHORT: ['Tendencia Macro 1D no bajista (Close $199.04 sobre EMA21 $197.31 o EMA50 $206.49)', 'Precio 1H sobre media móvil EMA21 ($199.40 >= $190.87)', 'RSI 1H sin pendiente descendente confirmada (76.8, Delta t-1 10.7, live Delta 0.6)', 'MACD 1H Histograma en aumento alcista (1.25, delta 0.20)']
+REJECTED: xyz:BE | LONG: ['Tendencia Macro 1D no alcista (Close $212.56 bajo EMA21 $217.87 o EMA50 $240.59)', 'Precio 1H bajo media móvil EMA21 ($212.50 <= $212.99)', 'MACD 1H Histograma en caída/deterioro (0.24, delta -0.01)', 'Bloqueo Resistencia < 5.0% (1.00%)'] | SHORT: ['RSI 1H insuficiente para Short (46.0 <= 65 sin volumen 1.8x SMA20)', 'Bloqueo Soporte < 5.0% (1.45%)']
+REJECTED: xyz:ZHIPU | LONG: ['Tendencia Macro 1D no alcista (Close $151.77 bajo EMA21 $151.84 o EMA50 $187.26)', 'Precio 1H bajo media móvil EMA21 ($151.80 <= $153.34)', 'Bloqueo Resistencia < 5.0% (0.31%)'] | SHORT: ['RSI 1H insuficiente para Short (38.9 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.25, delta 0.10)', 'Bloqueo Soporte < 5.0% (1.32%)']
+REJECTED: xyz:BOT | LONG: ['RSI 1H sobrecomprado (73.4 >= 70 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en caída/deterioro (0.31, delta -0.00)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($30.81 >= $29.05)']
+REJECTED: xyz:SHAZ | LONG: ['RSI 1H sobrecomprado (77.0 >= 70 sin volumen 1.8x SMA20)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($58.12 >= $54.84)', 'RSI 1H sin pendiente descendente confirmada (77.0, Delta t-1 4.8, live Delta 1.1)', 'MACD 1H Histograma en aumento alcista (0.34, delta 0.05)']
+REJECTED: xyz:SKHY | LONG: ['RSI 1H sin pendiente ascendente confirmada (68.9, Delta t-1 -1.3, live Delta -0.2)', 'MACD 1H Histograma en caída/deterioro (0.41, delta -0.01)', 'Bloqueo Resistencia < 5.0% (0.28%)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($141.41 >= $138.79)']
+REJECTED: xyz:CXMT | LONG: ['Precio 1H bajo media móvil EMA21 ($7.23 <= $7.26)', 'Bloqueo Resistencia < 5.0% (3.51%)'] | SHORT: ['RSI 1H insuficiente para Short (44.9 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (-0.01, delta 0.00)', 'Bloqueo Soporte < 5.0% (0.94%)']
+REJECTED: xyz:UNITREE | LONG: ['MACD 1H Histograma en caída/deterioro (0.14, delta -0.01)', 'Bloqueo Resistencia < 5.0% (0.50%)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($87.29 >= $86.03)', 'RSI 1H insuficiente para Short (62.3 <= 65 sin volumen 1.8x SMA20)']
+REJECTED: xyz:SOXL | LONG: ['Bloqueo Resistencia < 5.0% (2.17%)'] | SHORT: ['Precio 1H sobre media móvil EMA21 ($133.53 >= $133.36)', 'RSI 1H insuficiente para Short (49.0 <= 65 sin volumen 1.8x SMA20)', 'MACD 1H Histograma en aumento alcista (0.29, delta 0.05)', 'Bloqueo Soporte < 5.0% (2.43%)']

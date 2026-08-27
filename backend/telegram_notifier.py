@@ -12,7 +12,7 @@ from datetime import timezone
 
 import requests
 
-from backend.models import AsymmetricSignal, BreakoutSignal, RadarSignal
+from backend.models import AsymmetricSignal, BreakoutSignal, MomentumSignal, RadarSignal
 
 logger = logging.getLogger(__name__)
 
@@ -225,3 +225,96 @@ class TelegramNotifier:
         ])
 
         return "\n".join(lines)
+
+    def send_perp_alert(self, setup: dict) -> bool:
+        """Format and send a Telegram alert for an APPROVED Hyperliquid perps setup."""
+        if setup.get("verdict") != "APROBADO":
+            return False
+
+        ticker = setup.get("ticker", "")
+        hl_symbol = setup.get("hl_symbol", ticker)
+        direction = setup.get("direction", "LONG")
+        dir_emoji = "🟢 LONG" if direction == "LONG" else "🔴 SHORT"
+        leverage = setup.get("leverage", 5.0)
+
+        entry = setup.get("current_price", 0.0)
+        poc = setup.get("poc", entry)
+        mode = setup.get("order_execution_mode", "MARKET")
+        sl = setup.get("sl_price", 0.0)
+        tp = setup.get("tp_price", 0.0)
+        liq = setup.get("estimated_liq_price", 0.0)
+        rr = setup.get("rr_ratio", 2.5)
+
+        micro = setup.get("microstructure") or {}
+        funding = micro.get("funding_8h", 0.0) * 100.0
+        vol_24h = micro.get("volume_24h", 0.0)
+
+        msg = (
+            f"⚡ *HYPERLIQUID PERP SETUP APROBADO*\n"
+            f"━━━━━━━━━━━━━━━━━━\n"
+            f"🏷️ *{ticker}* ({hl_symbol}) | {dir_emoji} *{leverage:.0f}x Isolated*\n"
+            f"📍 *Entrada:* ${entry:,.2f} | *POC:* ${poc:,.2f}\n"
+            f"⚙️ *Ejecución:* {mode}\n"
+            f"🛑 *Stop Loss:* ${sl:,.2f}\n"
+            f"🎯 *Take Profit:* ${tp:,.2f} (R:R 1:{rr:.2f})\n"
+            f"🛡️ *Liquidación:* ${liq:,.2f}\n"
+            f"━━━━━━━━━━━━━━━━━━\n"
+            f"📊 *Funding 8h:* {funding:+.4f}%\n"
+            f"💧 *Volumen 24h:* ${vol_24h:,.0f} USD\n"
+            f"✅ *Veredicto:* 100% Validaciones Aprobadas"
+        )
+
+        if self._dry_run:
+            logger.info("[DRY-RUN Telegram Perp Alert]:\n%s", msg)
+            return True
+
+        url = f"https://api.telegram.org/bot{self._bot_token}/sendMessage"
+        payload = {
+            "chat_id": self._chat_id,
+            "text": msg,
+            "parse_mode": "Markdown",
+        }
+        try:
+            resp = requests.post(url, json=payload, timeout=10)
+            if resp.status_code == 200:
+                logger.info("Telegram perp alert sent for %s", ticker)
+                return True
+            logger.error("Failed sending Telegram perp alert: HTTP %d %s", resp.status_code, resp.text)
+            return False
+        except Exception as exc:
+            logger.error("Error sending Telegram perp alert: %s", exc)
+            return False
+
+    def _format_momentum(self, signal: MomentumSignal) -> str:
+        """Build an explosive momentum / squeeze alert."""
+        market_label = _MARKET_LABELS.get(signal.market, signal.market)
+        ts = signal.timestamp.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        fmt = ".2f" if signal.market == "US_EQUITIES" else ".4f"
+
+        dir_emoji = "🟢 LONG ▲" if signal.direction == "LONG" else "🔴 SHORT ▼"
+        
+        lines = [
+            f"🚀 ALERTA DE MOMENTUM INSTITUCIONAL",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"🏷️ {signal.ticker} — {market_label} ({signal.asset_class})",
+            f"⚡ Dirección: {dir_emoji}",
+            f"💥 Disparador: {signal.trigger} ({signal.squeeze_status})",
+            f"📈 ROC(10): {signal.roc_10:+.1f}% | RSI(14): {signal.rsi:.1f}",
+            f"💧 Volumen Relativo: {signal.rvol:.2f}x (SMA 20)",
+            f"📊 Confianza Cuantitativa: {signal.confidence_score * 100:.0f}%",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"📍 Entrada: ${signal.entry_price:{fmt}}",
+            f"🛑 Stop Loss: ${signal.stop_loss:{fmt}}",
+            f"🎯 Take Profit: ${signal.take_profit:{fmt}} (R:R 1:{signal.rr_ratio:.1f})",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"⏰ {ts}",
+            f"📝 {signal.analysis_summary}",
+        ]
+        return "\n".join(lines)
+
+    def send_momentum_alert(self, signal: MomentumSignal) -> bool:
+        """Format and dispatch a momentum signal alert."""
+        text = self._format_momentum(signal)
+        return self._send(text)
+
+

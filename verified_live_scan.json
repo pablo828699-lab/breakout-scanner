@@ -1,0 +1,45 @@
+SCANNED: 196
+APPROVED LONGS: 1
+{
+  "ticker": "UNI",
+  "hl_symbol": "UNI",
+  "direction": "LONG",
+  "verdict": "APROBADO",
+  "primary_reason": "Todas las validaciones aprobadas (100%)",
+  "rejection_reasons": [],
+  "current_price": 3.73265,
+  "poc": 4.0437,
+  "vah": 4.16902,
+  "val": 3.7641400000000003,
+  "rsi": 29.269989562642706,
+  "rsi_slope": 0.21103783998690062,
+  "macd_hist": -0.014491840305466748,
+  "atr": 0.05041428571428571,
+  "leverage": 8.0,
+  "sl_price": 3.5460175,
+  "tp_price": 4.19923125,
+  "estimated_liq_price": 3.2893978125,
+  "rr_ratio": 2.500000000000002,
+  "order_execution_mode": "MARKET",
+  "microstructure": {
+    "hl_symbol": "UNI",
+    "raw_ticker": "UNI",
+    "dex": "main",
+    "mark_price": 3.7326,
+    "mid_price": 3.73265,
+    "bid_price": 3.73225,
+    "ask_price": 3.73383,
+    "spread_pct": 0.00042315799058878864,
+    "requires_limit_order": false,
+    "funding_8h": 1.25e-05,
+    "funding_daily": 3.7500000000000003e-05,
+    "open_interest": 4751540.4,
+    "volume_24h": 7117672.455499996,
+    "has_sufficient_liquidity": true,
+    "min_required_vol": 1500000.0
+  },
+  "phase1_passed": true,
+  "phase2_passed": true,
+  "phase3_passed": true
+}
+APPROVED SHORTS: 0

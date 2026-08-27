@@ -24,6 +24,7 @@ from backend.telegram_notifier import TelegramNotifier
 from backend.trend_radar import evaluate_trend_radar
 from backend.volume_filter import passes_volume_filter
 from backend.capitulation_engine import run_capitulation_scan, AsymmetricSignal
+from backend.momentum_engine import evaluate_momentum, MomentumSignal
 
 logger = logging.getLogger(__name__)
 
@@ -347,6 +348,25 @@ class BreakoutScanner:
         except Exception as exc:
             logger.error("Capitulation scan failed: %s", exc, exc_info=True)
 
+        # --- Momentum / Squeeze analysis ---
+        try:
+            mom_signals = self._run_momentum_scan(markets)
+            if mom_signals:
+                for ms in mom_signals:
+                    alert_time = datetime.now(tz=timezone.utc)
+                    cooldown_key = f"MOM:{ms.ticker}:{ms.direction}"
+                    if cooldown_key not in self._last_alert or \
+                       (alert_time - self._last_alert[cooldown_key]).total_seconds() > cfg.ALERT_COOLDOWN_HOURS * 3600:
+                        self._last_alert[cooldown_key] = alert_time
+                        self._save_last_alerts()
+                        self._notifier.send_momentum_alert(ms)
+                        logger.info(
+                            "🚀 MOMENTUM ALERT sent: %s %s (Trigger=%s, R:R=1:%.1f)",
+                            ms.ticker, ms.direction, ms.trigger, ms.rr_ratio,
+                        )
+        except Exception as exc:
+            logger.error("Momentum scan failed: %s", exc, exc_info=True)
+
         return signals
 
     def _save_recent_signals(self, new_signals: List[BreakoutSignal | RadarSignal]) -> None:
@@ -555,6 +575,102 @@ class BreakoutScanner:
             self._sync_to_render_backend("/api/capitulation", signals_dict)
         except Exception as exc:
             logger.error("Failed to save capitulation signals: %s", exc)
+
+    def _run_momentum_scan(self, markets: Dict[str, List[str]]) -> List[MomentumSignal]:
+        """Run momentum and squeeze breakout analysis on all tickers."""
+        signals: List[MomentumSignal] = []
+        for market, tickers in markets.items():
+            for ticker in tickers:
+                try:
+                    if market == "US_EQUITIES":
+                        daily_df = self._fetcher.fetch_sp500_daily(ticker)
+                    else:
+                        daily_df = self._fetcher.fetch_crypto_daily(ticker)
+
+                    if daily_df is not None and len(daily_df) >= 55:
+                        sig = evaluate_momentum(daily_df, ticker, market=market)
+                        if sig:
+                            signals.append(sig)
+                except Exception as exc:
+                    logger.debug("Momentum eval failed for %s: %s", ticker, exc)
+
+        if signals:
+            try:
+                self._save_momentum_signals(signals)
+            except Exception as exc:
+                logger.error("Failed persisting momentum signals: %s", exc)
+
+        return signals
+
+    def _save_momentum_signals(self, signals: List[MomentumSignal]) -> None:
+        import json
+        import os
+        filepath = os.path.join(os.path.dirname(__file__), "momentum_signals.json")
+        now = datetime.now(timezone.utc)
+        ttl_seconds = 24 * 3600
+
+        existing_by_ticker: Dict[str, dict] = {}
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    items = json.load(f)
+                    for item in items:
+                        ticker_key = item.get("ticker")
+                        if not ticker_key:
+                            continue
+                        ts_val = item.get("last_updated") or item.get("first_detected") or item.get("timestamp")
+                        ts_dt = parse_iso_timestamp(ts_val)
+                        if (now - ts_dt).total_seconds() < ttl_seconds:
+                            existing_by_ticker[ticker_key] = item
+            except Exception as exc:
+                logger.warning("Failed loading existing momentum signals: %s", exc)
+                existing_by_ticker = {}
+
+        for s in signals:
+            iso_ts = s.timestamp.isoformat()
+            first_detected = (
+                existing_by_ticker[s.ticker].get("first_detected")
+                if s.ticker in existing_by_ticker and existing_by_ticker[s.ticker].get("first_detected")
+                else iso_ts
+            )
+            existing_by_ticker[s.ticker] = {
+                "type": "momentum",
+                "ticker": s.ticker,
+                "market": s.market,
+                "direction": s.direction,
+                "trigger": s.trigger,
+                "entry_price": s.entry_price,
+                "stop_loss": s.stop_loss,
+                "take_profit": s.take_profit,
+                "rr_ratio": s.rr_ratio,
+                "rvol": s.rvol,
+                "roc_10": s.roc_10,
+                "rsi": s.rsi,
+                "squeeze_status": s.squeeze_status,
+                "ema_stack": s.ema_stack,
+                "confidence_score": s.confidence_score,
+                "analysis_summary": s.analysis_summary,
+                "timestamp": iso_ts,
+                "first_detected": first_detected,
+                "last_updated": iso_ts,
+                "asset_class": getattr(s, "asset_class", "ACCIONES"),
+            }
+
+        signals_dict = list(existing_by_ticker.values())
+        signals_dict.sort(
+            key=lambda x: parse_iso_timestamp(x.get("last_updated") or x.get("timestamp")),
+            reverse=True,
+        )
+        if len(signals_dict) > 100:
+            signals_dict = signals_dict[:100]
+
+        try:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(signals_dict, f, indent=2)
+            logger.info("Saved %d momentum signals to disk.", len(signals_dict))
+            self._sync_to_render_backend("/api/momentum", signals_dict)
+        except Exception as exc:
+            logger.error("Failed to save momentum signals: %s", exc)
 
     def _sync_to_render_backend(self, endpoint_path: str, data: list) -> None:
         """Sync json data directly to Render backend with retries and timeout for Cold-Start toleration."""

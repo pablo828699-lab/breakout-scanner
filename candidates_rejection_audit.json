@@ -1,0 +1,61 @@
+=== BTC (LONG) === {
+  "rejections": [
+    "Tendencia Macro 1D no alcista (Close $63648.00 bajo EMA21 $64177.52 o EMA50 $64588.06)",
+    "Precio 1H bajo media m\u00f3vil EMA21 ($63647.50 <= $63869.64)",
+    "Bloqueo Resistencia < 5.0% (1.64%)"
+  ]
+}
+=== ETH (LONG) === {
+  "rejections": [
+    "Bloqueo Resistencia < 5.0% (0.73%)"
+  ]
+}
+=== SOL (LONG) === {
+  "rejections": [
+    "Tendencia Macro 1D no alcista (Close $75.89 bajo EMA21 $74.89 o EMA50 $75.44)"
+  ]
+}
+=== xyz:XYZ100 (LONG) === {
+  "rejections": [
+    "Precio 1H bajo media m\u00f3vil EMA21 ($29512.50 <= $29597.39)"
+  ]
+}
+=== xyz:TSLA (LONG) === {
+  "rejections": [
+    "Tendencia Macro 1D no alcista (Close $332.94 bajo EMA21 $332.12 o EMA50 $353.89)"
+  ]
+}
+=== xyz:NVDA (LONG) === {
+  "rejections": [
+    "Precio 1H bajo media m\u00f3vil EMA21 ($217.87 <= $218.91)",
+    "Riesgo de Liquidaci\u00f3n prematura (Liq: $197.17 vs SL: $206.98)"
+  ]
+}
+=== xyz:GOLD (LONG) === {
+  "rejections": [
+    "Precio 1H bajo media m\u00f3vil EMA21 ($4370.55 <= $4379.02)",
+    "Riesgo de Liquidaci\u00f3n prematura (Liq: $4024.55 vs SL: $4152.02)"
+  ]
+}
+=== xyz:SILVER (LONG) === {
+  "rejections": [
+    "Tendencia Macro 1D no alcista (Close $64.73 bajo EMA21 $61.15 o EMA50 $61.60)",
+    "Precio 1H bajo media m\u00f3vil EMA21 ($64.73 <= $64.90)",
+    "RSI 1H sin pendiente ascendente confirmada (46.1, \u0394t-1 -0.9, live \u0394 0.1)",
+    "Riesgo de Liquidaci\u00f3n prematura (Liq: $59.60 vs SL: $61.49)"
+  ]
+}
+=== LIT (LONG) === {
+  "rejections": [
+    "RSI 1H sin pendiente ascendente confirmada (54.2, \u0394t-1 -1.4, live \u0394 0.4)"
+  ]
+}
+=== UNI (LONG) === {
+  "rejections": [
+    "Tendencia Macro 1D no alcista (Close $3.75 bajo EMA21 $3.89 o EMA50 $3.66)",
+    "Precio 1H bajo media m\u00f3vil EMA21 ($3.75 <= $3.83)"
+  ]
+}
+=== CASHCAT (LONG) === {
+  "rejections": []
+}

@@ -38,6 +38,9 @@ def get_shared_session() -> requests.Session:
     global _shared_session
     if _shared_session is None:
         _shared_session = requests.Session()
+        adapter = requests.adapters.HTTPAdapter(pool_connections=50, pool_maxsize=50, max_retries=3)
+        _shared_session.mount("https://", adapter)
+        _shared_session.mount("http://", adapter)
         _shared_session.headers.update(DEFAULT_HEADERS)
     return _shared_session
 
@@ -97,6 +100,10 @@ def _binance_request(
         for attempt in range(1, max_retries + 1):
             try:
                 resp = sess.get(url, params=params, timeout=timeout)
+                if resp.status_code == 400:
+                    last_error = f"{host} → 400 (Invalid symbol/params)"
+                    break
+
                 if resp.status_code == 451:
                     last_error = f"{host} → 451 (geo-blocked)"
                     if _working_host != host:  # only log the first time we learn it
@@ -172,8 +179,8 @@ class DataFetcher:
         ticker: str,
         period: str,
         interval: str,
-        max_retries: int = 3,
-        base_delay: float = 1.0,
+        max_retries: int = 1,
+        base_delay: float = 0.5,
     ) -> pd.DataFrame:
         """Safely fetch historical data from Yahoo Finance using custom session with browser User-Agent and exponential backoff."""
         if not _YF_AVAILABLE:
@@ -190,8 +197,8 @@ class DataFetcher:
             "progress": False,
             "auto_adjust": True,
         }
-        if self._yf_session is not None:
-            download_kwargs["session"] = self._yf_session
+        if "XYZ:" in ticker.upper():
+            max_retries = 1
 
         for attempt in range(1, max_retries + 1):
             try:
@@ -220,12 +227,14 @@ class DataFetcher:
         """Fetch 24/7 candles directly from Hyperliquid public API for a given symbol."""
         url = "https://api.hyperliquid.xyz/info"
         now_ms = int(time.time() * 1000)
-        start_ms = now_ms - (30 * 24 * 3600 * 1000)
+        lookback_days = 150 if interval in ("1d", "D") else 30
+        start_ms = now_ms - (lookback_days * 24 * 3600 * 1000)
         
-        candidates = []
-        if not ticker.startswith("xyz:"):
-            candidates.append(f"xyz:{ticker}")
-        candidates.append(ticker)
+        clean_coin = ticker[4:] if ticker.upper().startswith("XYZ:") else ticker
+
+        candidates = [clean_coin, ticker]
+        if not clean_coin.startswith("xyz:"):
+            candidates.append(f"xyz:{clean_coin}")
         if ticker.endswith("USDT"):
             candidates.append(ticker.replace("USDT", ""))
 
@@ -269,8 +278,11 @@ class DataFetcher:
         if not hl_df.empty:
             return hl_df
 
+        # If it's an explicit Hyperliquid HIP-3 symbol (xyz:) or unmapped crypto, don't waste time on yfinance
+        if "XYZ:" in ticker.upper() or not _YF_AVAILABLE:
+            return pd.DataFrame()
         df = self._safe_yf_download(ticker, f"{cfg.DAILY_LOOKBACK_DAYS}d", "1d")
-        if df.empty:
+        if df is None or df.empty:
             logger.warning("No daily data returned for %s.", ticker)
             return pd.DataFrame()
         if isinstance(df.columns, pd.MultiIndex):
@@ -283,8 +295,11 @@ class DataFetcher:
         if not hl_df.empty:
             return hl_df
 
-        df = self._safe_yf_download(ticker, "1mo", "1h")
-        if df.empty:
+        # If it's an explicit Hyperliquid HIP-3 symbol (xyz:) or unmapped crypto, don't waste time on yfinance
+        if "XYZ:" in ticker.upper() or not _YF_AVAILABLE:
+            return pd.DataFrame()
+        df = self._safe_yf_download(ticker, f"{cfg.HOURLY_LOOKBACK_DAYS}d", "1h")
+        if df is None or df.empty:
             logger.warning("No hourly data returned for %s.", ticker)
             return pd.DataFrame()
         if isinstance(df.columns, pd.MultiIndex):
@@ -353,7 +368,8 @@ class DataFetcher:
         df = self._binance_klines(symbol, "1d", cfg.DAILY_LOOKBACK_DAYS)
         if df.empty:
             logger.warning("Binance daily empty for %s — trying Yahoo Finance fallback.", symbol)
-            yf_symbol = symbol.replace("USDT", "-USD")
+            raw_sym = symbol.replace("USDT", "")
+            yf_symbol = f"{raw_sym}-USD" if not raw_sym.endswith("-USD") else raw_sym
             df = self._fetch_yfinance_crypto(yf_symbol, f"{cfg.DAILY_LOOKBACK_DAYS}d", "1d")
 
         if df.empty:
@@ -367,7 +383,8 @@ class DataFetcher:
         df = self._binance_klines(symbol, "1h", limit)
         if df.empty:
             logger.warning("Binance hourly empty for %s — trying Yahoo Finance fallback.", symbol)
-            yf_symbol = symbol.replace("USDT", "-USD")
+            raw_sym = symbol.replace("USDT", "")
+            yf_symbol = f"{raw_sym}-USD" if not raw_sym.endswith("-USD") else raw_sym
             df = self._fetch_yfinance_crypto(yf_symbol, f"{cfg.HOURLY_LOOKBACK_DAYS}d", "1h")
 
         if df.empty:
@@ -469,3 +486,53 @@ class DataFetcher:
         )
         df.index.name = "Date"
         return df
+
+
+_default_fetcher: DataFetcher | None = None
+
+def get_default_fetcher() -> DataFetcher:
+    """Singleton getter for DataFetcher."""
+    global _default_fetcher
+    if _default_fetcher is None:
+        _default_fetcher = DataFetcher()
+    return _default_fetcher
+
+
+def fetch_candles(ticker: str, timeframe: str = "1d", limit: int = 150) -> pd.DataFrame:
+    """Top-level helper to fetch OHLCV DataFrame for any ticker (Crypto or Equity).
+
+    Prioritizes Hyperliquid 24/7 API for sub-second responses.
+    """
+    fetcher = get_default_fetcher()
+    clean = ticker.strip().upper()
+    interval = "1h" if timeframe in ("1h", "60m") else "1d"
+
+    # 1. Primary: Hyperliquid 24/7 Candles API (Fastest & direct perps match)
+    hl_df = fetcher._fetch_hyperliquid_candles(clean, interval)
+    if not hl_df.empty:
+        return hl_df
+
+    # Hyperliquid synthetic HIP-3 assets (xyz:*) are not on Binance/yfinance
+    if "XYZ:" in clean or clean.startswith("XYZ"):
+        return pd.DataFrame()
+
+    # 2. Secondary Fallbacks: Binance for Crypto, yfinance for Equities
+    # Known US stock tickers list
+    stock_tickers = {
+        "NVDA", "MSFT", "AAPL", "GOOGL", "AMZN", "META", "TSLA", "NFLX", "AMD", "INTC",
+        "ORCL", "PLTR", "COIN", "HOOD", "MU", "MRVL", "ARM", "AVGO", "QCOM", "TSM",
+        "SPY", "QQQ", "IWM", "SOXL", "XYZ:NVDA", "XYZ:MSFT", "XYZ:AAPL", "XYZ:GOOGL"
+    }
+
+    is_stock = (clean in stock_tickers) or clean.startswith("XYZ:")
+    if not is_stock:
+        binance_pair = clean if clean.endswith("USDT") else f"{clean}USDT"
+        if interval == "1h":
+            return fetcher.fetch_crypto_hourly(binance_pair)
+        return fetcher.fetch_crypto_daily(binance_pair)
+
+    if interval == "1h":
+        return fetcher.fetch_sp500_hourly(clean)
+    return fetcher.fetch_sp500_daily(clean)
+
+

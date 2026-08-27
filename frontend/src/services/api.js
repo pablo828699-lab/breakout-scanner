@@ -4,8 +4,10 @@
  * timeout defaults, and clean fallbacks.
  */
 
-export const BACKEND_URL = 'https://breakout-scanner-xg9f.onrender.com';
-export const DEFAULT_TIMEOUT_MS = 35000;
+export const BACKEND_URL = (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))
+  ? 'http://localhost:8080'
+  : 'https://breakout-scanner-xg9f.onrender.com';
+export const DEFAULT_TIMEOUT_MS = 90000;
 
 /**
  * Fetch wrapper with AbortController timeout.
@@ -137,3 +139,43 @@ export async function fetchLivePrices(tickers, options = {}) {
 
   return {};
 }
+
+/**
+ * Fetches momentum signals with primary backend endpoint and local fallback.
+ * Returns empty array [] on total failure.
+ *
+ * @param {object} options
+ * @returns {Promise<Array>}
+ */
+export async function fetchMomentumSignals(options = {}) {
+  const timeoutMs = options.timeoutMs || DEFAULT_TIMEOUT_MS;
+  const baseUrl = options.baseUrl || BACKEND_URL;
+
+  try {
+    const resp = await fetchWithTimeout(`${baseUrl}/api/momentum`, {}, timeoutMs);
+    if (resp.ok) {
+      const data = await resp.json();
+      if (Array.isArray(data)) {
+        return data;
+      }
+    }
+  } catch (err) {
+    console.warn('Primary momentum fetch failed, attempting local fallback:', err);
+  }
+
+  // Fallback fetch
+  try {
+    const fallbackResp = await fetchWithTimeout('/momentum_signals.json', {}, timeoutMs);
+    if (fallbackResp.ok) {
+      const data = await fallbackResp.json();
+      if (Array.isArray(data)) {
+        return data;
+      }
+    }
+  } catch (err) {
+    console.error('Momentum fallback fetch failed:', err);
+  }
+
+  return [];
+}
+

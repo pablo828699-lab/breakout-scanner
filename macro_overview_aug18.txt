@@ -1,0 +1,7 @@
+BTC LONG: RECHAZADO ['Tendencia Macro 1D no alcista (Close $64789.00 bajo EMA21 $63933.45 o EMA50 $64346.24)', 'RSI 1H sin pendiente ascendente confirmada (68.6, Delta t-1 -1.3, live Delta 0.0)', 'Bloqueo Resistencia < 5.0% (0.35%)']
+SOL LONG: RECHAZADO ['Tendencia Macro 1D no alcista (Close $77.01 bajo EMA21 $75.34 o EMA50 $75.52)', 'RSI 1H sin pendiente ascendente confirmada (66.5, Delta t-1 -3.5, live Delta 0.1)', 'MACD 1H Histograma en caída/deterioro (0.12, delta -0.00)']
+xyz:XYZ100 LONG: RECHAZADO ['Precio 1H bajo media móvil EMA21 ($29559.50 <= $29712.93)', 'Bloqueo Resistencia < 5.0% (2.25%)']
+xyz:GOLD LONG: RECHAZADO ['Precio 1H bajo media móvil EMA21 ($4366.65 <= $4391.05)', 'RSI 1H sin pendiente ascendente confirmada (31.1, Delta t-1 -0.4, live Delta 0.0)', 'Bloqueo Resistencia < 5.0% (1.62%)', 'Riesgo de Liquidación prematura (Liq: $4020.96 vs SL: $4148.32)']
+xyz:SP500 LONG: RECHAZADO ['Precio 1H bajo media móvil EMA21 ($7703.25 <= $7719.09)', 'Bloqueo Resistencia < 5.0% (1.22%)']
+xyz:NVDA LONG: RECHAZADO ['Precio 1H bajo media móvil EMA21 ($220.25 <= $221.80)', 'Bloqueo Resistencia < 5.0% (3.53%)', 'Riesgo de Liquidación prematura (Liq: $199.32 vs SL: $209.23)']
+xyz:TSLA LONG: RECHAZADO ['Tendencia Macro 1D no alcista (Close $339.57 bajo EMA21 $335.88 o EMA50 $350.36)', 'RSI 1H sin pendiente ascendente confirmada (54.0, Delta t-1 -0.5, live Delta -0.1)', 'Bloqueo Resistencia < 5.0% (1.41%)']

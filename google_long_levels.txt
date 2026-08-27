@@ -1,0 +1,13 @@
+{
+  "ticker": "xyz:GOOGL",
+  "hl_symbol": "xyz:GOOGL",
+  "direction": "LONG",
+  "verdict": "RECHAZADO",
+  "primary_reason": "Datos OHLCV 1H insuficientes o inaccesibles",
+  "rejection_reasons": [
+    "Datos OHLCV 1H insuficientes"
+  ],
+  "phase1_passed": false,
+  "phase2_passed": false,
+  "phase3_passed": false
+}

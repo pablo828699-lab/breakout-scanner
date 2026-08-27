@@ -1,0 +1,101 @@
+--- HYPERLIQUID xyz:LLY LONG ---
+{
+  "ticker": "xyz:LLY",
+  "hl_symbol": "xyz:LLY",
+  "direction": "LONG",
+  "verdict": "RECHAZADO",
+  "primary_reason": "RSI 1H sobrecomprado (78.3 >= 70)",
+  "rejection_reasons": [
+    "RSI 1H sobrecomprado (78.3 >= 70)"
+  ],
+  "current_price": 1216.8,
+  "poc": 1174.46,
+  "vah": 1212.28,
+  "val": 1143.96,
+  "rsi": 78.33652952584868,
+  "rsi_slope": 2.098696565901321,
+  "macd_hist": 3.6942314160341523,
+  "atr": 7.414285714285695,
+  "leverage": 8.0,
+  "sl_price": 1155.96,
+  "tp_price": 1368.9,
+  "estimated_liq_price": 1072.3049999999998,
+  "rr_ratio": 2.5000000000000058,
+  "order_execution_mode": "MARKET",
+  "microstructure": {
+    "hl_symbol": "xyz:LLY",
+    "raw_ticker": "xyz:LLY",
+    "dex": "xyz",
+    "mark_price": 1215.9,
+    "mid_price": 1216.4,
+    "bid_price": 1215.86,
+    "ask_price": 1216.98,
+    "spread_pct": 0.0009203109336226711,
+    "requires_limit_order": false,
+    "funding_8h": 3.47007e-05,
+    "funding_daily": 0.0001041021,
+    "open_interest": 4277.0748,
+    "volume_24h": 3238890.4036600012,
+    "has_sufficient_liquidity": true,
+    "min_required_vol": 800000.0
+  },
+  "phase1_passed": false,
+  "phase2_passed": true,
+  "phase3_passed": true
+}
+--- HYPERLIQUID xyz:LLY SHORT ---
+{
+  "ticker": "xyz:LLY",
+  "hl_symbol": "xyz:LLY",
+  "direction": "SHORT",
+  "verdict": "RECHAZADO",
+  "primary_reason": "Tendencia Macro 1D no bajista (Close $1216.80 >= EMA50 $1165.33)",
+  "rejection_reasons": [
+    "Tendencia Macro 1D no bajista (Close $1216.80 >= EMA50 $1165.33)",
+    "RSI 1H sin pendiente descendente (78.3, slope 2.1)",
+    "MACD 1H Histograma en aumento alcista",
+    "Bloqueo Soporte < 5.0% (3.68%)"
+  ],
+  "current_price": 1216.8,
+  "poc": 1174.46,
+  "vah": 1212.28,
+  "val": 1143.96,
+  "rsi": 78.33652952584868,
+  "rsi_slope": 2.098696565901321,
+  "macd_hist": 3.6942314160341523,
+  "atr": 7.414285714285695,
+  "leverage": 8.0,
+  "sl_price": 1277.6399999999999,
+  "tp_price": 1064.6999999999998,
+  "estimated_liq_price": 1361.2949999999998,
+  "rr_ratio": 2.5000000000000058,
+  "order_execution_mode": "MARKET",
+  "microstructure": {
+    "hl_symbol": "xyz:LLY",
+    "raw_ticker": "xyz:LLY",
+    "dex": "xyz",
+    "mark_price": 1215.9,
+    "mid_price": 1216.4,
+    "bid_price": 1215.86,
+    "ask_price": 1216.98,
+    "spread_pct": 0.0009203109336226711,
+    "requires_limit_order": false,
+    "funding_8h": 3.47007e-05,
+    "funding_daily": 0.0001041021,
+    "open_interest": 4277.0748,
+    "volume_24h": 3238890.4036600012,
+    "has_sufficient_liquidity": true,
+    "min_required_vol": 800000.0
+  },
+  "phase1_passed": false,
+  "phase2_passed": true,
+  "phase3_passed": true
+}
+--- LLY 1D CANDLES ---
+                             Open    High     Low   Close     Volume
+Timestamp                                                           
+2026-08-06 00:00:00+00:00  1178.3  1230.0  1167.9  1192.9  1295.2545
+2026-08-07 00:00:00+00:00  1191.4  1199.2  1160.7  1186.7  1723.0703
+2026-08-08 00:00:00+00:00  1186.7  1188.8  1176.5  1181.5   216.5380
+2026-08-09 00:00:00+00:00  1181.4  1185.6  1178.2  1184.3   180.8570
+2026-08-10 00:00:00+00:00  1183.9  1217.7  1172.0  1216.8  2642.0636

@@ -1,0 +1,19 @@
+BTC NAME: BTC
+BTC MARK PRICE: 63412.6
+BTC MID PRICE: 63411.5
+BTC DAY NTL VLM: 1216318382.1924955845
+RAW BTC CTX: {
+  "funding": "0.0000024459",
+  "openInterest": "39311.66086",
+  "prevDayPx": "64013.0",
+  "dayNtlVlm": "1216318382.1924955845",
+  "premium": "-0.0005043818",
+  "oraclePx": "63444.0",
+  "markPx": "63412.6",
+  "midPx": "63411.5",
+  "impactPxs": [
+    "63411.0",
+    "63412.0"
+  ],
+  "dayBaseVlm": "19029.94602"
+}
