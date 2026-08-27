@@ -147,6 +147,8 @@ class TelegramNotifier:
         """
         if isinstance(signal, AsymmetricSignal):
             text = self._format_asymmetric(signal)
+        elif isinstance(signal, MomentumSignal):
+            text = self._format_momentum(signal)
         elif isinstance(signal, RadarSignal):
             text = self._format_radar(signal)
         else:
@@ -314,7 +316,6 @@ class TelegramNotifier:
 
     def send_momentum_alert(self, signal: MomentumSignal) -> bool:
         """Format and dispatch a momentum signal alert."""
-        text = self._format_momentum(signal)
-        return self._send(text)
+        return self.send_alert(signal)
 
 
