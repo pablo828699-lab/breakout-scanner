@@ -530,32 +530,50 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
-        elif clean_path == "" or clean_path == "/":
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.end_headers()
-            html = """
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>Breakout Scanner Status</title>
-                    <meta charset="utf-8">
-                </head>
-                <body style="font-family: system-ui, sans-serif; background: #0a0e17; color: #f1f5f9; padding: 40px; text-align: center;">
-                    <h1 style="color: #3b82f6; font-size: 2.5rem; margin-bottom: 10px;">Breakout Scanner Active</h1>
-                    <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 30px;">Multi-Market Volume-Confirmed Breakout Detection System</p>
-                    <div style="display: inline-block; background: #111827; border: 1px border #1e293b; padding: 20px 40px; border-radius: 12px; margin-bottom: 20px;">
-                        <span style="display: inline-block; width: 10px; height: 10px; background: #10b981; border-radius: 50%; margin-right: 8px;"></span>
-                        <span style="font-weight: bold; color: #e2e8f0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">Servidor en Línea</span>
-                    </div>
-                    <p style="font-size: 0.9rem; color: #64748b;">
-                        Visita <a href="/scan" style="color: #06b6d4; text-decoration: none; font-weight: bold;">/scan</a> para forzar una búsqueda manual.
-                    </p>
-                </body>
-            </html>
-            """
-            self.wfile.write(html.encode("utf-8"))
         else:
+            # Serve Frontend Static Files (Single Page Application)
+            dist_dir = _PROJECT_ROOT / "frontend" / "dist"
+            if not dist_dir.exists():
+                dist_dir = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+
+            file_to_serve = None
+            if clean_path in ("", "/"):
+                file_to_serve = dist_dir / "index.html"
+            elif (dist_dir / clean_path.lstrip("/")).is_file():
+                file_to_serve = dist_dir / clean_path.lstrip("/")
+            elif clean_path.startswith("/assets/"):
+                asset_path = dist_dir / "assets" / clean_path.replace("/assets/", "").lstrip("/")
+                if asset_path.is_file():
+                    file_to_serve = asset_path
+            elif not clean_path.startswith("/api/") and not clean_path.startswith("/scan"):
+                file_to_serve = dist_dir / "index.html"
+
+            if file_to_serve and file_to_serve.is_file():
+                content_type = "text/html; charset=utf-8"
+                suffix = file_to_serve.suffix.lower()
+                if suffix == ".js":
+                    content_type = "application/javascript; charset=utf-8"
+                elif suffix == ".css":
+                    content_type = "text/css; charset=utf-8"
+                elif suffix == ".json":
+                    content_type = "application/json; charset=utf-8"
+                elif suffix == ".svg":
+                    content_type = "image/svg+xml"
+                elif suffix in (".png", ".jpg", ".jpeg"):
+                    content_type = f"image/{suffix.lstrip('.')}"
+
+                try:
+                    with open(file_to_serve, "rb") as f:
+                        content = f.read()
+                    self.send_response(200)
+                    self.send_header("Content-Type", content_type)
+                    self.send_header("Access-Control-Allow-Origin", "*")
+                    self.end_headers()
+                    self.wfile.write(content)
+                    return
+                except Exception as exc:
+                    logger.error("Error serving static file %s: %s", file_to_serve, exc)
+
             self.send_response(404)
             self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
