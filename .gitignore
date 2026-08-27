@@ -6,7 +6,6 @@ __pycache__/
 
 # Node/React local files
 node_modules/
-dist/
 .ignored/
 
 # OS temporary files
