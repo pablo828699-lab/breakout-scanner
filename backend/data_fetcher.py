@@ -272,15 +272,61 @@ class DataFetcher:
                 
         return pd.DataFrame()
 
+    def _fetch_yahoo_chart_daily(self, ticker: str, range_str: str = "2y") -> pd.DataFrame:
+        """Fetch full historical daily OHLCV directly from Yahoo Chart API (500+ candles for accurate EMA 200)."""
+        clean_ticker = ticker.upper().replace("XYZ:", "").replace("PERP", "").strip()
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{clean_ticker}?range={range_str}&interval=1d"
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+        }
+        try:
+            resp = self._session.get(url, headers=headers, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                results = data.get("chart", {}).get("result", [])
+                if results:
+                    res = results[0]
+                    timestamps = res.get("timestamp", [])
+                    quote = res.get("indicators", {}).get("quote", [{}])[0]
+                    opens = quote.get("open", [])
+                    highs = quote.get("high", [])
+                    lows = quote.get("low", [])
+                    closes = quote.get("close", [])
+                    volumes = quote.get("volume", [])
+
+                    records = []
+                    for i in range(len(timestamps)):
+                        c = closes[i] if i < len(closes) else None
+                        if c is not None and not pd.isna(c):
+                            records.append({
+                                "Timestamp": pd.to_datetime(timestamps[i], unit="s", utc=True),
+                                "Open": float(opens[i] if i < len(opens) and opens[i] is not None else c),
+                                "High": float(highs[i] if i < len(highs) and highs[i] is not None else c),
+                                "Low": float(lows[i] if i < len(lows) and lows[i] is not None else c),
+                                "Close": float(c),
+                                "Volume": float(volumes[i] if i < len(volumes) and volumes[i] is not None else 0),
+                            })
+                    if len(records) >= 30:
+                        df = pd.DataFrame(records).set_index("Timestamp")
+                        logger.info("Yahoo Chart API returned %d daily candles for %s.", len(df), clean_ticker)
+                        return df
+        except Exception as exc:
+            logger.debug("Yahoo Chart API failed for %s: %s", ticker, exc)
+        return pd.DataFrame()
+
     def fetch_sp500_daily(self, ticker: str) -> pd.DataFrame:
-        """Fetch ~6 months of daily OHLCV for a US equity ticker, prioritizing Hyperliquid 24/7 API."""
+        """Fetch full historical daily OHLCV for US equities prioritizing Yahoo Chart API for deep history."""
+        # 1. First fetch deep 2-year history from Yahoo Chart API (essential for accurate EMA 200 & RSI)
+        yf_df = self._fetch_yahoo_chart_daily(ticker, range_str="2y")
+        if not yf_df.empty and len(yf_df) >= 100:
+            return yf_df
+
+        # 2. Fallback to Hyperliquid candles if Yahoo Chart API fails
         hl_df = self._fetch_hyperliquid_candles(ticker, "1d")
         if not hl_df.empty:
             return hl_df
 
-        # If it's an explicit Hyperliquid HIP-3 symbol (xyz:) or unmapped crypto, don't waste time on yfinance
-        if "XYZ:" in ticker.upper() or not _YF_AVAILABLE:
-            return pd.DataFrame()
+        # 3. Final fallback to yfinance download
         df = self._safe_yf_download(ticker, f"{cfg.DAILY_LOOKBACK_DAYS}d", "1d")
         if df is None or df.empty:
             logger.warning("No daily data returned for %s.", ticker)
