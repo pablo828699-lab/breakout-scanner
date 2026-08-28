@@ -1,104 +1,37 @@
 [
   {
     "type": "radar",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.1684,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 41.8,
+    "volume_ratio": 3.59,
+    "roc_pct": 104.45,
+    "ema_stack": false,
+    "timestamp": "2026-08-28T09:28:33.963947+00:00",
+    "first_detected": "2026-08-28T09:28:33.963947+00:00",
+    "last_updated": "2026-08-28T09:28:33.963947+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "SOLUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 97.78,
+    "price": 106.32,
     "triggers": [
+      "DONCHIAN_15",
       "IMPULSE"
     ],
-    "adx": 30.1,
-    "volume_ratio": 2.18,
-    "roc_pct": 31.26,
+    "adx": 40.1,
+    "volume_ratio": 2.05,
+    "roc_pct": 43.57,
     "ema_stack": false,
-    "timestamp": "2026-08-25T17:29:27.577093+00:00",
-    "first_detected": "2026-08-22T01:04:09.749036+00:00",
-    "last_updated": "2026-08-25T17:29:27.577093+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PAXGUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 4598.67,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 42.0,
-    "volume_ratio": 1.17,
-    "roc_pct": 6.7,
-    "ema_stack": false,
-    "timestamp": "2026-08-25T13:47:55.390444+00:00",
-    "first_detected": "2026-08-25T01:06:22.958618+00:00",
-    "last_updated": "2026-08-25T13:47:55.390444+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "BTCUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 78523.99,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 33.4,
-    "volume_ratio": 1.99,
-    "roc_pct": 25.3,
-    "ema_stack": false,
-    "timestamp": "2026-08-25T13:47:51.561895+00:00",
-    "first_detected": "2026-08-25T01:06:19.304066+00:00",
-    "last_updated": "2026-08-25T13:47:51.561895+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "GLD",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 422.470001,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 28.5,
-    "volume_ratio": 1.95,
-    "roc_pct": 6.0,
-    "ema_stack": false,
-    "timestamp": "2026-08-25T13:47:43.974049+00:00",
-    "first_detected": "2026-08-24T13:49:12.438198+00:00",
-    "last_updated": "2026-08-25T13:47:43.974049+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "XRPUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 1.4825,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 39.1,
-    "volume_ratio": 2.11,
-    "roc_pct": 50.62,
-    "ema_stack": false,
-    "timestamp": "2026-08-24T18:36:18.613870+00:00",
-    "first_detected": "2026-08-20T01:04:25.934577+00:00",
-    "last_updated": "2026-08-24T18:36:18.613870+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "DOGEUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.0894,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 32.7,
-    "volume_ratio": 1.84,
-    "roc_pct": 33.1,
-    "ema_stack": false,
-    "timestamp": "2026-08-24T18:36:17.899018+00:00",
-    "first_detected": "2026-08-20T01:04:25.137163+00:00",
-    "last_updated": "2026-08-24T18:36:17.899018+00:00"
+    "timestamp": "2026-08-28T09:28:31.582636+00:00",
+    "first_detected": "2026-08-28T09:28:31.582636+00:00",
+    "last_updated": "2026-08-28T09:28:31.582636+00:00"
   }
 ]
