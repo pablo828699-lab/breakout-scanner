@@ -1,37 +1,20 @@
 [
   {
     "type": "radar",
-    "ticker": "ENAUSDT",
+    "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 0.1684,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 41.8,
-    "volume_ratio": 3.59,
-    "roc_pct": 104.45,
-    "ema_stack": false,
-    "timestamp": "2026-08-28T09:28:33.963947+00:00",
-    "first_detected": "2026-08-28T09:28:33.963947+00:00",
-    "last_updated": "2026-08-28T09:28:33.963947+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "SOLUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 106.32,
+    "price": 5.035,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
     ],
-    "adx": 40.1,
-    "volume_ratio": 2.05,
-    "roc_pct": 43.57,
-    "ema_stack": false,
-    "timestamp": "2026-08-28T09:28:31.582636+00:00",
-    "first_detected": "2026-08-28T09:28:31.582636+00:00",
-    "last_updated": "2026-08-28T09:28:31.582636+00:00"
+    "adx": 38.6,
+    "volume_ratio": 2.78,
+    "roc_pct": 36.35,
+    "ema_stack": true,
+    "timestamp": "2026-08-31T03:34:28.375311+00:00",
+    "first_detected": "2026-08-31T03:34:28.375311+00:00",
+    "last_updated": "2026-08-31T03:34:28.375311+00:00"
   }
 ]
