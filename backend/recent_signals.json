@@ -1,6 +1,75 @@
 [
   {
     "type": "radar",
+    "ticker": "NOW",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 144.300003,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.6,
+    "volume_ratio": 1.43,
+    "roc_pct": 25.73,
+    "ema_stack": false,
+    "timestamp": "2026-09-01T17:35:28.836732+00:00",
+    "first_detected": "2026-08-31T17:52:13.477498+00:00",
+    "last_updated": "2026-09-01T17:35:28.836732+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "CRCL",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 89.93,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 33.1,
+    "volume_ratio": 1.35,
+    "roc_pct": 28.1,
+    "ema_stack": false,
+    "timestamp": "2026-09-01T17:35:27.288537+00:00",
+    "first_detected": "2026-09-01T17:35:27.288537+00:00",
+    "last_updated": "2026-09-01T17:35:27.288537+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BABA",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 113.279999,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.8,
+    "volume_ratio": 0.71,
+    "roc_pct": -8.57,
+    "ema_stack": true,
+    "timestamp": "2026-09-01T17:35:20.819681+00:00",
+    "first_detected": "2026-09-01T17:35:20.819681+00:00",
+    "last_updated": "2026-09-01T17:35:20.819681+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "TSLA",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 357.329987,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 20.4,
+    "volume_ratio": 1.86,
+    "roc_pct": 8.44,
+    "ema_stack": false,
+    "timestamp": "2026-09-01T17:35:19.511384+00:00",
+    "first_detected": "2026-09-01T17:35:19.511384+00:00",
+    "last_updated": "2026-09-01T17:35:19.511384+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -33,24 +102,6 @@
     "timestamp": "2026-08-31T17:52:17.144898+00:00",
     "first_detected": "2026-08-31T17:52:17.144898+00:00",
     "last_updated": "2026-08-31T17:52:17.144898+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NOW",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 147.729996,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 21.9,
-    "volume_ratio": 1.63,
-    "roc_pct": 16.7,
-    "ema_stack": false,
-    "timestamp": "2026-08-31T17:52:13.477498+00:00",
-    "first_detected": "2026-08-31T17:52:13.477498+00:00",
-    "last_updated": "2026-08-31T17:52:13.477498+00:00"
   },
   {
     "type": "radar",
