@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 4330.12,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 34.4,
+    "volume_ratio": 1.38,
+    "roc_pct": -5.48,
+    "ema_stack": true,
+    "timestamp": "2026-09-02T00:56:49.270384+00:00",
+    "first_detected": "2026-09-02T00:56:49.270384+00:00",
+    "last_updated": "2026-09-02T00:56:49.270384+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 5.901,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 43.3,
+    "volume_ratio": 2.27,
+    "roc_pct": 36.07,
+    "ema_stack": true,
+    "timestamp": "2026-09-02T00:56:47.405132+00:00",
+    "first_detected": "2026-09-02T00:56:47.405132+00:00",
+    "last_updated": "2026-09-02T00:56:47.405132+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "NOW",
     "market": "US_EQUITIES",
     "direction": "UP",
@@ -67,57 +102,5 @@
     "timestamp": "2026-09-01T17:35:19.511384+00:00",
     "first_detected": "2026-09-01T17:35:19.511384+00:00",
     "last_updated": "2026-09-01T17:35:19.511384+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 5.222,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 38.6,
-    "volume_ratio": 2.78,
-    "roc_pct": 36.35,
-    "ema_stack": true,
-    "timestamp": "2026-08-31T17:52:21.197694+00:00",
-    "first_detected": "2026-08-31T03:34:28.375311+00:00",
-    "last_updated": "2026-08-31T17:52:21.197694+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "FXY",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 57.415001,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 21.8,
-    "volume_ratio": 1.71,
-    "roc_pct": -0.57,
-    "ema_stack": true,
-    "timestamp": "2026-08-31T17:52:17.144898+00:00",
-    "first_detected": "2026-08-31T17:52:17.144898+00:00",
-    "last_updated": "2026-08-31T17:52:17.144898+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "RKLB",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 63.84,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.0,
-    "volume_ratio": 1.05,
-    "roc_pct": -19.76,
-    "ema_stack": false,
-    "timestamp": "2026-08-31T17:52:06.771208+00:00",
-    "first_detected": "2026-08-31T17:52:06.771208+00:00",
-    "last_updated": "2026-08-31T17:52:06.771208+00:00"
   }
 ]
