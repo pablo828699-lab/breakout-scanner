@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "BABA",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 111.625,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.9,
+    "volume_ratio": 0.54,
+    "roc_pct": -13.26,
+    "ema_stack": true,
+    "timestamp": "2026-09-03T16:55:27.437592+00:00",
+    "first_detected": "2026-09-03T16:55:27.437592+00:00",
+    "last_updated": "2026-09-03T16:55:27.437592+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NFLX",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 82.014999,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 21.4,
+    "volume_ratio": 0.79,
+    "roc_pct": 3.13,
+    "ema_stack": false,
+    "timestamp": "2026-09-03T16:55:26.522707+00:00",
+    "first_detected": "2026-09-03T16:55:26.522707+00:00",
+    "last_updated": "2026-09-03T16:55:26.522707+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -15,107 +49,5 @@
     "timestamp": "2026-09-03T07:46:30.193702+00:00",
     "first_detected": "2026-09-02T00:56:47.405132+00:00",
     "last_updated": "2026-09-03T07:46:30.193702+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PAXGUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 4385.43,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 34.4,
-    "volume_ratio": 1.38,
-    "roc_pct": -5.48,
-    "ema_stack": true,
-    "timestamp": "2026-09-02T14:58:08.074598+00:00",
-    "first_detected": "2026-09-02T00:56:49.270384+00:00",
-    "last_updated": "2026-09-02T14:58:08.074598+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "FXY",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 57.790001,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.4,
-    "volume_ratio": 0.35,
-    "roc_pct": -0.49,
-    "ema_stack": true,
-    "timestamp": "2026-09-02T14:58:02.603365+00:00",
-    "first_detected": "2026-09-02T14:58:02.603365+00:00",
-    "last_updated": "2026-09-02T14:58:02.603365+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "GLD",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 401.450012,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 26.1,
-    "volume_ratio": 1.1,
-    "roc_pct": -0.45,
-    "ema_stack": false,
-    "timestamp": "2026-09-02T14:58:01.230520+00:00",
-    "first_detected": "2026-09-02T14:58:01.230520+00:00",
-    "last_updated": "2026-09-02T14:58:01.230520+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "SOXL",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 105.5625,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.2,
-    "volume_ratio": 1.13,
-    "roc_pct": -17.96,
-    "ema_stack": false,
-    "timestamp": "2026-09-02T14:57:57.410248+00:00",
-    "first_detected": "2026-09-02T14:57:57.410248+00:00",
-    "last_updated": "2026-09-02T14:57:57.410248+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "RKLB",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 62.810001,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 20.6,
-    "volume_ratio": 0.79,
-    "roc_pct": -21.0,
-    "ema_stack": false,
-    "timestamp": "2026-09-02T14:57:54.247701+00:00",
-    "first_detected": "2026-09-02T14:57:54.247701+00:00",
-    "last_updated": "2026-09-02T14:57:54.247701+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "BABA",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 111.985001,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.8,
-    "volume_ratio": 0.77,
-    "roc_pct": -11.94,
-    "ema_stack": true,
-    "timestamp": "2026-09-02T14:57:52.066395+00:00",
-    "first_detected": "2026-09-01T17:35:20.819681+00:00",
-    "last_updated": "2026-09-02T14:57:52.066395+00:00"
   }
 ]
