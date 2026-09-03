@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 6.402,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 45.9,
+    "volume_ratio": 2.88,
+    "roc_pct": 29.43,
+    "ema_stack": true,
+    "timestamp": "2026-09-03T22:16:02.202383+00:00",
+    "first_detected": "2026-09-02T00:56:47.405132+00:00",
+    "last_updated": "2026-09-03T22:16:02.202383+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "BABA",
     "market": "US_EQUITIES",
     "direction": "DOWN",
@@ -32,22 +49,5 @@
     "timestamp": "2026-09-03T16:55:26.522707+00:00",
     "first_detected": "2026-09-03T16:55:26.522707+00:00",
     "last_updated": "2026-09-03T16:55:26.522707+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 5.737,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 45.9,
-    "volume_ratio": 2.88,
-    "roc_pct": 29.43,
-    "ema_stack": true,
-    "timestamp": "2026-09-03T07:46:30.193702+00:00",
-    "first_detected": "2026-09-02T00:56:47.405132+00:00",
-    "last_updated": "2026-09-03T07:46:30.193702+00:00"
   }
 ]
