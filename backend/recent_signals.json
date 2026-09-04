@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 6.169,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 48.4,
+    "volume_ratio": 1.97,
+    "roc_pct": 46.02,
+    "ema_stack": true,
+    "timestamp": "2026-09-04T23:42:28.861781+00:00",
+    "first_detected": "2026-09-02T00:56:47.405132+00:00",
+    "last_updated": "2026-09-04T23:42:28.861781+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ZECUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -173,56 +190,5 @@
     "timestamp": "2026-09-04T14:46:29.292441+00:00",
     "first_detected": "2026-09-04T14:46:29.292441+00:00",
     "last_updated": "2026-09-04T14:46:29.292441+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 6.276,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 48.4,
-    "volume_ratio": 1.97,
-    "roc_pct": 46.02,
-    "ema_stack": true,
-    "timestamp": "2026-09-04T10:34:40.525154+00:00",
-    "first_detected": "2026-09-02T00:56:47.405132+00:00",
-    "last_updated": "2026-09-04T10:34:40.525154+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "BABA",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 111.625,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.9,
-    "volume_ratio": 0.54,
-    "roc_pct": -13.26,
-    "ema_stack": true,
-    "timestamp": "2026-09-03T16:55:27.437592+00:00",
-    "first_detected": "2026-09-03T16:55:27.437592+00:00",
-    "last_updated": "2026-09-03T16:55:27.437592+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NFLX",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 82.014999,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 21.4,
-    "volume_ratio": 0.79,
-    "roc_pct": 3.13,
-    "ema_stack": false,
-    "timestamp": "2026-09-03T16:55:26.522707+00:00",
-    "first_detected": "2026-09-03T16:55:26.522707+00:00",
-    "last_updated": "2026-09-03T16:55:26.522707+00:00"
   }
 ]
