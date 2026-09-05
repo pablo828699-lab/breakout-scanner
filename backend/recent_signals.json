@@ -1,6 +1,42 @@
 [
   {
     "type": "radar",
+    "ticker": "ZECUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1028.52,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 48.2,
+    "volume_ratio": 1.39,
+    "roc_pct": 33.23,
+    "ema_stack": true,
+    "timestamp": "2026-09-05T02:55:00.575977+00:00",
+    "first_detected": "2026-09-04T00:45:07.148401+00:00",
+    "last_updated": "2026-09-05T02:55:00.575977+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 2.22,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 29.1,
+    "volume_ratio": 2.0,
+    "roc_pct": 16.77,
+    "ema_stack": true,
+    "timestamp": "2026-09-05T02:54:59.701851+00:00",
+    "first_detected": "2026-09-05T02:54:59.701851+00:00",
+    "last_updated": "2026-09-05T02:54:59.701851+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -15,24 +51,6 @@
     "timestamp": "2026-09-04T23:42:28.861781+00:00",
     "first_detected": "2026-09-02T00:56:47.405132+00:00",
     "last_updated": "2026-09-04T23:42:28.861781+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ZECUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 970.82,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 46.6,
-    "volume_ratio": 1.22,
-    "roc_pct": 14.66,
-    "ema_stack": true,
-    "timestamp": "2026-09-04T14:46:47.133831+00:00",
-    "first_detected": "2026-09-04T00:45:07.148401+00:00",
-    "last_updated": "2026-09-04T14:46:47.133831+00:00"
   },
   {
     "type": "radar",
