@@ -1,6 +1,42 @@
 [
   {
     "type": "radar",
+    "ticker": "ZECUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1158.53,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 51.9,
+    "volume_ratio": 1.5,
+    "roc_pct": 51.56,
+    "ema_stack": true,
+    "timestamp": "2026-09-07T18:38:32.487097+00:00",
+    "first_detected": "2026-09-07T02:51:21.033160+00:00",
+    "last_updated": "2026-09-07T18:38:32.487097+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 2.298,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 33.6,
+    "volume_ratio": 1.88,
+    "roc_pct": 26.5,
+    "ema_stack": true,
+    "timestamp": "2026-09-07T18:38:31.639865+00:00",
+    "first_detected": "2026-09-07T02:51:20.285425+00:00",
+    "last_updated": "2026-09-07T18:38:31.639865+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "FXY",
     "market": "US_EQUITIES",
     "direction": "UP",
@@ -122,58 +158,5 @@
     "timestamp": "2026-09-07T07:55:11.082991+00:00",
     "first_detected": "2026-09-06T02:53:58.536400+00:00",
     "last_updated": "2026-09-07T07:55:11.082991+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ZECUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 1192.51,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 51.9,
-    "volume_ratio": 1.5,
-    "roc_pct": 51.56,
-    "ema_stack": true,
-    "timestamp": "2026-09-07T02:51:21.033160+00:00",
-    "first_detected": "2026-09-07T02:51:21.033160+00:00",
-    "last_updated": "2026-09-07T02:51:21.033160+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NEARUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 2.415,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 33.6,
-    "volume_ratio": 1.88,
-    "roc_pct": 26.5,
-    "ema_stack": true,
-    "timestamp": "2026-09-07T02:51:20.285425+00:00",
-    "first_detected": "2026-09-07T02:51:20.285425+00:00",
-    "last_updated": "2026-09-07T02:51:20.285425+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "DOGEUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.08864,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 37.7,
-    "volume_ratio": 1.5,
-    "roc_pct": 2.27,
-    "ema_stack": false,
-    "timestamp": "2026-09-06T14:58:12.289681+00:00",
-    "first_detected": "2026-09-06T02:53:56.196024+00:00",
-    "last_updated": "2026-09-06T14:58:12.289681+00:00"
   }
 ]
