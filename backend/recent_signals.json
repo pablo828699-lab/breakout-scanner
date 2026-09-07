@@ -1,6 +1,24 @@
 [
   {
     "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 6.886,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 55.6,
+    "volume_ratio": 1.47,
+    "roc_pct": 55.74,
+    "ema_stack": true,
+    "timestamp": "2026-09-07T21:54:47.199550+00:00",
+    "first_detected": "2026-09-06T02:53:58.536400+00:00",
+    "last_updated": "2026-09-07T21:54:47.199550+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ZECUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -140,23 +158,5 @@
     "timestamp": "2026-09-07T13:57:57.533731+00:00",
     "first_detected": "2026-09-07T13:57:57.533731+00:00",
     "last_updated": "2026-09-07T13:57:57.533731+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 7.053,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 55.6,
-    "volume_ratio": 1.47,
-    "roc_pct": 55.74,
-    "ema_stack": true,
-    "timestamp": "2026-09-07T07:55:11.082991+00:00",
-    "first_detected": "2026-09-06T02:53:58.536400+00:00",
-    "last_updated": "2026-09-07T07:55:11.082991+00:00"
   }
 ]
