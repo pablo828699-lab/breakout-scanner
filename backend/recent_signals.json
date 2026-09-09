@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "FXY",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 59.740002,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.8,
+    "volume_ratio": 1.42,
+    "roc_pct": 3.33,
+    "ema_stack": false,
+    "timestamp": "2026-09-09T17:32:44.493668+00:00",
+    "first_detected": "2026-09-09T17:32:44.493668+00:00",
+    "last_updated": "2026-09-09T17:32:44.493668+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -33,59 +50,5 @@
     "timestamp": "2026-09-08T17:45:08.869778+00:00",
     "first_detected": "2026-09-08T03:47:46.547788+00:00",
     "last_updated": "2026-09-08T17:45:08.869778+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 6.886,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 55.6,
-    "volume_ratio": 1.47,
-    "roc_pct": 55.74,
-    "ema_stack": true,
-    "timestamp": "2026-09-07T21:54:47.199550+00:00",
-    "first_detected": "2026-09-06T02:53:58.536400+00:00",
-    "last_updated": "2026-09-07T21:54:47.199550+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ZECUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 1158.53,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 51.9,
-    "volume_ratio": 1.5,
-    "roc_pct": 51.56,
-    "ema_stack": true,
-    "timestamp": "2026-09-07T18:38:32.487097+00:00",
-    "first_detected": "2026-09-07T02:51:21.033160+00:00",
-    "last_updated": "2026-09-07T18:38:32.487097+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NEARUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 2.298,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 33.6,
-    "volume_ratio": 1.88,
-    "roc_pct": 26.5,
-    "ema_stack": true,
-    "timestamp": "2026-09-07T18:38:31.639865+00:00",
-    "first_detected": "2026-09-07T02:51:20.285425+00:00",
-    "last_updated": "2026-09-07T18:38:31.639865+00:00"
   }
 ]
