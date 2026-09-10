@@ -4,7 +4,7 @@
     "ticker": "NEARUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 2.459,
+    "price": 2.4,
     "triggers": [
       "IMPULSE"
     ],
@@ -12,9 +12,26 @@
     "volume_ratio": 2.0,
     "roc_pct": 36.54,
     "ema_stack": true,
-    "timestamp": "2026-09-10T00:49:56.341454+00:00",
+    "timestamp": "2026-09-10T14:48:37.539107+00:00",
     "first_detected": "2026-09-10T00:49:56.341454+00:00",
-    "last_updated": "2026-09-10T00:49:56.341454+00:00"
+    "last_updated": "2026-09-10T14:48:37.539107+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BABA",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 108.644997,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.9,
+    "volume_ratio": 0.71,
+    "roc_pct": -8.41,
+    "ema_stack": true,
+    "timestamp": "2026-09-10T14:48:24.865691+00:00",
+    "first_detected": "2026-09-10T14:48:24.865691+00:00",
+    "last_updated": "2026-09-10T14:48:24.865691+00:00"
   },
   {
     "type": "radar",
