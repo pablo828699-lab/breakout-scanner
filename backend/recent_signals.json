@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 2.459,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 39.9,
+    "volume_ratio": 2.0,
+    "roc_pct": 36.54,
+    "ema_stack": true,
+    "timestamp": "2026-09-10T00:49:56.341454+00:00",
+    "first_detected": "2026-09-10T00:49:56.341454+00:00",
+    "last_updated": "2026-09-10T00:49:56.341454+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "FXY",
     "market": "US_EQUITIES",
     "direction": "UP",
@@ -15,40 +32,5 @@
     "timestamp": "2026-09-09T17:32:44.493668+00:00",
     "first_detected": "2026-09-09T17:32:44.493668+00:00",
     "last_updated": "2026-09-09T17:32:44.493668+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PUMPUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.004357,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 50.2,
-    "volume_ratio": 1.42,
-    "roc_pct": -5.72,
-    "ema_stack": true,
-    "timestamp": "2026-09-08T17:45:10.677157+00:00",
-    "first_detected": "2026-09-08T03:47:48.340407+00:00",
-    "last_updated": "2026-09-08T17:45:10.677157+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "WLDUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.4764,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 31.1,
-    "volume_ratio": 2.5,
-    "roc_pct": 25.74,
-    "ema_stack": false,
-    "timestamp": "2026-09-08T17:45:08.869778+00:00",
-    "first_detected": "2026-09-08T03:47:46.547788+00:00",
-    "last_updated": "2026-09-08T17:45:08.869778+00:00"
   }
 ]
