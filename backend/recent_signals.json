@@ -4,7 +4,7 @@
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 4330.25,
+    "price": 4365.0,
     "triggers": [
       "IMPULSE"
     ],
@@ -12,42 +12,60 @@
     "volume_ratio": 1.36,
     "roc_pct": -2.95,
     "ema_stack": true,
-    "timestamp": "2026-09-11T02:58:12.667066+00:00",
+    "timestamp": "2026-09-11T16:54:53.335738+00:00",
     "first_detected": "2026-09-11T02:58:12.667066+00:00",
-    "last_updated": "2026-09-11T02:58:12.667066+00:00"
+    "last_updated": "2026-09-11T16:54:53.335738+00:00"
   },
   {
     "type": "radar",
-    "ticker": "NEARUSDT",
-    "market": "CRYPTO",
+    "ticker": "USO",
+    "market": "US_EQUITIES",
     "direction": "UP",
-    "price": 2.4,
+    "price": 154.270004,
     "triggers": [
+      "DONCHIAN_15",
       "IMPULSE"
     ],
-    "adx": 39.9,
-    "volume_ratio": 2.0,
-    "roc_pct": 36.54,
+    "adx": 20.0,
+    "volume_ratio": 2.25,
+    "roc_pct": 24.37,
     "ema_stack": true,
-    "timestamp": "2026-09-10T14:48:37.539107+00:00",
-    "first_detected": "2026-09-10T00:49:56.341454+00:00",
-    "last_updated": "2026-09-10T14:48:37.539107+00:00"
+    "timestamp": "2026-09-11T16:54:47.492593+00:00",
+    "first_detected": "2026-09-11T16:54:47.492593+00:00",
+    "last_updated": "2026-09-11T16:54:47.492593+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "GLD",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 399.869995,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.5,
+    "volume_ratio": 0.84,
+    "roc_pct": -5.92,
+    "ema_stack": false,
+    "timestamp": "2026-09-11T16:54:46.622708+00:00",
+    "first_detected": "2026-09-11T16:54:46.622708+00:00",
+    "last_updated": "2026-09-11T16:54:46.622708+00:00"
   },
   {
     "type": "radar",
     "ticker": "BABA",
     "market": "US_EQUITIES",
     "direction": "DOWN",
-    "price": 108.644997,
+    "price": 109.400002,
     "triggers": [
       "DONCHIAN_15"
     ],
-    "adx": 20.9,
-    "volume_ratio": 0.71,
-    "roc_pct": -8.41,
+    "adx": 21.7,
+    "volume_ratio": 0.51,
+    "roc_pct": -9.4,
     "ema_stack": true,
-    "timestamp": "2026-09-10T14:48:24.865691+00:00",
-    "first_detected": "2026-09-10T14:48:24.865691+00:00",
-    "last_updated": "2026-09-10T14:48:24.865691+00:00"
+    "timestamp": "2026-09-11T16:54:36.363816+00:00",
+    "first_detected": "2026-09-11T16:54:36.363816+00:00",
+    "last_updated": "2026-09-11T16:54:36.363816+00:00"
   }
 ]
