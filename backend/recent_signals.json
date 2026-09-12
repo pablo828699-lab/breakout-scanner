@@ -1,6 +1,57 @@
 [
   {
     "type": "radar",
+    "ticker": "ZECUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1160.68,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 56.8,
+    "volume_ratio": 1.46,
+    "roc_pct": 40.38,
+    "ema_stack": true,
+    "timestamp": "2026-09-12T00:53:59.461037+00:00",
+    "first_detected": "2026-09-12T00:53:59.461037+00:00",
+    "last_updated": "2026-09-12T00:53:59.461037+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ETHUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 2511.54,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 50.3,
+    "volume_ratio": 2.1,
+    "roc_pct": 4.05,
+    "ema_stack": true,
+    "timestamp": "2026-09-12T00:53:57.529097+00:00",
+    "first_detected": "2026-09-12T00:53:57.529097+00:00",
+    "last_updated": "2026-09-12T00:53:57.529097+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BTCUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 77290.01,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 45.6,
+    "volume_ratio": 1.25,
+    "roc_pct": -0.28,
+    "ema_stack": true,
+    "timestamp": "2026-09-12T00:53:56.670720+00:00",
+    "first_detected": "2026-09-12T00:53:56.670720+00:00",
+    "last_updated": "2026-09-12T00:53:56.670720+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
