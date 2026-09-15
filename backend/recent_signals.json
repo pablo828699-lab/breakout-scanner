@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "XRPUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1.4215,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 39.0,
+    "volume_ratio": 1.88,
+    "roc_pct": 1.76,
+    "ema_stack": false,
+    "timestamp": "2026-09-15T00:16:03.728378+00:00",
+    "first_detected": "2026-09-15T00:16:03.728378+00:00",
+    "last_updated": "2026-09-15T00:16:03.728378+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ETHUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 2511.91,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 50.8,
+    "volume_ratio": 1.23,
+    "roc_pct": 2.44,
+    "ema_stack": true,
+    "timestamp": "2026-09-15T00:16:02.365407+00:00",
+    "first_detected": "2026-09-15T00:16:02.365407+00:00",
+    "last_updated": "2026-09-15T00:16:02.365407+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "STRC",
     "market": "US_EQUITIES",
     "direction": "UP",
