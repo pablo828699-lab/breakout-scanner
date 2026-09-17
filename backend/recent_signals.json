@@ -1,6 +1,58 @@
 [
   {
     "type": "radar",
+    "ticker": "FXE",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 106.059998,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 19.4,
+    "volume_ratio": 1.66,
+    "roc_pct": -1.01,
+    "ema_stack": true,
+    "timestamp": "2026-09-17T14:40:51.077489+00:00",
+    "first_detected": "2026-09-17T14:40:51.077489+00:00",
+    "last_updated": "2026-09-17T14:40:51.077489+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "CRCL",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 82.811897,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 32.5,
+    "volume_ratio": 1.59,
+    "roc_pct": -10.09,
+    "ema_stack": true,
+    "timestamp": "2026-09-17T14:40:47.159360+00:00",
+    "first_detected": "2026-09-17T14:40:47.159360+00:00",
+    "last_updated": "2026-09-17T14:40:47.159360+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BABA",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 107.830002,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.0,
+    "volume_ratio": 0.54,
+    "roc_pct": -4.94,
+    "ema_stack": true,
+    "timestamp": "2026-09-17T14:40:41.548296+00:00",
+    "first_detected": "2026-09-17T14:40:41.548296+00:00",
+    "last_updated": "2026-09-17T14:40:41.548296+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
