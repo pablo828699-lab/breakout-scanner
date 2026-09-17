@@ -1,6 +1,58 @@
 [
   {
     "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 4287.34,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 25.3,
+    "volume_ratio": 2.29,
+    "roc_pct": -3.26,
+    "ema_stack": true,
+    "timestamp": "2026-09-17T03:23:43.789847+00:00",
+    "first_detected": "2026-09-17T03:23:43.789847+00:00",
+    "last_updated": "2026-09-17T03:23:43.789847+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ZECUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1385.0,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 54.0,
+    "volume_ratio": 1.95,
+    "roc_pct": 8.98,
+    "ema_stack": true,
+    "timestamp": "2026-09-17T03:23:41.649912+00:00",
+    "first_detected": "2026-09-17T03:23:41.649912+00:00",
+    "last_updated": "2026-09-17T03:23:41.649912+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 2.662,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 51.3,
+    "volume_ratio": 1.59,
+    "roc_pct": 7.46,
+    "ema_stack": true,
+    "timestamp": "2026-09-17T03:23:40.779264+00:00",
+    "first_detected": "2026-09-17T03:23:40.779264+00:00",
+    "last_updated": "2026-09-17T03:23:40.779264+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "USO",
     "market": "US_EQUITIES",
     "direction": "UP",
