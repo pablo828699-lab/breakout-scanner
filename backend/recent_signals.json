@@ -1,6 +1,42 @@
 [
   {
     "type": "radar",
+    "ticker": "ZECUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1569.29,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 54.8,
+    "volume_ratio": 2.03,
+    "roc_pct": 28.65,
+    "ema_stack": true,
+    "timestamp": "2026-09-18T23:00:59.533690+00:00",
+    "first_detected": "2026-09-17T03:23:41.649912+00:00",
+    "last_updated": "2026-09-18T23:00:59.533690+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 3.758,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 53.4,
+    "volume_ratio": 3.24,
+    "roc_pct": 36.35,
+    "ema_stack": true,
+    "timestamp": "2026-09-18T23:00:58.736360+00:00",
+    "first_detected": "2026-09-17T03:23:40.779264+00:00",
+    "last_updated": "2026-09-18T23:00:58.736360+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ONDOUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -50,58 +86,5 @@
     "timestamp": "2026-09-18T17:29:32.888605+00:00",
     "first_detected": "2026-09-18T17:29:32.888605+00:00",
     "last_updated": "2026-09-18T17:29:32.888605+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ZECUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 1478.64,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 54.8,
-    "volume_ratio": 2.03,
-    "roc_pct": 28.65,
-    "ema_stack": true,
-    "timestamp": "2026-09-18T08:45:03.441203+00:00",
-    "first_detected": "2026-09-17T03:23:41.649912+00:00",
-    "last_updated": "2026-09-18T08:45:03.441203+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NEARUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 3.462,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 53.4,
-    "volume_ratio": 3.24,
-    "roc_pct": 36.35,
-    "ema_stack": true,
-    "timestamp": "2026-09-18T08:45:02.533851+00:00",
-    "first_detected": "2026-09-17T03:23:40.779264+00:00",
-    "last_updated": "2026-09-18T08:45:02.533851+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PAXGUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 4350.65,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 25.3,
-    "volume_ratio": 2.29,
-    "roc_pct": -3.26,
-    "ema_stack": true,
-    "timestamp": "2026-09-17T18:48:40.886932+00:00",
-    "first_detected": "2026-09-17T03:23:43.789847+00:00",
-    "last_updated": "2026-09-17T18:48:40.886932+00:00"
   }
 ]
