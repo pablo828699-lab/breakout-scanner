@@ -1,6 +1,42 @@
 [
   {
     "type": "radar",
+    "ticker": "ONDOUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.3987,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 25.9,
+    "volume_ratio": 2.51,
+    "roc_pct": 6.41,
+    "ema_stack": true,
+    "timestamp": "2026-09-19T07:01:14.880443+00:00",
+    "first_detected": "2026-09-18T03:09:54.382928+00:00",
+    "last_updated": "2026-09-19T07:01:14.880443+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 9.169,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 52.0,
+    "volume_ratio": 2.36,
+    "roc_pct": 31.24,
+    "ema_stack": true,
+    "timestamp": "2026-09-19T07:01:13.855794+00:00",
+    "first_detected": "2026-09-18T03:09:53.355434+00:00",
+    "last_updated": "2026-09-19T07:01:13.855794+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "WLDUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -171,41 +207,6 @@
     "timestamp": "2026-09-18T23:00:58.736360+00:00",
     "first_detected": "2026-09-17T03:23:40.779264+00:00",
     "last_updated": "2026-09-18T23:00:58.736360+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ONDOUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.4014,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 25.0,
-    "volume_ratio": 2.48,
-    "roc_pct": -3.0,
-    "ema_stack": true,
-    "timestamp": "2026-09-18T17:29:46.977455+00:00",
-    "first_detected": "2026-09-18T03:09:54.382928+00:00",
-    "last_updated": "2026-09-18T17:29:46.977455+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 8.775,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 50.7,
-    "volume_ratio": 1.65,
-    "roc_pct": 13.6,
-    "ema_stack": true,
-    "timestamp": "2026-09-18T17:29:45.994037+00:00",
-    "first_detected": "2026-09-18T03:09:53.355434+00:00",
-    "last_updated": "2026-09-18T17:29:45.994037+00:00"
   },
   {
     "type": "radar",
