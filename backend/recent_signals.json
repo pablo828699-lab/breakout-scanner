@@ -1,6 +1,42 @@
 [
   {
     "type": "radar",
+    "ticker": "ONDOUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.4169,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 25.9,
+    "volume_ratio": 2.51,
+    "roc_pct": 6.41,
+    "ema_stack": true,
+    "timestamp": "2026-09-19T21:17:23.585907+00:00",
+    "first_detected": "2026-09-18T03:09:54.382928+00:00",
+    "last_updated": "2026-09-19T21:17:23.585907+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 8.602,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 52.0,
+    "volume_ratio": 2.36,
+    "roc_pct": 31.24,
+    "ema_stack": true,
+    "timestamp": "2026-09-19T21:17:22.583622+00:00",
+    "first_detected": "2026-09-18T03:09:53.355434+00:00",
+    "last_updated": "2026-09-19T21:17:22.583622+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "WLDUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -170,58 +206,5 @@
     "timestamp": "2026-09-19T11:54:21.251323+00:00",
     "first_detected": "2026-09-17T03:23:40.779264+00:00",
     "last_updated": "2026-09-19T11:54:21.251323+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ONDOUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.3987,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 25.9,
-    "volume_ratio": 2.51,
-    "roc_pct": 6.41,
-    "ema_stack": true,
-    "timestamp": "2026-09-19T07:01:14.880443+00:00",
-    "first_detected": "2026-09-18T03:09:54.382928+00:00",
-    "last_updated": "2026-09-19T07:01:14.880443+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 9.169,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 52.0,
-    "volume_ratio": 2.36,
-    "roc_pct": 31.24,
-    "ema_stack": true,
-    "timestamp": "2026-09-19T07:01:13.855794+00:00",
-    "first_detected": "2026-09-18T03:09:53.355434+00:00",
-    "last_updated": "2026-09-19T07:01:13.855794+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "DELL",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 579.440002,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 18.5,
-    "volume_ratio": 0.96,
-    "roc_pct": 19.54,
-    "ema_stack": true,
-    "timestamp": "2026-09-18T17:29:32.888605+00:00",
-    "first_detected": "2026-09-18T17:29:32.888605+00:00",
-    "last_updated": "2026-09-18T17:29:32.888605+00:00"
   }
 ]
