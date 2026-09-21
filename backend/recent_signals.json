@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "ONDOUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.4283,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 29.4,
+    "volume_ratio": 1.37,
+    "roc_pct": 26.27,
+    "ema_stack": true,
+    "timestamp": "2026-09-21T05:53:57.174382+00:00",
+    "first_detected": "2026-09-18T03:09:54.382928+00:00",
+    "last_updated": "2026-09-21T05:53:57.174382+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.2146,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 47.2,
+    "volume_ratio": 2.01,
+    "roc_pct": 51.78,
+    "ema_stack": true,
+    "timestamp": "2026-09-21T05:53:55.915488+00:00",
+    "first_detected": "2026-09-19T01:06:27.252491+00:00",
+    "last_updated": "2026-09-21T05:53:55.915488+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "NEARUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -16,41 +51,5 @@
     "timestamp": "2026-09-21T00:54:50.843700+00:00",
     "first_detected": "2026-09-21T00:54:50.843700+00:00",
     "last_updated": "2026-09-21T00:54:50.843700+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ENAUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.2238,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 45.5,
-    "volume_ratio": 2.19,
-    "roc_pct": 34.32,
-    "ema_stack": true,
-    "timestamp": "2026-09-20T17:18:48.612500+00:00",
-    "first_detected": "2026-09-19T01:06:27.252491+00:00",
-    "last_updated": "2026-09-20T17:18:48.612500+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ONDOUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.4069,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 27.7,
-    "volume_ratio": 2.25,
-    "roc_pct": 16.85,
-    "ema_stack": true,
-    "timestamp": "2026-09-20T13:56:40.870039+00:00",
-    "first_detected": "2026-09-18T03:09:54.382928+00:00",
-    "last_updated": "2026-09-20T13:56:40.870039+00:00"
   }
 ]
