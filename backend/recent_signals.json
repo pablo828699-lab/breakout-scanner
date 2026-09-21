@@ -1,6 +1,24 @@
 [
   {
     "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 4.283,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 60.2,
+    "volume_ratio": 2.77,
+    "roc_pct": 70.64,
+    "ema_stack": true,
+    "timestamp": "2026-09-21T00:54:50.843700+00:00",
+    "first_detected": "2026-09-21T00:54:50.843700+00:00",
+    "last_updated": "2026-09-21T00:54:50.843700+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ENAUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -34,23 +52,5 @@
     "timestamp": "2026-09-20T13:56:40.870039+00:00",
     "first_detected": "2026-09-18T03:09:54.382928+00:00",
     "last_updated": "2026-09-20T13:56:40.870039+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 8.602,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 52.0,
-    "volume_ratio": 2.36,
-    "roc_pct": 31.24,
-    "ema_stack": true,
-    "timestamp": "2026-09-19T21:17:22.583622+00:00",
-    "first_detected": "2026-09-18T03:09:53.355434+00:00",
-    "last_updated": "2026-09-19T21:17:22.583622+00:00"
   }
 ]
