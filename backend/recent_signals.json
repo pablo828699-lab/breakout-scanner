@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "ONDOUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.4334,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 31.4,
+    "volume_ratio": 2.07,
+    "roc_pct": 30.6,
+    "ema_stack": true,
+    "timestamp": "2026-09-22T07:17:13.825022+00:00",
+    "first_detected": "2026-09-18T03:09:54.382928+00:00",
+    "last_updated": "2026-09-22T07:17:13.825022+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 4.339,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 62.3,
+    "volume_ratio": 1.85,
+    "roc_pct": 80.67,
+    "ema_stack": true,
+    "timestamp": "2026-09-22T07:17:12.099585+00:00",
+    "first_detected": "2026-09-21T00:54:50.843700+00:00",
+    "last_updated": "2026-09-22T07:17:12.099585+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "XPLUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -126,23 +161,6 @@
   },
   {
     "type": "radar",
-    "ticker": "ONDOUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.4387,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 29.4,
-    "volume_ratio": 1.37,
-    "roc_pct": 26.27,
-    "ema_stack": true,
-    "timestamp": "2026-09-21T18:04:26.806548+00:00",
-    "first_detected": "2026-09-18T03:09:54.382928+00:00",
-    "last_updated": "2026-09-21T18:04:26.806548+00:00"
-  },
-  {
-    "type": "radar",
     "ticker": "ENAUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -158,24 +176,6 @@
     "timestamp": "2026-09-21T18:04:26.094619+00:00",
     "first_detected": "2026-09-19T01:06:27.252491+00:00",
     "last_updated": "2026-09-21T18:04:26.094619+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NEARUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 3.943,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 60.2,
-    "volume_ratio": 2.77,
-    "roc_pct": 70.64,
-    "ema_stack": true,
-    "timestamp": "2026-09-21T18:04:24.579793+00:00",
-    "first_detected": "2026-09-21T00:54:50.843700+00:00",
-    "last_updated": "2026-09-21T18:04:24.579793+00:00"
   },
   {
     "type": "radar",
