@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 10.784,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 57.3,
+    "volume_ratio": 2.0,
+    "roc_pct": 60.46,
+    "ema_stack": true,
+    "timestamp": "2026-09-23T03:17:07.758729+00:00",
+    "first_detected": "2026-09-23T03:17:07.758729+00:00",
+    "last_updated": "2026-09-23T03:17:07.758729+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ZECUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 1609.42,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 58.4,
+    "volume_ratio": 1.15,
+    "roc_pct": 45.14,
+    "ema_stack": true,
+    "timestamp": "2026-09-23T03:17:06.706288+00:00",
+    "first_detected": "2026-09-23T03:17:06.706288+00:00",
+    "last_updated": "2026-09-23T03:17:06.706288+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ONDOUSDT",
     "market": "CRYPTO",
     "direction": "UP",
