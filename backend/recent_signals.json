@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "ACEUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.2084,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 40.8,
+    "volume_ratio": 2.29,
+    "roc_pct": 36.69,
+    "ema_stack": true,
+    "timestamp": "2026-09-27T00:13:08.772213+00:00",
+    "first_detected": "2026-09-27T00:13:08.772213+00:00",
+    "last_updated": "2026-09-27T00:13:08.772213+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "XPLUSDT",
     "market": "CRYPTO",
     "direction": "UP",
