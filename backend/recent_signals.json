@@ -4,7 +4,7 @@
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 4142.6,
+    "price": 4155.88,
     "triggers": [
       "DONCHIAN_15",
       "IMPULSE"
@@ -13,9 +13,27 @@
     "volume_ratio": 1.88,
     "roc_pct": -5.29,
     "ema_stack": true,
-    "timestamp": "2026-09-29T04:11:38.956489+00:00",
+    "timestamp": "2026-09-29T17:37:07.309235+00:00",
     "first_detected": "2026-09-29T04:11:38.956489+00:00",
-    "last_updated": "2026-09-29T04:11:38.956489+00:00"
+    "last_updated": "2026-09-29T17:37:07.309235+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NFLX",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 70.532501,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 20.5,
+    "volume_ratio": 1.33,
+    "roc_pct": -13.81,
+    "ema_stack": true,
+    "timestamp": "2026-09-29T17:36:51.906279+00:00",
+    "first_detected": "2026-09-29T17:36:51.906279+00:00",
+    "last_updated": "2026-09-29T17:36:51.906279+00:00"
   },
   {
     "type": "radar",
