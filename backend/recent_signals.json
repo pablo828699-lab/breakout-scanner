@@ -1,6 +1,24 @@
 [
   {
     "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 4142.6,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 30.2,
+    "volume_ratio": 1.88,
+    "roc_pct": -5.29,
+    "ema_stack": true,
+    "timestamp": "2026-09-29T04:11:38.956489+00:00",
+    "first_detected": "2026-09-29T04:11:38.956489+00:00",
+    "last_updated": "2026-09-29T04:11:38.956489+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "UP",
