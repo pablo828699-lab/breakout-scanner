@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "WLDUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.5369,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 33.0,
+    "volume_ratio": 1.64,
+    "roc_pct": 22.92,
+    "ema_stack": true,
+    "timestamp": "2026-10-01T04:06:47.472046+00:00",
+    "first_detected": "2026-10-01T04:06:47.472046+00:00",
+    "last_updated": "2026-10-01T04:06:47.472046+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.2686,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 56.1,
+    "volume_ratio": 1.41,
+    "roc_pct": 22.13,
+    "ema_stack": true,
+    "timestamp": "2026-10-01T04:06:46.498551+00:00",
+    "first_detected": "2026-10-01T04:06:46.498551+00:00",
+    "last_updated": "2026-10-01T04:06:46.498551+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -67,41 +101,5 @@
     "timestamp": "2026-09-30T14:38:45.873805+00:00",
     "first_detected": "2026-09-30T14:38:45.873805+00:00",
     "last_updated": "2026-09-30T14:38:45.873805+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PAXGUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 4155.88,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 30.2,
-    "volume_ratio": 1.88,
-    "roc_pct": -5.29,
-    "ema_stack": true,
-    "timestamp": "2026-09-29T17:37:07.309235+00:00",
-    "first_detected": "2026-09-29T04:11:38.956489+00:00",
-    "last_updated": "2026-09-29T17:37:07.309235+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NFLX",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 70.532501,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 20.5,
-    "volume_ratio": 1.33,
-    "roc_pct": -13.81,
-    "ema_stack": true,
-    "timestamp": "2026-09-29T17:36:51.906279+00:00",
-    "first_detected": "2026-09-29T17:36:51.906279+00:00",
-    "last_updated": "2026-09-29T17:36:51.906279+00:00"
   }
 ]
