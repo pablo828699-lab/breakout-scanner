@@ -1,6 +1,57 @@
 [
   {
     "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 4152.56,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 34.6,
+    "volume_ratio": 1.81,
+    "roc_pct": -4.78,
+    "ema_stack": true,
+    "timestamp": "2026-10-03T00:09:22.610749+00:00",
+    "first_detected": "2026-10-03T00:09:22.610749+00:00",
+    "last_updated": "2026-10-03T00:09:22.610749+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "WLDUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.5616,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 34.7,
+    "volume_ratio": 1.65,
+    "roc_pct": 18.07,
+    "ema_stack": true,
+    "timestamp": "2026-10-03T00:09:21.622196+00:00",
+    "first_detected": "2026-10-03T00:09:21.622196+00:00",
+    "last_updated": "2026-10-03T00:09:21.622196+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "SOLUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 118.57,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 43.9,
+    "volume_ratio": 1.2,
+    "roc_pct": 0.07,
+    "ema_stack": true,
+    "timestamp": "2026-10-03T00:09:18.726777+00:00",
+    "first_detected": "2026-10-03T00:09:18.726777+00:00",
+    "last_updated": "2026-10-03T00:09:18.726777+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "FXE",
     "market": "US_EQUITIES",
     "direction": "DOWN",
@@ -50,39 +101,5 @@
     "timestamp": "2026-10-02T15:22:11.620040+00:00",
     "first_detected": "2026-10-02T15:22:11.620040+00:00",
     "last_updated": "2026-10-02T15:22:11.620040+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "WLDUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.4965,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 33.0,
-    "volume_ratio": 1.64,
-    "roc_pct": 22.92,
-    "ema_stack": true,
-    "timestamp": "2026-10-01T17:59:55.586646+00:00",
-    "first_detected": "2026-10-01T04:06:47.472046+00:00",
-    "last_updated": "2026-10-01T17:59:55.586646+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ENAUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.25,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 56.1,
-    "volume_ratio": 1.41,
-    "roc_pct": 22.13,
-    "ema_stack": true,
-    "timestamp": "2026-10-01T17:59:54.522427+00:00",
-    "first_detected": "2026-10-01T04:06:46.498551+00:00",
-    "last_updated": "2026-10-01T17:59:54.522427+00:00"
   }
 ]
