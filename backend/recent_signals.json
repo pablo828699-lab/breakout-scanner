@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.006278,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 37.2,
+    "volume_ratio": 0.85,
+    "roc_pct": 56.59,
+    "ema_stack": true,
+    "timestamp": "2026-10-04T15:08:11.668749+00:00",
+    "first_detected": "2026-10-04T02:22:50.987511+00:00",
+    "last_updated": "2026-10-04T15:08:11.668749+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "WLDUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -16,23 +33,6 @@
     "timestamp": "2026-10-04T09:19:52.538564+00:00",
     "first_detected": "2026-10-03T00:09:21.622196+00:00",
     "last_updated": "2026-10-04T09:19:52.538564+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PUMPUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 0.006266,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 37.2,
-    "volume_ratio": 0.85,
-    "roc_pct": 56.59,
-    "ema_stack": true,
-    "timestamp": "2026-10-04T02:22:50.987511+00:00",
-    "first_detected": "2026-10-04T02:22:50.987511+00:00",
-    "last_updated": "2026-10-04T02:22:50.987511+00:00"
   },
   {
     "type": "radar",
