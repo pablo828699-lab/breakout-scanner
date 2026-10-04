@@ -520,6 +520,34 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 res = f'{{"status": "error", "message": "{str(exc)}"}}'
                 self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/scan-orderflow":
+            try:
+                logger.info("Manual orderflow scan triggered via HTTP.")
+
+                thread = threading.Thread(
+                    target=self.scanner._run_orderflow_scan,
+                    args=({
+                        "CRYPTO": self.scanner._fetcher.get_crypto_tickers(),
+                        "US_EQUITIES": self.scanner._fetcher.get_sp500_tickers()
+                    },),
+                    name="OrderflowScanThread",
+                )
+                thread.start()
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = '{"status": "processing", "message": "Orderflow scan started in background"}'
+                self.wfile.write(res.encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP orderflow scan handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
         elif clean_path == "/api/perp-screener":
             try:
                 from urllib.parse import urlparse, parse_qs

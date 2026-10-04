@@ -697,13 +697,22 @@ class BreakoutScanner:
         except Exception as exc:
             logger.error("Failed to save momentum signals: %s", exc)
 
-    def _run_orderflow_scan(self, markets: List[str]) -> List[Dict[str, Any]]:
+    def _run_orderflow_scan(self, markets: Any = None) -> List[Dict[str, Any]]:
         """Run Order Flow & Auction Market Theory analysis across Crypto & Equity/Perp candidates."""
         from backend.orderflow_engine import analyze_orderflow_and_auction
 
+        if markets is None:
+            markets = ["CRYPTO", "US_EQUITIES"]
+
+        market_tickers: Dict[str, List[str]] = {}
+        if isinstance(markets, dict):
+            market_tickers = markets
+        elif isinstance(markets, list):
+            for m in markets:
+                market_tickers[m] = self._tickers_for_market(m)
+
         reports: List[Dict[str, Any]] = []
-        for market in markets:
-            tickers = self._tickers_for_market(market)
+        for market, tickers in market_tickers.items():
             for ticker in tickers:
                 try:
                     if market == "CRYPTO":
@@ -715,7 +724,7 @@ class BreakoutScanner:
                         report = analyze_orderflow_and_auction(ticker, hourly_df, market=market)
                         scores = report.get("scores", {})
                         max_score = max(scores.values()) if scores else 0.0
-                        if max_score >= 50.0 or report.get("signals"):
+                        if max_score >= 40.0 or report.get("signals") or report.get("confluence_a_plus"):
                             reports.append(report)
                 except Exception as exc:
                     logger.debug("Orderflow eval failed for %s: %s", ticker, exc)
