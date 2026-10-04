@@ -90,6 +90,62 @@ function ScoreBar({ label, value, color }) {
   );
 }
 
+function Sparkline({ priceData = [], cvdData = [] }) {
+  if (!priceData || priceData.length < 2) return null;
+
+  const width = 280;
+  const height = 44;
+  const pad = 4;
+
+  const minP = Math.min(...priceData);
+  const maxP = Math.max(...priceData);
+  const rangeP = maxP - minP || 1;
+
+  const pointsP = priceData.map((p, i) => {
+    const x = pad + (i / (priceData.length - 1)) * (width - pad * 2);
+    const y = height - pad - ((p - minP) / rangeP) * (height - pad * 2);
+    return `${x},${y}`;
+  }).join(' ');
+
+  let pointsC = '';
+  if (cvdData && cvdData.length >= 2) {
+    const minC = Math.min(...cvdData);
+    const maxC = Math.max(...cvdData);
+    const rangeC = maxC - minC || 1;
+    pointsC = cvdData.map((c, i) => {
+      const x = pad + (i / (cvdData.length - 1)) * (width - pad * 2);
+      const y = height - pad - ((c - minC) / rangeC) * (height - pad * 2);
+      return `${x},${y}`;
+    }).join(' ');
+  }
+
+  return (
+    <div style={{ backgroundColor: 'rgba(15,23,42,0.8)', padding: '8px 10px', borderRadius: 8, border: `1px solid #1e293b`, marginTop: 8 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, marginBottom: 4 }}>
+        <span style={{ color: COLORS.cyan, fontWeight: 700 }}>● Precio (1h)</span>
+        <span style={{ color: COLORS.purple, fontWeight: 700 }}>● CVD Acumulado</span>
+      </div>
+      <svg viewBox={`0 0 ${width} ${height}`} style={{ width: '100%', height: 44, overflow: 'visible' }}>
+        {pointsC && (
+          <polyline
+            fill="none"
+            stroke={COLORS.purple}
+            strokeWidth="1.8"
+            strokeDasharray="2 2"
+            points={pointsC}
+          />
+        )}
+        <polyline
+          fill="none"
+          stroke={COLORS.cyan}
+          strokeWidth="2"
+          points={pointsP}
+        />
+      </svg>
+    </div>
+  );
+}
+
 export function OrderflowPanel({
   signals = [],
   livePrices = {},
@@ -105,6 +161,9 @@ export function OrderflowPanel({
   const filteredSignals = safeSignals.filter((s) => {
     if (!s || typeof s !== 'object') return false;
     const scores = s.scores || {};
+    if (filter === 'CONFLUENCE') {
+      return s.confluence_a_plus === true;
+    }
     if (filter === 'ABSORPTION') {
       return (scores.buyer_absorption || 0) >= 60 || (scores.seller_absorption || 0) >= 60;
     }
@@ -136,7 +195,7 @@ export function OrderflowPanel({
         {/* Controls & Filter */}
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           <div style={{ display: 'flex', backgroundColor: '#111827', borderRadius: 8, border: `1px solid ${COLORS.border}`, padding: 2 }}>
-            {['ALL', 'ABSORPTION', 'TRAPPED', 'INITIATIVE'].map((f) => (
+            {['ALL', 'CONFLUENCE', 'ABSORPTION', 'TRAPPED', 'INITIATIVE'].map((f) => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
@@ -147,12 +206,12 @@ export function OrderflowPanel({
                   fontSize: 11,
                   fontWeight: 600,
                   cursor: 'pointer',
-                  backgroundColor: filter === f ? COLORS.cyan : 'transparent',
-                  color: filter === f ? '#0a0e17' : COLORS.textSecondary,
+                  backgroundColor: filter === f ? (f === 'CONFLUENCE' ? '#ef4444' : COLORS.cyan) : 'transparent',
+                  color: filter === f ? '#0a0e17' : (f === 'CONFLUENCE' ? '#fca5a5' : COLORS.textSecondary),
                   transition: 'all 0.2s ease',
                 }}
               >
-                {f === 'ALL' ? 'Todos' : f === 'ABSORPTION' ? 'Absorción' : f === 'TRAPPED' ? 'Atrapados' : 'Iniciativa'}
+                {f === 'ALL' ? 'Todos' : f === 'CONFLUENCE' ? '🔥 Confluencia A+' : f === 'ABSORPTION' ? 'Absorción' : f === 'TRAPPED' ? 'Atrapados' : 'Iniciativa'}
               </button>
             ))}
           </div>
@@ -204,14 +263,35 @@ export function OrderflowPanel({
                 style={{
                   backgroundColor: COLORS.card,
                   borderRadius: 12,
-                  border: `1px solid ${COLORS.border}`,
+                  border: item.confluence_a_plus ? '1px solid #ef4444' : `1px solid ${COLORS.border}`,
                   padding: 16,
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 12,
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                  boxShadow: item.confluence_a_plus ? '0 4px 16px rgba(239,68,68,0.25)' : '0 4px 12px rgba(0,0,0,0.2)',
                 }}
               >
+                {/* Confluence A+ Banner */}
+                {item.confluence_a_plus && (
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    backgroundColor: 'rgba(239,68,68,0.15)',
+                    border: '1px solid #ef4444',
+                    color: '#fca5a5',
+                    padding: '4px 8px',
+                    borderRadius: 6,
+                    fontSize: 10,
+                    fontWeight: 800,
+                    letterSpacing: 0.5,
+                    textTransform: 'uppercase'
+                  }}>
+                    <span>🔥 CONFLUENCIA A+:</span>
+                    <span>{Array.isArray(item.confluence_tags) ? item.confluence_tags.join(' + ').replace(/_/g, ' ') : 'CONFIRMADO'}</span>
+                  </div>
+                )}
+
                 {/* Card Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
@@ -251,6 +331,11 @@ export function OrderflowPanel({
                   <ScoreBar label="Vendedores Atrapados (Trapped Shorts)" value={scores.trapped_shorts || 0} color={COLORS.yellow} />
                   <ScoreBar label="Compradores Atrapados (Trapped Longs)" value={scores.trapped_longs || 0} color={COLORS.purple} />
                 </div>
+
+                {/* Native Visual Sparkline (Price vs CVD Trajectory) */}
+                {item.sparkline_price && item.sparkline_price.length > 1 && (
+                  <Sparkline priceData={item.sparkline_price} cvdData={item.sparkline_cvd} />
+                )}
 
                 {/* Metrics Grid */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, textAlign: 'center' }}>

@@ -23,6 +23,10 @@ class OrderFlowReport:
     metrics: Dict[str, Any]
     scores: Dict[str, float]
     market_story: str
+    sparkline_price: List[float] = field(default_factory=list)
+    sparkline_cvd: List[float] = field(default_factory=list)
+    confluence_a_plus: bool = False
+    confluence_tags: List[str] = field(default_factory=list)
     timestamp: datetime = field(default_factory=datetime.utcnow)
 
 

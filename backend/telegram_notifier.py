@@ -330,10 +330,14 @@ class TelegramNotifier:
         eff = metrics.get("aggression_efficiency", 0.0)
         ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
+        header = "🔥 <b>SETUP A+ CONFLUENCIA INSTITUCIONAL</b>" if report.get("confluence_a_plus") else "🔬 <b>ORDER FLOW & SUBASTA INSTITUCIONAL</b>"
+        confluence_str = f"🔥 <b>Confluencia:</b> <code>{', '.join(report.get('confluence_tags', []))}</code>\n" if report.get("confluence_a_plus") else ""
+
         lines = [
-            f"🔬 <b>ORDER FLOW & SUBASTA INSTITUCIONAL</b>",
+            header,
             f"━━━━━━━━━━━━━━━━━━",
             f"🏷️ <b>{symbol}</b> — Régimen: <code>{regime}</code>",
+            confluence_str.strip() if confluence_str else "",
             f"📍 Ubicación: <i>{loc}</i>",
             f"━━━━━━━━━━━━━━━━━━",
             f"📊 <b>Scores Relevantes:</b> {top_scores_str}",
@@ -344,7 +348,7 @@ class TelegramNotifier:
             f"━━━━━━━━━━━━━━━━━━",
             f"⏰ {ts}",
         ]
-        return "\n".join(lines)
+        return "\n".join([line for line in lines if line])
 
     def send_orderflow_alert(self, report: dict) -> bool:
         """Format and dispatch an order flow & auction report alert."""

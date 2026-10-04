@@ -280,6 +280,30 @@ def analyze_orderflow_and_auction(
     if of_metrics.get("cvd_divergence") != "NONE":
         signals.append(of_metrics["cvd_divergence"])
 
+    # Extract last 20 bars for native visual sparklines
+    last_20 = df_1h.tail(20)
+    sparkline_price = [round(float(p), 4) for p in last_20["Close"].tolist()] if "Close" in last_20 else []
+    sparkline_cvd = [round(float(c), 2) for c in last_20["CVD"].tolist()] if "CVD" in last_20 else []
+
+    # Smart Multi-Module Confluence A+ Rules
+    is_confluence_a_plus = False
+    confluence_tags = []
+
+    # A+ Rule 1: Capitulation Reversal (Extreme Selling Absorption at Value Support)
+    if scores.get("buyer_absorption", 0) >= 70.0 and ("INSIDE_VALUE" in auc_context.get("location_tags", []) or "NEAR_INTRADAY_VAL" in auc_context.get("location_tags", [])):
+        is_confluence_a_plus = True
+        confluence_tags.append("CAPITULATION_ABSORPTION_REVERSAL")
+
+    # A+ Rule 2: High Conviction Short Squeeze (Trapped Shorts + Heavy Aggression Absorption)
+    if scores.get("trapped_shorts", 0) >= 70.0:
+        is_confluence_a_plus = True
+        confluence_tags.append("SHORT_SQUEEZE_HIGH_CONVICTION")
+
+    # A+ Rule 3: Initiative Breakout with Value Expansion
+    if scores.get("initiative_buying", 0) >= 70.0 and auc_context.get("value_migration") == "VALUE_MIGRATING_UP":
+        is_confluence_a_plus = True
+        confluence_tags.append("INITIATIVE_VALUE_EXPANSION")
+
     report = OrderFlowReport(
         symbol=symbol,
         market=market,
@@ -290,6 +314,10 @@ def analyze_orderflow_and_auction(
         metrics={**of_metrics, **profiles, **{k: v for k, v in auc_context.items() if k not in ("location_tags", "regime", "activity_type")}},
         scores=scores,
         market_story=market_story,
+        sparkline_price=sparkline_price,
+        sparkline_cvd=sparkline_cvd,
+        confluence_a_plus=is_confluence_a_plus,
+        confluence_tags=confluence_tags,
     )
 
     return {
@@ -302,5 +330,9 @@ def analyze_orderflow_and_auction(
         "metrics": report.metrics,
         "scores": report.scores,
         "market_story": report.market_story,
+        "sparkline_price": report.sparkline_price,
+        "sparkline_cvd": report.sparkline_cvd,
+        "confluence_a_plus": report.confluence_a_plus,
+        "confluence_tags": report.confluence_tags,
     }
 
