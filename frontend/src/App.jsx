@@ -4,6 +4,7 @@ import CapitulationPanel from './components/CapitulationPanel';
 import MomentumPanel from './components/MomentumPanel';
 import PerpScreenerPanel from './components/PerpScreenerPanel';
 import OrderflowPanel from './components/OrderflowPanel';
+import ErrorBoundary from './components/ErrorBoundary';
 import { safeDateParse } from './utils/dateUtils';
 import { fetchCapitulationSignals, fetchCandidates, fetchMomentumSignals, fetchOrderFlowSignals, fetchLivePrices, BACKEND_URL } from './services/api';
 
@@ -146,19 +147,37 @@ export default function App() {
   const [livePriceMap, setLivePriceMap] = useState({});
   const [capitulationSignals, setCapitulationSignals] = useState(() => {
     const saved = localStorage.getItem('capitulationSignals');
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+    try {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   });
   const [isScanningCap, setIsScanningCap] = useState(false);
 
   const [momentumSignals, setMomentumSignals] = useState(() => {
     const saved = localStorage.getItem('momentumSignals');
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+    try {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   });
   const [isScanningMom, setIsScanningMom] = useState(false);
 
   const [orderflowSignals, setOrderflowSignals] = useState(() => {
     const saved = localStorage.getItem('orderflowSignals');
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+    try {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   });
   const [isScanningOf, setIsScanningOf] = useState(false);
 
@@ -807,50 +826,60 @@ export default function App() {
 
         {/* Hyperliquid Perpetuals Screener Module */}
         <section className="w-full">
-          <PerpScreenerPanel apiBaseUrl={BACKEND_URL} />
+          <ErrorBoundary name="Hyperliquid Perpetuals Screener">
+            <PerpScreenerPanel apiBaseUrl={BACKEND_URL} />
+          </ErrorBoundary>
         </section>
 
         {/* Order Flow & Auction Market Theory Module */}
         <section className="w-full">
-          <OrderflowPanel
-            signals={orderflowSignals}
-            livePrices={livePriceMap}
-            onApprove={(c) => setApproveModalCandidate(c)}
-            onReject={handleRejectOrderflow}
-            onScan={handleScanOrderFlow}
-            isScanning={isScanningOf}
-          />
+          <ErrorBoundary name="Order Flow & Auction Theory">
+            <OrderflowPanel
+              signals={orderflowSignals}
+              livePrices={livePriceMap}
+              onApprove={(c) => setApproveModalCandidate(c)}
+              onReject={handleRejectOrderflow}
+              onScan={handleScanOrderFlow}
+              isScanning={isScanningOf}
+            />
+          </ErrorBoundary>
         </section>
 
         {/* Momentum & Squeeze Acceleration Module */}
         <section className="w-full">
-          <MomentumPanel
-            signals={momentumSignals}
-            livePriceMap={livePriceMap}
-            onApprove={(c) => setApproveModalCandidate(c)}
-            onReject={handleRejectMomentum}
-            onScan={handleScanMomentum}
-            isScanning={isScanningMom}
-          />
+          <ErrorBoundary name="Momentum & Squeeze">
+            <MomentumPanel
+              signals={momentumSignals}
+              livePriceMap={livePriceMap}
+              onApprove={(c) => setApproveModalCandidate(c)}
+              onReject={handleRejectMomentum}
+              onScan={handleScanMomentum}
+              isScanning={isScanningMom}
+            />
+          </ErrorBoundary>
         </section>
 
         {/* Capitulation Analysis Module */}
         <section className="w-full">
-          <CapitulationPanel
-            signals={capitulationSignals}
-            livePriceMap={livePriceMap}
-            onApprove={(c) => setApproveModalCandidate(c)}
-            onReject={handleRejectCapitulation}
-          />
+          <ErrorBoundary name="Capitulation Analysis">
+            <CapitulationPanel
+              signals={capitulationSignals}
+              livePriceMap={livePriceMap}
+              onApprove={(c) => setApproveModalCandidate(c)}
+              onReject={handleRejectCapitulation}
+            />
+          </ErrorBoundary>
         </section>
 
         {/* Breakout Candidates / Trend Radar */}
         <section className="w-full">
-          <CandidatePanel
-            candidates={candidates}
-            livePriceMap={livePriceMap}
-            onReject={handleReject}
-          />
+          <ErrorBoundary name="Breakout Candidates">
+            <CandidatePanel
+              candidates={candidates}
+              livePriceMap={livePriceMap}
+              onReject={handleReject}
+            />
+          </ErrorBoundary>
         </section>
 
         {/* Custom Modal for Approval Size & Entry Price */}

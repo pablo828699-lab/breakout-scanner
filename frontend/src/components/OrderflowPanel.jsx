@@ -47,18 +47,19 @@ function Badge({ label, bg, color }) {
   );
 }
 
-function RegimeBadge({ regime }) {
-  let label = regime.replace(/_/g, ' ');
+function RegimeBadge({ regime = 'DEVELOPING' }) {
+  const regStr = typeof regime === 'string' && regime ? regime : 'DEVELOPING';
+  const label = regStr.replace(/_/g, ' ');
   let bg = 'rgba(59,130,246,0.18)';
   let color = COLORS.blue;
 
-  if (regime.includes('TRENDING_UP') || regime.includes('ACCUMULATION')) {
+  if (regStr.includes('TRENDING_UP') || regStr.includes('ACCUMULATION')) {
     bg = 'rgba(16,185,129,0.2)';
     color = COLORS.greenPrimary;
-  } else if (regime.includes('DISTRIBUTION') || regime.includes('TRENDING_DOWN')) {
+  } else if (regStr.includes('DISTRIBUTION') || regStr.includes('TRENDING_DOWN')) {
     bg = 'rgba(239,68,68,0.2)';
     color = COLORS.redPrimary;
-  } else if (regime.includes('TRANSITION')) {
+  } else if (regStr.includes('TRANSITION')) {
     bg = 'rgba(245,158,11,0.2)';
     color = COLORS.yellow;
   }
@@ -99,17 +100,18 @@ export function OrderflowPanel({
 }) {
   const [filter, setFilter] = useState('ALL');
 
-  const filteredSignals = signals.filter((s) => {
+  const safeSignals = Array.isArray(signals) ? signals : [];
+
+  const filteredSignals = safeSignals.filter((s) => {
+    if (!s || typeof s !== 'object') return false;
+    const scores = s.scores || {};
     if (filter === 'ABSORPTION') {
-      const scores = s.scores || {};
       return (scores.buyer_absorption || 0) >= 60 || (scores.seller_absorption || 0) >= 60;
     }
     if (filter === 'TRAPPED') {
-      const scores = s.scores || {};
       return (scores.trapped_shorts || 0) >= 60 || (scores.trapped_longs || 0) >= 60;
     }
     if (filter === 'INITIATIVE') {
-      const scores = s.scores || {};
       return (scores.initiative_buying || 0) >= 65 || (scores.initiative_selling || 0) >= 65;
     }
     return true;
@@ -189,11 +191,12 @@ export function OrderflowPanel({
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: 16 }}>
           {filteredSignals.map((item, idx) => {
+            if (!item || typeof item !== 'object') return null;
             const sym = item.symbol || item.ticker || 'N/A';
-            const livePrice = livePrices[sym] || item.metrics?.intra_poc || 0;
+            const livePrice = (livePrices && livePrices[sym]) || item.metrics?.intra_poc || item.metrics?.current_price || 0;
             const metrics = item.metrics || {};
             const scores = item.scores || {};
-            const locations = item.location || [];
+            const locations = Array.isArray(item.location) ? item.location : [];
 
             return (
               <div
@@ -217,11 +220,14 @@ export function OrderflowPanel({
                       <RegimeBadge regime={item.regime || 'DEVELOPING'} />
                     </div>
                     <div style={{ fontSize: 11, color: COLORS.textSecondary, marginTop: 4 }}>
-                      {locations.map((loc) => (
-                        <span key={loc} style={{ marginRight: 6, color: COLORS.cyan, fontWeight: 500 }}>
-                          📍 {loc.replace(/_/g, ' ')}
-                        </span>
-                      ))}
+                      {locations.map((loc, lIdx) => {
+                        const locLabel = typeof loc === 'string' ? loc.replace(/_/g, ' ') : String(loc);
+                        return (
+                          <span key={`${locLabel}-${lIdx}`} style={{ marginRight: 6, color: COLORS.cyan, fontWeight: 500 }}>
+                            📍 {locLabel}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -251,14 +257,16 @@ export function OrderflowPanel({
                   <div style={{ backgroundColor: '#0f172a', padding: '6px 8px', borderRadius: 6 }}>
                     <div style={{ fontSize: 10, color: COLORS.textSecondary }}>CVD z-score</div>
                     <div style={{ fontSize: 12, fontWeight: 700, color: (metrics.cvd_change_z || 0) >= 0 ? COLORS.greenLight : COLORS.redLight }}>
-                      {(metrics.cvd_change_z || 0) > 0 ? `+${metrics.cvd_change_z}` : metrics.cvd_change_z || 0}σ
+                      {typeof metrics.cvd_change_z === 'number'
+                        ? (metrics.cvd_change_z > 0 ? `+${metrics.cvd_change_z.toFixed(2)}` : metrics.cvd_change_z.toFixed(2))
+                        : metrics.cvd_change_z || 0}σ
                     </div>
                   </div>
 
                   <div style={{ backgroundColor: '#0f172a', padding: '6px 8px', borderRadius: 6 }}>
                     <div style={{ fontSize: 10, color: COLORS.textSecondary }}>Eficiencia</div>
                     <div style={{ fontSize: 12, fontWeight: 700, color: (metrics.aggression_efficiency || 1) < 0.8 ? COLORS.yellow : COLORS.blue }}>
-                      {metrics.aggression_efficiency || 1}
+                      {typeof metrics.aggression_efficiency === 'number' ? metrics.aggression_efficiency.toFixed(2) : (metrics.aggression_efficiency || 1)}
                     </div>
                   </div>
 
@@ -292,7 +300,7 @@ export function OrderflowPanel({
                 <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
                   <button
                     onClick={() => {
-                      const clean = sym.replace('xyz:', '').replace('USDT', '');
+                      const clean = typeof sym === 'string' ? sym.replace('xyz:', '').replace('USDT', '') : '';
                       window.open(`https://www.tradingview.com/chart/?symbol=${clean}`, '_blank');
                     }}
                     style={{
