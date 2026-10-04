@@ -318,4 +318,56 @@ class TelegramNotifier:
         """Format and dispatch a momentum signal alert."""
         return self.send_alert(signal)
 
+    def _format_orderflow(self, report: dict) -> str:
+        symbol = report.get("symbol", "N/A")
+        regime = report.get("regime", "DEVELOPING")
+        loc = ", ".join(report.get("location", []))
+        scores = report.get("scores", {})
+        top_scores = [f"{k.replace('_', ' ').title()}: {v:.0f}%" for k, v in scores.items() if v >= 60.0]
+        top_scores_str = " | ".join(top_scores) if top_scores else "Flujo Normal"
+        metrics = report.get("metrics", {})
+        cvd_z = metrics.get("cvd_change_z", 0.0)
+        eff = metrics.get("aggression_efficiency", 0.0)
+        ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+        lines = [
+            f"🔬 <b>ORDER FLOW & SUBASTA INSTITUCIONAL</b>",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"🏷️ <b>{symbol}</b> — Régimen: <code>{regime}</code>",
+            f"📍 Ubicación: <i>{loc}</i>",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"📊 <b>Scores Relevantes:</b> {top_scores_str}",
+            f"⚡ CVD z-score: <code>{cvd_z:+.2f}σ</code> | Eficiencia: <code>{eff:.2f}</code>",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"📖 <b>Diagnóstico:</b>",
+            f"<i>{report.get('market_story', '')}</i>",
+            f"━━━━━━━━━━━━━━━━━━",
+            f"⏰ {ts}",
+        ]
+        return "\n".join(lines)
+
+    def send_orderflow_alert(self, report: dict) -> bool:
+        """Format and dispatch an order flow & auction report alert."""
+        text = self._format_orderflow(report)
+        if self._dry_run:
+            logger.info("[DRY-RUN] Telegram Orderflow alert:\n%s", text)
+            return True
+
+        url = f"https://api.telegram.org/bot{self._bot_token}/sendMessage"
+        payload = {
+            "chat_id": self._chat_id,
+            "text": text,
+            "parse_mode": "HTML",
+        }
+        try:
+            resp = requests.post(url, json=payload, timeout=10)
+            if resp.status_code == 200:
+                logger.info("Telegram Orderflow alert sent for %s.", report.get("symbol"))
+                return True
+            logger.error("Telegram API error %d: %s", resp.status_code, resp.text[:200])
+            return False
+        except Exception as exc:
+            logger.error("Telegram Orderflow send failed: %s", exc)
+            return False
+
 

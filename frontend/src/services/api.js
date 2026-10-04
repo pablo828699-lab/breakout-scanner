@@ -179,3 +179,40 @@ export async function fetchMomentumSignals(options = {}) {
   return [];
 }
 
+/**
+ * Fetches institutional order flow and auction signals with primary endpoint and fallback.
+ *
+ * @param {object} options
+ * @returns {Promise<Array>}
+ */
+export async function fetchOrderFlowSignals(options = {}) {
+  const timeoutMs = options.timeoutMs || DEFAULT_TIMEOUT_MS;
+  const baseUrl = options.baseUrl || BACKEND_URL;
+
+  try {
+    const resp = await fetchWithTimeout(`${baseUrl}/api/orderflow`, {}, timeoutMs);
+    if (resp.ok) {
+      const data = await resp.json();
+      if (Array.isArray(data)) {
+        return data;
+      }
+    }
+  } catch (err) {
+    console.warn('Primary orderflow fetch failed, attempting fallback:', err);
+  }
+
+  try {
+    const fallbackResp = await fetchWithTimeout('/orderflow_signals.json', {}, timeoutMs);
+    if (fallbackResp.ok) {
+      const data = await fallbackResp.json();
+      if (Array.isArray(data)) {
+        return data;
+      }
+    }
+  } catch (err) {
+    console.error('Orderflow fallback fetch failed:', err);
+  }
+
+  return [];
+}
+

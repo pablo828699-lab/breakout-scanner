@@ -70,7 +70,7 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
         clean_path = self.path.split("?")[0].rstrip("/")
         logger.info("HTTP POST request: path=%s, clean_path=%s", self.path, clean_path)
 
-        if clean_path in ("/api/capitulation", "/api/candidates", "/api/momentum"):
+        if clean_path in ("/api/capitulation", "/api/candidates", "/api/momentum", "/api/orderflow"):
             try:
                 content_length = int(self.headers.get('Content-Length', 0))
                 post_data = self.rfile.read(content_length)
@@ -80,6 +80,8 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                     filename = "capitulation_signals.json"
                 elif clean_path == "/api/momentum":
                     filename = "momentum_signals.json"
+                elif clean_path == "/api/orderflow":
+                    filename = "orderflow_signals.json"
                 else:
                     filename = "recent_signals.json"
                 filepath = os.path.join(os.path.dirname(__file__), filename)
@@ -159,6 +161,30 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(res.encode("utf-8"))
             except Exception as exc:
                 logger.error("HTTP scan handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/scan-orderflow":
+            try:
+                logger.info("External HTTP OrderFlow trigger received. Spawning background orderflow scan thread...")
+                
+                def _do_of():
+                    self.scanner._run_orderflow_scan(["US_EQUITIES", "CRYPTO"])
+
+                thread = threading.Thread(target=_do_of, name="OrderFlowScanThread")
+                thread.start()
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = '{"status": "processing", "message": "Orderflow scan cycle started in background"}'
+                self.wfile.write(res.encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP scan-orderflow handler error: %s", exc)
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")
@@ -271,6 +297,27 @@ class ScannerHTTPHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps(data).encode("utf-8"))
             except Exception as exc:
                 logger.error("HTTP momentum handler error: %s", exc)
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                res = f'{{"status": "error", "message": "{str(exc)}"}}'
+                self.wfile.write(res.encode("utf-8"))
+        elif clean_path == "/api/orderflow":
+            try:
+                filepath = os.path.join(os.path.dirname(__file__), "orderflow_signals.json")
+                data = []
+                if os.path.exists(filepath):
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(json.dumps(data).encode("utf-8"))
+            except Exception as exc:
+                logger.error("HTTP orderflow handler error: %s", exc)
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Access-Control-Allow-Origin", "*")

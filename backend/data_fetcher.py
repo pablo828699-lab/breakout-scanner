@@ -393,9 +393,18 @@ class DataFetcher:
         df["Low"] = df["Low"].astype(float)
         df["Close"] = df["Close"].astype(float)
         df["Volume"] = df["Volume"].astype(float)
+        df["TakerBuyBase"] = df["TakerBuyBase"].astype(float)
         df.index = pd.to_datetime(df["OpenTime"], unit="ms", utc=True)
         df.index.name = "Date"
-        return df[["Open", "High", "Low", "Close", "Volume"]]
+
+        # Explicit Order Flow Delta Calculation
+        df["BuyVolume"] = df["TakerBuyBase"]
+        df["SellVolume"] = df["Volume"] - df["TakerBuyBase"]
+        df["Delta"] = df["BuyVolume"] - df["SellVolume"]
+        df["CVD"] = df["Delta"].cumsum()
+
+        cols = ["Open", "High", "Low", "Close", "Volume", "BuyVolume", "SellVolume", "Delta", "CVD"]
+        return df[cols]
 
     def _fetch_yfinance_crypto(self, yf_symbol: str, period: str, interval: str) -> pd.DataFrame:
         """Fetch historical crypto data from Yahoo Finance as a backup."""

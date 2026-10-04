@@ -1,0 +1,24 @@
+[
+  {
+    "type": "momentum",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "LONG",
+    "trigger": "INSTITUTIONAL_IMPULSE",
+    "entry_price": 0.1694,
+    "stop_loss": 0.1366,
+    "take_profit": 0.2513,
+    "rr_ratio": 2.5,
+    "rvol": 2.63,
+    "roc_10": 103.61,
+    "rsi": 77.9,
+    "squeeze_status": "EXPANSION",
+    "ema_stack": true,
+    "confidence_score": 0.85,
+    "analysis_summary": "Impulso alcista de alta velocidad | ROC(10): +103.6% | RVOL: 2.63x | RSI: 77.9 | Estado: EXPANSION | R:R = 1:2.5 | Confianza: 85%",
+    "timestamp": "2026-08-27T17:55:29.258128+00:00",
+    "first_detected": "2026-08-27T17:55:29.258128+00:00",
+    "last_updated": "2026-08-27T17:55:29.258128+00:00",
+    "asset_class": "CRIPTO"
+  }
+]

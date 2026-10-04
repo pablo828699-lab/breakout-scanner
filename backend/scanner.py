@@ -363,9 +363,34 @@ class BreakoutScanner:
                         logger.info(
                             "🚀 MOMENTUM ALERT sent: %s %s (Trigger=%s, R:R=1:%.1f)",
                             ms.ticker, ms.direction, ms.trigger, ms.rr_ratio,
-                        )
+                         )
         except Exception as exc:
             logger.error("Momentum scan failed: %s", exc, exc_info=True)
+
+        # --- Order Flow / Auction Market Theory analysis ---
+        try:
+            of_reports = self._run_orderflow_scan(markets)
+            if of_reports:
+                for rep in of_reports:
+                    symbol = rep.get("symbol", "")
+                    scores = rep.get("scores", {})
+                    top_score_name = max(scores, key=scores.get) if scores else ""
+                    top_score_val = scores.get(top_score_name, 0.0) if top_score_name else 0.0
+
+                    if top_score_val >= 70.0:
+                        alert_time = datetime.now(tz=timezone.utc)
+                        cooldown_key = f"OF:{symbol}:{top_score_name}"
+                        if cooldown_key not in self._last_alert or \
+                           (alert_time - self._last_alert[cooldown_key]).total_seconds() > cfg.ALERT_COOLDOWN_HOURS * 3600:
+                            self._last_alert[cooldown_key] = alert_time
+                            self._save_last_alerts()
+                            self._notifier.send_orderflow_alert(rep)
+                            logger.info(
+                                "🔬 ORDERFLOW ALERT sent: %s (%s=%.1f%%)",
+                                symbol, top_score_name, top_score_val,
+                            )
+        except Exception as exc:
+            logger.error("Orderflow scan failed: %s", exc, exc_info=True)
 
         return signals
 
@@ -671,6 +696,93 @@ class BreakoutScanner:
             self._sync_to_render_backend("/api/momentum", signals_dict)
         except Exception as exc:
             logger.error("Failed to save momentum signals: %s", exc)
+
+    def _run_orderflow_scan(self, markets: List[str]) -> List[Dict[str, Any]]:
+        """Run Order Flow & Auction Market Theory analysis across Crypto & Equity/Perp candidates."""
+        from backend.orderflow_engine import analyze_orderflow_and_auction
+
+        reports: List[Dict[str, Any]] = []
+        for market in markets:
+            tickers = self._tickers_for_market(market)
+            for ticker in tickers:
+                try:
+                    if market == "CRYPTO":
+                        hourly_df = self._fetcher.fetch_crypto_hourly(ticker)
+                    else:
+                        hourly_df = self._fetcher.fetch_sp500_hourly(ticker)
+
+                    if hourly_df is not None and len(hourly_df) >= 20:
+                        report = analyze_orderflow_and_auction(ticker, hourly_df, market=market)
+                        scores = report.get("scores", {})
+                        max_score = max(scores.values()) if scores else 0.0
+                        if max_score >= 50.0 or report.get("signals"):
+                            reports.append(report)
+                except Exception as exc:
+                    logger.debug("Orderflow eval failed for %s: %s", ticker, exc)
+
+        if reports:
+            try:
+                self._save_orderflow_signals(reports)
+            except Exception as exc:
+                logger.error("Failed persisting orderflow signals: %s", exc)
+
+        return reports
+
+    def _save_orderflow_signals(self, reports: List[Dict[str, Any]]) -> None:
+        import json
+        import os
+        filepath = os.path.join(os.path.dirname(__file__), "orderflow_signals.json")
+        now = datetime.now(timezone.utc)
+        ttl_seconds = 24 * 3600
+
+        existing_by_symbol: Dict[str, dict] = {}
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    items = json.load(f)
+                    for item in items:
+                        sym = item.get("symbol")
+                        if not sym:
+                            continue
+                        ts_val = item.get("last_updated") or item.get("timestamp")
+                        ts_dt = parse_iso_timestamp(ts_val)
+                        if (now - ts_dt).total_seconds() < ttl_seconds:
+                            existing_by_symbol[sym] = item
+            except Exception as exc:
+                logger.warning("Failed loading existing orderflow signals: %s", exc)
+                existing_by_symbol = {}
+
+        for r in reports:
+            sym = r.get("symbol")
+            if not sym:
+                continue
+            iso_ts = now.isoformat()
+            first_detected = (
+                existing_by_symbol[sym].get("first_detected")
+                if sym in existing_by_symbol and existing_by_symbol[sym].get("first_detected")
+                else iso_ts
+            )
+            r["timestamp"] = iso_ts
+            r["first_detected"] = first_detected
+            r["last_updated"] = iso_ts
+            existing_by_symbol[sym] = r
+
+        reports_dict = list(existing_by_symbol.values())
+        # Sort by highest score descending
+        reports_dict.sort(
+            key=lambda x: max(x.get("scores", {}).values()) if x.get("scores") else 0,
+            reverse=True,
+        )
+        if len(reports_dict) > 100:
+            reports_dict = reports_dict[:100]
+
+        try:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(reports_dict, f, indent=2)
+            logger.info("Saved %d orderflow reports to disk.", len(reports_dict))
+            self._sync_to_render_backend("/api/orderflow", reports_dict)
+        except Exception as exc:
+            logger.error("Failed to save orderflow signals: %s", exc)
 
     def _sync_to_render_backend(self, endpoint_path: str, data: list) -> None:
         """Sync json data directly to Render backend with retries and timeout for Cold-Start toleration."""

@@ -3,8 +3,9 @@ import CandidatePanel from './components/CandidatePanel';
 import CapitulationPanel from './components/CapitulationPanel';
 import MomentumPanel from './components/MomentumPanel';
 import PerpScreenerPanel from './components/PerpScreenerPanel';
+import OrderflowPanel from './components/OrderflowPanel';
 import { safeDateParse } from './utils/dateUtils';
-import { fetchCapitulationSignals, fetchCandidates, fetchMomentumSignals, fetchLivePrices, BACKEND_URL } from './services/api';
+import { fetchCapitulationSignals, fetchCandidates, fetchMomentumSignals, fetchOrderFlowSignals, fetchLivePrices, BACKEND_URL } from './services/api';
 
 // Import fallback mock data in case localStorage is empty initially
 import {
@@ -155,6 +156,12 @@ export default function App() {
   });
   const [isScanningMom, setIsScanningMom] = useState(false);
 
+  const [orderflowSignals, setOrderflowSignals] = useState(() => {
+    const saved = localStorage.getItem('orderflowSignals');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [isScanningOf, setIsScanningOf] = useState(false);
+
   // Real-time clock update
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -173,6 +180,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('momentumSignals', JSON.stringify(momentumSignals));
   }, [momentumSignals]);
+
+  useEffect(() => {
+    localStorage.setItem('orderflowSignals', JSON.stringify(orderflowSignals));
+  }, [orderflowSignals]);
 
   const [isLoadedFromCloud, setIsLoadedFromCloud] = useState(false);
 
@@ -281,6 +292,22 @@ export default function App() {
 
     loadMomentum();
     const timer = setInterval(loadMomentum, 30000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Fetch order flow & auction signals using API service
+  useEffect(() => {
+    const loadOrderFlow = async () => {
+      const data = await fetchOrderFlowSignals();
+      setOrderflowSignals(() => {
+        const savedIgnored = JSON.parse(localStorage.getItem('ignoredCandidates') || '[]');
+        const ignoredSet = new Set(savedIgnored);
+        return data.filter(s => !ignoredSet.has(`OF_${s.symbol}_${s.timestamp}`));
+      });
+    };
+
+    loadOrderFlow();
+    const timer = setInterval(loadOrderFlow, 30000);
     return () => clearInterval(timer);
   }, []);
 
@@ -592,6 +619,35 @@ export default function App() {
     }
   };
 
+  const handleRejectOrderflow = (symbol) => {
+    const signal = orderflowSignals.find((s) => (s.symbol === symbol || s.ticker === symbol));
+    if (signal) {
+      const key = `OF_${signal.symbol || signal.ticker}_${signal.timestamp}`;
+      setIgnoredCandidates((prev) => {
+        if (prev.includes(key)) return prev;
+        return [...prev, key];
+      });
+    }
+    setOrderflowSignals(orderflowSignals.filter((s) => s.symbol !== symbol && s.ticker !== symbol));
+  };
+
+  const handleScanOrderFlow = async () => {
+    setIsScanningOf(true);
+    try {
+      await fetch(`${BACKEND_URL}/scan-orderflow`);
+      setTimeout(async () => {
+        const data = await fetchOrderFlowSignals();
+        if (Array.isArray(data) && data.length > 0) {
+          setOrderflowSignals(data);
+        }
+        setIsScanningOf(false);
+      }, 6000);
+    } catch (err) {
+      console.error('Orderflow scan failed:', err);
+      setIsScanningOf(false);
+    }
+  };
+
   // Handler to close an open position (move it to closed trade history)
   const handleClosePosition = (id) => {
     const position = openPositions.find((p) => p.id === id);
@@ -717,6 +773,19 @@ export default function App() {
               >
                 {isScanningMom ? 'Buscando...' : '🚀 Momentum'}
               </button>
+
+              {/* Manual Order Flow Scan Button */}
+              <button
+                onClick={handleScanOrderFlow}
+                disabled={isScanningOf}
+                className={`text-xs font-bold px-3 py-1.5 rounded-lg border transition-all duration-300 ${
+                  isScanningOf
+                    ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed'
+                    : 'bg-cyan-600/10 border-cyan-500/30 text-cyan-400 hover:bg-cyan-600/20 hover:border-cyan-500/60'
+                }`}
+              >
+                {isScanningOf ? 'Analizando...' : '🔬 Order Flow'}
+              </button>
               
               <div className="h-4 w-[1px] bg-slate-800" />
               
@@ -739,6 +808,18 @@ export default function App() {
         {/* Hyperliquid Perpetuals Screener Module */}
         <section className="w-full">
           <PerpScreenerPanel apiBaseUrl={BACKEND_URL} />
+        </section>
+
+        {/* Order Flow & Auction Market Theory Module */}
+        <section className="w-full">
+          <OrderflowPanel
+            signals={orderflowSignals}
+            livePrices={livePriceMap}
+            onApprove={(c) => setApproveModalCandidate(c)}
+            onReject={handleRejectOrderflow}
+            onScan={handleScanOrderFlow}
+            isScanning={isScanningOf}
+          />
         </section>
 
         {/* Momentum & Squeeze Acceleration Module */}
