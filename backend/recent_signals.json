@@ -1,6 +1,57 @@
 [
   {
     "type": "radar",
+    "ticker": "CL",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 85.699997,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.0,
+    "volume_ratio": 1.22,
+    "roc_pct": -3.67,
+    "ema_stack": false,
+    "timestamp": "2026-10-05T17:51:48.955812+00:00",
+    "first_detected": "2026-10-05T17:51:48.955812+00:00",
+    "last_updated": "2026-10-05T17:51:48.955812+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "MRVL",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 269.084991,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 22.5,
+    "volume_ratio": 0.89,
+    "roc_pct": 11.48,
+    "ema_stack": true,
+    "timestamp": "2026-10-05T17:51:46.998335+00:00",
+    "first_detected": "2026-10-05T17:51:46.998335+00:00",
+    "last_updated": "2026-10-05T17:51:46.998335+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NFLX",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 66.860001,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 25.8,
+    "volume_ratio": 1.1,
+    "roc_pct": -6.59,
+    "ema_stack": true,
+    "timestamp": "2026-10-05T17:51:46.007719+00:00",
+    "first_detected": "2026-10-05T17:51:46.007719+00:00",
+    "last_updated": "2026-10-05T17:51:46.007719+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "UP",
