@@ -252,7 +252,7 @@ export function OrderflowPanel({
           {filteredSignals.map((item, idx) => {
             if (!item || typeof item !== 'object') return null;
             const sym = item.symbol || item.ticker || 'N/A';
-            const livePrice = (livePrices && livePrices[sym]) || item.metrics?.intra_poc || item.metrics?.current_price || 0;
+            const livePrice = (livePrices && livePrices[sym]) || item.metrics?.current_price || item.metrics?.intra_poc || 0;
             const metrics = item.metrics || {};
             const scores = item.scores || {};
             const locations = Array.isArray(item.location) ? item.location : [];

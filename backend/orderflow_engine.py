@@ -256,6 +256,7 @@ def analyze_orderflow_and_auction(
 
     current_price = float(df_1h["Close"].iloc[-1])
     of_metrics = evaluate_orderflow_metrics(df_1h, oi_series=oi_series)
+    of_metrics["current_price"] = round(current_price, 4)
     profiles = compute_dual_session_profiles(df_1h, session_bars=24)
     auc_context = evaluate_auction_context(current_price, profiles, of_metrics)
     scores = compute_composite_scores(of_metrics, auc_context)

@@ -267,18 +267,22 @@ export default function App() {
     localStorage.setItem('approvedCandidates', JSON.stringify(approvedCandidates));
   }, [approvedCandidates]);
 
-  // Fetch real-time prices for candidates, capitulations, momentums, and open positions via backend proxy every 10s (batch request)
+  // Fetch real-time prices for candidates, capitulations, momentums, orderflow and open positions via backend proxy every 10s (batch request)
   useEffect(() => {
     const updateLivePrices = async () => {
       const allTickers = [
         ...openPositions.map(pos => pos.ticker),
         ...candidates.map(c => c.ticker),
         ...capitulationSignals.map(c => c.ticker),
-        ...momentumSignals.map(m => m.ticker)
-      ];
+        ...momentumSignals.map(m => m.ticker),
+        ...orderflowSignals.map(o => o.symbol || o.ticker)
+      ].filter(Boolean);
+
+      if (allTickers.length === 0) return;
+
       const priceMap = await fetchLivePrices(allTickers);
       if (Object.keys(priceMap).length > 0) {
-        setLivePriceMap(priceMap);
+        setLivePriceMap(prev => ({ ...prev, ...priceMap }));
 
         // Update open position current prices
         setOpenPositions(prev =>
@@ -296,7 +300,7 @@ export default function App() {
     updateLivePrices();
     const timer = setInterval(updateLivePrices, 10000); // Every 10 seconds
     return () => clearInterval(timer);
-  }, [openPositions.length, candidates.length, capitulationSignals.length, momentumSignals.length]);
+  }, [openPositions.length, candidates.length, capitulationSignals.length, momentumSignals.length, orderflowSignals.length]);
 
   // Fetch momentum signals using API service
   useEffect(() => {

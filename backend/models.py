@@ -117,6 +117,7 @@ class AsymmetricSignal:
     fundamental_ok: bool
     confidence_score: float  # 0.0 - 1.0
     timestamp: datetime
+    analysis_summary: str = ""
     asset_class: str = "ACCIONES"  # 'ACCIONES', 'MATERIAS_PRIMAS', 'INDICES', 'FOREX', 'CRIPTO'
 
 
