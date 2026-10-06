@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "ADAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.2697,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 33.8,
+    "volume_ratio": 1.75,
+    "roc_pct": 4.48,
+    "ema_stack": false,
+    "timestamp": "2026-10-06T04:49:59.756836+00:00",
+    "first_detected": "2026-10-06T04:49:59.756836+00:00",
+    "last_updated": "2026-10-06T04:49:59.756836+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "UP",
