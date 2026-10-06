@@ -4,7 +4,7 @@
     "ticker": "ADAUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 0.2697,
+    "price": 0.2733,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -12,9 +12,43 @@
     "volume_ratio": 1.75,
     "roc_pct": 4.48,
     "ema_stack": false,
-    "timestamp": "2026-10-06T04:49:59.756836+00:00",
+    "timestamp": "2026-10-06T17:54:49.588861+00:00",
     "first_detected": "2026-10-06T04:49:59.756836+00:00",
-    "last_updated": "2026-10-06T04:49:59.756836+00:00"
+    "last_updated": "2026-10-06T17:54:49.588861+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "TSM",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 484.399994,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.5,
+    "volume_ratio": 1.07,
+    "roc_pct": 9.13,
+    "ema_stack": true,
+    "timestamp": "2026-10-06T17:54:38.007324+00:00",
+    "first_detected": "2026-10-06T17:54:38.007324+00:00",
+    "last_updated": "2026-10-06T17:54:38.007324+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "MSFT",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 531.469971,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 37.8,
+    "volume_ratio": 1.25,
+    "roc_pct": 4.7,
+    "ema_stack": true,
+    "timestamp": "2026-10-06T17:54:34.998713+00:00",
+    "first_detected": "2026-10-06T17:54:34.998713+00:00",
+    "last_updated": "2026-10-06T17:54:34.998713+00:00"
   },
   {
     "type": "radar",
@@ -32,56 +66,5 @@
     "timestamp": "2026-10-05T23:43:35.108436+00:00",
     "first_detected": "2026-10-04T02:22:50.987511+00:00",
     "last_updated": "2026-10-05T23:43:35.108436+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "CL",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 85.699997,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 18.0,
-    "volume_ratio": 1.22,
-    "roc_pct": -3.67,
-    "ema_stack": false,
-    "timestamp": "2026-10-05T17:51:48.955812+00:00",
-    "first_detected": "2026-10-05T17:51:48.955812+00:00",
-    "last_updated": "2026-10-05T17:51:48.955812+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "MRVL",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 269.084991,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 22.5,
-    "volume_ratio": 0.89,
-    "roc_pct": 11.48,
-    "ema_stack": true,
-    "timestamp": "2026-10-05T17:51:46.998335+00:00",
-    "first_detected": "2026-10-05T17:51:46.998335+00:00",
-    "last_updated": "2026-10-05T17:51:46.998335+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NFLX",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 66.860001,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 25.8,
-    "volume_ratio": 1.1,
-    "roc_pct": -6.59,
-    "ema_stack": true,
-    "timestamp": "2026-10-05T17:51:46.007719+00:00",
-    "first_detected": "2026-10-05T17:51:46.007719+00:00",
-    "last_updated": "2026-10-05T17:51:46.007719+00:00"
   }
 ]
