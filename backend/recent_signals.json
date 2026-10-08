@@ -4,7 +4,7 @@
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 4147.17,
+    "price": 4136.75,
     "triggers": [
       "IMPULSE"
     ],
@@ -12,78 +12,42 @@
     "volume_ratio": 1.52,
     "roc_pct": -3.25,
     "ema_stack": true,
-    "timestamp": "2026-10-08T02:29:37.906584+00:00",
+    "timestamp": "2026-10-08T17:15:07.480088+00:00",
     "first_detected": "2026-10-08T02:29:37.906584+00:00",
-    "last_updated": "2026-10-08T02:29:37.906584+00:00"
+    "last_updated": "2026-10-08T17:15:07.480088+00:00"
   },
   {
     "type": "radar",
-    "ticker": "LITE",
+    "ticker": "GLD",
     "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 1100.552002,
+    "direction": "DOWN",
+    "price": 378.605011,
     "triggers": [
       "DONCHIAN_15"
     ],
-    "adx": 19.0,
-    "volume_ratio": 0.87,
-    "roc_pct": 19.85,
+    "adx": 19.7,
+    "volume_ratio": 0.85,
+    "roc_pct": -4.33,
     "ema_stack": true,
-    "timestamp": "2026-10-07T17:14:16.886415+00:00",
-    "first_detected": "2026-10-07T17:14:16.886415+00:00",
-    "last_updated": "2026-10-07T17:14:16.886415+00:00"
+    "timestamp": "2026-10-08T17:15:00.759224+00:00",
+    "first_detected": "2026-10-08T17:15:00.759224+00:00",
+    "last_updated": "2026-10-08T17:15:00.759224+00:00"
   },
   {
     "type": "radar",
-    "ticker": "AVGO",
+    "ticker": "USAR",
     "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 373.734985,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 19.9,
-    "volume_ratio": 1.26,
-    "roc_pct": 3.09,
-    "ema_stack": true,
-    "timestamp": "2026-10-07T17:14:12.689764+00:00",
-    "first_detected": "2026-10-07T17:14:12.689764+00:00",
-    "last_updated": "2026-10-07T17:14:12.689764+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "AMD",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 645.75,
+    "direction": "DOWN",
+    "price": 12.625,
     "triggers": [
       "DONCHIAN_15"
     ],
-    "adx": 26.9,
+    "adx": 20.2,
     "volume_ratio": 1.08,
-    "roc_pct": 4.11,
+    "roc_pct": -16.42,
     "ema_stack": true,
-    "timestamp": "2026-10-07T17:14:11.976518+00:00",
-    "first_detected": "2026-10-07T17:14:11.976518+00:00",
-    "last_updated": "2026-10-07T17:14:11.976518+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "MRVL",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 282.179993,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 24.4,
-    "volume_ratio": 2.96,
-    "roc_pct": 9.4,
-    "ema_stack": true,
-    "timestamp": "2026-10-07T17:14:11.355900+00:00",
-    "first_detected": "2026-10-07T17:14:11.355900+00:00",
-    "last_updated": "2026-10-07T17:14:11.355900+00:00"
+    "timestamp": "2026-10-08T17:14:55.500454+00:00",
+    "first_detected": "2026-10-08T17:14:55.500454+00:00",
+    "last_updated": "2026-10-08T17:14:55.500454+00:00"
   }
 ]
