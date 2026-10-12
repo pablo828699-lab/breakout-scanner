@@ -4,7 +4,7 @@
     "ticker": "NEARUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 5.888,
+    "price": 5.529,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -12,8 +12,43 @@
     "volume_ratio": 0.72,
     "roc_pct": 22.6,
     "ema_stack": true,
-    "timestamp": "2026-10-12T00:12:57.280854+00:00",
+    "timestamp": "2026-10-12T16:31:41.923828+00:00",
     "first_detected": "2026-10-12T00:12:57.280854+00:00",
-    "last_updated": "2026-10-12T00:12:57.280854+00:00"
+    "last_updated": "2026-10-12T16:31:41.923828+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "PLTR",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 207.199997,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 33.1,
+    "volume_ratio": 1.63,
+    "roc_pct": 10.22,
+    "ema_stack": true,
+    "timestamp": "2026-10-12T16:31:30.701856+00:00",
+    "first_detected": "2026-10-12T16:31:30.701856+00:00",
+    "last_updated": "2026-10-12T16:31:30.701856+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "INTC",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 101.25,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.6,
+    "volume_ratio": 0.68,
+    "roc_pct": -14.88,
+    "ema_stack": false,
+    "timestamp": "2026-10-12T16:31:28.060130+00:00",
+    "first_detected": "2026-10-12T16:31:28.060130+00:00",
+    "last_updated": "2026-10-12T16:31:28.060130+00:00"
   }
 ]
