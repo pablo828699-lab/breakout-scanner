@@ -1,6 +1,74 @@
 [
   {
     "type": "radar",
+    "ticker": "STRC",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 99.879997,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.6,
+    "volume_ratio": 0.99,
+    "roc_pct": 0.79,
+    "ema_stack": true,
+    "timestamp": "2026-10-13T13:33:22.777906+00:00",
+    "first_detected": "2026-10-13T13:33:22.777906+00:00",
+    "last_updated": "2026-10-13T13:33:22.777906+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "USAR",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 11.48,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 25.1,
+    "volume_ratio": 0.99,
+    "roc_pct": -18.0,
+    "ema_stack": true,
+    "timestamp": "2026-10-13T13:33:21.869546+00:00",
+    "first_detected": "2026-10-13T13:33:21.869546+00:00",
+    "last_updated": "2026-10-13T13:33:21.869546+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "INTC",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 98.705002,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.1,
+    "volume_ratio": 0.67,
+    "roc_pct": -12.65,
+    "ema_stack": false,
+    "timestamp": "2026-10-13T13:33:18.963268+00:00",
+    "first_detected": "2026-10-12T16:31:28.060130+00:00",
+    "last_updated": "2026-10-13T13:33:18.963268+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "MSFT",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 548.76001,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 40.1,
+    "volume_ratio": 0.82,
+    "roc_pct": 6.27,
+    "ema_stack": true,
+    "timestamp": "2026-10-13T13:33:15.795472+00:00",
+    "first_detected": "2026-10-13T13:33:15.795472+00:00",
+    "last_updated": "2026-10-13T13:33:15.795472+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -50,22 +118,5 @@
     "timestamp": "2026-10-12T16:31:30.701856+00:00",
     "first_detected": "2026-10-12T16:31:30.701856+00:00",
     "last_updated": "2026-10-12T16:31:30.701856+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "INTC",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 101.25,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 20.6,
-    "volume_ratio": 0.68,
-    "roc_pct": -14.88,
-    "ema_stack": false,
-    "timestamp": "2026-10-12T16:31:28.060130+00:00",
-    "first_detected": "2026-10-12T16:31:28.060130+00:00",
-    "last_updated": "2026-10-12T16:31:28.060130+00:00"
   }
 ]
