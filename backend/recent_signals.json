@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 7.402,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 36.1,
+    "volume_ratio": 0.65,
+    "roc_pct": -22.12,
+    "ema_stack": false,
+    "timestamp": "2026-10-13T05:26:32.394361+00:00",
+    "first_detected": "2026-10-13T05:26:32.394361+00:00",
+    "last_updated": "2026-10-13T05:26:32.394361+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "NEARUSDT",
     "market": "CRYPTO",
     "direction": "UP",
