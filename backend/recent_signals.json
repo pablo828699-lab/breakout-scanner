@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 7.57,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 36.1,
+    "volume_ratio": 0.65,
+    "roc_pct": -22.12,
+    "ema_stack": false,
+    "timestamp": "2026-10-13T20:04:36.081591+00:00",
+    "first_detected": "2026-10-13T05:26:32.394361+00:00",
+    "last_updated": "2026-10-13T20:04:36.081591+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "STRC",
     "market": "US_EQUITIES",
     "direction": "UP",
@@ -66,57 +83,5 @@
     "timestamp": "2026-10-13T13:33:15.795472+00:00",
     "first_detected": "2026-10-13T13:33:15.795472+00:00",
     "last_updated": "2026-10-13T13:33:15.795472+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 7.402,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 36.1,
-    "volume_ratio": 0.65,
-    "roc_pct": -22.12,
-    "ema_stack": false,
-    "timestamp": "2026-10-13T05:26:32.394361+00:00",
-    "first_detected": "2026-10-13T05:26:32.394361+00:00",
-    "last_updated": "2026-10-13T05:26:32.394361+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NEARUSDT",
-    "market": "CRYPTO",
-    "direction": "UP",
-    "price": 5.529,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 51.8,
-    "volume_ratio": 0.72,
-    "roc_pct": 22.6,
-    "ema_stack": true,
-    "timestamp": "2026-10-12T16:31:41.923828+00:00",
-    "first_detected": "2026-10-12T00:12:57.280854+00:00",
-    "last_updated": "2026-10-12T16:31:41.923828+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PLTR",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 207.199997,
-    "triggers": [
-      "DONCHIAN_15",
-      "IMPULSE"
-    ],
-    "adx": 33.1,
-    "volume_ratio": 1.63,
-    "roc_pct": 10.22,
-    "ema_stack": true,
-    "timestamp": "2026-10-12T16:31:30.701856+00:00",
-    "first_detected": "2026-10-12T16:31:30.701856+00:00",
-    "last_updated": "2026-10-12T16:31:30.701856+00:00"
   }
 ]
