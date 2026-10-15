@@ -1,6 +1,57 @@
 [
   {
     "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 4156.4,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 29.9,
+    "volume_ratio": 1.58,
+    "roc_pct": -0.6,
+    "ema_stack": true,
+    "timestamp": "2026-10-15T18:00:11.354931+00:00",
+    "first_detected": "2026-10-15T03:09:34.913692+00:00",
+    "last_updated": "2026-10-15T18:00:11.354931+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ZECUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 1229.62,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 28.3,
+    "volume_ratio": 1.28,
+    "roc_pct": -15.15,
+    "ema_stack": false,
+    "timestamp": "2026-10-15T18:00:08.990337+00:00",
+    "first_detected": "2026-10-15T03:09:32.734394+00:00",
+    "last_updated": "2026-10-15T18:00:08.990337+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ETHUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 2445.73,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 29.4,
+    "volume_ratio": 1.33,
+    "roc_pct": -11.2,
+    "ema_stack": false,
+    "timestamp": "2026-10-15T18:00:05.461746+00:00",
+    "first_detected": "2026-10-15T03:09:30.797514+00:00",
+    "last_updated": "2026-10-15T18:00:05.461746+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PPLT",
     "market": "US_EQUITIES",
     "direction": "DOWN",
@@ -169,90 +220,5 @@
     "timestamp": "2026-10-15T13:55:50.417605+00:00",
     "first_detected": "2026-10-15T13:55:50.417605+00:00",
     "last_updated": "2026-10-15T13:55:50.417605+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PAXGUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 4158.74,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 29.9,
-    "volume_ratio": 1.58,
-    "roc_pct": -0.6,
-    "ema_stack": true,
-    "timestamp": "2026-10-15T03:09:34.913692+00:00",
-    "first_detected": "2026-10-15T03:09:34.913692+00:00",
-    "last_updated": "2026-10-15T03:09:34.913692+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ZECUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 1111.44,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 28.3,
-    "volume_ratio": 1.28,
-    "roc_pct": -15.15,
-    "ema_stack": false,
-    "timestamp": "2026-10-15T03:09:32.734394+00:00",
-    "first_detected": "2026-10-15T03:09:32.734394+00:00",
-    "last_updated": "2026-10-15T03:09:32.734394+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ETHUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 2375.64,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 29.4,
-    "volume_ratio": 1.33,
-    "roc_pct": -11.2,
-    "ema_stack": false,
-    "timestamp": "2026-10-15T03:09:30.797514+00:00",
-    "first_detected": "2026-10-15T03:09:30.797514+00:00",
-    "last_updated": "2026-10-15T03:09:30.797514+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "WDC",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 368.53299,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 20.2,
-    "volume_ratio": 1.41,
-    "roc_pct": -16.05,
-    "ema_stack": false,
-    "timestamp": "2026-10-14T16:31:09.254281+00:00",
-    "first_detected": "2026-10-14T16:31:09.254281+00:00",
-    "last_updated": "2026-10-14T16:31:09.254281+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "MSFT",
-    "market": "US_EQUITIES",
-    "direction": "UP",
-    "price": 536.099976,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 40.8,
-    "volume_ratio": 1.08,
-    "roc_pct": 6.78,
-    "ema_stack": true,
-    "timestamp": "2026-10-14T16:31:04.784137+00:00",
-    "first_detected": "2026-10-14T16:31:04.784137+00:00",
-    "last_updated": "2026-10-14T16:31:04.784137+00:00"
   }
 ]
