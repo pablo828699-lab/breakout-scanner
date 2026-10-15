@@ -1,6 +1,57 @@
 [
   {
     "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 4158.74,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 29.9,
+    "volume_ratio": 1.58,
+    "roc_pct": -0.6,
+    "ema_stack": true,
+    "timestamp": "2026-10-15T03:09:34.913692+00:00",
+    "first_detected": "2026-10-15T03:09:34.913692+00:00",
+    "last_updated": "2026-10-15T03:09:34.913692+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ZECUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 1111.44,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 28.3,
+    "volume_ratio": 1.28,
+    "roc_pct": -15.15,
+    "ema_stack": false,
+    "timestamp": "2026-10-15T03:09:32.734394+00:00",
+    "first_detected": "2026-10-15T03:09:32.734394+00:00",
+    "last_updated": "2026-10-15T03:09:32.734394+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ETHUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 2375.64,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 29.4,
+    "volume_ratio": 1.33,
+    "roc_pct": -11.2,
+    "ema_stack": false,
+    "timestamp": "2026-10-15T03:09:30.797514+00:00",
+    "first_detected": "2026-10-15T03:09:30.797514+00:00",
+    "last_updated": "2026-10-15T03:09:30.797514+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "USAR",
     "market": "US_EQUITIES",
     "direction": "DOWN",
@@ -49,22 +100,5 @@
     "timestamp": "2026-10-14T16:31:04.784137+00:00",
     "first_detected": "2026-10-14T16:31:04.784137+00:00",
     "last_updated": "2026-10-14T16:31:04.784137+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "UNIUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 7.57,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 36.1,
-    "volume_ratio": 0.65,
-    "roc_pct": -22.12,
-    "ema_stack": false,
-    "timestamp": "2026-10-13T20:04:36.081591+00:00",
-    "first_detected": "2026-10-13T05:26:32.394361+00:00",
-    "last_updated": "2026-10-13T20:04:36.081591+00:00"
   }
 ]
