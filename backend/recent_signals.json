@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.004534,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 27.0,
+    "volume_ratio": 1.44,
+    "roc_pct": -29.77,
+    "ema_stack": false,
+    "timestamp": "2026-10-16T00:04:27.786972+00:00",
+    "first_detected": "2026-10-16T00:04:27.786972+00:00",
+    "last_updated": "2026-10-16T00:04:27.786972+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 5.257,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 45.8,
+    "volume_ratio": 1.29,
+    "roc_pct": -0.59,
+    "ema_stack": true,
+    "timestamp": "2026-10-16T00:04:24.783140+00:00",
+    "first_detected": "2026-10-16T00:04:24.783140+00:00",
+    "last_updated": "2026-10-16T00:04:24.783140+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
