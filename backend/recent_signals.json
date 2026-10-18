@@ -4,7 +4,7 @@
     "ticker": "ACEUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 0.1591,
+    "price": 0.1536,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -12,8 +12,8 @@
     "volume_ratio": 0.19,
     "roc_pct": -9.87,
     "ema_stack": false,
-    "timestamp": "2026-10-18T00:38:02.406699+00:00",
+    "timestamp": "2026-10-18T14:17:23.893073+00:00",
     "first_detected": "2026-10-18T00:38:02.406699+00:00",
-    "last_updated": "2026-10-18T00:38:02.406699+00:00"
+    "last_updated": "2026-10-18T14:17:23.893073+00:00"
   }
 ]
