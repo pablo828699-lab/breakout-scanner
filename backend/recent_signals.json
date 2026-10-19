@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.004196,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 26.5,
+    "volume_ratio": 0.65,
+    "roc_pct": -24.76,
+    "ema_stack": false,
+    "timestamp": "2026-10-19T00:47:53.822067+00:00",
+    "first_detected": "2026-10-19T00:47:53.822067+00:00",
+    "last_updated": "2026-10-19T00:47:53.822067+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ACEUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
