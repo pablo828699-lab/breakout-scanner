@@ -4,7 +4,7 @@
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 4117.88,
+    "price": 4144.53,
     "triggers": [
       "IMPULSE"
     ],
@@ -12,9 +12,9 @@
     "volume_ratio": 1.31,
     "roc_pct": -1.52,
     "ema_stack": true,
-    "timestamp": "2026-10-21T01:16:22.134670+00:00",
+    "timestamp": "2026-10-21T13:25:06.641807+00:00",
     "first_detected": "2026-10-21T01:16:22.134670+00:00",
-    "last_updated": "2026-10-21T01:16:22.134670+00:00"
+    "last_updated": "2026-10-21T13:25:06.641807+00:00"
   },
   {
     "type": "radar",
@@ -29,8 +29,8 @@
     "volume_ratio": 2.07,
     "roc_pct": 5.91,
     "ema_stack": true,
-    "timestamp": "2026-10-21T01:16:21.117659+00:00",
+    "timestamp": "2026-10-21T13:25:05.614500+00:00",
     "first_detected": "2026-10-21T01:16:21.117659+00:00",
-    "last_updated": "2026-10-21T01:16:21.117659+00:00"
+    "last_updated": "2026-10-21T13:25:05.614500+00:00"
   }
 ]
