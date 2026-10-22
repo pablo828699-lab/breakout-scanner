@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "NFLX",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 67.379997,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 22.1,
+    "volume_ratio": 2.76,
+    "roc_pct": -6.69,
+    "ema_stack": true,
+    "timestamp": "2026-10-22T18:16:15.883209+00:00",
+    "first_detected": "2026-10-21T18:21:51.150064+00:00",
+    "last_updated": "2026-10-22T18:16:15.883209+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ENAUSDT",
     "market": "CRYPTO",
     "direction": "UP",
@@ -50,22 +67,5 @@
     "timestamp": "2026-10-21T18:21:53.055167+00:00",
     "first_detected": "2026-10-21T18:21:53.055167+00:00",
     "last_updated": "2026-10-21T18:21:53.055167+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NFLX",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 65.610001,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 20.7,
-    "volume_ratio": 1.87,
-    "roc_pct": 0.0,
-    "ema_stack": true,
-    "timestamp": "2026-10-21T18:21:51.150064+00:00",
-    "first_detected": "2026-10-21T18:21:51.150064+00:00",
-    "last_updated": "2026-10-21T18:21:51.150064+00:00"
   }
 ]
