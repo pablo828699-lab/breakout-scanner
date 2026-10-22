@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "UP",
+    "price": 0.2144,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 24.8,
+    "volume_ratio": 1.28,
+    "roc_pct": -9.98,
+    "ema_stack": true,
+    "timestamp": "2026-10-22T01:12:05.395227+00:00",
+    "first_detected": "2026-10-22T01:12:05.395227+00:00",
+    "last_updated": "2026-10-22T01:12:05.395227+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "LLY",
     "market": "US_EQUITIES",
     "direction": "UP",
