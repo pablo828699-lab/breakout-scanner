@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "ONDOUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.4135,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 22.4,
+    "volume_ratio": 0.54,
+    "roc_pct": -7.99,
+    "ema_stack": false,
+    "timestamp": "2026-10-25T00:48:36.353487+00:00",
+    "first_detected": "2026-10-25T00:48:36.353487+00:00",
+    "last_updated": "2026-10-25T00:48:36.353487+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PAXGUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
