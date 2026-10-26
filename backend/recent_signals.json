@@ -1,36 +1,155 @@
 [
   {
     "type": "radar",
-    "ticker": "ONDOUSDT",
-    "market": "CRYPTO",
+    "ticker": "PPLT",
+    "market": "US_EQUITIES",
     "direction": "DOWN",
-    "price": 0.4025,
+    "price": 13.895,
     "triggers": [
       "DONCHIAN_15"
     ],
-    "adx": 22.4,
-    "volume_ratio": 0.54,
-    "roc_pct": -7.99,
-    "ema_stack": false,
-    "timestamp": "2026-10-25T14:47:44.602742+00:00",
-    "first_detected": "2026-10-25T00:48:36.353487+00:00",
-    "last_updated": "2026-10-25T14:47:44.602742+00:00"
+    "adx": 25.9,
+    "volume_ratio": 1.12,
+    "roc_pct": -7.87,
+    "ema_stack": true,
+    "timestamp": "2026-10-26T16:28:44.343151+00:00",
+    "first_detected": "2026-10-26T16:28:44.343151+00:00",
+    "last_updated": "2026-10-26T16:28:44.343151+00:00"
   },
   {
     "type": "radar",
-    "ticker": "PAXGUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 4003.4,
+    "ticker": "USO",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 168.210007,
     "triggers": [
       "DONCHIAN_15"
     ],
-    "adx": 32.1,
-    "volume_ratio": 1.95,
-    "roc_pct": -3.75,
+    "adx": 28.5,
+    "volume_ratio": 1.25,
+    "roc_pct": 14.39,
     "ema_stack": true,
-    "timestamp": "2026-10-24T22:53:01.613040+00:00",
-    "first_detected": "2026-10-23T01:11:29.262523+00:00",
-    "last_updated": "2026-10-24T22:53:01.613040+00:00"
+    "timestamp": "2026-10-26T16:28:43.101529+00:00",
+    "first_detected": "2026-10-26T16:28:43.101529+00:00",
+    "last_updated": "2026-10-26T16:28:43.101529+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "SLV",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 48.84,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 25.2,
+    "volume_ratio": 1.12,
+    "roc_pct": -11.06,
+    "ema_stack": true,
+    "timestamp": "2026-10-26T16:28:42.582057+00:00",
+    "first_detected": "2026-10-26T16:28:42.582057+00:00",
+    "last_updated": "2026-10-26T16:28:42.582057+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "GLD",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 368.380005,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.4,
+    "volume_ratio": 1.23,
+    "roc_pct": -4.67,
+    "ema_stack": true,
+    "timestamp": "2026-10-26T16:28:42.028052+00:00",
+    "first_detected": "2026-10-26T16:28:42.028052+00:00",
+    "last_updated": "2026-10-26T16:28:42.028052+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "SNDK",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 1262.305054,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.2,
+    "volume_ratio": 0.98,
+    "roc_pct": -21.73,
+    "ema_stack": false,
+    "timestamp": "2026-10-26T16:28:40.128815+00:00",
+    "first_detected": "2026-10-26T16:28:40.128815+00:00",
+    "last_updated": "2026-10-26T16:28:40.128815+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NOW",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 155.669998,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 31.5,
+    "volume_ratio": 1.0,
+    "roc_pct": 12.85,
+    "ema_stack": true,
+    "timestamp": "2026-10-26T16:28:39.566119+00:00",
+    "first_detected": "2026-10-26T16:28:39.566119+00:00",
+    "last_updated": "2026-10-26T16:28:39.566119+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BE",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 208.455002,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.0,
+    "volume_ratio": 2.51,
+    "roc_pct": -31.09,
+    "ema_stack": false,
+    "timestamp": "2026-10-26T16:28:36.551185+00:00",
+    "first_detected": "2026-10-26T16:28:36.551185+00:00",
+    "last_updated": "2026-10-26T16:28:36.551185+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "USAR",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 9.18,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 44.1,
+    "volume_ratio": 0.73,
+    "roc_pct": -25.72,
+    "ema_stack": true,
+    "timestamp": "2026-10-26T16:28:35.997798+00:00",
+    "first_detected": "2026-10-26T16:28:35.997798+00:00",
+    "last_updated": "2026-10-26T16:28:35.997798+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NVDA",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 215.580002,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.1,
+    "volume_ratio": 0.76,
+    "roc_pct": -7.99,
+    "ema_stack": false,
+    "timestamp": "2026-10-26T16:28:31.772743+00:00",
+    "first_detected": "2026-10-26T16:28:31.772743+00:00",
+    "last_updated": "2026-10-26T16:28:31.772743+00:00"
   }
 ]
