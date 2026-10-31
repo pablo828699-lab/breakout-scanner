@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 3902.26,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 34.1,
+    "volume_ratio": 2.63,
+    "roc_pct": -5.35,
+    "ema_stack": true,
+    "timestamp": "2026-10-31T01:59:49.353668+00:00",
+    "first_detected": "2026-10-31T01:59:49.353668+00:00",
+    "last_updated": "2026-10-31T01:59:49.353668+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BTCUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 77405.99,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.2,
+    "volume_ratio": 1.77,
+    "roc_pct": -6.82,
+    "ema_stack": false,
+    "timestamp": "2026-10-31T01:59:45.111970+00:00",
+    "first_detected": "2026-10-31T01:59:45.111970+00:00",
+    "last_updated": "2026-10-31T01:59:45.111970+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -296,56 +331,5 @@
     "timestamp": "2026-10-30T13:49:53.184797+00:00",
     "first_detected": "2026-10-30T13:49:53.184797+00:00",
     "last_updated": "2026-10-30T13:49:53.184797+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "HOOD",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 91.370003,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 23.0,
-    "volume_ratio": 2.05,
-    "roc_pct": -9.55,
-    "ema_stack": false,
-    "timestamp": "2026-10-29T15:09:08.588223+00:00",
-    "first_detected": "2026-10-29T15:09:08.588223+00:00",
-    "last_updated": "2026-10-29T15:09:08.588223+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NFLX",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 61.917599,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 28.6,
-    "volume_ratio": 0.96,
-    "roc_pct": -12.16,
-    "ema_stack": true,
-    "timestamp": "2026-10-29T15:09:06.258882+00:00",
-    "first_detected": "2026-10-28T16:58:36.511154+00:00",
-    "last_updated": "2026-10-29T15:09:06.258882+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "META",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 628.270996,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 27.8,
-    "volume_ratio": 1.68,
-    "roc_pct": -16.96,
-    "ema_stack": false,
-    "timestamp": "2026-10-29T15:09:05.538034+00:00",
-    "first_detected": "2026-10-28T16:58:35.459751+00:00",
-    "last_updated": "2026-10-29T15:09:05.538034+00:00"
   }
 ]
