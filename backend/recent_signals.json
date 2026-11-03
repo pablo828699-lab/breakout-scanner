@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "NEARUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 3.839,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.3,
+    "volume_ratio": 0.89,
+    "roc_pct": -17.57,
+    "ema_stack": false,
+    "timestamp": "2026-11-03T01:59:47.776003+00:00",
+    "first_detected": "2026-11-03T01:59:47.776003+00:00",
+    "last_updated": "2026-11-03T01:59:47.776003+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "SOLUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 92.38,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 33.0,
+    "volume_ratio": 1.03,
+    "roc_pct": -10.57,
+    "ema_stack": false,
+    "timestamp": "2026-11-03T01:59:46.198323+00:00",
+    "first_detected": "2026-11-03T01:59:46.198323+00:00",
+    "last_updated": "2026-11-03T01:59:46.198323+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PPLT",
     "market": "US_EQUITIES",
     "direction": "DOWN",
