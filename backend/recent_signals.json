@@ -4,7 +4,7 @@
     "ticker": "ETHUSDT",
     "market": "CRYPTO",
     "direction": "UP",
-    "price": 2421.97,
+    "price": 2243.74,
     "triggers": [
       "IMPULSE"
     ],
@@ -12,9 +12,318 @@
     "volume_ratio": 1.48,
     "roc_pct": 4.07,
     "ema_stack": true,
-    "timestamp": "2026-11-05T00:08:51.645880+00:00",
+    "timestamp": "2026-11-05T16:07:29.159015+00:00",
     "first_detected": "2026-11-05T00:08:51.645880+00:00",
-    "last_updated": "2026-11-05T00:08:51.645880+00:00"
+    "last_updated": "2026-11-05T16:07:29.159015+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "USO",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 147.949997,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 26.7,
+    "volume_ratio": 2.44,
+    "roc_pct": -9.01,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:26.308753+00:00",
+    "first_detected": "2026-11-05T16:07:26.308753+00:00",
+    "last_updated": "2026-11-05T16:07:26.308753+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "SNDK",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 824.974976,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 28.9,
+    "volume_ratio": 1.27,
+    "roc_pct": -24.73,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:24.606051+00:00",
+    "first_detected": "2026-11-05T16:07:24.606051+00:00",
+    "last_updated": "2026-11-05T16:07:24.606051+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "CRWV",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 40.688301,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 37.2,
+    "volume_ratio": 0.97,
+    "roc_pct": -21.68,
+    "ema_stack": true,
+    "timestamp": "2026-11-05T16:07:22.961641+00:00",
+    "first_detected": "2026-11-05T16:07:22.961641+00:00",
+    "last_updated": "2026-11-05T16:07:22.961641+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "LITE",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 521.518005,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 21.0,
+    "volume_ratio": 1.59,
+    "roc_pct": -26.33,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:20.407220+00:00",
+    "first_detected": "2026-11-05T16:07:20.407220+00:00",
+    "last_updated": "2026-11-05T16:07:20.407220+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "SOXL",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 42.669998,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 30.1,
+    "volume_ratio": 2.27,
+    "roc_pct": -35.41,
+    "ema_stack": true,
+    "timestamp": "2026-11-05T16:07:19.765126+00:00",
+    "first_detected": "2026-11-05T16:07:19.765126+00:00",
+    "last_updated": "2026-11-05T16:07:19.765126+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "USAR",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 6.965,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 44.5,
+    "volume_ratio": 1.26,
+    "roc_pct": -19.84,
+    "ema_stack": true,
+    "timestamp": "2026-11-05T16:07:18.407853+00:00",
+    "first_detected": "2026-11-04T18:26:51.131248+00:00",
+    "last_updated": "2026-11-05T16:07:18.407853+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "CL",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 100.964996,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 39.6,
+    "volume_ratio": 1.17,
+    "roc_pct": 5.74,
+    "ema_stack": true,
+    "timestamp": "2026-11-05T16:07:17.786883+00:00",
+    "first_detected": "2026-11-05T16:07:17.786883+00:00",
+    "last_updated": "2026-11-05T16:07:17.786883+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "WDC",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 267.542114,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 26.8,
+    "volume_ratio": 0.83,
+    "roc_pct": -14.45,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:16.340418+00:00",
+    "first_detected": "2026-11-05T16:07:16.340418+00:00",
+    "last_updated": "2026-11-05T16:07:16.340418+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "DELL",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 319.459991,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.6,
+    "volume_ratio": 1.62,
+    "roc_pct": -23.36,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:15.703159+00:00",
+    "first_detected": "2026-11-05T16:07:15.703159+00:00",
+    "last_updated": "2026-11-05T16:07:15.703159+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ARM",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 164.294998,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 27.7,
+    "volume_ratio": 1.75,
+    "roc_pct": -15.35,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:15.087628+00:00",
+    "first_detected": "2026-11-05T16:07:15.087628+00:00",
+    "last_updated": "2026-11-05T16:07:15.087628+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "ASML",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 1360.219971,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 21.8,
+    "volume_ratio": 1.27,
+    "roc_pct": -10.76,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:13.235018+00:00",
+    "first_detected": "2026-11-05T16:07:13.235018+00:00",
+    "last_updated": "2026-11-05T16:07:13.235018+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "TSM",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 353.209991,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.8,
+    "volume_ratio": 1.19,
+    "roc_pct": -8.37,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:12.581908+00:00",
+    "first_detected": "2026-11-05T16:07:12.581908+00:00",
+    "last_updated": "2026-11-05T16:07:12.581908+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "INTC",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 53.014999,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 33.8,
+    "volume_ratio": 1.49,
+    "roc_pct": -37.32,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:11.617566+00:00",
+    "first_detected": "2026-11-05T16:07:11.617566+00:00",
+    "last_updated": "2026-11-05T16:07:11.617566+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "MRVL",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 137.339996,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.0,
+    "volume_ratio": 1.87,
+    "roc_pct": -34.71,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:10.775437+00:00",
+    "first_detected": "2026-11-05T16:07:10.775437+00:00",
+    "last_updated": "2026-11-05T16:07:10.775437+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "MU",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 664.815002,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 29.5,
+    "volume_ratio": 1.33,
+    "roc_pct": -12.96,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:09.744758+00:00",
+    "first_detected": "2026-11-05T16:07:09.744758+00:00",
+    "last_updated": "2026-11-05T16:07:09.744758+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "NVDA",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 182.449997,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 23.7,
+    "volume_ratio": 1.48,
+    "roc_pct": -9.84,
+    "ema_stack": false,
+    "timestamp": "2026-11-05T16:07:08.617589+00:00",
+    "first_detected": "2026-11-05T16:07:08.617589+00:00",
+    "last_updated": "2026-11-05T16:07:08.617589+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "MSFT",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 535.42511,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 22.8,
+    "volume_ratio": 2.27,
+    "roc_pct": 4.29,
+    "ema_stack": true,
+    "timestamp": "2026-11-05T16:07:07.676978+00:00",
+    "first_detected": "2026-11-05T16:07:07.676978+00:00",
+    "last_updated": "2026-11-05T16:07:07.676978+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "AAPL",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 347.459991,
+    "triggers": [
+      "IMPULSE"
+    ],
+    "adx": 18.5,
+    "volume_ratio": 2.05,
+    "roc_pct": 1.6,
+    "ema_stack": true,
+    "timestamp": "2026-11-05T16:07:06.745704+00:00",
+    "first_detected": "2026-11-05T16:07:06.745704+00:00",
+    "last_updated": "2026-11-05T16:07:06.745704+00:00"
   },
   {
     "type": "radar",
@@ -52,23 +361,6 @@
   },
   {
     "type": "radar",
-    "ticker": "USAR",
-    "market": "US_EQUITIES",
-    "direction": "DOWN",
-    "price": 8.25,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 44.1,
-    "volume_ratio": 0.94,
-    "roc_pct": -13.42,
-    "ema_stack": true,
-    "timestamp": "2026-11-04T18:26:51.131248+00:00",
-    "first_detected": "2026-11-04T18:26:51.131248+00:00",
-    "last_updated": "2026-11-04T18:26:51.131248+00:00"
-  },
-  {
-    "type": "radar",
     "ticker": "PLTR",
     "market": "US_EQUITIES",
     "direction": "DOWN",
@@ -100,22 +392,5 @@
     "timestamp": "2026-11-04T18:26:46.818299+00:00",
     "first_detected": "2026-11-04T18:26:46.818299+00:00",
     "last_updated": "2026-11-04T18:26:46.818299+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "NEARUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 4.094,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 24.0,
-    "volume_ratio": 0.72,
-    "roc_pct": -14.84,
-    "ema_stack": false,
-    "timestamp": "2026-11-04T10:27:43.858324+00:00",
-    "first_detected": "2026-11-03T01:59:47.776003+00:00",
-    "last_updated": "2026-11-04T10:27:43.858324+00:00"
   }
 ]
