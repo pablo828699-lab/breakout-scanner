@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "XRPUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 1.1729,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 18.5,
+    "volume_ratio": 1.37,
+    "roc_pct": -11.44,
+    "ema_stack": true,
+    "timestamp": "2026-11-07T11:30:03.295977+00:00",
+    "first_detected": "2026-11-06T03:08:33.134113+00:00",
+    "last_updated": "2026-11-07T11:30:03.295977+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "XPLUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -136,23 +153,6 @@
     "timestamp": "2026-11-06T18:52:59.755464+00:00",
     "first_detected": "2026-11-06T03:08:33.922227+00:00",
     "last_updated": "2026-11-06T18:52:59.755464+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "XRPUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 1.187,
-    "triggers": [
-      "IMPULSE"
-    ],
-    "adx": 18.4,
-    "volume_ratio": 1.4,
-    "roc_pct": -7.79,
-    "ema_stack": true,
-    "timestamp": "2026-11-06T18:52:59.078426+00:00",
-    "first_detected": "2026-11-06T03:08:33.134113+00:00",
-    "last_updated": "2026-11-06T18:52:59.078426+00:00"
   },
   {
     "type": "radar",
