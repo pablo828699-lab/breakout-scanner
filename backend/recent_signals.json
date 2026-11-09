@@ -1,6 +1,40 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.003525,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 19.5,
+    "volume_ratio": 0.85,
+    "roc_pct": -10.64,
+    "ema_stack": false,
+    "timestamp": "2026-11-09T07:38:47.923480+00:00",
+    "first_detected": "2026-11-08T01:04:03.145572+00:00",
+    "last_updated": "2026-11-09T07:38:47.923480+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "XRPUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 1.0907,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 20.2,
+    "volume_ratio": 1.16,
+    "roc_pct": -10.06,
+    "ema_stack": true,
+    "timestamp": "2026-11-09T07:38:44.359294+00:00",
+    "first_detected": "2026-11-06T03:08:33.134113+00:00",
+    "last_updated": "2026-11-09T07:38:44.359294+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "XPLUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -168,39 +202,5 @@
     "timestamp": "2026-11-09T00:30:53.915185+00:00",
     "first_detected": "2026-11-09T00:30:53.915185+00:00",
     "last_updated": "2026-11-09T00:30:53.915185+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "PUMPUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 0.003731,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 18.7,
-    "volume_ratio": 0.71,
-    "roc_pct": -17.92,
-    "ema_stack": false,
-    "timestamp": "2026-11-08T15:47:04.270572+00:00",
-    "first_detected": "2026-11-08T01:04:03.145572+00:00",
-    "last_updated": "2026-11-08T15:47:04.270572+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "XRPUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 1.1551,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 19.0,
-    "volume_ratio": 0.78,
-    "roc_pct": -12.22,
-    "ema_stack": true,
-    "timestamp": "2026-11-08T15:47:00.116062+00:00",
-    "first_detected": "2026-11-06T03:08:33.134113+00:00",
-    "last_updated": "2026-11-08T15:47:00.116062+00:00"
   }
 ]
