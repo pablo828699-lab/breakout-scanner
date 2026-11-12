@@ -1,6 +1,23 @@
 [
   {
     "type": "radar",
+    "ticker": "UNIUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 6.169,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 28.3,
+    "volume_ratio": 1.46,
+    "roc_pct": -13.63,
+    "ema_stack": false,
+    "timestamp": "2026-11-12T01:17:59.101183+00:00",
+    "first_detected": "2026-11-12T01:17:59.101183+00:00",
+    "last_updated": "2026-11-12T01:17:59.101183+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "XRPUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
