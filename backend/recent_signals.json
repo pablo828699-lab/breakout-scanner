@@ -4,7 +4,7 @@
     "ticker": "UNIUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
-    "price": 6.169,
+    "price": 6.025,
     "triggers": [
       "DONCHIAN_15"
     ],
@@ -12,9 +12,43 @@
     "volume_ratio": 1.46,
     "roc_pct": -13.63,
     "ema_stack": false,
-    "timestamp": "2026-11-12T01:17:59.101183+00:00",
+    "timestamp": "2026-11-12T17:55:04.506973+00:00",
     "first_detected": "2026-11-12T01:17:59.101183+00:00",
-    "last_updated": "2026-11-12T01:17:59.101183+00:00"
+    "last_updated": "2026-11-12T17:55:04.506973+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "FXE",
+    "market": "US_EQUITIES",
+    "direction": "DOWN",
+    "price": 101.949997,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.5,
+    "volume_ratio": 0.6,
+    "roc_pct": -0.7,
+    "ema_stack": true,
+    "timestamp": "2026-11-12T17:54:58.533308+00:00",
+    "first_detected": "2026-11-12T17:54:58.533308+00:00",
+    "last_updated": "2026-11-12T17:54:58.533308+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "RKLB",
+    "market": "US_EQUITIES",
+    "direction": "UP",
+    "price": 65.434998,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 24.9,
+    "volume_ratio": 1.13,
+    "roc_pct": 12.88,
+    "ema_stack": false,
+    "timestamp": "2026-11-12T17:54:51.070383+00:00",
+    "first_detected": "2026-11-12T17:54:51.070383+00:00",
+    "last_updated": "2026-11-12T17:54:51.070383+00:00"
   },
   {
     "type": "radar",
