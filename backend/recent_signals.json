@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.1276,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 28.6,
+    "volume_ratio": 1.59,
+    "roc_pct": -23.05,
+    "ema_stack": false,
+    "timestamp": "2026-11-14T08:34:47.135117+00:00",
+    "first_detected": "2026-11-13T05:00:29.238764+00:00",
+    "last_updated": "2026-11-14T08:34:47.135117+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BTCUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 67150.01,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 25.7,
+    "volume_ratio": 2.05,
+    "roc_pct": -11.8,
+    "ema_stack": false,
+    "timestamp": "2026-11-14T08:34:44.159759+00:00",
+    "first_detected": "2026-11-13T05:00:25.801525+00:00",
+    "last_updated": "2026-11-14T08:34:44.159759+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "ACEUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -122,23 +157,6 @@
   },
   {
     "type": "radar",
-    "ticker": "ENAUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 0.1369,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 27.2,
-    "volume_ratio": 0.89,
-    "roc_pct": -17.75,
-    "ema_stack": false,
-    "timestamp": "2026-11-13T20:22:09.311222+00:00",
-    "first_detected": "2026-11-13T05:00:29.238764+00:00",
-    "last_updated": "2026-11-13T20:22:09.311222+00:00"
-  },
-  {
-    "type": "radar",
     "ticker": "NEARUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -153,23 +171,6 @@
     "timestamp": "2026-11-13T20:22:07.796374+00:00",
     "first_detected": "2026-11-13T05:00:27.792482+00:00",
     "last_updated": "2026-11-13T20:22:07.796374+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "BTCUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 69077.79,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 23.3,
-    "volume_ratio": 1.06,
-    "roc_pct": -6.97,
-    "ema_stack": false,
-    "timestamp": "2026-11-13T20:22:05.890845+00:00",
-    "first_detected": "2026-11-13T05:00:25.801525+00:00",
-    "last_updated": "2026-11-13T20:22:05.890845+00:00"
   },
   {
     "type": "radar",
