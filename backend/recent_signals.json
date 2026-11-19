@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "PUMPUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.002562,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 31.1,
+    "volume_ratio": 1.31,
+    "roc_pct": -26.35,
+    "ema_stack": false,
+    "timestamp": "2026-11-19T01:45:08.078732+00:00",
+    "first_detected": "2026-11-19T01:45:08.078732+00:00",
+    "last_updated": "2026-11-19T01:45:08.078732+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "PAXGUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 3750.16,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 27.2,
+    "volume_ratio": 1.77,
+    "roc_pct": -7.78,
+    "ema_stack": true,
+    "timestamp": "2026-11-19T01:45:06.818685+00:00",
+    "first_detected": "2026-11-19T01:45:06.818685+00:00",
+    "last_updated": "2026-11-19T01:45:06.818685+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "CPER",
     "market": "US_EQUITIES",
     "direction": "DOWN",
