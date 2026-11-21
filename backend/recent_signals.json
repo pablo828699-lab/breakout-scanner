@@ -1,6 +1,41 @@
 [
   {
     "type": "radar",
+    "ticker": "ENAUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 0.0933,
+    "triggers": [
+      "DONCHIAN_15"
+    ],
+    "adx": 41.5,
+    "volume_ratio": 1.79,
+    "roc_pct": -33.98,
+    "ema_stack": false,
+    "timestamp": "2026-11-21T07:58:14.957960+00:00",
+    "first_detected": "2026-11-20T01:02:05.357606+00:00",
+    "last_updated": "2026-11-21T07:58:14.957960+00:00"
+  },
+  {
+    "type": "radar",
+    "ticker": "BTCUSDT",
+    "market": "CRYPTO",
+    "direction": "DOWN",
+    "price": 58000.0,
+    "triggers": [
+      "DONCHIAN_15",
+      "IMPULSE"
+    ],
+    "adx": 44.3,
+    "volume_ratio": 2.11,
+    "roc_pct": -20.12,
+    "ema_stack": true,
+    "timestamp": "2026-11-21T07:58:11.943843+00:00",
+    "first_detected": "2026-11-20T01:02:02.191691+00:00",
+    "last_updated": "2026-11-21T07:58:11.943843+00:00"
+  },
+  {
+    "type": "radar",
     "ticker": "PUMPUSDT",
     "market": "CRYPTO",
     "direction": "DOWN",
@@ -224,40 +259,6 @@
     "timestamp": "2026-11-21T00:35:50.129786+00:00",
     "first_detected": "2026-11-21T00:35:50.129786+00:00",
     "last_updated": "2026-11-21T00:35:50.129786+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "ENAUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 0.099,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 39.6,
-    "volume_ratio": 1.08,
-    "roc_pct": -31.62,
-    "ema_stack": false,
-    "timestamp": "2026-11-20T18:17:43.029447+00:00",
-    "first_detected": "2026-11-20T01:02:05.357606+00:00",
-    "last_updated": "2026-11-20T18:17:43.029447+00:00"
-  },
-  {
-    "type": "radar",
-    "ticker": "BTCUSDT",
-    "market": "CRYPTO",
-    "direction": "DOWN",
-    "price": 59020.01,
-    "triggers": [
-      "DONCHIAN_15"
-    ],
-    "adx": 41.6,
-    "volume_ratio": 1.09,
-    "roc_pct": -17.76,
-    "ema_stack": false,
-    "timestamp": "2026-11-20T18:17:40.287664+00:00",
-    "first_detected": "2026-11-20T01:02:02.191691+00:00",
-    "last_updated": "2026-11-20T18:17:40.287664+00:00"
   },
   {
     "type": "radar",
